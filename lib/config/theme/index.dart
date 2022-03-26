@@ -55,12 +55,12 @@ ThemeData themeColor() {
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
       labelColor: AppColor.info,
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         fontWeight: AppColor.fontWeight,
       ),
       unselectedLabelColor: AppColor.unactive,
-      labelPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      unselectedLabelStyle: TextStyle(
+      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      unselectedLabelStyle: const TextStyle(
         fontWeight: AppColor.fontWeight,
       ),
     ),
@@ -100,7 +100,7 @@ ThemeData themeColor() {
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
         //设置按钮内边距
-        padding: MaterialStateProperty.all(EdgeInsets.all(2)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(2)),
         //设置按钮的大小
         // minimumSize: MaterialStateProperty.all(Size(200, 100)),
         //设置边框
@@ -108,7 +108,7 @@ ThemeData themeColor() {
           BorderSide(color: AppColor.transparent, width: 0),
         ),
         //外边框装饰 会覆盖 side 配置的样式
-        shape: MaterialStateProperty.all(StadiumBorder()),
+        shape: MaterialStateProperty.all(const StadiumBorder()),
       ),
     ),
     // * 进度指示器主题
@@ -140,12 +140,12 @@ ThemeData darkTheme() {
       // indicator:,
       indicatorSize: TabBarIndicatorSize.label,
       labelColor: AppColor.info,
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         fontWeight: AppColor.fontWeight,
       ),
       unselectedLabelColor: AppColor.unactive,
-      labelPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      unselectedLabelStyle: TextStyle(
+      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      unselectedLabelStyle: const TextStyle(
         fontWeight: AppColor.fontWeight,
       ),
     ),
