@@ -47,6 +47,8 @@ dependencies:
   flutter_svg: ^1.0.3
   # 控制屏幕常亮
   wakelock: ^0.6.1+2
+  # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
+  mobile_scanner: ^1.0.0
 
   flutter:
     sdk: flutter
