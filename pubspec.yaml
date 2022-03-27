@@ -33,24 +33,27 @@ dependencies:
   fluro: ^2.0.3
   # 屏幕自适应及适配不同屏幕
   flutter_screenutil: ^5.3.1
+  # 状态管理
+  provider: ^6.0.2
+  # 简单数据持久化，清除数据就消失（官方）
+  shared_preferences: ^2.0.13
+  # SVG使用（官方）
+  flutter_svg: ^1.0.3
   # 日志打印
   logger: ^1.1.0
   # toast
   fluttertoast: ^8.0.9
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.0.20
-  # 简单数据持久化，清除数据就消失（官方）
-  shared_preferences: ^2.0.13
-  # 状态管理
-  provider: ^6.0.2
-  # SVG使用（官方）
-  flutter_svg: ^1.0.3
+  # 设备信息及平台
+  device_info_plus: ^3.2.2
+
   # 控制屏幕常亮
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
   mobile_scanner: ^1.0.0
-  # 设备信息及平台
-  device_info_plus: ^3.2.2
+  # 所有平台兼容的升级插件
+  upgrader: ^3.13.0
 
   flutter:
     sdk: flutter
