@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
-import './http_options.dart';
-import './http_interceptor.dart';
+import 'package:flutter/cupertino.dart';
+import 'http_options.dart';
+import 'http_interceptor.dart';
 
 // http 请求单例类
 class Http {
-  // 工厂构造方法，当你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。
-  factory Http() => _instance;
   // 初始化一个单例实例
   static final Http _instance = Http._internal();
+  // 工厂构造方法，当你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。
+  factory Http() => _instance;
   // dio 实例
   late Dio dio;
 
@@ -15,14 +16,14 @@ class Http {
   Http._internal() {
     // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     BaseOptions baseOptions = BaseOptions(
-      baseUrl: HttpOptions.BASE_URL,
-      connectTimeout: HttpOptions.CONNECT_TIMEOUT,
-      receiveTimeout: HttpOptions.RECEIVE_TIMEOUT,
-      headers: HttpOptions.HEADER,
-      responseType: HttpOptions.RESPONSE_TYPE,
+      baseUrl: HttpOptions.baseUrl,
+      connectTimeout: HttpOptions.connectTimeout,
+      receiveTimeout: HttpOptions.receiveTimeout,
+      headers: HttpOptions.header,
+      responseType: HttpOptions.responseType,
     );
 
-    dio = new Dio(baseOptions);
+    dio = Dio(baseOptions);
     dio.interceptors.add(HttpInterceptor()); // 添加拦截器
   }
 
@@ -44,7 +45,7 @@ class Http {
     dio.options.receiveTimeout = receiveTimeout!;
     dio.options.headers = headers;
     if (interceptors!.isNotEmpty) {
-      dio.interceptors..addAll(interceptors);
+      dio.interceptors.addAll(interceptors);
     }
   }
 
@@ -53,19 +54,16 @@ class Http {
     dio.options.headers.addAll(headers);
   }
 
-  /*
-   * 取消请求
-   *
-   * 同一个cancel token 可以用于多个请求
-   * 当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
-   * 所以参数可选
-   */
-  CancelToken _cancelToken = new CancelToken();
+  //  取消请求:
+  //  同一个cancel token 可以用于多个请求
+  //  当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
+  //  所以参数可选
+  final CancelToken _cancelToken = CancelToken();
   void cancelRequests({required CancelToken token}) {
     _cancelToken.cancel("cancelled");
   }
 
-  // * 设置鉴权请求头
+  // 设置鉴权请求头
   Options setAuthorizationHeader(Options requestOptions) {
     String _token = '';
     if (_token.isNotEmpty) {
@@ -74,7 +72,7 @@ class Http {
     return requestOptions;
   }
 
-  //* restful get 操作
+  // restful get 操作
   Future get(
     String path, {
     Map<String, dynamic>? params,
@@ -92,7 +90,7 @@ class Http {
     return response.data;
   }
 
-  //* restful post 操作
+  // restful post 操作
   Future post(
     String path, {
     Map<String, dynamic>? params,
@@ -112,7 +110,7 @@ class Http {
     return response.data;
   }
 
-  //* restful post form 表单提交操作
+  // restful post form 表单提交操作
   Future postForm(
     String path, {
     required Map<String, dynamic> params,
@@ -130,7 +128,7 @@ class Http {
     return response.data;
   }
 
-  // * 下载文件
+  // 下载文件
   downLoadFile(
     path,
     savePath, {
@@ -144,7 +142,7 @@ class Http {
       path,
       savePath,
       onReceiveProgress: (int count, int total) {
-        print('$count $total');
+        debugPrint('$count $total');
       },
       queryParameters: queryParameters,
       cancelToken: cancelToken,

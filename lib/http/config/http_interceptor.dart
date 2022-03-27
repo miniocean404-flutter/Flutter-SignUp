@@ -5,10 +5,10 @@ import 'http_exception.dart';
 class HttpInterceptor extends Interceptor {
   // 请求拦截
   @override
-  void onRequest(
+  Future onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
-  ) {
+  ) async {
     super.onRequest(options, handler);
   }
 
@@ -24,10 +24,7 @@ class HttpInterceptor extends Interceptor {
 
   // 异常拦截
   @override
-  Future onError(
-    DioError err,
-    ErrorInterceptorHandler handler,
-  ) async {
+  Future onError(DioError err, ErrorInterceptorHandler handler) async {
     // 覆盖异常为自定义的异常类
     HttpException httpException = HttpException.create(err);
     err.error = httpException;

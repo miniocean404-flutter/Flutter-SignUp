@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

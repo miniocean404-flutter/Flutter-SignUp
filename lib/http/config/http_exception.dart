@@ -7,12 +7,12 @@ class HttpException implements Exception {
 
   HttpException({this.code = 500, this.msg = '未知异常，请联系管理员'});
 
+  @override
   String toString() {
-    return "HttpError [$code]: $msg";
+    return "Http错误 [$code]: $msg";
   }
 
   factory HttpException.create(DioError error) {
-    // dio 异常
     switch (error.type) {
       case DioErrorType.cancel:
         return HttpException(code: -1, msg: '请求取消');
@@ -33,11 +33,11 @@ class HttpException implements Exception {
           case 401:
             return HttpException(code: statusCode, msg: '没有权限');
           case 403:
-            return HttpException(code: statusCode, msg: '服务器拒绝执行');
+            return HttpException(code: statusCode, msg: '服务器拒绝');
           case 404:
             return HttpException(code: statusCode, msg: '找不到地址');
           case 405:
-            return HttpException(code: statusCode, msg: '不支持HTTP协议请求');
+            return HttpException(code: statusCode, msg: '请求方法有问题');
           case 500:
             return HttpException(code: statusCode, msg: '服务器内部错误');
           case 502:
