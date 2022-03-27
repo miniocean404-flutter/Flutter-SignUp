@@ -14,7 +14,7 @@ class Routers {
     // 处理找不到页面情况
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-        logW('没有匹配的路由!');
+        logger.w('没有匹配的路由!');
         return null;
       },
     );

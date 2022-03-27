@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
+import 'package:flutter_sign_in/components/common/modal.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,6 +12,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  StateType _modalState = StateType.none;
+
+  closeModal() {
+    setState(() {
+      _modalState = StateType.none;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,55 +27,44 @@ class _HomeState extends State<Home> {
       //   title: const Text('签到'),
       // ),
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 159.h),
-            const Text(
-              '签到',
-              style: TextStyle(fontSize: 29, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 102.h),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: SizedBox(
-                width: 160.r,
-                height: 160.r,
-                child: Container(
-                    // child: MobileScanner(
-                    //   allowDuplicates: false, // 扫描一次还是(true)多次
-                    //   fit: BoxFit.cover,
-                    //   controller: MobileScannerController(
-                    //     // 相机朝向
-                    //     facing: CameraFacing.front,
-                    //     torchEnabled: true,
-                    //   ),
-                    //   // 发现二维码事件
-                    //   onDetect: (barcode, args) {
-                    //     final String? code = barcode.rawValue;
-                    //     debugPrint('二维码 $code');
-                    //   },
-                    // ),
-                    ),
+        child: StateModal(
+          state: _modalState,
+          onClose: closeModal,
+          bgChild: Column(
+            children: [
+              SizedBox(height: 159.h),
+              const Text(
+                '签到',
+                style: TextStyle(fontSize: 29, fontWeight: FontWeight.w600),
               ),
-            ),
-            SizedBox(height: 158.h),
-            const Text(
-              '请向屏幕展示二维码',
-              style: TextStyle(color: Color(0xff999999), fontSize: 14.5),
-            ),
-            const Text(
-              '识别后会自动签到',
-              style: TextStyle(color: Color(0xff999999)),
-            ),
-            SizedBox(height: 292.h),
-            const Text(
-              'Serendipity Envoy',
-              style: TextStyle(
-                color: Color(0xffCECECE),
-                fontWeight: FontWeight.w400,
+              SizedBox(height: 102.h),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: SizedBox(
+                  width: 160.r,
+                  height: 160.r,
+                  child: const QRScanner(),
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: 158.h),
+              const Text(
+                '请向屏幕展示二维码',
+                style: TextStyle(color: Color(0xff999999), fontSize: 14.5),
+              ),
+              const Text(
+                '识别后会自动签到',
+                style: TextStyle(color: Color(0xff999999)),
+              ),
+              SizedBox(height: 292.h),
+              const Text(
+                'Serendipity Envoy',
+                style: TextStyle(
+                  color: Color(0xffCECECE),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
