@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
-import 'package:logger/logger.dart';
 
 import 'config/global.dart';
 import 'config/theme/index.dart';
