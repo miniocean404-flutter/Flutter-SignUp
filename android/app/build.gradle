@@ -1,3 +1,8 @@
+// 模块级构建文件
+// 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。
+// 通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
+
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -25,8 +30,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// android {} 中配置构建Android APP所需的特定编译选项。
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    // buildToolsVersion：指定Gradle编译APP时所使用的SDK编译工具、命令行工具和编译器的版本、我们需要通过SDK Manager去下载使用到的编译工具。
+
+    // compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本，这意味着我们的APP只能使用该版本及其以下版本中的API。
+    // compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,16 +51,34 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    /**
+     * defaultConfig默认配置和配置编译变体的入口,
+     * 还可以在这里动态的覆盖main/AndroidManifest.xml的属性。
+     * 在这个区块还可以设置产品风味，给不同的风味版本配置不同的属性值。
+     * */
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+         // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.flutter_sign_in"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        // 定义APP需要支持的 Android API 最小的版本。
+        // minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
+        // 指定用来测试APP的 Android API 版本
+        // targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 31
+        // 定义APP的版本
         versionCode flutterVersionCode.toInteger()
+        // 定义APP的版本名
         versionName flutterVersionName
     }
 
+    /**
+     * buildTypes区块中配置多个编译类型。编译系统默认定义了两个类型：debug and release.。
+     * debug类型：默认的配置文件中没有展示出来，它包含了debug工具，使用debug key签名APK。
+     * release类型：使用Proguard设置，默认不签名APK。
+     */
     buildTypes {
+        // Android Studio默认配置release编译类型开启代码缩减和指定代码混淆文件。
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
@@ -63,6 +91,50 @@ flutter {
     source '../..'
 }
 
+// dependencies代码块中指定本模块中所需要的依赖
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+
+// 安卓其他属性
+//  /**
+//    * productFlavors {} 区域可以配置不同的产品风味。
+//    * 这里不同风味版本的配置可以覆盖掉 defaultConfig {} 中的设置。
+//    * 产品风味是可选项，编译系统默认不会自动创建不同的产品风味。
+//    * 下面例子创建了免费版和付费版两种产品风味。
+//    * 每种产品风味都指定了自己的应用ID，这使得两种风味的版本可以同时安装在一个设备上。
+//    */
+//   productFlavors {
+//     free {
+//       applicationId 'com.example.myapp.free'
+//     }
+
+//     paid {
+//       applicationId 'com.example.myapp.paid'
+//     }
+//   }
+
+//   /**
+//    * splits {} 配置可以针对不同的屏幕密度和不同ABI架构的设备编译不同的APP
+//    */
+//   splits {
+//     // APP分割机制针对屏幕密度的设置
+//     density {
+//       // 打开或关闭密度分割机制
+//       enable false
+
+//       // 分割APP不支持如下屏幕密度设备
+//       exclude "ldpi", "tvdpi", "xxxhdpi", "400dpi", "560dpi"
+//     }
+
+//     abi {
+//       enable true
+
+//       // 清除默认配置
+//       reset()
+
+//       // 分割APP支持如下ABI设备
+//       include "armeabi-v7a", "armeabi-v8a"
+//     }
+//   }

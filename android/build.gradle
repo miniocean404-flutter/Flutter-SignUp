@@ -1,16 +1,43 @@
+// 顶级构建文件
+// 顶级 build.gradle 文件位于项目根目录，用于定义适用于项目中所有模块的构建配置。
+// 默认情况下，这个顶级构建文件使用 buildscript {} 代码块来定义项目中所有模块共用的 Gradle 存储区和依赖项。以下代码示例描述的默认设置和 DSL 元素。
+
+/**
+ * buildscript是配置构建工具Gradle本身所需要的依赖和仓库的代码区块，
+ * 也就是说不能把APP模块所需要的依赖放到这里。
+ * 如：这个区块里包含gradle-plugin的依赖，因为这个插件包含了Gradle构建APP模块所需要的附加命令。 
+ */
 buildscript {
+    // 使用kotlin编译的版本
     ext.kotlin_version = '1.6.10'
+    /**
+     * repositories {} 区域配置Gradle用来下载依赖的仓库地址。
+     * Gradle内置支持的远程仓库有JCenter、Maven Central 和 Ivy，4.1版本开始内置支持google()。 
+     * 也可以使用本地仓库或者配置我们自己的远程仓库地址。
+     * 下面代码示例Gradle使用JCenter、google作为查找依赖库的代码仓库。
+     */
     repositories {
+        // Gradle 4.1开始可以通过google()方法来支持Google的Maven仓库。
+        // 我们需要从这个仓库下载Android plugin 3.0.0或者更新的版本。
         google()
         mavenCentral()
     }
 
     dependencies {
+       /**
+        * dependencies {} 区域配置了Gradle编译APP工程所需要的依赖。
+        * 下面代码展示路径依赖4.1.0版本gradle-plugin
+        */
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
+/**
+ * allprojects区域可以配置工程中全局插件、代码仓库、依赖（多处使用），如，三方插件或者库。
+ * 如果依赖不是被所有模块都需要，那应该将依赖配到需要它的模块级的build.gradle文件中。
+ * 在Android Studio新建的工程里，顶级的build.gradle中只配置JCenter为所有模块的默认仓库，但不配置任何依赖。
+ */
 allprojects {
     repositories {
         google()
@@ -18,6 +45,7 @@ allprojects {
     }
 }
 
+// 项目打包配置
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"

@@ -3,12 +3,12 @@ import 'package:flutter_sign_in/views/splash.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-var splashHandler =
+final splashHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
   return const Splash();
 });
 
-var homeHandler =
+final homeHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
   return const Home();
 });

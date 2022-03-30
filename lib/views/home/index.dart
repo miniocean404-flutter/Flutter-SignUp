@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:flutter_sign_in/config/global.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
 
 class Home extends StatefulWidget {
@@ -48,6 +49,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    Global.initScreen(context); // 初始化屏幕自适应工具
+
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('签到'),
@@ -78,7 +81,7 @@ class _HomeState extends State<Home> {
                     child: SizedBox(
                       width: 160.r,
                       height: 160.r,
-                      child: const QRScanner(),
+                      // child: const QRScanner(),
                     ),
                   ),
                   SizedBox(height: 158.h),
@@ -90,6 +93,9 @@ class _HomeState extends State<Home> {
                     '识别后会自动签到',
                     style: TextStyle(color: Color(0xff999999)),
                   ),
+                  // SvgPicture.asset(
+                  //   'assets/svg/loading.svg',
+                  // ),
                   SizedBox(height: 292.h),
                   const Text(
                     'Serendipity Envoy',

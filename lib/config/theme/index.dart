@@ -11,11 +11,11 @@ class ColorSchemeConfig {
       // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
       primary: AppColor.primary,
       // 黑暗主题的主色调
-      primaryVariant: AppColor.dark,
+      primaryContainer: AppColor.dark,
 
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
       secondary: AppColor.info,
-      secondaryVariant: AppColor.info,
+      secondaryContainer: AppColor.info,
 
       //小部件的背景色 如:card appbar
       surface: AppColor.info,

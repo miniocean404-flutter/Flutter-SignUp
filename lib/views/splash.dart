@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/config/global.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 
 class Splash extends StatefulWidget {
@@ -67,8 +66,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Global.initScreen(context); // 初始化屏幕自适应工具
-
     return Scaffold(
       body: Stack(
         children: [

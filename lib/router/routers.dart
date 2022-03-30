@@ -5,12 +5,15 @@ import 'route_handler.dart';
 
 //省略 import
 class Routers {
-  static FluroRouter router = FluroRouter();
+  static final FluroRouter router = FluroRouter();
 
   static const String splash = "/";
   static const String home = "/home";
 
   static void defineRoutes() {
+    router.define(splash, handler: splashHandler);
+    router.define(home, handler: homeHandler);
+
     // 处理找不到页面情况
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -18,9 +21,6 @@ class Routers {
         return null;
       },
     );
-
-    router.define(splash, handler: splashHandler);
-    router.define(home, handler: homeHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

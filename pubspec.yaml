@@ -95,6 +95,7 @@ flutter:
     - assets/splash.png
     - assets/state-icon/success.png
     - assets/state-icon/error.png
+    - assets/svg/loading.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

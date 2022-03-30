@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:logger/logger.dart';
 
 import 'config/global.dart';
 import 'config/theme/index.dart';
 import 'router/routers.dart';
 
 void main() {
+  Global.initCommon();
   runApp(const MyApp());
 }
 
@@ -14,8 +17,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Global.initCommon();
-
     return MaterialApp(
       title: '签到',
       debugShowCheckedModeBanner: false,
