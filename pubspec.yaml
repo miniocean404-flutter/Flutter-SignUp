@@ -53,8 +53,8 @@ dependencies:
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
   mobile_scanner: ^1.0.0
-  # 所有平台兼容的升级插件
-  upgrader: ^3.13.0
+  # android ios 的升级插件
+  r_upgrade: ^0.3.7+3
   # 加载AE制作的炫酷动画
   lottie: ^1.2.2
 
