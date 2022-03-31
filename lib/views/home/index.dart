@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/config/global.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
 
 class Home extends StatefulWidget {
@@ -93,9 +92,6 @@ class _HomeState extends State<Home> {
                     '识别后会自动签到',
                     style: TextStyle(color: Color(0xff999999)),
                   ),
-                  // SvgPicture.asset(
-                  //   'assets/svg/loading.svg',
-                  // ),
                   SizedBox(height: 292.h),
                   const Text(
                     'Serendipity Envoy',

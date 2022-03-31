@@ -3,6 +3,6 @@ class Assets {
   static String stateIconSuccess = 'assets/state-icon/success.png';
   static String stateIconError = 'assets/state-icon/error.png';
 
-  // SVG
-  static String svgLading = 'assets/svg/loading.svg';
+  // lottie
+  static String lottieLading = 'assets/lottie/loading.json';
 }
