@@ -1,7 +1,9 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/utils/logger.dart';
+// 函数导入
 import 'route_handler.dart';
+import 'setting_handler.dart';
 
 //省略 import
 class Routers {
@@ -10,9 +12,20 @@ class Routers {
   static const String splash = "/";
   static const String home = "/home";
 
+  // 设置界面
+  static const String settingHome = "/settingHome";
+  static const String settingAbout = "/settingAbout";
+  static const String settingDevice = "/settingDevice";
+  static const String settingNetwork = "/settingNetwork";
+  static const String settingUpdate = "/settingUpdate";
+
   static void defineRoutes() {
     router.define(splash, handler: splashHandler);
     router.define(home, handler: homeHandler);
+    router.define(settingHome, handler: settingHomeHandler);
+    router.define(settingAbout, handler: settingAboutHandler);
+    router.define(settingDevice, handler: settingDeviceHandler);
+    router.define(settingUpdate, handler: settingUpdateHandler);
 
     // 处理找不到页面情况
     router.notFoundHandler = Handler(
@@ -24,7 +37,7 @@ class Routers {
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
-  static Future navigateTo(
+  static Future<dynamic> navigateTo(
     BuildContext context,
     String path, {
     Map<String, dynamic>? params,

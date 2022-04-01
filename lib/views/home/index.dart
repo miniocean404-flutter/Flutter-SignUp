@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/config/global.dart';
+import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:flutter_sign_in/utils/toast.dart';
 import 'package:video_player/video_player.dart';
 
 class Home extends StatefulWidget {
@@ -15,6 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   StateType _modalState = StateType.none;
   late VideoPlayerController _controller;
+  int _clickNum = 0;
 
   @override
   void initState() {
@@ -23,9 +27,14 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   initVideo() async {
@@ -46,14 +55,21 @@ class _HomeState extends State<Home> {
     });
   }
 
+  goSetting() {
+    _clickNum++;
+    if (_clickNum > 5 && _clickNum < 10) {
+      toast('再点击5次进入设置界面');
+    } else if (_clickNum >= 10) {
+      _clickNum = 0;
+      Routers.navigateTo(context, Routers.settingHome);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Global.initScreen(context); // 初始化屏幕自适应工具
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('签到'),
-      // ),
       body: Center(
         child: StateModal(
           state: _modalState,
@@ -70,9 +86,15 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   SizedBox(height: 159.h),
-                  const Text(
-                    '签到',
-                    style: TextStyle(fontSize: 29, fontWeight: FontWeight.w600),
+                  GestureDetector(
+                    child: Text(
+                      '签到',
+                      style: TextStyle(
+                        fontSize: 29.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: goSetting,
                   ),
                   SizedBox(height: 102.h),
                   ClipRRect(
@@ -84,9 +106,12 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   SizedBox(height: 158.h),
-                  const Text(
+                  Text(
                     '请向屏幕展示二维码',
-                    style: TextStyle(color: Color(0xff999999), fontSize: 14.5),
+                    style: TextStyle(
+                      color: const Color(0xff999999),
+                      fontSize: 14.5.sp,
+                    ),
                   ),
                   const Text(
                     '识别后会自动签到',

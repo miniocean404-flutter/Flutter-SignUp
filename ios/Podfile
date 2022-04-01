@@ -1,5 +1,17 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+# 指定编译iOS版本，Pods->Local Podspecs 文件中platforms指定库要求的最低iOS版本
+  # spec.name             = 'Reachability' #名字
+  # spec.version          = '3.1.0'	#版本
+  # spec.license          = { :type => 'BSD' }	#证书
+  # spec.homepage         = 'https://github.com/tonymillion/Reachability'	#首页
+  # spec.authors          = { 'Tony Million' => 'tonymillion@gmail.com' }	#作者
+  # spec.summary          = 'ARC and GCD Compatible Reachability Class for iOS and macOS.'	#摘要
+  # spec.source           = { :git => 'https://github.com/tonymillion/Reachability.git', :tag => 'v3.1.0' }	#它的源地址
+  # spec.source_files     = 'Reachability.h,m'	#要引入的文件
+  # spec.framework        = 'SystemConfiguration'	#依赖的框架
+  # spec.requires_arc     = true	#是否使用arc规则
+  # spec.platforms        = 运行的最低版本
+platform :ios, '11.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'

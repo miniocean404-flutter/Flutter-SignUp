@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SpHelper {
   static final SpHelper _instance = SpHelper._internal();
+
   // 工厂方法构造函数
   factory SpHelper() => _instance;
   // instance的getter方法，SpHelper.instance获取对象
@@ -13,11 +14,7 @@ class SpHelper {
 
   //构造函数初始化
   SpHelper._internal() {
-    initPrefs();
-  }
-
-  static Future<void> initPrefs() async {
-    prefs = await SharedPreferences.getInstance();
+    SharedPreferences.getInstance().then((value) => prefs = value);
   }
 
   // 存数据

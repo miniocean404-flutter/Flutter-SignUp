@@ -27,6 +27,8 @@ void main() {
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。
 
         builder: (ctx, data, child) {
+          Global.initSp();
+
           return const MyApp();
         },
       ),
@@ -47,6 +49,13 @@ class MyApp extends StatelessWidget {
       darkTheme: darkTheme(),
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
+      builder: (context, widget) {
+        return MediaQuery(
+          // 设置文字大小不随系统设置改变（flutter screen 插件用）
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: widget as Widget,
+        );
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,9 +6,14 @@ import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class Global {
   static void initCommon() {
+    // 当输入和显示频率不同导致的性能下降处理
+    GestureBinding.instance?.resamplingEnabled = true;
+
     // 初始化路由
     Routers.defineRoutes();
+  }
 
+  static void initSp() {
     // 初始化持久化key,value存储工具
     SpHelper();
   }

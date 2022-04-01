@@ -102,8 +102,8 @@ class _StateModalState extends State<StateModal> {
                                     SizedBox(height: 36.h),
                                     Text(
                                       _currentState['state'],
-                                      style: const TextStyle(
-                                        fontSize: 32,
+                                      style: TextStyle(
+                                        fontSize: 32.sp,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     )
@@ -124,10 +124,10 @@ class _StateModalState extends State<StateModal> {
                         child: Text(
                           _currentState['tip'],
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style: TextStyle(
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff999999),
+                            color: const Color(0xff999999),
                           ),
                         ),
                       ),
