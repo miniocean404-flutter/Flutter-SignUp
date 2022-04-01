@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
@@ -27,8 +28,6 @@ void main() {
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。
 
         builder: (ctx, data, child) {
-          Global.initSp();
-
           return const MyApp();
         },
       ),
@@ -50,6 +49,9 @@ class MyApp extends StatelessWidget {
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
       builder: (context, widget) {
+        Global.initScreen(context); // 初始化屏幕自适应工具
+        Global.initSp();
+
         return MediaQuery(
           // 设置文字大小不随系统设置改变（flutter screen 插件用）
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

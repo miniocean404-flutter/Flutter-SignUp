@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
+import 'package:flutter_sign_in/config/global.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 
 class Splash extends StatefulWidget {

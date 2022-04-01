@@ -4,7 +4,6 @@ import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/config/global.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:flutter_sign_in/utils/toast.dart';
 import 'package:video_player/video_player.dart';
 
@@ -67,8 +66,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Global.initScreen(context); // 初始化屏幕自适应工具
-
     return Scaffold(
       body: Center(
         child: StateModal(

@@ -20,6 +20,7 @@ class Global {
 
   // 初始化屏幕自适应工具
   static initScreen(ctx) {
+    // MediaQuery.of(context) 的使用必须在 WidgetsApp or MaterialApp 里来提供数据。
     ScreenUtil.init(
       BoxConstraints(
         maxWidth: MediaQuery.of(ctx).size.width,
