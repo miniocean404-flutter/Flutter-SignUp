@@ -22,8 +22,8 @@ CupertinoThemeData iosThemeColor() {
 
     // 顶部导航栏和底部标签栏的背景颜色。
     // 在浅色模式下默认为浅灰色，在深色模式下默认为深半透明灰色。
-    // barBackgroundColor: ,
+    // barBackgroundColor: CupertinoColors.systemGrey,
     // app内页面的背景色
-    scaffoldBackgroundColor: AppColor.page,
+    // scaffoldBackgroundColor: AppColor.page,
   );
 }
