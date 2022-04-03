@@ -1,5 +1,5 @@
 import 'package:fluro/fluro.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_sign_in/utils/logger.dart';
 // 函数导入
 import 'route_handler.dart';
@@ -20,13 +20,6 @@ class Routers {
   static const String settingUpdate = "/settingUpdate";
 
   static void defineRoutes() {
-    router.define(splash, handler: splashHandler);
-    router.define(home, handler: homeHandler);
-    router.define(settingHome, handler: settingHomeHandler);
-    router.define(settingAbout, handler: settingAboutHandler);
-    router.define(settingDevice, handler: settingDeviceHandler);
-    router.define(settingUpdate, handler: settingUpdateHandler);
-
     // 处理找不到页面情况
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -34,6 +27,14 @@ class Routers {
         return null;
       },
     );
+
+    router.define(splash, handler: splashHandler);
+    router.define(home, handler: homeHandler);
+    router.define(settingHome, handler: settingHomeHandler);
+    router.define(settingAbout, handler: settingAboutHandler);
+    router.define(settingNetwork, handler: settingNetworkHandler);
+    router.define(settingDevice, handler: settingDeviceHandler);
+    router.define(settingUpdate, handler: settingUpdateHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
+// 安卓使用material IOS使用 cupertino
+// 与安卓的MaterialApp一样 iOS的是CupertinoApp
+// 与安卓的Scaffold一样 iOS的是CupertinoPageScaffold
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_sign_in/config/theme/ios.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
-import 'config/theme/index.dart';
 import 'provider/data.dart';
 import 'router/routers.dart';
 
@@ -41,11 +43,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CupertinoApp(
       title: '签到',
       debugShowCheckedModeBanner: false,
-      theme: themeColor(),
-      darkTheme: darkTheme(),
+      theme: iosThemeColor(),
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
       builder: (context, widget) {

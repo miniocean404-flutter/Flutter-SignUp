@@ -1,6 +1,6 @@
+// 去除按钮水波纹
 import 'package:flutter/material.dart';
 
-// 去除按钮水波纹
 class NoSplashFactory extends InteractiveInkFeatureFactory {
   const NoSplashFactory();
 

@@ -35,7 +35,7 @@ class ColorSchemeConfig {
   }
 }
 
-ThemeData themeColor() {
+ThemeData androidThemeColor() {
   return ThemeData(
     // platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
 
@@ -130,7 +130,7 @@ ThemeData themeColor() {
   );
 }
 
-ThemeData darkTheme() {
+ThemeData androidDarkTheme() {
   return ThemeData(
     // * 全局主题
     colorScheme: ColorSchemeConfig.colorScheme(mode: Brightness.dark),

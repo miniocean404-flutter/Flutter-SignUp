@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
-import 'package:flutter_sign_in/config/global.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/toast.dart';
 import 'package:video_player/video_player.dart';
@@ -66,8 +65,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return CupertinoPageScaffold(
+      child: Center(
         child: StateModal(
           state: _modalState,
           onClose: closeModal,
