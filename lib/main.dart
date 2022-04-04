@@ -16,10 +16,10 @@ void main() {
     MultiProvider(
       providers: [
         // 这里通过 ChangeNotifierProvider 的 create 把 ChangeNotifier（即 Data）建立联系，
-        //作用域的范围在 child 指定的 MaterialApp，这里我们将 MyApp 作为首页，SingleStatsView 里面
-        //可以使用 Data 作为数据源。
-        //需要注意的是，不要把所有状态的作用域都放在 MaterialApp，根据实际业务需求严格控制作用域范围，
-        //全局状态多了会严重影响应用的性能。
+        // 作用域的范围在 child 指定的 MaterialApp，这里我们将 MyApp 作为首页，SingleStatsView 里面
+        // 可以使用 Data 作为数据源。
+        // 需要注意的是，不要把所有状态的作用域都放在 MaterialApp，根据实际业务需求严格控制作用域范围，
+        // 全局状态多了会严重影响应用的性能。
 
         ChangeNotifierProvider<Data>(create: (_) => Data()),
       ],

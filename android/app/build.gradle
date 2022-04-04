@@ -28,21 +28,21 @@ if (flutterVersionName == null) {
 
 /// 获取渠道参数使用,这里设置一下默认值
 def dartEnvironmentVariables = [
-    APP_CHANNEL: 'main',
-    OTHER_VAR: 'other',
+        APP_CHANNEL: 'main',
+        OTHER_VAR  : 'other',
 ]
 
 // TODO 获取命令行参数脚本
 if (project.hasProperty('dart-defines')) {
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
-        .split(',')
-        .collectEntries { entry ->
-            // 1.22.6 版本
-            //def pair = URLDecoder.decode(entry).split('=')
-            // 2.2 版本
-            def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
-            [(pair.first()): pair.last()]
-        }
+            .split(',')
+            .collectEntries { entry ->
+                // 1.22.6 版本
+                //def pair = URLDecoder.decode(entry).split('=')
+                // 2.2 版本
+                def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+                [(pair.first()): pair.last()]
+            }
 }
 
 
@@ -55,18 +55,17 @@ android {
     // TODO 重命名安卓 apk 脚本
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            if(variant.buildType.name == "release"){
+            if (variant.buildType.name == "release") {
                 // 获取版本
                 def versionName = variant.versionName
                 def versionCode = variant.versionName
-             	// 设置新名称
-                def newApkName ="app_v${defaultConfig.versionName}_${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.APP_CHANNEL}.apk"
+                // 设置新名称
+                def newApkName = "app_v${defaultConfig.versionName}_${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.APP_CHANNEL}.apk"
                 outputFileName = new File(newApkName)
             }
         }
     }
 
- 
 
     // buildToolsVersion：指定Gradle编译APP时所使用的SDK编译工具、命令行工具和编译器的版本、我们需要通过SDK Manager去下载使用到的编译工具。
 
@@ -94,7 +93,7 @@ android {
      * */
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-         // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
+        // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.flutter_sign_in"
         // 定义APP需要支持的 Android API 最小的版本。
         // minSdkVersion flutter.minSdkVersion
@@ -119,6 +118,20 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+
+            // 配置打包的架构
+            ndk {
+                //之前看QQ微信等大佬都只用"armeabi"
+                abiFilters "armeabi-v7a"
+            }
+        }
+
+        // 配置调试版本时候的包的架构
+        debug {
+            ndk {
+                //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器回报错
+                abiFilters  "armeabi-v7a","arm64-v8a", "x86"
+            }
         }
     }
 }
