@@ -25,9 +25,9 @@ class _SettingBarState extends State<SettingBar> {
       color: widget.color ?? Colors.transparent,
       child: Row(
         children: [
-          SizedBox(width: 11.w),
+          SizedBox(width: 11.r),
           Container(color: Colors.red, width: 30.r, height: 30.r),
-          SizedBox(width: 12.w),
+          SizedBox(width: 12.r),
           Text(
             widget.title,
             style: TextStyle(fontSize: 18.sp),

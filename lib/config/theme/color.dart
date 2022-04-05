@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppColor {
   static const fontWeight = FontWeight.w600;
+
+  static Color page = const Color(0xffefeff3);
 
   static Color primary = const Color(0xfffbfbfb);
   // static Color success = Color(0xff07c160);
@@ -13,10 +15,10 @@ class AppColor {
   static Color un2active = const Color(0xff8d8d8d);
   static Color un3active = const Color(0xffb1b1b1);
   // static Color page = Color(0xfff7f7f7);
-  static Color page = const Color(0xFFFFFFFF);
   static Color border = const Color(0xfff5f5f5);
   static Color dark = const Color(0xFF000000);
-  static Color transparent = Colors.transparent;
+  // static Color transparent = Colors.transparent;
+  static Color transparent = const Color.fromRGBO(0, 0, 0, 0);
 
   // 颜色值转换
   static Color string2Color(String colorString) {

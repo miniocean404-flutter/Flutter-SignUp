@@ -82,7 +82,7 @@ class _SettingState extends State<Setting> {
 
               // 关于、软件更新
               SettingBg(
-                leftLine: 53.w,
+                leftLine: 53.r,
                 childs: [
                   GestureDetector(
                     onTap: () => goPage(Page.about),

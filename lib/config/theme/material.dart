@@ -17,7 +17,7 @@ class ColorSchemeConfig {
       secondary: AppColor.info,
       secondaryContainer: AppColor.info,
 
-      //小部件的背景色 如:card appbar
+      // 小部件的背景色 如:card appbar
       surface: AppColor.info,
       //可滚动内容后面的颜色
       background: Colors.green,
@@ -35,9 +35,9 @@ class ColorSchemeConfig {
   }
 }
 
-ThemeData androidThemeColor() {
+ThemeData materialThemeColor() {
   return ThemeData(
-    // platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
+    platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
 
     // 用于去除水波纹
     // splashColor: AppColor.transparent,
@@ -130,7 +130,7 @@ ThemeData androidThemeColor() {
   );
 }
 
-ThemeData androidDarkTheme() {
+ThemeData materialDarkTheme() {
   return ThemeData(
     // * 全局主题
     colorScheme: ColorSchemeConfig.colorScheme(mode: Brightness.dark),

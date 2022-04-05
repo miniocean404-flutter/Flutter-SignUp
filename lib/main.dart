@@ -2,7 +2,7 @@
 // 与安卓的MaterialApp一样 iOS的是CupertinoApp
 // 与安卓的Scaffold一样 iOS的是CupertinoPageScaffold
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/config/theme/ios.dart';
+import 'package:flutter_sign_in/config/theme/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
@@ -43,10 +43,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // CupertinoApp
     return CupertinoApp(
       title: '签到',
       debugShowCheckedModeBanner: false,
-      theme: iosThemeColor(),
+      theme: cupertinoThemeColor(),
+      // darkTheme: materialDarkTheme(),
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
       builder: (context, widget) {

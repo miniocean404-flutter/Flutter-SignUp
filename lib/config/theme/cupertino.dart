@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'color.dart';
 
-CupertinoThemeData iosThemeColor() {
+CupertinoThemeData cupertinoThemeColor() {
   return CupertinoThemeData(
     brightness: Brightness.light,
     // 用于主题的交互元素的颜色。

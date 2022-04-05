@@ -84,7 +84,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
               ),
               SizedBox(height: 30.h),
 
-              // 服务器状态
+              // 重新登录
               SettingBg(
                 leftLine: 16.w,
                 child: Container(
