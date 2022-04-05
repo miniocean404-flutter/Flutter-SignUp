@@ -17,16 +17,20 @@ CupertinoThemeData cupertinoThemeColor() {
     primaryContrastingColor: AppColor.primary,
 
     textTheme: const CupertinoTextThemeData(
-        // primaryColor: CupertinoColors.systemBlue,
-        // textStyle:,
-        // actionTextStyle:,
-        // tabLabelTextStyle:,
-        // navTitleTextStyle:,
-        // navLargeTitleTextStyle:,
-        // navActionTextStyle:,
-        // pickerTextStyle:,
-        // dateTimePickerTextStyle:,
-        ),
+      primaryColor: CupertinoColors.systemBlue,
+      textStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Color(0xff000000),
+      ),
+      // actionTextStyle:,
+      // tabLabelTextStyle:,
+      // navTitleTextStyle:,
+      // navLargeTitleTextStyle:,
+      // navActionTextStyle:,
+      // pickerTextStyle:,
+      // dateTimePickerTextStyle:,
+    ),
 
     /**
      * 顶部导航栏和底部标签栏的背景颜色。
