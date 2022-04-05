@@ -4,12 +4,12 @@ class AppColor {
   static const fontWeight = FontWeight.w600;
 
   static Color page = const Color(0xffefeff3);
+  static Color info = const Color(0xffC1C1C1);
+  static Color primary = const Color(0xffFFFFFF);
 
-  static Color primary = const Color(0xfffbfbfb);
   // static Color success = Color(0xff07c160);
   static Color danger = const Color(0xffee0a24);
   static Color warning = const Color(0xffffba00);
-  static Color info = const Color(0xff00a1d6);
   // static Color active = Colors.blue;
   static Color unactive = const Color(0xff7b7b7b);
   static Color un2active = const Color(0xff8d8d8d);
