@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sign_in/utils/water_ripple.dart';
 import 'color.dart';
-
-// import './water-ripple.dart';
 
 // 全局主题配置
 class ColorSchemeConfig {
@@ -40,9 +39,9 @@ ThemeData materialThemeColor() {
     platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
 
     // 用于去除水波纹
-    // splashColor: AppColor.transparent,
-    // highlightColor: AppColor.transparent,
-    // splashFactory: const NoSplashFactory(),
+    splashColor: AppColor.transparent,
+    highlightColor: AppColor.transparent,
+    splashFactory: const NoSplashFactory(),
 
     primaryColor: AppColor.info,
     //用于materia应用程序或app内页面的背景色

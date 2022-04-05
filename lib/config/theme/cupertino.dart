@@ -4,6 +4,18 @@ import 'color.dart';
 CupertinoThemeData cupertinoThemeColor() {
   return CupertinoThemeData(
     brightness: Brightness.light,
+
+    /**
+     * app内页面的背景色
+     */
+    scaffoldBackgroundColor: AppColor.page,
+
+    /**
+     * 顶部导航栏和底部标签栏的背景颜色。
+     * 默认:在浅色模式下默认为浅灰色，在深色模式下默认为深半透明灰色。
+     */
+    // barBackgroundColor: CupertinoColors.systemGrey,
+
     /**
      *  用于主题的交互元素的颜色。
      *  Icon
@@ -16,6 +28,9 @@ CupertinoThemeData cupertinoThemeColor() {
      */
     primaryContrastingColor: AppColor.primary,
 
+    /**
+     * 文字相关样式
+     */
     textTheme: const CupertinoTextThemeData(
       primaryColor: CupertinoColors.systemBlue,
       textStyle: TextStyle(
@@ -31,16 +46,5 @@ CupertinoThemeData cupertinoThemeColor() {
       // pickerTextStyle:,
       // dateTimePickerTextStyle:,
     ),
-
-    /**
-     * 顶部导航栏和底部标签栏的背景颜色。
-     * 默认:在浅色模式下默认为浅灰色，在深色模式下默认为深半透明灰色。
-     */
-    // barBackgroundColor: CupertinoColors.systemGrey,
-
-    /**
-     * app内页面的背景色
-     */
-    scaffoldBackgroundColor: AppColor.page,
   );
 }
