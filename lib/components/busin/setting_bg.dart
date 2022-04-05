@@ -4,11 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SettingBg extends StatefulWidget {
   final Widget? child;
   final List<Widget>? childs;
+  // 虚线距离左侧的长度
+  final double leftLine;
 
   const SettingBg({
     Key? key,
     this.child,
     this.childs,
+    required this.leftLine,
   }) : super(key: key);
 
   @override
@@ -35,7 +38,7 @@ class _SettingBgState extends State<SettingBg> {
           list.add(
             Row(
               children: [
-                SizedBox(width: 53.w),
+                SizedBox(width: widget.leftLine),
                 Flexible(
                   child: Container(
                     color: const Color(0xffC6C6C8),
@@ -64,9 +67,7 @@ class _SettingBgState extends State<SettingBg> {
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
       ),
       child: widget.childs != null
-          ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list
-              //  widget.childs as List<Widget>,
-              )
+          ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list)
           : widget.child,
     );
   }

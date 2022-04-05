@@ -60,31 +60,29 @@ class _SettingState extends State<Setting> {
               SizedBox(height: 8.h),
 
               // 设备配置
-
-              SettingBg(
-                child: GestureDetector(
-                  onTap: () => goPage(Page.device),
-                  child: const SettingBg(
-                    child: SettingBar(title: '设备配置'),
-                  ),
+              GestureDetector(
+                onTap: () => goPage(Page.device),
+                child: SettingBg(
+                  leftLine: 53.w,
+                  child: const SettingBar(title: '设备配置'),
                 ),
               ),
 
               SizedBox(height: 30.h),
 
               // 网络配置
-              SettingBg(
-                child: GestureDetector(
-                  onTap: () => goPage(Page.network),
-                  child: const SettingBg(
-                    child: SettingBar(title: '网络配置'),
-                  ),
+              GestureDetector(
+                onTap: () => goPage(Page.network),
+                child: SettingBg(
+                  leftLine: 53.w,
+                  child: const SettingBar(title: '网络配置'),
                 ),
               ),
               SizedBox(height: 30.h),
 
               // 关于、软件更新
               SettingBg(
+                leftLine: 53.w,
                 childs: [
                   GestureDetector(
                     onTap: () => goPage(Page.about),
