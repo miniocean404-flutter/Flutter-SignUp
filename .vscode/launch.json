@@ -5,10 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "flutter_sign_in-dev",
+      "name": "dev-chrome",
       "request": "launch",
       "type": "dart",
       "args": [
+        "run -d chrome", // 运行平台
         "--dart-define",
         "APP_CHANNEL=Flutter",
         "--dart-define",
@@ -16,7 +17,7 @@
       ]
     },
     {
-      "name": "flutter_sign_in-staging",
+      "name": "staging",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile",
@@ -28,7 +29,7 @@
       ]
     },
     {
-      "name": "flutter_sign_in-prod",
+      "name": "prod",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
