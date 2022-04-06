@@ -37,6 +37,10 @@ dependencies:
   provider: ^6.0.2
   # 简单数据持久化，清除数据就消失（官方）
   shared_preferences: ^2.0.13
+  # 应用包信息查询（官方）
+  package_info_plus: ^1.4.2
+  # 设备信息及平台（官方）
+  device_info_plus: ^3.2.2
 
   # 日志打印
   logger: ^1.1.0
@@ -44,8 +48,6 @@ dependencies:
   fluttertoast: ^8.0.9
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.0.20
-  # 设备信息及平台
-  device_info_plus: ^3.2.2
 
   # 视频播放 (官方)
   video_player: ^2.3.0
