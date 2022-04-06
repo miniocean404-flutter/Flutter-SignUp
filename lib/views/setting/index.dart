@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_icon_button_bar.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 
 enum Page {
@@ -64,7 +65,10 @@ class _SettingState extends State<Setting> {
                 onTap: () => goPage(Page.device),
                 child: SettingBg(
                   leftLine: 53.w,
-                  child: const SettingBar(title: '设备配置'),
+                  child: SettingBar(
+                    imgUrl: Assets.iconSettingConfig,
+                    title: '设备配置',
+                  ),
                 ),
               ),
 
@@ -75,7 +79,10 @@ class _SettingState extends State<Setting> {
                 onTap: () => goPage(Page.network),
                 child: SettingBg(
                   leftLine: 53.w,
-                  child: const SettingBar(title: '网络配置'),
+                  child: SettingBar(
+                    imgUrl: Assets.iconNetworkConfig,
+                    title: '网络配置',
+                  ),
                 ),
               ),
               SizedBox(height: 30.h),
@@ -86,11 +93,17 @@ class _SettingState extends State<Setting> {
                 childs: [
                   GestureDetector(
                     onTap: () => goPage(Page.about),
-                    child: const SettingBar(title: '关于'),
+                    child: SettingBar(
+                      imgUrl: Assets.iconAbout,
+                      title: '关于',
+                    ),
                   ),
                   GestureDetector(
                     onTap: () => goPage(Page.update),
-                    child: const SettingBar(title: '软件更新'),
+                    child: SettingBar(
+                      imgUrl: Assets.iconUpdate,
+                      title: '软件更新',
+                    ),
                   )
                 ],
               ),

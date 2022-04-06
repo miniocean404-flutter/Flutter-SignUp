@@ -5,11 +5,13 @@ class SettingBar extends StatefulWidget {
   // 按钮条颜色
   final Color? color;
   final String title;
+  final String imgUrl;
 
   const SettingBar({
     Key? key,
     this.color,
     required this.title,
+    required this.imgUrl,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,11 @@ class _SettingBarState extends State<SettingBar> {
       child: Row(
         children: [
           SizedBox(width: 11.r),
-          Container(color: Colors.red, width: 30.r, height: 30.r),
+          SizedBox(
+            width: 30.r,
+            height: 30.r,
+            child: Image.asset(widget.imgUrl),
+          ),
           SizedBox(width: 12.r),
           Text(
             widget.title,
