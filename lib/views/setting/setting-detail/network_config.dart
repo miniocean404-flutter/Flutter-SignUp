@@ -67,6 +67,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
 
                 // 使用https
                 Container(
+                  key: ValueKey('$_isUseHttps'),
                   height: 44.h,
                   margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
                   child: Row(

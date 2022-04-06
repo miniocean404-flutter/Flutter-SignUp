@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 
 class SettingBg extends StatefulWidget {
   final Widget? child;
@@ -19,16 +20,22 @@ class SettingBg extends StatefulWidget {
 }
 
 class _SettingBgState extends State<SettingBg> {
-  final List<Widget> list = [];
+  late List<Widget> list = [];
 
   @override
   void initState() {
+    addLine();
     super.initState();
+  }
 
+  @override
+  void didUpdateWidget(covariant SettingBg oldWidget) {
+    super.didUpdateWidget(oldWidget);
     addLine();
   }
 
   void addLine() {
+    list = [];
     final childs = widget.childs;
     if (childs != null) {
       for (var i = 0; i <= childs.length - 1; i++) {

@@ -1,4 +1,4 @@
-1.组件中传递 widget 过去后，传递过去的 widget 中监听事件并 setState 失效：需要使用状态管理进行数据的更新
+1.组件中传递 widget 过去后，传递过去的 widget 中使用的是以前的 list 集合中的 widget，需要在 build 中或者 didUpdateWidget 生命周期中删除以前的 list,更新为新的 list
 
 ```flutter
 SettingBg(
