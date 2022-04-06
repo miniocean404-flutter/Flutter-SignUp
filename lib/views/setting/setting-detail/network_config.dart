@@ -11,6 +11,8 @@ class NetworkConfig extends StatefulWidget {
 }
 
 class _NetworkConfigState extends State<NetworkConfig> {
+  bool _isUseHttps = false;
+
   @override
   Widget build(BuildContext context) {
     // 与安卓的MaterialApp一样 iOS的是CupertinoApp
@@ -19,107 +21,96 @@ class _NetworkConfigState extends State<NetworkConfig> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           '网络配置',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18.sp,
-          ),
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
         ),
       ),
       child: Container(
-        color: const Color(0xffefeff3),
-        child: Container(
-          margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
-          child: Column(
-            children: [
-              SettingBg(
-                leftLine: 17.w,
-                childs: [
-                  // 服务器
-                  GestureDetector(
-                    child: Container(
-                      height: 44.h,
-                      margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '服务器',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '10.1.5.138',
-                                style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: const Color(0xff8A8A8D)),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 20.r,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // 使用https
-                  Container(
+        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        child: Column(
+          children: [
+            SettingBg(
+              leftLine: 17.w,
+              childs: [
+                // 服务器
+                GestureDetector(
+                  child: Container(
                     height: 44.h,
                     margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                    child: GestureDetector(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '使用https',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
-                          CupertinoSwitch(
-                            value: true,
-                            onChanged: (value) {
-                              setState(() {});
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30.h),
-
-              // 服务器状态
-              SettingBg(
-                leftLine: 16.w,
-                child: Container(
-                  height: 44.h,
-                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                  child: GestureDetector(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '服务器状态',
+                          '服务器',
                           style: TextStyle(fontSize: 18.sp),
                         ),
-                        Text(
-                          '正常',
-                          style: TextStyle(
-                              fontSize: 18.sp, color: const Color(0xff8A8A8D)),
-                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '10.1.5.138',
+                              style: TextStyle(
+                                  fontSize: 18.sp,
+                                  color: const Color(0xff8A8A8D)),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 20.r,
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+
+                // 使用https
+                Container(
+                  height: 44.h,
+                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('使用https', style: TextStyle(fontSize: 18.sp)),
+                      CupertinoSwitch(
+                        value: _isUseHttps,
+                        onChanged: (v) {
+                          setState(() => {_isUseHttps = v});
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 30.h),
+
+            // 服务器状态
+            SettingBg(
+              leftLine: 16.w,
+              child: Container(
+                height: 44.h,
+                margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '服务器状态',
+                        style: TextStyle(fontSize: 18.sp),
+                      ),
+                      Text(
+                        '正常',
+                        style: TextStyle(
+                            fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
