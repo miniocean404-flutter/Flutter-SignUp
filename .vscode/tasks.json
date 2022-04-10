@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "git-pull-push",
+      "label": "git-commit-push",
       "type": "shell",
       "dependsOn": ["git-commit-am", "git-push"],
       "dependsOrder": "sequence",
