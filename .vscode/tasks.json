@@ -19,7 +19,7 @@
       "label": "git-push",
       "type": "shell",
       "command": "git",
-      "args": ["pull", "origin", "${input:branchName}"],
+      "args": ["push", "origin", "${input:branchName}"],
       "problemMatcher": []
     }
   ],
