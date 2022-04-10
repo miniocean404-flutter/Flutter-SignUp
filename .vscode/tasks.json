@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "git-pull-push",
+      "type": "shell",
+      "dependsOn": ["git-commit-am", "git-push"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "git-commit-am",
+      "type": "shell",
+      "command": "git",
+      "args": ["commit", "-am", "${input:commit-info}"],
+      "problemMatcher": []
+    },
+    {
+      "label": "git-push",
+      "type": "shell",
+      "command": "git",
+      "args": ["pull", "origin", "${input:branchName}"],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "commit-info",
+      "type": "promptString",
+      "description": "输入提交信息",
+      "default": "提交信息没有填写"
+    },
+    {
+      "id": "branchName",
+      "type": "promptString",
+      "description": "手动输入分支名",
+      "default": "release"
+    },
+    {
+      "id": "branch",
+      "type": "pickString",
+      "options": ["dev", "release"],
+      "description": "请输入分支"
+    }
+  ]
+}
