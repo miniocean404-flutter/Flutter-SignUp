@@ -34,7 +34,7 @@
       "id": "branchName",
       "type": "promptString",
       "description": "手动输入分支名",
-      "default": "release"
+      "default": "master"
     },
     {
       "id": "branch",
