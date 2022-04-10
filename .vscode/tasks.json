@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "git-commit-push",
+      "label": "添加文件并推送",
       "type": "shell",
       "dependsOn": ["git-add.", "git-commit-am", "git-push"],
       "dependsOrder": "sequence",
@@ -35,7 +35,7 @@
       "id": "commit-info",
       "type": "promptString",
       "description": "输入提交信息",
-      "default": "提交信息没有填写"
+      "default": "请填写提交信息"
     },
     {
       "id": "branchName",
