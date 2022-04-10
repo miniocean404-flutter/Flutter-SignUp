@@ -4,8 +4,15 @@
     {
       "label": "git-commit-push",
       "type": "shell",
-      "dependsOn": ["git-commit-am", "git-push"],
+      "dependsOn": ["git-add.", "git-commit-am", "git-push"],
       "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "git-add.",
+      "type": "shell",
+      "command": "git",
+      "args": ["add", "."],
       "problemMatcher": []
     },
     {
