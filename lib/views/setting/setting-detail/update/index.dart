@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/utils/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 enum PageState {
@@ -17,7 +18,7 @@ class Update extends StatefulWidget {
 }
 
 class _UpdateState extends State<Update> {
-  PageState _currentState = PageState.auto;
+  late PageState _currentState;
 
   // 是否自动更新
   late String _version = '';
@@ -25,6 +26,19 @@ class _UpdateState extends State<Update> {
   @override
   void initState() {
     super.initState();
+
+    getCurrentState();
+
+    PackageInfo.fromPlatform().then((packageInfo) {
+      setState(() => {_version = packageInfo.version});
+    });
+  }
+
+  void getCurrentState() {
+    bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
+    if (isAutoUpdate == null || isAutoUpdate == true) {
+      _currentState = PageState.auto;
+    }
 
     if (_currentState == PageState.auto) {
       setState(() {
@@ -35,10 +49,6 @@ class _UpdateState extends State<Update> {
         _currentState = PageState.auto;
       });
     }
-
-    PackageInfo.fromPlatform().then((packageInfo) {
-      setState(() => {_version = packageInfo.version});
-    });
   }
 
   void _isAutoUpdateButton(v) {

@@ -1,10 +1,13 @@
 import 'dart:convert';
+
 import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpHelper {
+  // 命名构造函数,及初始化
+  SpHelper._internal();
+  // 单例模式
   static final SpHelper _instance = SpHelper._internal();
-
   // 工厂方法构造函数
   factory SpHelper() => _instance;
   // instance的getter方法，SpHelper.instance获取对象
@@ -12,9 +15,8 @@ class SpHelper {
 
   static late SharedPreferences prefs;
 
-  //构造函数初始化
-  SpHelper._internal() {
-    SharedPreferences.getInstance().then((value) => prefs = value);
+  static Future init() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
   // 存数据
@@ -43,11 +45,13 @@ class SpHelper {
   // 获取持久化数据
   static T getLocalStorage<T>(String key) {
     dynamic value = prefs.get(key);
+    logger.i('SharedPreferences获取的值为---$value');
+
+    // 如果是字符串就返回json解析后的结果
     if (value.runtimeType.toString() == "String" && _isJson(value)) {
       return json.decode(value);
     }
-    logger.i('SharedPreferences获取的值为 $value');
-    return value ?? '';
+    return value;
   }
 
   // 获取任意值的key

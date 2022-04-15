@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class Global {
@@ -15,7 +15,7 @@ class Global {
 
   static void initSp() {
     // 初始化持久化key,value存储工具
-    SpHelper();
+    SpHelper.init();
   }
 
   // 初始化屏幕自适应工具
