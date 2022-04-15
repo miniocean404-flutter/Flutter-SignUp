@@ -18,7 +18,7 @@ class Update extends StatefulWidget {
 }
 
 class _UpdateState extends State<Update> {
-  late PageState _currentState;
+  late PageState _currentState = PageState.auto;
 
   // 是否自动更新
   late String _version = '';
@@ -34,7 +34,10 @@ class _UpdateState extends State<Update> {
     });
   }
 
-  void getCurrentState() {
+  // 获取当前自动更新状态，并设置当前页面的状态
+  void getCurrentState() async {
+    // await Version.getHistoryVersion();
+
     bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
     if (isAutoUpdate == null || isAutoUpdate == true) {
       _currentState = PageState.auto;

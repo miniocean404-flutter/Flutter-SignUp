@@ -1,13 +1,17 @@
-import 'package:flutter_sign_in/model/test.dart';
+import 'package:flutter_sign_in/model/history_version.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
+
 import './config/http_request.dart';
 
-class Platform {
+class Version {
   // 首页推荐
-  static Future<List> getRecommendAll(String cid, int pageNum) async {
-    var json =
-        await Http().get('/top/live/' + cid, params: {"pageNum": pageNum});
-    Map<String, dynamic> res = Test.fromJson(json).toJson();
+  static Future getHistoryVersion() async {
+    var json = await Http()
+        .get('/version', params: {"client": 'envoy', 'platform': 'iOS'});
 
+    Map<String, dynamic> res = HistoryVersion.fromJson(json).toJson();
+
+    logger.i(res);
     return res['data'];
   }
 }
