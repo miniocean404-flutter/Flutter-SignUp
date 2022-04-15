@@ -1,7 +1,6 @@
+import 'package:flutter_sign_in/http/config/http_request.dart';
 import 'package:flutter_sign_in/model/history_version.dart';
 import 'package:flutter_sign_in/utils/logger.dart';
-
-import './config/http_request.dart';
 
 class Version {
   // 首页推荐

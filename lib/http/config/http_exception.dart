@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 
 // 自定义 http 异常
 class HttpException implements Exception {
@@ -9,7 +10,10 @@ class HttpException implements Exception {
 
   @override
   String toString() {
-    return "Http错误 [$code]: $msg";
+    logger.e('Http错误: \r\n\t状态码:$code \r\n\t错误消息: $msg');
+
+    // 重写报错的tostring
+    return "";
   }
 
   factory HttpException.create(DioError error) {
@@ -24,10 +28,11 @@ class HttpException implements Exception {
         return HttpException(code: -1, msg: '响应超时');
       case DioErrorType.response:
         // 服务器异常
-        int statusCode = error.response!.statusCode ?? 0;
+        int statusCode = error.response?.statusCode ?? 0;
         switch (statusCode) {
           case 0:
-            return HttpException(code: statusCode, msg: '状态码为空');
+            return HttpException(
+                code: statusCode, msg: 'response 或者 状态码为空,如果是web项目可能跨域');
           case 400:
             return HttpException(code: statusCode, msg: '请求语法错误');
           case 401:

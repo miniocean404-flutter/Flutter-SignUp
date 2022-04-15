@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/http/version.dart';
 import 'package:flutter_sign_in/utils/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -36,7 +37,7 @@ class _UpdateState extends State<Update> {
 
   // 获取当前自动更新状态，并设置当前页面的状态
   void getCurrentState() async {
-    // await Version.getHistoryVersion();
+    await Version.getHistoryVersion();
 
     bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
     if (isAutoUpdate == null || isAutoUpdate == true) {

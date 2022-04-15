@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'http_options.dart';
+
 import 'http_interceptor.dart';
+import 'http_options.dart';
 
 // http 请求单例类
 class Http {
@@ -34,16 +35,17 @@ class Http {
   // [headers] 请求头
   // [interceptors] 基础拦截器
   void init({
-    required String baseUrl,
+    String? baseUrl,
     int? connectTimeout,
     int? receiveTimeout,
     Map<String, dynamic>? headers,
     List<Interceptor>? interceptors,
   }) {
-    dio.options.baseUrl = baseUrl;
+    dio.options.baseUrl = baseUrl!;
     dio.options.connectTimeout = connectTimeout!;
     dio.options.receiveTimeout = receiveTimeout!;
     dio.options.headers = headers;
+
     if (interceptors!.isNotEmpty) {
       dio.interceptors.addAll(interceptors);
     }
@@ -87,6 +89,7 @@ class Http {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+
     return response.data;
   }
 

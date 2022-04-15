@@ -29,9 +29,9 @@ class Data {
   Data({this.test, this.count});
 
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['test'] != null) {
+    if (json['list'] != null) {
       test = <Test>[];
-      json['test'].forEach((v) {
+      json['list'].forEach((v) {
         test!.add(Test.fromJson(v));
       });
     }

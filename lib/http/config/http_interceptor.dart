@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'http_exception.dart';
+import 'package:flutter_sign_in/http/config/http_exception.dart';
 
 // 自定义拦截器
 class HttpInterceptor extends Interceptor {
