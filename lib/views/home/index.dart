@@ -107,6 +107,7 @@ class _HomeState extends State<Home> {
                     )
                   : Container(),
 
+              // 标题、扫码
               Column(
                 children: [
                   SizedBox(height: 159.h),
