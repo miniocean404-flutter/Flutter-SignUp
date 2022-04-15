@@ -21,14 +21,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late VideoPlayerController _controller; // 播放控制器
+  int _clickNum = 0;
+
   StateType _modalState = StateType.none; // 弹窗状态
   final BusinState _businState = BusinState.sign; // 当前业务模式
 
   bool teachIsSign = false; // 老师是否签到
   bool childrenIsSign = false; // 学生是否签到
-
-  late VideoPlayerController _controller; // 播放控制器
-  int _clickNum = 0;
+  bool isHavaVideoLink = true; // 是否有视频链接
 
   // 初始化声明周期
   @override
@@ -107,21 +108,27 @@ class _HomeState extends State<Home> {
                     )
                   : Container(),
 
-              // 标题、扫码
               Column(
                 children: [
                   SizedBox(height: 159.h),
+
+                  // 签到标题
                   GestureDetector(
                     child: Text(
                       title,
                       style: TextStyle(
                         fontSize: 29.sp,
                         fontWeight: FontWeight.w600,
+                        color: isHavaVideoLink
+                            ? const Color(0xffFFFFFF)
+                            : const Color(0xff000000),
                       ),
                     ),
                     onTap: goSetting,
                   ),
                   SizedBox(height: 102.h),
+
+                  // 扫码
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
@@ -140,19 +147,27 @@ class _HomeState extends State<Home> {
                             Text(
                               '请向屏幕展示二维码',
                               style: TextStyle(
-                                color: const Color(0xff999999),
+                                color: isHavaVideoLink
+                                    ? const Color(0xffFFFFFF)
+                                    : const Color(0xff999999),
                                 fontSize: 14.5.sp,
                               ),
                             ),
-                            const Text(
+                            Text(
                               '识别后会自动签到',
-                              style: TextStyle(color: Color(0xff999999)),
+                              style: TextStyle(
+                                color: isHavaVideoLink
+                                    ? const Color(0xffFFFFFF)
+                                    : const Color(0xff999999),
+                              ),
                             ),
                             SizedBox(height: 292.h),
-                            const Text(
+                            Text(
                               'Serendipity Envoy',
                               style: TextStyle(
-                                color: Color(0xffCECECE),
+                                color: isHavaVideoLink
+                                    ? const Color(0xffFFFFFF)
+                                    : const Color(0xffCECECE),
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
