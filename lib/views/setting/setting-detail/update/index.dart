@@ -101,10 +101,13 @@ class _UpdateState extends State<Update> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('自动更新', style: TextStyle(fontSize: 18.sp)),
-                  CupertinoSwitch(
-                    value: _currentState == PageState.auto,
-                    onChanged: _isAutoUpdateButton,
-                  )
+                  Transform.scale(
+                    scale: 1.5.r,
+                    child: CupertinoSwitch(
+                      value: _currentState == PageState.auto,
+                      onChanged: _isAutoUpdateButton,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -180,7 +183,10 @@ class _UpdateState extends State<Update> {
               borderRadius: BorderRadius.circular(40),
               color: const Color(0xff0C508F),
               onPressed: () {},
-              child: const Text('更新'),
+              child: Text(
+                '更新',
+                style: TextStyle(fontSize: 18.sp),
+              ),
             ),
           )
         ],

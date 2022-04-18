@@ -24,6 +24,7 @@ class HistoryVersion {
     _message = json['message'];
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
+
   String? _code;
   String? _message;
   Data? _data;
