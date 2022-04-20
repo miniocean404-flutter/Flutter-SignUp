@@ -37,8 +37,6 @@ class _UpdateState extends State<Update> {
 
   // 获取当前自动更新状态，并设置当前页面的状态
   void getCurrentState() async {
-    final value = await getHistoryVersion();
-
     bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
     if (isAutoUpdate == null || isAutoUpdate == true) {
       _currentState = PageState.auto;
@@ -48,6 +46,8 @@ class _UpdateState extends State<Update> {
       setState(() {
         _currentState = PageState.loading;
       });
+
+      final value = await getHistoryVersion();
 
       setState(() {
         _currentState = PageState.auto;
