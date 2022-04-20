@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_proxy/shelf_proxy.dart';
 
@@ -7,8 +9,7 @@ import 'package:shelf_proxy/shelf_proxy.dart';
 // 运行 dart ./script/proxy-server.dart 启动代理服务器
 
 // 前端页面访问本地域名
-const String localHost = 'localhost';
-
+String localHost = 'localhost';
 // 前端页面访问本地端口号
 const int localPort = 4040;
 
@@ -16,6 +17,15 @@ const int localPort = 4040;
 const String targetUrl = 'http://api.uat.serendipity.illiaccess.com';
 
 Future main() async {
+  // 内网ip
+  for (var interface in await NetworkInterface.list()) {
+    for (var addr in interface.addresses) {
+      if (addr.type.name == 'IPv4') {
+        localHost = addr.address;
+      }
+    }
+  }
+
   var server = await shelf_io.serve(
     proxyHandler(targetUrl),
     localHost,
