@@ -11,7 +11,6 @@ import 'router/routers.dart';
 
 void main() {
   Global.initCommon();
-  Global.initSp();
 
   runApp(
     MultiProvider(
@@ -54,6 +53,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Routers.router.generator,
       builder: (context, widget) {
         Global.initScreen(context); // 初始化屏幕自适应工具
+        Global.initSp();
 
         return MediaQuery(
           // 设置文字大小不随系统设置改变（flutter screen 插件用）

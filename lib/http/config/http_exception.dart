@@ -8,11 +8,10 @@ class HttpException implements Exception {
 
   HttpException({this.code = 500, this.msg = '未知异常，请联系管理员'});
 
+  // 重写报错的tostring
   @override
   String toString() {
     logger.e('Http错误: \r\n\t状态码:$code \r\n\t错误消息: $msg');
-
-    // 重写报错的tostring
     return "";
   }
 

@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 
 class HttpOptions {
   // 地址前缀
-  // static const String baseUrl = 'http://api.uat.serendipity.illiaccess.com';
-  static const String baseUrl = 'http://localhost:4040';
+  static const String baseUrl = 'http://api.uat.serendipity.illiaccess.com';
+  // static const String baseUrl = 'http://localhost:4040';
   // 连接服务器超时时间，单位是毫秒
   static const int connectTimeout = 30000;
   // 接收超时时间，单位是毫秒

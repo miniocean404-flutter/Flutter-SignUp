@@ -54,13 +54,13 @@ class _HomeState extends State<Home> {
   // 初始化视频
   initVideo() {
     _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      // 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+
+      'https://vd2.bdstatic.com/mda-jm9ebsc3izgn97qm/sc/mda-jm9ebsc3izgn97qm.mp4?v_from_s=hkapp-haokan-hnb&auth_key=1650469567-0-0-842c2c922ad785b31459a37fd52564f9&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=0967274216&vid=4640462964647540560&abtest=100815_1-101454_1-17451_1&klogid=0967274216',
     );
 
-    setState(() {
-      _controller.setLooping(true);
-      _controller.play();
-    });
+    _controller.setLooping(true);
+    _controller.play();
 
     // 设置属性后初始化
     _controller.initialize().then((v) {

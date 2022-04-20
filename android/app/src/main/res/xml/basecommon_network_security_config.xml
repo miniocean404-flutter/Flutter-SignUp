@@ -1,0 +1,4 @@
+<!-- 解决不能直接访问http协议 -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true"/>
+</network-security-config>

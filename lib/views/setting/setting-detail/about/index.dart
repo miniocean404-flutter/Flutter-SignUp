@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class About extends StatefulWidget {

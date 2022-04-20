@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
 
 class SettingBg extends StatefulWidget {
   final Widget? child;

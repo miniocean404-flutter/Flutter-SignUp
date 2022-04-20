@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/setting_icon_button_bar.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/components/busin/setting_icon_button_bar.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 

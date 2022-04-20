@@ -47,7 +47,7 @@ class _UpdateState extends State<Update> {
         _currentState = PageState.loading;
       });
 
-      final value = await getHistoryVersion();
+      await getHistoryVersion();
 
       setState(() {
         _currentState = PageState.auto;

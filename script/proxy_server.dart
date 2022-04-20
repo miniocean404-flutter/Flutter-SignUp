@@ -25,5 +25,6 @@ Future main() async {
   server.defaultResponseHeaders.add('Access-Control-Allow-Origin', '*');
   server.defaultResponseHeaders.add('Access-Control-Allow-Credentials', true);
 
+  // ignore: avoid_print
   print('代理服务在:http://${server.address.host}:${server.port}');
 }
