@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpHelper {
@@ -45,7 +44,6 @@ class SpHelper {
   // 获取持久化数据
   static T getLocalStorage<T>(String key) {
     dynamic value = prefs.get(key);
-    logger.i('SharedPreferences获取的值为---$value');
 
     // 如果是字符串就返回json解析后的结果
     if (value.runtimeType.toString() == "String" && _isJson(value)) {

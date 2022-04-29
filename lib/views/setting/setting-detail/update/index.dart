@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/version.dart';
 import 'package:flutter_sign_in/utils/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/string_handle.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 enum PageState {
@@ -21,38 +22,63 @@ class Update extends StatefulWidget {
 class _UpdateState extends State<Update> {
   late PageState _currentState = PageState.auto;
 
-  // 是否自动更新
+  // 当前版本或者最新版本
   late String _version = '';
+  late bool _isForceUpdate = false;
+  late bool _isNew = false;
 
   @override
   void initState() {
     super.initState();
 
-    getCurrentState();
+    setVersionInfo();
+  }
 
-    PackageInfo.fromPlatform().then((packageInfo) {
-      setState(() => {_version = packageInfo.version});
-    });
+  // 设置当前版本、是否最新、是否强制更新
+  void setVersionInfo() async {
+    final Map<String, dynamic> versionRes = await getCurrentState();
+
+    final List list = versionRes['list'];
+
+    if (versionRes['count'] > 0) {
+      // 获取当前版本信息
+      final packageInfo = await PackageInfo.fromPlatform();
+      final currentVersion = packageInfo.version;
+
+      for (var versionItem in list) {
+        _isNew = versionCompare(versionItem['versionCode'], currentVersion);
+        _isNew
+            ? setState(() {
+                _version = versionItem['versionCode'];
+                _isForceUpdate = versionItem['isForceUpdate'];
+              })
+            : setState(() => _version = currentVersion);
+
+        if (_isNew) {
+          break;
+        }
+      }
+    }
   }
 
   // 获取当前自动更新状态，并设置当前页面的状态
-  void getCurrentState() async {
+  Future<Map<String, dynamic>> getCurrentState() async {
     bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
     if (isAutoUpdate == null || isAutoUpdate == true) {
       _currentState = PageState.auto;
     }
 
     if (_currentState == PageState.auto) {
-      setState(() {
-        _currentState = PageState.loading;
-      });
+      setState(() => _currentState = PageState.loading);
 
-      await getHistoryVersion();
+      final Map<String, dynamic> res = await getHistoryVersion();
 
-      setState(() {
-        _currentState = PageState.auto;
-      });
+      setState(() => _currentState = PageState.auto);
+
+      return res;
     }
+
+    throw '没有获取结果';
   }
 
   void _isAutoUpdateButton(v) {
@@ -102,7 +128,8 @@ class _UpdateState extends State<Update> {
                 children: [
                   Text('自动更新', style: TextStyle(fontSize: 18.sp)),
                   Transform.scale(
-                    scale: 1.5.r,
+                    // 1.r 屏幕放大的倍率也是1个像素放大的倍率
+                    scale: 1.r,
                     child: CupertinoSwitch(
                       value: _currentState == PageState.auto,
                       onChanged: _isAutoUpdateButton,
@@ -142,7 +169,7 @@ class _UpdateState extends State<Update> {
                         style: TextStyle(fontSize: 18.sp),
                       ),
                       Text(
-                        '正常',
+                        'Version $_version',
                         style: TextStyle(
                             fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),
@@ -164,7 +191,7 @@ class _UpdateState extends State<Update> {
                         style: TextStyle(fontSize: 18.sp),
                       ),
                       Text(
-                        '非强制',
+                        _isForceUpdate ? '强制' : '非强制',
                         style: TextStyle(
                             fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),

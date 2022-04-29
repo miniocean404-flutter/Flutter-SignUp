@@ -13,7 +13,7 @@ String localHost = 'localhost';
 // 前端页面访问本地端口号
 const int localPort = 4040;
 
-// 代理域名
+// 代理地址
 const String targetUrl = 'http://api.uat.serendipity.illiaccess.com';
 
 Future main() async {
@@ -31,6 +31,7 @@ Future main() async {
     localHost,
     localPort,
   );
+
   // 添加上跨域的这几个header
   server.defaultResponseHeaders.add('Access-Control-Allow-Origin', '*');
   server.defaultResponseHeaders.add('Access-Control-Allow-Credentials', true);
