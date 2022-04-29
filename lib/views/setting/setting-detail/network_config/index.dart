@@ -74,12 +74,15 @@ class _NetworkConfigState extends State<NetworkConfig> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('使用https', style: TextStyle(fontSize: 18.sp)),
-                      CupertinoSwitch(
-                        value: _isUseHttps,
-                        onChanged: (v) {
-                          setState(() => {_isUseHttps = v});
-                        },
-                      ),
+                      Transform.scale(
+                        scale: 1.r,
+                        child: CupertinoSwitch(
+                          value: _isUseHttps,
+                          onChanged: (v) {
+                            setState(() => {_isUseHttps = v});
+                          },
+                        ),
+                      )
                     ],
                   ),
                 ),
