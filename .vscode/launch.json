@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "dev-chrome",
-      "request": "launch",
+      "request": "launch", //launch 为启动 attach 为连接 （启动程序使用launch，但是在一个已经启动的项目中就需要attach连接进行调试）
       "type": "dart",
       "args": [
         "run -d chrome", // 运行平台
