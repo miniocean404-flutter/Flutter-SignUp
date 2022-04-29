@@ -21,3 +21,25 @@ Object getEnvironmentConfig() {
 
   throw '没有获取到对应环境的配置';
 }
+
+/// 判断是否为Debug模式
+bool isDebug() {
+  bool inDebug = false;
+  assert(inDebug = true);
+  return inDebug;
+}
+
+/// 判断编译模式
+String getCompileMode() {
+  const bool isProfile = bool.fromEnvironment("dart.vm.profile");
+  const bool isReleaseMode = bool.fromEnvironment("dart.vm.product");
+  if (isDebug()) {
+    return "debug";
+  } else if (isProfile) {
+    return "profile";
+  } else if (isReleaseMode) {
+    return "release";
+  } else {
+    return "Unknown type";
+  }
+}
