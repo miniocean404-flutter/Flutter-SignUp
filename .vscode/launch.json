@@ -4,41 +4,74 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    // !需要手动切换平台
     {
       "name": "dev-chrome",
       "request": "launch", //launch 为启动 attach 为连接 （启动程序使用launch，但是在一个已经启动的项目中就需要attach连接进行调试）
-      "type": "dart",
+      "cwd": "${workspaceFolder}", // 当前默认工作目录,也就是寻找文件或者以来的路径，默认${workspaceFolder}
+      "type": "dart", // 语言类型，不同语言有不同扩展
+      "flutterMode": "debug", // flutter 运行的模式
+      "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
+      "stopAtEntry": false, // 是否在开始处断点
+      "preLaunchTask": "start proxy", // 调试开始前的任务
+      "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
+      "console": "debugConsole", // 只支持调试控制台
       "args": [
         "run -d chrome", // 运行平台
         "--dart-define",
         "APP_CHANNEL=Flutter",
         "--dart-define",
         "ENV=dev"
-      ]
+      ],
+      // window平台执行的属性
+      "windows": {
+        "program": "${workspaceFolder}\\lib\\main.dart"
+      }
     },
+
     {
-      "name": "staging",
+      "name": "staging-profile",
       "request": "launch",
+      "cwd": "${workspaceFolder}",
       "type": "dart",
       "flutterMode": "profile",
+      "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
+      "stopAtEntry": false, // 是否在开始处断点
+      "preLaunchTask": "start proxy", // 调试开始前的任务
+      "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
+      "console": "debugConsole", // 只支持调试控制台
       "args": [
+        "run -d chrome", // 运行平台
         "--dart-define",
         "APP_CHANNEL=Flutter",
         "--dart-define",
         "ENV=staging"
-      ]
+      ],
+      "windows": {
+        "program": "${workspaceFolder}\\lib\\main.dart"
+      }
     },
     {
-      "name": "prod",
+      "name": "prod-release",
       "request": "launch",
+      "cwd": "${workspaceFolder}",
       "type": "dart",
       "flutterMode": "release",
+      "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
+      "stopAtEntry": false, // 是否在开始处断点
+      "preLaunchTask": "start proxy", // 调试开始前的任务
+      "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
+      "console": "debugConsole", // 只支持调试控制台
       "args": [
+        "run -d chrome", // 运行平台
         "--dart-define",
         "APP_CHANNEL=Flutter",
         "--dart-define",
         "ENV=prod"
-      ]
+      ],
+      "windows": {
+        "program": "${workspaceFolder}\\lib\\main.dart"
+      }
     }
   ]
 }

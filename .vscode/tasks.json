@@ -1,6 +1,17 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // 启动dart 跨域代理，用于laumch.json调试
+    {
+      "label": "start proxy",
+      "type": "shell",
+      "command": "dart",
+      "args": ["${workspaceFolder}/script/proxy_server.dart"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+
+    // 多任务命令
     {
       "label": "添加文件并推送",
       "type": "shell",
@@ -8,6 +19,8 @@
       "dependsOrder": "sequence",
       "problemMatcher": []
     },
+
+    // 单任务命令
     {
       "label": "git-add.",
       "type": "shell",
@@ -30,6 +43,8 @@
       "problemMatcher": []
     }
   ],
+
+  // 行为类型
   "inputs": [
     {
       "id": "commit-info",
