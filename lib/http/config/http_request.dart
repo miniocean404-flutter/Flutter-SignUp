@@ -41,14 +41,11 @@ class Http {
     Map<String, dynamic>? headers,
     List<Interceptor>? interceptors,
   }) {
-    dio.options.baseUrl = baseUrl!;
-    dio.options.connectTimeout = connectTimeout!;
-    dio.options.receiveTimeout = receiveTimeout!;
-    dio.options.headers = headers;
-
-    if (interceptors!.isNotEmpty) {
-      dio.interceptors.addAll(interceptors);
-    }
+    if (baseUrl != null) dio.options.baseUrl = baseUrl;
+    if (connectTimeout != null) dio.options.connectTimeout = connectTimeout;
+    if (receiveTimeout != null) dio.options.receiveTimeout = receiveTimeout;
+    if (headers != null) dio.options.headers = headers;
+    if (interceptors != null) dio.interceptors.addAll(interceptors);
   }
 
   //* 设置请求头

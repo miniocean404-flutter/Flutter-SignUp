@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
-import 'package:flutter_sign_in/config/env/util_get_env.dart';
+import 'package:flutter_sign_in/config/env/get_env.dart';
 
 class HttpOptions {
   static final HttpOptions _instance = HttpOptions._internal();

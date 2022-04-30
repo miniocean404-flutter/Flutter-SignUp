@@ -2,7 +2,6 @@ import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 
 import 'env.dev.dart';
 import 'env.prod.dart';
-import 'env.staging.dart';
 
 // 通过命令--dart-define=key=value
 // flutter run --dart-define=APP_CHANNEL=ZeroFlutter --dart-define=ENV=dev
@@ -13,8 +12,6 @@ CurrentEnv getEnvironmentConfig() {
     return EnvironmentDev();
   } else if (env == 'prod') {
     return EnvironmentProd();
-  } else if (env == 'staging') {
-    return EnvironmentStaging();
   }
 
   throw '没有获取到对应环境的配置';

@@ -19,24 +19,24 @@ class SpHelper {
   }
 
   // 存数据
-  static setLocalStorage<T>(String key, T value) {
+  static Future<void> setLocalStorage<T>(String key, T value) async {
     String type = value.runtimeType.toString();
 
     switch (type) {
       case "String":
-        prefs.setString(key, value as String);
+        await prefs.setString(key, value as String);
         break;
       case "int":
-        prefs.setInt(key, value as int);
+        await prefs.setInt(key, value as int);
         break;
       case "bool":
-        prefs.setBool(key, value as bool);
+        await prefs.setBool(key, value as bool);
         break;
       case "double":
-        prefs.setDouble(key, value as double);
+        await prefs.setDouble(key, value as double);
         break;
       case "List<String>":
-        prefs.setStringList(key, value as List<String>);
+        await prefs.setStringList(key, value as List<String>);
         break;
     }
   }

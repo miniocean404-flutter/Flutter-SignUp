@@ -23,7 +23,8 @@ class _UpdateState extends State<Update> {
   late PageState _currentState = PageState.auto;
 
   // 当前版本或者最新版本
-  late String _version = '';
+  late String _newVersion = '';
+  late String _localVersion = '';
   late bool _isForceUpdate = false;
   late bool _isNew = false;
 
@@ -45,14 +46,18 @@ class _UpdateState extends State<Update> {
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = packageInfo.version;
 
+      setState(() => {_localVersion = currentVersion});
+
       for (var versionItem in list) {
         _isNew = versionCompare(versionItem['versionCode'], currentVersion);
         _isNew
             ? setState(() {
-                _version = versionItem['versionCode'];
+                _newVersion = versionItem['versionCode'];
                 _isForceUpdate = versionItem['isForceUpdate'];
               })
-            : setState(() => _version = currentVersion);
+            : setState(() {
+                _newVersion = currentVersion;
+              });
 
         if (_isNew) {
           break;
@@ -169,7 +174,7 @@ class _UpdateState extends State<Update> {
                         style: TextStyle(fontSize: 18.sp),
                       ),
                       Text(
-                        'Version $_version',
+                        'Version $_newVersion',
                         style: TextStyle(
                             fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),
@@ -223,7 +228,7 @@ class _UpdateState extends State<Update> {
         children: [
           SizedBox(height: 330.h),
           Text(
-            'Version $_version',
+            'Version $_localVersion',
             style: TextStyle(fontSize: 16.sp, color: const Color(0xff8A8A8D)),
           ),
           SizedBox(height: 5.h),

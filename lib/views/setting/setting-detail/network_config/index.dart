@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
+import 'package:flutter_sign_in/config/env/get_env.dart';
+import 'package:flutter_sign_in/http/config/http_request.dart';
+import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class NetworkConfig extends StatefulWidget {
   const NetworkConfig({Key? key}) : super(key: key);
@@ -11,7 +15,56 @@ class NetworkConfig extends StatefulWidget {
 }
 
 class _NetworkConfigState extends State<NetworkConfig> {
-  bool _isUseHttps = false;
+  bool _isUseHttps = false; // 是否https
+  late String showServe = ''; // 当前服务器地址
+
+  @override
+  void initState() {
+    super.initState();
+
+    setServeAddress();
+    getIsUseHttpsState();
+  }
+
+  // 设置展示的服务器地址
+  void setServeAddress() async {
+    CurrentEnv config = getEnvironmentConfig();
+    dynamic baseUrl = SpHelper.getLocalStorage('baseUrl');
+    if (baseUrl == null) {
+      baseUrl = config.getBaseUrl;
+
+      await SpHelper.setLocalStorage('baseUrl', baseUrl);
+    }
+    baseUrl = SpHelper.getLocalStorage('baseUrl');
+
+    // 将地址特换为展示效果
+    RegExp reg = RegExp(r"\/\/([\d\w.]+)", multiLine: true, unicode: true);
+    final simpleUrl = reg.firstMatch(baseUrl)?.group(1);
+
+    setState(() => showServe = simpleUrl!);
+  }
+
+  // 获取https状态
+  void getIsUseHttpsState() async {
+    String baseUrl = SpHelper.getLocalStorage('baseUrl');
+    final bool isHttps = baseUrl.contains('https');
+
+    setState(() => _isUseHttps = isHttps);
+  }
+
+  // 切换是否使用https
+  void isUseHttpsButton(v) async {
+    String url = SpHelper.getLocalStorage('baseUrl');
+    RegExp findReg = RegExp(v ? 'http' : 'https');
+    String beReplaced = v ? 'https' : 'http';
+    final replaceUrl = url.replaceAll(findReg, beReplaced);
+
+    // 设置地址
+    Http().init(baseUrl: replaceUrl);
+    await SpHelper.setLocalStorage('baseUrl', replaceUrl);
+
+    setState(() => _isUseHttps = v);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +99,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                         Row(
                           children: [
                             Text(
-                              '10.1.5.138',
+                              showServe,
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   color: const Color(0xff8A8A8D)),
@@ -78,9 +131,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                         scale: 1.r,
                         child: CupertinoSwitch(
                           value: _isUseHttps,
-                          onChanged: (v) {
-                            setState(() => {_isUseHttps = v});
-                          },
+                          onChanged: isUseHttpsButton,
                         ),
                       )
                     ],
