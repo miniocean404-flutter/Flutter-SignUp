@@ -45,28 +45,24 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      // 返回键拦截
-      child: WillPopScope(
-        onWillPop: () async {
-          if (kIsWeb) {
-            Routers.navigateTo(context, Routers.home, clearStack: true);
-          }
+    // 返回键拦截 返回true 代表返回桌面 false代表什么都不做
+    return WillPopScope(
+      onWillPop: () async {
+        if (kIsWeb) Routers.navigateTo(context, Routers.home, clearStack: true);
 
-          DateTime now = DateTime.now();
+        DateTime now = DateTime.now();
 
-          // 对比两个时间是否相差1秒
-          if (_lastTime == null || now.difference(_lastTime!).inSeconds > 1) {
-            _lastTime = DateTime.now();
-
-            toast('再点击一次退出界面');
-
-            return false;
-          } else {
-            Routers.navigateTo(context, Routers.home, clearStack: true);
-            return true;
-          }
-        },
+        // 对比两个时间是否相差1秒
+        if (_lastTime == null || now.difference(_lastTime!).inSeconds > 1) {
+          _lastTime = DateTime.now();
+          toast('再点击一次回到扫码界面');
+          return false;
+        } else {
+          Routers.navigateTo(context, Routers.home, clearStack: true);
+          return false;
+        }
+      },
+      child: CupertinoPageScaffold(
         child: Container(
           width: double.infinity,
           color: const Color(0xffefeff3),
