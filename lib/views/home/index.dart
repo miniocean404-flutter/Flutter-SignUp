@@ -80,7 +80,8 @@ class _HomeState extends State<Home> {
       toast('再点击5次进入设置界面');
     } else if (_clickNum >= 10) {
       _clickNum = 0;
-      Routers.navigateTo(context, Routers.settingHome);
+
+      Routers.navigateTo(context, Routers.settingHome, clearStack: true);
     }
   }
 

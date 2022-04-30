@@ -29,6 +29,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   @override
   void dispose() {
     _animationController.dispose(); // 销毁动画
+    _timer.cancel();
     super.dispose();
   }
 
@@ -61,7 +62,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   }
 
   void startJump() {
-    _timer.cancel();
     Routers.navigateTo(context, Routers.home, clearStack: true);
   }
 
