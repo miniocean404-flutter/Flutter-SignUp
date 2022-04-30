@@ -46,6 +46,7 @@ class _UpdateState extends State<Update> {
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = packageInfo.version;
 
+      // 获取最新版本接口
       dynamic newRes = await getNewVersion(currentVersion);
 
       setState(() => {_localVersion = currentVersion});
@@ -70,8 +71,13 @@ class _UpdateState extends State<Update> {
 
   // 获取当前自动更新状态，并设置当前页面的状态
   Future<Map<String, dynamic>> getCurrentState() async {
-    bool? isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
-    if (isAutoUpdate == null || isAutoUpdate == true) {
+    dynamic isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
+    if (isAutoUpdate == null) {
+      SpHelper.setLocalStorage('isAutoUpdate', true);
+      isAutoUpdate = true;
+    }
+
+    if (isAutoUpdate) {
       _currentState = PageState.auto;
     }
 
