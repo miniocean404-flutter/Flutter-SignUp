@@ -46,6 +46,8 @@ class _UpdateState extends State<Update> {
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = packageInfo.version;
 
+      dynamic newRes = await getNewVersion(currentVersion);
+
       setState(() => {_localVersion = currentVersion});
 
       for (var versionItem in list) {
