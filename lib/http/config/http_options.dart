@@ -1,17 +1,26 @@
 // 请求配置
 
 import 'package:dio/dio.dart';
+import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
+import 'package:flutter_sign_in/config/env/util_get_env.dart';
 
 class HttpOptions {
+  static final HttpOptions _instance = HttpOptions._internal();
+  factory HttpOptions() => _instance;
+
   // 地址前缀
-  // static const String baseUrl = 'http://api.uat.serendipity.illiaccess.com';
-  static const String baseUrl = 'http://192.168.1.130:4040';
+  late final String baseUrl;
   // 连接服务器超时时间，单位是毫秒
-  static const int connectTimeout = 30000;
+  late final int connectTimeout = 30000;
   // 接收超时时间，单位是毫秒
-  static const int receiveTimeout = 30000;
+  late final int receiveTimeout = 30000;
   //默认值是"application/json; charset=utf-8","Accept:*/*",Headers.formUrlEncodedContentType会自动编码请求体.
-  static const Map<String, dynamic>? header = {};
+  late final Map<String, dynamic>? header = {};
   //共有三种方式json,bytes(响应字节),stream（响应流）,plain
-  static const ResponseType responseType = ResponseType.json;
+  late final ResponseType responseType = ResponseType.json;
+
+  HttpOptions._internal() {
+    CurrentEnv config = getEnvironmentConfig();
+    baseUrl = config.getBaseUrl;
+  }
 }

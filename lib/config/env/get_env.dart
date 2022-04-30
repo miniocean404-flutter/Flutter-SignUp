@@ -1,10 +1,12 @@
-import 'dev.dart';
-import 'prod.dart';
-import 'staging.dart';
+import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
+
+import 'env.dev.dart';
+import 'env.prod.dart';
+import 'env.staging.dart';
 
 // 通过命令--dart-define=key=value
 // flutter run --dart-define=APP_CHANNEL=ZeroFlutter --dart-define=ENV=dev
-Object getEnvironmentConfig() {
+CurrentEnv getEnvironmentConfig() {
   const env = String.fromEnvironment('ENV');
 
   if (env == 'dev') {
@@ -21,7 +23,7 @@ Object getEnvironmentConfig() {
 /// 判断是否为Debug模式
 bool isDebug() {
   bool inDebug = false;
-  assert(inDebug = true);
+  assert(inDebug = true); // 如果debug模式下会触发断言
   return inDebug;
 }
 
@@ -29,6 +31,7 @@ bool isDebug() {
 String getCompileMode() {
   const bool isProfile = bool.fromEnvironment("dart.vm.profile");
   const bool isReleaseMode = bool.fromEnvironment("dart.vm.product");
+
   if (isDebug()) {
     return "debug";
   } else if (isProfile) {
@@ -36,6 +39,6 @@ String getCompileMode() {
   } else if (isReleaseMode) {
     return "release";
   } else {
-    return "Unknown type";
+    return "unknown mode";
   }
 }
