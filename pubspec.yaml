@@ -64,6 +64,9 @@ dependencies:
   # 加载AE制作的炫酷动画
   lottie: ^1.2.2
 
+  # 微信SDK调用（第三方）
+  # fluwx: ^3.8.5
+
   # SVG使用（官方）只能是静态的，不能是动态svg
   # flutter_svg: ^1.0.3
 
