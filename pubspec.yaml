@@ -54,7 +54,7 @@ dependencies:
   url_launcher: ^6.0.20
 
   # 视频播放 (官方)
-  video_player: ^2.3.0
+  video_player: ^2.4.0
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0

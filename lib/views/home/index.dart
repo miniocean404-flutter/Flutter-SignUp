@@ -1,10 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 import 'package:flutter_sign_in/utils/toast.dart';
 import 'package:video_player/video_player.dart';
 
@@ -57,11 +59,21 @@ class _HomeState extends State<Home> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
     );
 
-    _controller.setLooping(true);
-    _controller.play();
+    _controller.addListener(() {
+      final message = _controller.value.errorDescription;
+      if (message != null) logger.e(message);
+    });
 
-    // 设置属性后初始化
-    _controller.initialize().then((v) {
+    _controller.initialize().then((value) async {
+      await _controller.setLooping(true);
+      if (kIsWeb) {
+        // play() failed because the user didn't interact with the document
+        // chrome文档 https://developer.chrome.com/blog/autoplay/
+        // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
+        await _controller.setVolume(0.0);
+      }
+      await _controller.play();
+      // 设置属性后初始化
       setState(() {});
     });
   }
@@ -98,7 +110,7 @@ class _HomeState extends State<Home> {
             alignment: Alignment.center,
             children: [
               // 背景视屏
-              _businState == BusinState.sign
+              _businState == BusinState.sign && _controller.value.isInitialized
                   ? Transform.scale(
                       // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
                       scale: _controller.value.aspectRatio /
