@@ -20,7 +20,7 @@ class Update extends StatefulWidget {
 }
 
 class _UpdateState extends State<Update> {
-  late PageState _currentState = PageState.auto;
+  late PageState _currentState = PageState.noAuto;
 
   // 当前版本或者最新版本
   late String _newVersion = '';
@@ -32,72 +32,74 @@ class _UpdateState extends State<Update> {
   void initState() {
     super.initState();
 
-    setVersionInfo();
+    setLocalVersionInfo();
+    setNewVersionInfo();
+  }
+
+  // 设置本地版本信息
+  void setLocalVersionInfo() async {
+    // 获取当前版本信息
+    final packageInfo = await PackageInfo.fromPlatform();
+    final currentVersion = packageInfo.version;
+    setState(() => {_localVersion = currentVersion});
   }
 
   // 设置当前版本、是否最新、是否强制更新
-  void setVersionInfo() async {
-    final Map<String, dynamic> versionRes = await getCurrentState();
+  void setNewVersionInfo() async {
+    // 获取最新版本接口
+    // dynamic newRes = await getNewVersion(currentVersion);
 
-    final List list = versionRes['list'];
+    dynamic isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
+    if (isAutoUpdate == null) {
+      await SpHelper.setLocalStorage('isAutoUpdate', true);
+      isAutoUpdate = true;
+      setState(() => _currentState = PageState.auto);
+    }
 
-    if (versionRes['count'] > 0) {
-      // 获取当前版本信息
-      final packageInfo = await PackageInfo.fromPlatform();
-      final currentVersion = packageInfo.version;
+    // 如果是自动更新状态就加载loading
+    if (isAutoUpdate) {
+      _currentState = PageState.auto;
 
-      // 获取最新版本接口
-      dynamic newRes = await getNewVersion(currentVersion);
+      setState(() => _currentState = PageState.loading);
+      dynamic versionRes = await getHistoryVersion();
+      setState(() => _currentState = PageState.auto);
 
-      setState(() => {_localVersion = currentVersion});
+      // 获取最新版本的信息
+      final List list = versionRes['list'];
 
-      for (var versionItem in list) {
-        _isNew = versionCompare(versionItem['versionCode'], currentVersion);
-        _isNew
-            ? setState(() {
-                _newVersion = versionItem['versionCode'];
-                _isForceUpdate = versionItem['isForceUpdate'];
-              })
-            : setState(() {
-                _newVersion = currentVersion;
-              });
+      if (versionRes['count'] > 0) {
+        for (var versionItem in list) {
+          _isNew = versionCompare(versionItem['versionCode'], _localVersion);
+          _isNew
+              ? setState(() {
+                  _newVersion = versionItem['versionCode'];
+                  _isForceUpdate = versionItem['isForceUpdate'];
+                })
+              : setState(() {
+                  _newVersion = _localVersion;
+                });
 
-        if (_isNew) {
-          break;
+          if (_isNew) {
+            break;
+          }
         }
       }
     }
+
+    // 不自动更新
+    if (!isAutoUpdate) {
+      setState(() {
+        _currentState = PageState.noAuto;
+      });
+    }
   }
 
-  // 获取当前自动更新状态，并设置当前页面的状态
-  Future<Map<String, dynamic>> getCurrentState() async {
-    dynamic isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
-    if (isAutoUpdate == null) {
-      SpHelper.setLocalStorage('isAutoUpdate', true);
-      isAutoUpdate = true;
-    }
-
-    if (isAutoUpdate) {
-      _currentState = PageState.auto;
-    }
-
-    if (_currentState == PageState.auto) {
-      setState(() => _currentState = PageState.loading);
-
-      final Map<String, dynamic> res = await getHistoryVersion();
-
-      setState(() => _currentState = PageState.auto);
-
-      return res;
-    }
-
-    throw '没有获取结果';
-  }
-
-  void _isAutoUpdateButton(v) {
+  void _isAutoUpdateButton(v) async {
+    await SpHelper.setLocalStorage('isAutoUpdate', v);
+    setNewVersionInfo();
     setState(() {
-      if (v == true) _currentState = PageState.auto;
-      if (v == false) _currentState = PageState.noAuto;
+      if (v) _currentState = PageState.auto;
+      if (!v) _currentState = PageState.noAuto;
     });
   }
 
