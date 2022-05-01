@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/utils/water_ripple.dart';
+
 import 'color.dart';
 
 // 全局主题配置
@@ -129,6 +130,7 @@ ThemeData materialThemeColor() {
   );
 }
 
+// * 黑暗主题
 ThemeData materialDarkTheme() {
   return ThemeData(
     // * 全局主题

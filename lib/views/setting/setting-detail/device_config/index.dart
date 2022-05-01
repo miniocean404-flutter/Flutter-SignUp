@@ -15,14 +15,24 @@ class _DeviceConfigState extends State<DeviceConfig> {
   Widget build(BuildContext context) {
     // CupertinoPageScaffold
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          '设备配置',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18.sp,
-          ),
-        ),
+      navigationBar: const CupertinoNavigationBar(
+        // leading: Icon(Icons.arrow_back), // 左侧组件
+        // previousPageTitle: '返回', // 左侧返回按钮的文字
+        //  trailing: Icon(Icons.add), // 右侧组件
+        //  backgroundColor: Colors.blue.shade100, // 背景色
+        // brightness: Brightness.light, // 上方电量，事件，Wifi 等状态栏颜色
+        // 内边距，用来调节所有子组件上下左右偏移
+        // padding: const EdgeInsetsDirectional.only(start: 15, end: 15),
+        // border: const Border(bottom: BorderSide(color: Colors.red, width: 1)),
+        // 是否添加默认 leading，默认为 true。当 leading 为空会默认添加一个返回按钮
+        automaticallyImplyMiddle: true,
+        // 是否添加默认 middle，默认为 true，如果 middle 为空，且当前 route 为 CupertinoPageRoute，会默认填充 route.title
+        // Navigator.push(context,CupertinoPageRoute(builder:()=>{},title:'名字'))
+        automaticallyImplyLeading: true,
+        // middle: Text(
+        //   '设备配置',
+        //   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+        // ),
       ),
       child: Container(
         color: const Color(0xffefeff3),
