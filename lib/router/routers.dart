@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sign_in/utils/logger.dart';
+
 // 函数导入
 import 'route_handler.dart';
 import 'setting_handler.dart';
@@ -52,8 +53,8 @@ class Routers {
 
       // 拼接参数
       for (var key in params.keys) {
-        var value = Uri.encodeComponent(params[key].toString());
-        index == 0 ? paramsStr = "?" : paramsStr = paramsStr + "\\&";
+        final value = Uri.encodeComponent(params[key].toString());
+        index == 0 ? paramsStr = "?" : paramsStr = paramsStr + r"&";
         paramsStr += "$key=$value";
         index++;
       }
