@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/http/login.dart';
+import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class DeviceConfig extends StatefulWidget {
   const DeviceConfig({Key? key}) : super(key: key);
@@ -11,6 +13,28 @@ class DeviceConfig extends StatefulWidget {
 }
 
 class _DeviceConfigState extends State<DeviceConfig> {
+  late String serverName = '';
+  late String location = '';
+
+  @override
+  void initState() {
+    super.initState();
+    login();
+  }
+
+  void login() async {
+    final res = await deviceLogin(187237, 'f1c8ec723723');
+    await SpHelper.setLocalStorage('token', res['accessSecret']);
+    setState(() {
+      location = res['cool']['placement'];
+      serverName = res['cool']['serviceName'];
+    });
+  }
+
+  void reLogin() {
+    login();
+  }
+
   @override
   Widget build(BuildContext context) {
     // CupertinoPageScaffold
@@ -56,7 +80,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                             style: TextStyle(fontSize: 18.sp),
                           ),
                           Text(
-                            '一个放当前公司名字的地方',
+                            serverName,
                             style: TextStyle(
                               fontSize: 18.sp,
                               color: const Color(0xff8A8A8D),
@@ -80,7 +104,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                             style: TextStyle(fontSize: 18.sp),
                           ),
                           Text(
-                            '负一楼前台',
+                            location,
                             style: TextStyle(
                               fontSize: 18.sp,
                               color: const Color(0xff8A8A8D),
@@ -95,12 +119,13 @@ class _DeviceConfigState extends State<DeviceConfig> {
               SizedBox(height: 30.h),
 
               // 重新登录
-              SettingBg(
-                leftLine: 16.w,
-                child: Container(
-                  height: 44.h,
-                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                  child: GestureDetector(
+              GestureDetector(
+                onTap: () => reLogin(),
+                child: SettingBg(
+                  leftLine: 16.w,
+                  child: Container(
+                    height: 44.h,
+                    margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -3,11 +3,16 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
+import 'package:flutter_sign_in/http/login.dart';
+import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:flutter_sign_in/utils/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/toast.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:video_player/video_player.dart';
 
 enum BusinState {
@@ -37,6 +42,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    login();
     initVideo();
   }
 
@@ -51,6 +57,11 @@ class _HomeState extends State<Home> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void login() async {
+    final res = await deviceLogin(187237, 'f1c8ec723723');
+    await SpHelper.setLocalStorage('token', res['accessSecret']);
   }
 
   // 初始化视频
@@ -76,6 +87,15 @@ class _HomeState extends State<Home> {
       // 设置属性后初始化
       setState(() {});
     });
+  }
+
+  // 扫码结果
+  scanQRcode(Barcode barcode, MobileScannerArguments? args) {
+    final String? code = barcode.rawValue;
+    final String token = SpHelper.getLocalStorage('token');
+    if (code != null) {
+      scanQRCodeApi(token, code, 'admittance');
+    }
   }
 
   // 关闭弹窗
@@ -145,7 +165,9 @@ class _HomeState extends State<Home> {
                     child: SizedBox(
                       width: 160.r,
                       height: 160.r,
-                      // child: const QRScanner(),
+                      child: QRScanner(
+                        onDetect: scanQRcode,
+                      ),
                     ),
                   ),
                   SizedBox(height: 158.h),
