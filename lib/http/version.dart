@@ -5,8 +5,13 @@ import 'package:flutter_sign_in/model/version/ger_new_version.dart';
 import 'package:flutter_sign_in/model/version/history_version.dart';
 
 Future getHistoryVersion() async {
-  var json = await Http()
-      .get('/version', params: {"client": 'envoy', 'platform': 'iOS'});
+  var json = await Http().get(
+    '/version',
+    params: {
+      "client": 'envoy',
+      'platform': 'iOS',
+    },
+  );
 
   Map<String, dynamic> res = HistoryVersion.fromJson(jsonDecode(json)).toJson();
 
@@ -14,8 +19,14 @@ Future getHistoryVersion() async {
 }
 
 Future getNewVersion(version) async {
-  var json = await Http().get('/version/latest',
-      params: {"client": 'envoy', 'platform': 'iOS', 'versionCode': version});
+  var json = await Http().get(
+    '/version/latest',
+    params: {
+      "client": 'envoy',
+      'platform': 'iOS',
+      'versionCode': version,
+    },
+  );
 
   dynamic res = GetNewVersion.fromJson(jsonDecode(json)).toJson();
 
