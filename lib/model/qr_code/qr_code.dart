@@ -2,13 +2,19 @@ class ScanQRCodeResult {
   int? code;
   String? message;
   Data? data;
+  List? nullInfo;
 
   ScanQRCodeResult({this.code, this.message, this.data});
 
   ScanQRCodeResult.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+
+    if (json['data'].runtimeType == List<dynamic>) {
+      nullInfo = <Null>[];
+    } else {
+      data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -17,6 +23,9 @@ class ScanQRCodeResult {
     data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
+    } else {
+      data['data'] = nullInfo;
+      return data;
     }
     return data;
   }

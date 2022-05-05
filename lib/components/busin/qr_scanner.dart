@@ -51,12 +51,12 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     return _isOpen == true
         ? MobileScanner(
-            allowDuplicates: false, // 扫描一次还是(true)多次
+            allowDuplicates: true, // 扫描一次还是(true)多次
             fit: BoxFit.cover,
             controller: MobileScannerController(
               // 相机朝向
               facing: CameraFacing.front,
-              torchEnabled: true,
+              torchEnabled: false,
             ),
             // 发现二维码事件
             onDetect: widget.onDetect,

@@ -58,7 +58,9 @@ dependencies:
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
-  mobile_scanner: ^1.0.0
+  mobile_scanner:
+    git: https://github.com/juliansteenbakker/mobile_scanner
+
   # android ios 的升级插件
   r_upgrade: ^0.3.7+3
   # 加载AE制作的炫酷动画

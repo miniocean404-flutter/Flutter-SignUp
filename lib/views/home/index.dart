@@ -38,12 +38,15 @@ class _HomeState extends State<Home> {
   bool childrenIsSign = false; // 学生是否签到
   bool isHavaVideoLink = true; // 是否有视频链接
 
+  DateTime? lastTime;
+
   // 初始化声明周期
   @override
   void initState() {
     super.initState();
     login();
-    initVideo();
+    initVideo(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
   }
 
   // 页面栈弹出声明周期
@@ -65,10 +68,8 @@ class _HomeState extends State<Home> {
   }
 
   // 初始化视频
-  initVideo() {
-    _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-    );
+  initVideo(url) {
+    _controller = VideoPlayerController.network(url);
 
     _controller.addListener(() {
       final message = _controller.value.errorDescription;
@@ -90,11 +91,31 @@ class _HomeState extends State<Home> {
   }
 
   // 扫码结果
-  scanQRcode(Barcode barcode, MobileScannerArguments? args) {
+  scanQRcode(Barcode barcode, MobileScannerArguments? args) async {
     final String? code = barcode.rawValue;
     final String token = SpHelper.getLocalStorage('token');
-    if (code != null) {
-      scanQRCodeApi(token, code, 'admittance');
+    String? mode;
+
+    DateTime now = DateTime.now();
+    bool gap = lastTime == null || now.difference(lastTime!).inSeconds > 1;
+
+    if (gap && code != null) {
+      lastTime = DateTime.now();
+
+      _businState == BusinState.sign
+          ? mode = 'admittance'
+          : mode = 'serviceSigning';
+
+      dynamic res = await scanQRCodeApi(token, code, mode);
+      bool isSuccess = res['isSuccess'];
+      String message = res['message'];
+      int delayClose = res['delayClose'];
+      String? textColor = res['appUseInfo']['textColor'];
+      String? backgroundUrl = res['appUseInfo']['backgroundUrl'];
+
+      if (backgroundUrl != null) {
+        initVideo(backgroundUrl);
+      }
     }
   }
 

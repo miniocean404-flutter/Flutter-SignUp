@@ -9,7 +9,7 @@ import 'package:flutter_sign_in/model/qr_code/qr_code.dart';
 //    serviceSigning 服务（上课）签到
 Future scanQRCodeApi(secret, code, type) async {
   var json = await Http().post(
-    '/envoy/connect',
+    '/envoy/decoding',
     data: {
       "secret": secret,
       'code': code,
