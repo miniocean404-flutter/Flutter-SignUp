@@ -48,6 +48,9 @@ dependencies:
 
   # 日志打印
   logger: ^1.1.0
+  # 摇晃展示控制台
+  logger_flutter: ^0.7.1
+
   # toast
   fluttertoast: ^8.0.9
   # 跳转链接 和 实现原生电话的拨打 (官方)
