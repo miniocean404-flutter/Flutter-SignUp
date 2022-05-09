@@ -6,7 +6,7 @@
   "configurations": [
     // !需要手动切换平台
     {
-      "name": "dev-chrome",
+      "name": "dev",
       "request": "launch", //launch 为启动 attach 为连接 （启动程序使用launch，但是在一个已经启动的项目中就需要attach连接进行调试）
       "cwd": "${workspaceFolder}", // 当前默认工作目录,也就是寻找文件或者以来的路径，默认${workspaceFolder}
       "type": "dart", // 语言类型，不同语言有不同扩展
@@ -28,7 +28,6 @@
         "program": "${workspaceFolder}\\lib\\main.dart"
       }
     },
-
     {
       "name": "staging-profile",
       "request": "launch",
