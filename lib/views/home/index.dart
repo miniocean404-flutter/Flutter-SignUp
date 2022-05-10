@@ -185,6 +185,12 @@ class _HomeState extends State<Home> {
                     child: SizedBox(
                       width: 160.r,
                       height: 160.r,
+                      child: MobileScanner(
+                          allowDuplicates: false,
+                          onDetect: (barcode, args) {
+                            final String? code = barcode.rawValue;
+                            debugPrint('Barcode found! $code');
+                          }),
                       // TODO iOS 设备开启后启动异常
                       // child: QRScanner(
                       //   onDetect: scanQRcode,
