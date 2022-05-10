@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/http/login.dart';
@@ -186,9 +185,10 @@ class _HomeState extends State<Home> {
                     child: SizedBox(
                       width: 160.r,
                       height: 160.r,
-                      child: QRScanner(
-                        onDetect: scanQRcode,
-                      ),
+                      // TODO iOS 设备开启后启动异常
+                      // child: QRScanner(
+                      //   onDetect: scanQRcode,
+                      // ),
                     ),
                   ),
                   SizedBox(height: 158.h),
