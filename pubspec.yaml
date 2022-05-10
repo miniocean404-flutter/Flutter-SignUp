@@ -47,15 +47,22 @@ dependencies:
   path_provider: ^2.0.9
   # 日志打印
   logger: ^1.1.0
-  # 动画
+  # 动画(官方)
   animations: ^2.0.2
   # toast
   fluttertoast: ^8.0.9
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.0.20
 
+  # 指纹或面部识别 (官方)
+  local_auth: ^2.0.1
   # 视频播放 (官方)
   video_player: ^2.4.0
+  # 日期格式化
+  date_format: ^2.0.6
+
+  # 音频播放器
+  just_audio: ^0.9.21
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
