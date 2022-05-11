@@ -14,6 +14,7 @@ import 'package:flutter_sign_in/utils/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/toast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wakelock/wakelock.dart';
 
 enum BusinState {
   sign,
@@ -44,6 +45,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
+    Wakelock.toggle(enable: true);
     login();
     initVideo(
         'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
@@ -134,6 +137,7 @@ class _HomeState extends State<Home> {
     } else if (_clickNum >= 10) {
       _clickNum = 0;
 
+      Wakelock.toggle(enable: false);
       Routers.navigateTo(context, Routers.settingHome, clearStack: true);
     }
   }
