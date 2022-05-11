@@ -3,10 +3,7 @@ import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class EnvironmentDev extends CurrentEnv {
   EnvironmentDev() {
-    if (SpHelper.getLocalStorage('baseUrl') != null) {
-      baseUrl = SpHelper.getLocalStorage('baseUrl');
-    } else {
-      baseUrl = 'http://10.30.13.134:4040';
-    }
+    baseUrl = 'http://10.30.13.134:4040';
+    SpHelper.setLocalStorage('baseUrl', baseUrl);
   }
 }
