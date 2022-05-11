@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 import 'package:flutter_sign_in/config/env/get_env.dart';
+import 'package:flutter_sign_in/utils/logger.dart';
 
 class HttpOptions {
   static final HttpOptions _instance = HttpOptions._internal();
@@ -21,6 +22,7 @@ class HttpOptions {
 
   HttpOptions._internal() {
     CurrentEnv config = getEnvironmentConfig();
+    logger.i(config.getBaseUrl);
     baseUrl = config.getBaseUrl;
   }
 }

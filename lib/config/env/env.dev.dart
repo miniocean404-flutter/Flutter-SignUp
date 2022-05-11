@@ -6,7 +6,7 @@ class EnvironmentDev extends CurrentEnv {
     if (SpHelper.getLocalStorage('baseUrl') != null) {
       baseUrl = SpHelper.getLocalStorage('baseUrl');
     } else {
-      baseUrl = 'http://192.168.1.130:4040';
+      baseUrl = 'http://10.30.13.134:4040';
     }
   }
 }
