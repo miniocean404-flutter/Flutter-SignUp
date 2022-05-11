@@ -14,7 +14,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with TickerProviderStateMixin {
-  late AnimationController _animationController;
+  late AnimationController _controller;
   late Timer _timer;
   int step = 3;
 
@@ -22,37 +22,36 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   void initState() {
     // SystemChrome.setEnabledSystemUIMode();
     animationExec();
-    startTiming();
     super.initState();
   }
 
   @override
   void dispose() {
-    _animationController.dispose(); // 销毁动画
+    _controller.dispose(); // 销毁动画
     _timer.cancel();
     super.dispose();
   }
 
   void animationExec() {
     //创建动画控制器
-    _animationController = AnimationController(
-      // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
-      // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
+    // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
+    // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
+    _controller = AnimationController(
       vsync: this,
-      duration: Duration(
-        milliseconds: step * 1000,
-      ),
+      duration: Duration(milliseconds: step * 1000),
     );
-    final _animation =
-        Tween(begin: 1.0, end: 1.0).animate(_animationController);
+
+    final _animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
 
     _animation.addStatusListener((status) {
+      if (status == AnimationStatus.forward) startTiming();
+
       // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页
-      if (status == AnimationStatus.completed) {
-        startJump();
-      }
+      if (status == AnimationStatus.completed) startJump();
     });
-    _animationController.forward();
+
+    // 开始执行动画
+    _controller.forward();
   }
 
   void startTiming() {
