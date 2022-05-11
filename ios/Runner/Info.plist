@@ -31,6 +31,13 @@
 	<key>NSRemindersUsageDescription</key>
 	<string>App需要您的同意,才能访问提醒事项</string>
 
+	<!-- 开启http请求 -->
+	<key>AppTransportSecurity</key>
+	<dict>
+		<key>AllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+
 
  
 	<key>CFBundleDevelopmentRegion</key>
