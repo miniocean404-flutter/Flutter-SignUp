@@ -7,7 +7,7 @@ class EnvironmentDev extends CurrentEnv {
     baseUrl = 'http://10.30.13.134:4040';
 
     RegExp reg = RegExp(r"\/\/([\d\w.]+)", multiLine: true, unicode: true);
-    final getURL = reg.firstMatch(getUrl)?.group(1);
+    final getURL = reg.firstMatch(getUrl ?? '')?.group(1);
     final baseURL = reg.firstMatch(baseUrl)?.group(1);
 
     if (getURL != baseURL) {
