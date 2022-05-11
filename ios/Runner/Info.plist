@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- 权限申请 -->
 	<key>NSCameraUsageDescription</key>
 	<string>需要访问您的相机进行扫码</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -37,7 +38,6 @@
 		<key>AllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-
 
  
 	<key>CFBundleDevelopmentRegion</key>
