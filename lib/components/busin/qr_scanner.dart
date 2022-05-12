@@ -17,11 +17,22 @@ class QRScanner extends StatefulWidget {
 
 class _QRScannerState extends State<QRScanner> {
   bool? _isOpen = true;
+  MobileScannerController controller = MobileScannerController(
+    // 相机朝向
+    facing: CameraFacing.front,
+    torchEnabled: false,
+  );
 
   @override
   void initState() {
     getCurrentPlatform();
+    controller.dispose();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   getCurrentPlatform() {
@@ -53,11 +64,7 @@ class _QRScannerState extends State<QRScanner> {
         ? MobileScanner(
             allowDuplicates: true, // 扫描一次还是(true)多次
             fit: BoxFit.cover,
-            controller: MobileScannerController(
-              // 相机朝向
-              facing: CameraFacing.front,
-              torchEnabled: false,
-            ),
+            controller: controller,
             // 发现二维码事件
             onDetect: widget.onDetect,
           )
