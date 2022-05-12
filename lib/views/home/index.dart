@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/http/login.dart';
@@ -186,16 +187,16 @@ class _HomeState extends State<Home> {
                     SizedBox(height: 102.h),
 
                     // 扫码
-                    // ClipRRect(
-                    //   borderRadius: BorderRadius.circular(20),
-                    //   child: SizedBox(
-                    //     width: 160.r,
-                    //     height: 160.r,
-                    //     child: QRScanner(
-                    //       onDetect: scanQRcode,
-                    //     ),
-                    //   ),
-                    // ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: SizedBox(
+                        width: 160.r,
+                        height: 160.r,
+                        child: QRScanner(
+                          onDetect: scanQRcode,
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 158.h),
 
                     // 老师或者学生签到后不显示

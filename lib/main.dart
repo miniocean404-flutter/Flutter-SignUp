@@ -35,7 +35,6 @@ void main() {
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。
 
         builder: (ctx, data, child) {
-          final EdgeInsets edgeInsets = MediaQuery.of(ctx).padding;
           return const MyApp();
         },
       ),
