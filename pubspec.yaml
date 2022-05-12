@@ -32,7 +32,7 @@ dependencies:
   # 路由
   fluro: ^2.0.3
   # 屏幕自适应及适配不同屏幕 可以使用px(例如 750 * 812)
-  flutter_screenutil: ^5.3.1
+  flutter_screenutil: ^5.5.2
   # 状态管理
   provider: ^6.0.2
   # 简单数据持久化，清除数据就消失（官方）
