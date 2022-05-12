@@ -35,6 +35,7 @@ void main() {
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。
 
         builder: (ctx, data, child) {
+          final EdgeInsets edgeInsets = MediaQuery.of(ctx).padding;
           return const MyApp();
         },
       ),
@@ -48,9 +49,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Global.initScreen(context); // 初始化屏幕自适应工具
-    Global.initSp(); // 安卓开发问题
-
     // CupertinoApp
     return CupertinoApp(
       title: '签到',
@@ -60,10 +58,13 @@ class MyApp extends StatelessWidget {
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
       builder: (context, widget) {
+        Global.initScreen(context); // 初始化屏幕自适应工具
+        Global.initSp(); // 安卓开发问题
+
         return MediaQuery(
           // 设置文字大小不随系统设置改变（flutter screen 插件用）
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: widget as Widget,
+          child: widget ?? Container(),
         );
       },
     );

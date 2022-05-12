@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class Global {
   static void initCommon() {
+    WidgetsFlutterBinding.ensureInitialized();
     // 当输入和显示频率不同导致的性能下降处理
     GestureBinding.instance.resamplingEnabled = true;
 
@@ -27,6 +30,7 @@ class Global {
       designSize: const Size(768, 1024),
       minTextAdapt: true, // 是否根据宽度/高度中的最小值适配文字
       splitScreenMode: true, // 支持分屏尺寸
+      deviceSize: Size(window.physicalSize.width, window.physicalSize.height),
     );
   }
 }

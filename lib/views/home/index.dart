@@ -145,113 +145,116 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
 
-    return CupertinoPageScaffold(
-      child: Center(
-        child: StateModal(
-          state: _modalState,
-          onClose: closeModal,
-          bgChild: Stack(
-            alignment: Alignment.center,
-            children: [
-              // 背景视屏
-              _businState == BusinState.sign && _controller.value.isInitialized
-                  ? Transform.scale(
-                      // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
-                      scale: _controller.value.aspectRatio /
-                          window.physicalSize.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    )
-                  : Container(),
+    return SafeArea(
+      child: CupertinoPageScaffold(
+        child: Center(
+          child: StateModal(
+            state: _modalState,
+            onClose: closeModal,
+            bgChild: Stack(
+              alignment: Alignment.center,
+              children: [
+                // 背景视屏
+                _businState == BusinState.sign &&
+                        _controller.value.isInitialized
+                    ? Transform.scale(
+                        // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
+                        scale: _controller.value.aspectRatio /
+                            window.physicalSize.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      )
+                    : Container(),
 
-              Column(
-                children: [
-                  SizedBox(height: 159.h),
+                Column(
+                  children: [
+                    SizedBox(height: 159.h),
 
-                  // 签到标题
-                  GestureDetector(
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 29.sp,
-                        fontWeight: FontWeight.w600,
-                        color: isHavaVideoLink
-                            ? const Color(0xffFFFFFF)
-                            : const Color(0xff000000),
+                    // 签到标题
+                    GestureDetector(
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 29.sp,
+                          fontWeight: FontWeight.w600,
+                          color: isHavaVideoLink
+                              ? const Color(0xffFFFFFF)
+                              : const Color(0xff000000),
+                        ),
                       ),
+                      onTap: goSetting,
                     ),
-                    onTap: goSetting,
-                  ),
-                  SizedBox(height: 102.h),
+                    SizedBox(height: 102.h),
 
-                  // 扫码
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.circular(20),
-                  //   child: SizedBox(
-                  //     width: 160.r,
-                  //     height: 160.r,
-                  //     child: QRScanner(
-                  //       onDetect: scanQRcode,
-                  //     ),
-                  //   ),
-                  // ),
-                  SizedBox(height: 158.h),
+                    // 扫码
+                    // ClipRRect(
+                    //   borderRadius: BorderRadius.circular(20),
+                    //   child: SizedBox(
+                    //     width: 160.r,
+                    //     height: 160.r,
+                    //     child: QRScanner(
+                    //       onDetect: scanQRcode,
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(height: 158.h),
 
-                  // 老师或者学生签到后不显示
-                  teachIsSign || childrenIsSign
-                      ? Container()
-                      : Column(
-                          children: [
-                            Text(
-                              '请向屏幕展示二维码',
-                              style: TextStyle(
-                                color: isHavaVideoLink
-                                    ? const Color(0xffFFFFFF)
-                                    : const Color(0xff999999),
-                                fontSize: 14.5.sp,
+                    // 老师或者学生签到后不显示
+                    teachIsSign || childrenIsSign
+                        ? Container()
+                        : Column(
+                            children: [
+                              Text(
+                                '请向屏幕展示二维码',
+                                style: TextStyle(
+                                  color: isHavaVideoLink
+                                      ? const Color(0xffFFFFFF)
+                                      : const Color(0xff999999),
+                                  fontSize: 14.5.sp,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '识别后会自动签到',
-                              style: TextStyle(
-                                color: isHavaVideoLink
-                                    ? const Color(0xffFFFFFF)
-                                    : const Color(0xff999999),
+                              Text(
+                                '识别后会自动签到',
+                                style: TextStyle(
+                                  color: isHavaVideoLink
+                                      ? const Color(0xffFFFFFF)
+                                      : const Color(0xff999999),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 292.h),
-                            Text(
-                              'Serendipity Envoy',
-                              style: TextStyle(
-                                color: isHavaVideoLink
-                                    ? const Color(0xffFFFFFF)
-                                    : const Color(0xffCECECE),
-                                fontWeight: FontWeight.w400,
+                              SizedBox(height: 292.h),
+                              Text(
+                                'Serendipity Envoy',
+                                style: TextStyle(
+                                  color: isHavaVideoLink
+                                      ? const Color(0xffFFFFFF)
+                                      : const Color(0xffCECECE),
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                ],
-              ),
+                            ],
+                          )
+                  ],
+                ),
 
-              //  学生上课下课card
-              teachIsSign
-                  ? UpDownClassCard(
-                      name: '张三',
-                      role: '游泳教练',
-                      left: 22.w,
-                      bottom: 22.h,
-                    )
-                  : Container(),
-              childrenIsSign
-                  ? UpDownClassCard(
-                      name: '李四',
-                      role: '学生',
-                      right: 22.w,
-                      bottom: 22.h,
-                    )
-                  : Container()
-              // _businState == BusinState.upDownClass
-            ],
+                //  学生上课下课card
+                teachIsSign
+                    ? UpDownClassCard(
+                        name: '张三',
+                        role: '游泳教练',
+                        left: 22.w,
+                        bottom: 22.h,
+                      )
+                    : Container(),
+                childrenIsSign
+                    ? UpDownClassCard(
+                        name: '李四',
+                        role: '学生',
+                        right: 22.w,
+                        bottom: 22.h,
+                      )
+                    : Container()
+                // _businState == BusinState.upDownClass
+              ],
+            ),
           ),
         ),
       ),
