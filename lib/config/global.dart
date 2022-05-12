@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/immerse.dart';
 import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class Global {
@@ -12,6 +13,8 @@ class Global {
     // 当输入和显示频率不同导致的性能下降处理
     GestureBinding.instance.resamplingEnabled = true;
 
+    // 初始化沉浸式状态栏
+    barColor('white');
     // 初始化路由
     Routers.defineRoutes();
   }
