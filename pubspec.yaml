@@ -70,7 +70,10 @@ dependencies:
   mobile_scanner:
     # ^1.0.0
     # web 使用
-    git: https://github.com/juliansteenbakker/mobile_scanner
+    # git:  https://github.com/juliansteenbakker/mobile_scanner.git
+    git:
+     url: https://github.com/juliansteenbakker/mobile_scanner.git
+     ref: master
 
   # android ios 的升级插件
   r_upgrade: ^0.3.7+3
