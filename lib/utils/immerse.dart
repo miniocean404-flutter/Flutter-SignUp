@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 import 'package:flutter_sign_in/config/theme/color.dart';
 
 // 状态栏和虚拟按键沉浸式
-void barColor({required String color}) {
+void barColor(String color) {
   if (Platform.isAndroid) {}
   if (Platform.isIOS) {}
 
@@ -36,7 +37,6 @@ void barColor({required String color}) {
     statusBarBrightness: Brightness.light,
   );
 
-  // 这个地方你可以去掉三目运算符 直接调用你想要的 效果即可
   "white" == color.trim()
       ? SystemChrome.setSystemUIOverlayStyle(light)
       : SystemChrome.setSystemUIOverlayStyle(dark);
