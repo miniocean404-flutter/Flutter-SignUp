@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/router/routers.dart';
@@ -13,8 +14,11 @@ class Global {
     // 当输入和显示频率不同导致的性能下降处理
     GestureBinding.instance.resamplingEnabled = true;
 
-    // 初始化沉浸式状态栏
-    barColor('white');
+    if (!kIsWeb) {
+      // 初始化沉浸式状态栏
+      barColor('white');
+    }
+
     // 初始化路由
     Routers.defineRoutes();
   }
