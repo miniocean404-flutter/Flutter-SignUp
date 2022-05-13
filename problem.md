@@ -29,3 +29,7 @@ SettingBg(
     )
 ),
 ```
+
+ios 打包文章
+https://juejin.cn/post/6953144821611495431#heading-5
+https://zhuanlan.zhihu.com/p/505288508
