@@ -2,7 +2,9 @@ import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 import 'package:flutter_sign_in/utils/shared_preferences.dart';
 
 class EnvironmentDev extends CurrentEnv {
-  EnvironmentDev() {
+  EnvironmentDev(channel) {
+    this.channel = channel;
+
     final getUrl = SpHelper.getLocalStorage('baseUrl');
     baseUrl = 'http://api.uat.serendipity.illiaccess.com';
     // baseUrl = 'http://10.30.13.134:4040';

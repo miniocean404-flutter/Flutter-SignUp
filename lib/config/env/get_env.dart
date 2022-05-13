@@ -7,9 +7,10 @@ import 'env.prod.dart';
 // flutter run --dart-define=APP_CHANNEL=ZeroFlutter --dart-define=ENV=dev
 CurrentEnv getEnvironmentConfig() {
   const env = String.fromEnvironment('ENV');
+  const channel = String.fromEnvironment('CHANNEL');
 
   if (env == 'dev') {
-    return EnvironmentDev();
+    return EnvironmentDev(channel);
   } else if (env == 'prod') {
     return EnvironmentProd();
   }

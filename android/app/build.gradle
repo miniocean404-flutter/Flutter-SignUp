@@ -26,10 +26,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
+
 /// 获取渠道参数使用,这里设置一下默认值
 def dartEnvironmentVariables = [
-        APP_CHANNEL: 'main',
-        OTHER_VAR  : 'other',
+        CHANNEL: 'YYB',
+        ENV: 'DEV',
 ]
 
 // TODO 获取命令行参数脚本
@@ -40,6 +42,7 @@ if (project.hasProperty('dart-defines')) {
                 // 1.22.6 版本
                 //def pair = URLDecoder.decode(entry).split('=')
                 // 2.2 版本
+                // def pair = URLDecoder.decode(entry).split('=')
                 def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
                 [(pair.first()): pair.last()]
             }
@@ -52,7 +55,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 // android {} 中配置构建Android APP所需的特定编译选项。
 android {
-    // TODO 重命名安卓 apk 脚本
+    // TODO 打包APK时修改文件名带上渠道参数,还有一些SDK也可以通过这种方式设置参数
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             if (variant.buildType.name == "release") {
@@ -60,7 +63,7 @@ android {
                 def versionName = variant.versionName
                 def versionCode = variant.versionName
                 // 设置新名称
-                def newApkName = "app_v${defaultConfig.versionName}_${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.APP_CHANNEL}.apk"
+                def newApkName = "app_${getDateTime()}_v${defaultConfig.versionName}_${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.CHANNEL}.apk"
                 outputFileName = new File(newApkName)
             }
         }
@@ -121,16 +124,16 @@ android {
 
             // 配置打包的架构
             ndk {
-                //之前看QQ微信等大佬都只用"armeabi"
-                abiFilters "armeabi-v7a"
+                //之前看QQ微信等大佬都只用"armeabi",手机没什么x86框架的,只包含arm32和arm64即可
+                abiFilters "armeabi","armeabi-v7a","arm64-v8a" 
             }
         }
 
         // 配置调试版本时候的包的架构
         debug {
             ndk {
-                //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错
-                abiFilters "armeabi-v7a","arm64-v8a", "x86","x86_64"
+                //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错(x86是兼容模拟器的)
+                abiFilters "armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"
             }
         }
     }
