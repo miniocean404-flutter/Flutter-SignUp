@@ -25,13 +25,13 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   void initState() {
-    getCurrentPlatform();
-    controller.dispose();
     super.initState();
+    getCurrentPlatform();
   }
 
   @override
   void dispose() {
+    controller.dispose();
     super.dispose();
   }
 

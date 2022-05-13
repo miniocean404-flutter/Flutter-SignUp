@@ -49,7 +49,9 @@ class _HomeState extends State<Home> {
     Wakelock.toggle(enable: true);
     login();
     initVideo(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
+      // 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      'https://vd2.bdstatic.com/mda-nec58z84qej7rg6z/sc/cae_h264/1652413788970483306/mda-nec58z84qej7rg6z.mp4?v_from_s=hkapp-haokan-tucheng&auth_key=1652435409-0-0-31449704a1117ed44620fe1c04f60d47&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=1209408769&vid=2787785771096453920&abtest=101830_1-102148_2-17451_2&klogid=1209408769',
+    );
   }
 
   // 页面栈弹出声明周期
