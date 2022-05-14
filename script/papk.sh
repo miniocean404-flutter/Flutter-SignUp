@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# 颜色
+red='\e[91m'
+green='\e[92m'
+yellow='\e[93m'
+magenta='\e[95m'
+cyan='\e[96m'
+none='\e[0m' # 无颜色
+
 #---------------------请修改渠道数组----------------#
 channels=(YYB HUAWEI MI OPPO VIVO)
 
@@ -37,6 +45,7 @@ echo $clean_tips
 read  -t 5 is_clean
 if [  ! -n "${is_clean}" ];then
 	is_clean="n"
+elif echo ''
 fi
 
 while([[ $is_clean != "y" ]] && [[ $is_clean != "n" ]])
@@ -49,6 +58,7 @@ done
 
 
 tips="请输入选择渠道(默认：0) [ ALL: 0 "
+# ${#数组[@]} 显示数组参数长度,没有# 显示数组参数
 c_length=${#channels[@]};
 
 for(( i=0; i<$c_length; i++)) do

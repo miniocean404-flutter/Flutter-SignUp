@@ -34,6 +34,8 @@ unsign_path=${ipa_path}/unsign
 #导出未签名.Payload文件所在路径
 payload_path=${unsign_path}/Payload
 
+
+
 clean_tips="执行flutter clean(默认:n) [ y/n ]"
 echo $clean_tips
 read  -t 5 is_clean
@@ -47,6 +49,8 @@ do
   read is_clean
 done
 
+
+
 echo "请输入选择模式(默认:0) [ UnSign: 0 AdHoc: 1 ] "
 read  -t 5 number
 if [  ! -n "${number}" ];then
@@ -59,10 +63,14 @@ do
   read number
 done
 
+
+
 if [ ${is_clean} = "y" ];then
   echo "=============== 开始清理 ==============="
 	flutter clean
 fi
+
+
 
 echo "=============== 构建FLUTTER_IOS工程 ==============="
 if [ $number == 0 ];then
@@ -81,6 +89,8 @@ mkdir -p ${ipa_path}
 
 #rm -rf ${ipa_path}
 
+
+
 if [ $number == 0 ];then
   #无签名打包
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
@@ -97,7 +107,8 @@ if [ $number == 0 ];then
   info_plist="Payload/Runner.app/info.plist"
   version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$info_plist")
   build=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$info_plist")
-  time=$(date "+%Y%m%d_%H%M")
+  time=$(date "+%Y%m%d_%H%M%S")
+  
   appName="$app_name""_v$version""_b$build""_$time.ipa"
 
   echo "=============== 优化Framework大小 ==============="
@@ -141,4 +152,6 @@ else
     exit 1
   fi
 fi
+
+
 exit 0
