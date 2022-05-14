@@ -11,8 +11,16 @@ import 'package:flutter_sign_in/utils/shared_preferences.dart';
 class Global {
   static void initCommon() {
     WidgetsFlutterBinding.ensureInitialized();
+
     // 当输入和显示频率不同导致的性能下降处理
     GestureBinding.instance.resamplingEnabled = true;
+
+    // 优化图片缓存内存
+    // 在图片加载解码完成之前，无法知道到底将要消耗多少内存，容易产生大量的IO操作，导致内存峰值过高
+    // 图片缓存个数 100
+    PaintingBinding.instance.imageCache.maximumSize = 100;
+    // 图片缓存大小 50m
+    PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
 
     if (!kIsWeb) {
       // 初始化沉浸式状态栏
