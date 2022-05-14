@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/login.dart';
-import 'package:flutter_sign_in/utils/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 
 class DeviceConfig extends StatefulWidget {
   const DeviceConfig({Key? key}) : super(key: key);

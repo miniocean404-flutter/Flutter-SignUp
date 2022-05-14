@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 // 自定义 http 异常
 class HttpException implements Exception {

@@ -1,5 +1,5 @@
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
-import 'package:flutter_sign_in/utils/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 
 class EnvironmentDev extends CurrentEnv {
   EnvironmentDev(channel) {

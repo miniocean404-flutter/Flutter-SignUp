@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/utils/logger.dart';
+import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 // 函数导入
 import 'route_handler.dart';

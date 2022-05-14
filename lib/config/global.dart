@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/immerse.dart';
-import 'package:flutter_sign_in/utils/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/system/immerse.dart';
+import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 
 class Global {
   static void initCommon() {
