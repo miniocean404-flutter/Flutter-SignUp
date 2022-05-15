@@ -13,9 +13,14 @@
 
     // 多任务命令
     {
-      "label": "添加文件并推送",
+      "label": "添加文件并推送多个仓库",
       "type": "shell",
-      "dependsOn": ["git-add.", "git-commit-am", "git-push"],
+      "dependsOn": [
+        "git-add.",
+        "git-commit-am",
+        "git-push-origin",
+        "git-push-github"
+      ],
       "dependsOrder": "sequence",
       "problemMatcher": []
     },
@@ -33,6 +38,20 @@
       "type": "shell",
       "command": "git",
       "args": ["commit", "-am", "${input:commit-info}"],
+      "problemMatcher": []
+    },
+    {
+      "label": "git-push-github",
+      "type": "shell",
+      "command": "git",
+      "args": ["push", "github", "${input:branchName}"],
+      "problemMatcher": []
+    },
+    {
+      "label": "git-push-origin",
+      "type": "shell",
+      "command": "git",
+      "args": ["push", "origin"],
       "problemMatcher": []
     },
     {
