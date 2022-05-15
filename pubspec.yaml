@@ -19,6 +19,12 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=2.16.1 <3.0.0'
+flutter_native_splash:
+  color: '#FFFFFF'
+  image: 'assets/splash.png'
+  ardroid: true
+  ios: false
+  android_gravity: fill # 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -70,11 +76,6 @@ dependencies:
   # 极光推送
   jpush_flutter: ^2.2.5
 
-  # 左滑删除
-  # left_scroll_actions: ^2.1.0
-  # 图片压缩
-  # flutter_luban: ^0.1.13
-
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
@@ -91,16 +92,23 @@ dependencies:
   # 加载AE制作的炫酷动画
   lottie: ^1.2.2
 
+  # 左滑删除
+  # left_scroll_actions: ^2.1.0
+  # 图片压缩
+  # flutter_luban: ^0.1.13
   # 微信SDK调用（第三方）
   # fluwx: ^3.8.5
   # 支付宝支付
   # tobias: ^2.4.0+2
-
   # SVG使用（官方）只能是静态的，不能是动态svg
   # flutter_svg: ^1.0.3
-
   flutter:
     sdk: flutter
+
+  # widget的国际化支持，默认是英文
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
   # 添加Cupertino图标字体到你的应用程序。
   # 使用CupertinoIcons类的iOS风格图标
@@ -127,9 +135,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
+  # 开启自定义的国际化
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -141,13 +150,10 @@ flutter:
     - assets/state-icon/
     - assets/lottie/
     - assets/setting-icon/
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -167,3 +173,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

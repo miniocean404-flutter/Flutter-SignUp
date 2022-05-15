@@ -4,6 +4,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -58,10 +59,19 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       title: '签到',
       debugShowCheckedModeBanner: false,
+      // 国际化
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+      localeListResolutionCallback: localeListResolutionCallback,
+      localeResolutionCallback: localeResolutionCallback,
+
+      // 主题
       theme: cupertinoThemeColor(),
       // darkTheme: materialDarkTheme(),
+      // 路由
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
+
       builder: (context, widget) {
         Global.initScreen(context); // 初始化屏幕自适应工具
         Global.initSp(); // 安卓开发问题
