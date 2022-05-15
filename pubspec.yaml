@@ -35,6 +35,8 @@ dependencies:
   flutter_screenutil: ^5.5.2
   # 状态管理
   provider: ^6.0.2
+  # 有原生写法 https://book.flutterchina.club/chapter8/eventbus.html
+  event_bus: ^2.0.0
   # 简单数据持久化，清除数据就消失（官方）
   shared_preferences: ^2.0.13
   # 应用包信息查询（官方）
@@ -47,6 +49,10 @@ dependencies:
   path_provider: ^2.0.9
   # 日志打印
   logger: ^1.1.0
+  #权限申请
+  permission_handler: ^9.2.0
+  # 日期格式化
+  date_format: ^2.0.6
   # 动画(官方)
   animations: ^2.0.2
   # toast
@@ -59,10 +65,15 @@ dependencies:
   video_player: ^2.4.0
   # 音频播放器
   just_audio: ^0.9.21
-  #权限申请
-  permission_handler: ^9.2.0
-  # 日期格式化
-  date_format: ^2.0.6
+  # AES RSA 加密解密
+  encrypt: ^5.0.1
+  # 极光推送
+  jpush_flutter: ^2.2.5
+
+  # 左滑删除
+  # left_scroll_actions: ^2.1.0
+  # 图片压缩
+  # flutter_luban: ^0.1.13
 
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
@@ -82,6 +93,8 @@ dependencies:
 
   # 微信SDK调用（第三方）
   # fluwx: ^3.8.5
+  # 支付宝支付
+  # tobias: ^2.4.0+2
 
   # SVG使用（官方）只能是静态的，不能是动态svg
   # flutter_svg: ^1.0.3
