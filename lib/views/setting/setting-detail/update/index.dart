@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/version.dart';
+import 'package:flutter_sign_in/provider/version.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/string_handle.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:provider/provider.dart';
 
 enum PageState {
   loading, // 加载中
@@ -24,24 +25,27 @@ class _UpdateState extends State<Update> {
 
   // 当前版本或者最新版本
   late String _newVersion = '';
-  late String _localVersion = '';
+
   late bool _isForceUpdate = false;
-  late bool _isNew = false;
+  late bool _isHaveNew = false;
+
+  late String? _localVersion = '';
+  late bool _isAutoUpdate = false;
 
   @override
   void initState() {
     super.initState();
-
-    setLocalVersionInfo();
-    setNewVersionInfo();
   }
 
-  // 设置本地版本信息
-  void setLocalVersionInfo() async {
-    // 获取当前版本信息
-    final packageInfo = await PackageInfo.fromPlatform();
-    final currentVersion = packageInfo.version;
-    setState(() => {_localVersion = currentVersion});
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // 在 didChangeDependencies 或者 build 中的context.watch<T>().getXXX 取到新值
+    _localVersion = Provider.of<Version>(context, listen: false).getVersion!;
+    _isAutoUpdate = Provider.of<Version>(context).getIsAutoUpdate;
+
+    setNewVersionInfo();
   }
 
   // 设置当前版本、是否最新、是否强制更新
@@ -49,61 +53,58 @@ class _UpdateState extends State<Update> {
     // 获取最新版本接口
     // dynamic newRes = await getNewVersion(currentVersion);
 
-    dynamic isAutoUpdate = SpHelper.getLocalStorage('isAutoUpdate');
-    if (isAutoUpdate == null) {
-      await SpHelper.setLocalStorage('isAutoUpdate', true);
-      isAutoUpdate = true;
-      setState(() => _currentState = PageState.auto);
+    // 不自动更新
+    if (!_isAutoUpdate) {
+      setState(() {
+        _currentState = PageState.noAuto;
+      });
+
+      return;
     }
 
-    // 如果是自动更新状态就加载loading
-    if (isAutoUpdate) {
-      _currentState = PageState.auto;
-
+    // 自动更新
+    if (_isAutoUpdate == true) {
+      // 如果是自动更新状态就加载loading
       setState(() => _currentState = PageState.loading);
       dynamic versionRes = await getHistoryVersion();
-      setState(() => _currentState = PageState.auto);
 
       // 获取最新版本的信息
       final List list = versionRes['list'];
 
       if (versionRes['count'] > 0) {
         for (var versionItem in list) {
-          _isNew = versionCompare(versionItem['versionCode'], _localVersion);
-          _isNew
+          _isHaveNew =
+              versionCompare(versionItem['versionCode'], _localVersion!);
+          _isHaveNew
               ? setState(() {
                   _newVersion = versionItem['versionCode'];
                   _isForceUpdate = versionItem['isForceUpdate'];
                 })
               : setState(() {
-                  _newVersion = _localVersion;
+                  _newVersion = _localVersion!;
                 });
 
-          if (_isNew) {
+          if (_isHaveNew) {
             break;
           }
         }
       }
-    }
 
-    // 不自动更新
-    if (!isAutoUpdate) {
-      setState(() {
-        _currentState = PageState.noAuto;
-      });
+      setState(() => _currentState = PageState.auto);
     }
   }
 
   void _isAutoUpdateButton(v) async {
     await SpHelper.setLocalStorage('isAutoUpdate', v);
-    setNewVersionInfo();
+    Provider.of<Version>(context, listen: false).setIsAutoUpdate = v;
+
     setState(() {
       if (v) _currentState = PageState.auto;
       if (!v) _currentState = PageState.noAuto;
     });
   }
 
-  // 是否是加载中的状态
+  // 是否是加载中的状态还是自动更新状态
   Widget _isLoading() {
     if (_currentState == PageState.loading) {
       return SizedBox(
@@ -162,7 +163,7 @@ class _UpdateState extends State<Update> {
     }
   }
 
-  // 是否展示自动更新的状态
+  // 是否展示自动更新的状态、还是当前已经是最新版本的状态
   Widget _isShowAutoUpdate() {
     if (_currentState == PageState.auto) {
       return Column(

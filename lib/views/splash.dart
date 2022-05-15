@@ -21,15 +21,17 @@ class _SplashState extends State<Splash>
 
   @override
   void initState() {
+    super.initState();
+
     // SystemChrome.setEnabledSystemUIMode();
     animationExec();
-    super.initState();
   }
 
   @override
   void dispose() {
     _controller.dispose(); // 销毁动画
     _timer.cancel();
+
     super.dispose();
   }
 

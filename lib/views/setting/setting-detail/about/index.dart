@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_sign_in/provider/version.dart';
+import 'package:provider/provider.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -12,19 +13,10 @@ class About extends StatefulWidget {
 }
 
 class _AboutConfigState extends State<About> {
-  String _version = '';
-
-  @override
-  void initState() {
-    super.initState();
-
-    PackageInfo.fromPlatform().then((packageInfo) {
-      setState(() => _version = packageInfo.version);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    String? _version = Provider.of<Version>(context).getVersion;
+
     return CupertinoPageScaffold(
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(

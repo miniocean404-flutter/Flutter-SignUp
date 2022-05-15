@@ -8,7 +8,7 @@ import 'package:flutter_sign_in/config/theme/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
-import 'provider/data.dart';
+import 'provider/version.dart';
 import 'router/routers.dart';
 
 void main() {
@@ -25,11 +25,17 @@ void main() {
         // 可以使用 Data 作为数据源。
         // 需要注意的是，不要把所有状态的作用域都放在 MaterialApp，根据实际业务需求严格控制作用域范围，
         // 全局状态多了会严重影响应用的性能。
+        // 默认懒加载，需要提前处理值，就要lazy=false
 
-        ChangeNotifierProvider<Data>(create: (_) => Data()),
+        // 原生 ValueListenableBuilder 按需 rebuild https://book.flutterchina.club/chapter7/value_listenable_builder.html#_7-5-1-valuelistenablebuilder
+
+        ChangeNotifierProvider<Version>(
+          create: (context) => Version(),
+          lazy: false,
+        ),
       ],
       // 消费者
-      child: Consumer<Data>(
+      child: Consumer<Version>(
         // builder 中的参数分别是 Context context、T value、Widget child，value 即Data，value 的类型和 Data 类型一致，
         // builder 方法返回的是 Widget，也就是被 Consumer 包裹的 widget，
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。

@@ -46,11 +46,10 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    Wakelock.toggle(enable: true);
     login();
     initVideo(
-      // 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-      'https://vd2.bdstatic.com/mda-nec58z84qej7rg6z/sc/cae_h264/1652413788970483306/mda-nec58z84qej7rg6z.mp4?v_from_s=hkapp-haokan-tucheng&auth_key=1652435409-0-0-31449704a1117ed44620fe1c04f60d47&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=1209408769&vid=2787785771096453920&abtest=101830_1-102148_2-17451_2&klogid=1209408769',
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      // 'https://vd2.bdstatic.com/mda-nec58z84qej7rg6z/sc/cae_h264/1652413788970483306/mda-nec58z84qej7rg6z.mp4',
     );
   }
 
@@ -64,6 +63,8 @@ class _HomeState extends State<Home> {
   @override
   void dispose() {
     _controller.dispose();
+    Wakelock.toggle(enable: false);
+
     super.dispose();
   }
 
@@ -90,6 +91,8 @@ class _HomeState extends State<Home> {
         await _controller.setVolume(0.0);
       }
       await _controller.play();
+      Wakelock.toggle(enable: true);
+
       // 设置属性后初始化
       setState(() {});
     });
@@ -139,7 +142,6 @@ class _HomeState extends State<Home> {
     } else if (_clickNum >= 10) {
       _clickNum = 0;
 
-      Wakelock.toggle(enable: false);
       Routers.navigateTo(context, Routers.settingHome, clearStack: true);
     }
   }
@@ -147,6 +149,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
+
+    // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
+    double scale =
+        _controller.value.aspectRatio / window.physicalSize.aspectRatio;
+    bool isShowVideo =
+        _businState == BusinState.sign && _controller.value.isInitialized;
 
     return SafeArea(
       child: CupertinoPageScaffold(
@@ -158,12 +166,9 @@ class _HomeState extends State<Home> {
               alignment: Alignment.center,
               children: [
                 // 背景视屏
-                _businState == BusinState.sign &&
-                        _controller.value.isInitialized
+                isShowVideo
                     ? Transform.scale(
-                        // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
-                        scale: _controller.value.aspectRatio /
-                            window.physicalSize.aspectRatio,
+                        scale: scale,
                         child: VideoPlayer(_controller),
                       )
                     : Container(),
