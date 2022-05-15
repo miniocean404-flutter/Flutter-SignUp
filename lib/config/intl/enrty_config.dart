@@ -23,7 +23,10 @@ final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates = [
 ];
 
 // 使用intl插件生成的
-final supportedLocales = S.delegate.supportedLocales;
+final supportedLocales = [
+  const Locale('en', ''),
+  ...S.delegate.supportedLocales
+];
 
 // 监听系统语言切换事件，一些安卓零碎个性，可设置多语言列表，默认以第一个列表为默认语言
 Locale localeListResolutionCallback(
@@ -42,8 +45,17 @@ Locale localeResolutionCallback(
   Locale? locale,
   Iterable<Locale> supportedLocales,
 ) {
-  if (locale != null) {
-    return locale;
+  // 中文 简繁体处理
+  if (locale != null && locale.languageCode == 'zh') {
+    // zh-CN：地区限制匹配规范，表示用在中国大陆区域的中文。
+    // 包括各种大方言、小方言、繁体、简体等等都可以被匹配到。
+    if (locale.scriptCode == 'Hant') {
+      // zh-Hant和zh-CHT相同相对应;
+      return const Locale('zh', 'HK'); //繁体
+    } else {
+      // zh-Hans：语言限制匹配规范，表示简体中文
+      return const Locale('zh', 'CN'); //简体
+    }
   }
 
   return const Locale('zh', 'CN');

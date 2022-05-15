@@ -1,18 +1,17 @@
 {
-  "@@locale": "zh",
-  "title": "标题 {other}",
+  "title": "标题12 {other}",
   "@title": {
-    "description": "@ title 是 title的描述信息",
+    "description": "@ title 是 title的描述信息 {other} 是占位符 可以重复使用",
     "type": "text",
     "placeholders": {}
   },
   "remainingEmailsMessage": "{howMany,plural, =0{没有未读邮件}=1{有{howMany}封未读邮件}other{有{howMany}封未读邮件}}",
   "@remainingEmailsMessage": {
-    "description": "存档后还剩下多少封电子邮件",
+    "description": "存档后还剩下多少封电子邮件 使用：S.of(context).getMessageTips(2)",
     "type": "text",
     "placeholders": {
       "howMany": {
-        "example": 42
+        "example": "42"
       }
     }
   },

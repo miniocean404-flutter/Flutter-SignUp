@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -51,31 +50,34 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `home1 {name}`
-  String title(Object name) {
+  /// `title {other}`
+  String title(Object other) {
     return Intl.message(
-      'home1 $name',
+      'title $other',
       name: 'title',
-      desc: '@ title 是 title的描述信息',
-      args: [name],
+      desc: '@ title 是 title的描述信息 {other} 是占位符 可以重复使用',
+      args: [other],
     );
   }
 
-  /// `hello~ `
-  String get greet {
-    return Intl.message(
-      'hello~ ',
-      name: 'greet',
-      desc: '',
-      args: [],
+  /// `{howMany,plural, =0{There are no emails left}=1{There is {howMany} email left}other{There are {howMany} emails left}}`
+  String remainingEmailsMessage(num howMany) {
+    return Intl.plural(
+      howMany,
+      zero: 'There are no emails left',
+      one: 'There is $howMany email left',
+      other: 'There are $howMany emails left',
+      name: 'remainingEmailsMessage',
+      desc: '存档后还剩下多少封电子邮件 使用：S.of(context).getMessageTips(2)',
+      args: [howMany],
     );
   }
 
-  /// `Pick a time`
-  String get picktime {
+  /// `singleField`
+  String get singleField {
     return Intl.message(
-      'Pick a time',
-      name: 'picktime',
+      'singleField',
+      name: 'singleField',
       desc: '',
       args: [],
     );
