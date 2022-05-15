@@ -73,9 +73,9 @@
     },
     {
       "id": "branchName",
-      "type": "promptString",
-      "description": "手动输入分支名",
-      "default": "master"
+      "type": "pickString",
+      "options": ["master", "dev", "feature/api"],
+      "default": "请选择分支"
     },
     {
       "id": "branch",
