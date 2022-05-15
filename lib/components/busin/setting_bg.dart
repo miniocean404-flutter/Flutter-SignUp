@@ -23,8 +23,8 @@ class _SettingBgState extends State<SettingBg> {
 
   @override
   void initState() {
-    addLine();
     super.initState();
+    addLine();
   }
 
   @override

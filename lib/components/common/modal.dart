@@ -32,6 +32,8 @@ class _StateModalState extends State<StateModal> {
 
   @override
   void initState() {
+    super.initState();
+
     switch (widget.state) {
       case StateType.success:
         _currentState['state'] = '签到成功';
@@ -50,8 +52,6 @@ class _StateModalState extends State<StateModal> {
         break;
       default:
     }
-
-    super.initState();
   }
 
   @override
