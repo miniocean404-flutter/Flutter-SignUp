@@ -75,7 +75,7 @@
       "id": "branchName",
       "type": "pickString",
       "options": ["master", "dev", "feature/api"],
-      "default": "请选择分支"
+      "description": "请选择分支"
     },
     {
       "id": "branch",
