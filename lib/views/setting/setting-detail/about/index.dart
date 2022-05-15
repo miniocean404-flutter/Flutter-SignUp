@@ -15,7 +15,7 @@ class About extends StatefulWidget {
 class _AboutConfigState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    String? _version = Provider.of<Version>(context).getVersion;
+    String? version = Provider.of<Version>(context).getVersion;
 
     return CupertinoPageScaffold(
       child: CupertinoPageScaffold(
@@ -50,7 +50,7 @@ class _AboutConfigState extends State<About> {
                               style: TextStyle(fontSize: 18.sp),
                             ),
                             Text(
-                              'Version $_version',
+                              'Version $version',
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 color: const Color(0xff8A8A8D),

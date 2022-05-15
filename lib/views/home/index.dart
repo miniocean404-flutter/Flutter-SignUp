@@ -179,6 +179,7 @@ class _HomeState extends State<Home> {
 
                     // 签到标题
                     GestureDetector(
+                      onTap: goSetting,
                       child: Text(
                         title,
                         style: TextStyle(
@@ -189,7 +190,6 @@ class _HomeState extends State<Home> {
                               : const Color(0xff000000),
                         ),
                       ),
-                      onTap: goSetting,
                     ),
                     SizedBox(height: 102.h),
 

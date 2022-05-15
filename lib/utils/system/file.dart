@@ -17,8 +17,8 @@ class FileJson {
       List fileJson = jsonDecode(fileJsonStr);
 
       return fileJson.map((value) {
-        Map _dataMap = json.decode(value);
-        return _dataMap;
+        Map dataMap = json.decode(value);
+        return dataMap;
       }).toList();
     } on FileSystemException {
       return [];

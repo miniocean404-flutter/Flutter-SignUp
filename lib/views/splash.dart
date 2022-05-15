@@ -44,9 +44,9 @@ class _SplashState extends State<Splash>
       duration: Duration(milliseconds: step * 1000),
     );
 
-    final _animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
+    final animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
 
-    _animation.addStatusListener((status) {
+    animation.addStatusListener((status) {
       if (status == AnimationStatus.forward) startTiming();
 
       // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页
@@ -58,7 +58,7 @@ class _SplashState extends State<Splash>
   }
 
   void startTiming() {
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (_timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       setState(() => step--);
     });
   }
@@ -103,7 +103,6 @@ class _SplashState extends State<Splash>
             top: 50.0,
             right: 20.0,
             child: OutlinedButton(
-              child: Text('${step}s跳过'),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
@@ -112,6 +111,7 @@ class _SplashState extends State<Splash>
                 ),
               ),
               onPressed: () => {startJump()},
+              child: Text('${step}s跳过'),
             ),
           )
         ],

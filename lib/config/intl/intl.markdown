@@ -1,3 +1,78 @@
+博客：https://book.flutterchina.club/chapter13/multi_languages_support.html#_13-1-1-%E7%AE%80%E4%BB%8B
+
+#### 自定义 支持的语言列表
+
+```dart
+// fromSubtags:
+// 一些具有多种变体的语言需要的不仅仅是语言代码才能正确区分。
+// 例如，完全区分中文的所有变体需要指定语言代码、脚本代码和国家代码。这是由于简繁体文字的存在，以及在同一文字类型中书写字符的方式存在地区差异。
+// 为了充分表达国家代码CN、TW和HK的每个中文变体，支持的语言环境列表应包括
+
+final supportedLocales = [
+  // generic Chinese 'zh'
+  const Locale.fromSubtags(languageCode: 'zh'),
+  // generic simplified Chinese 'zh_Hans'
+  const Locale.fromSubtags(
+    languageCode: 'zh',
+    scriptCode: 'Hans',
+  ),
+  // generic traditional Chinese 'zh_Hant'
+  const Locale.fromSubtags(
+    languageCode: 'zh',
+    scriptCode: 'Hant',
+  ),
+  // 'zh_Hans_CN'
+  const Locale.fromSubtags(
+    languageCode: 'zh',
+    scriptCode: 'Hans',
+    countryCode: 'CN',
+  ),
+  // 'zh_Hant_TW'
+  const Locale.fromSubtags(
+    languageCode: 'zh',
+    scriptCode: 'Hant',
+    countryCode: 'TW',
+  ),
+  // 'zh_Hant_HK'
+  const Locale.fromSubtags(
+    languageCode: 'zh',
+    scriptCode: 'Hant',
+    countryCode: 'HK',
+  ),
+  const Locale('en', 'US'), // 美国英语
+  const Locale('zh', 'CN'), // 中文简体
+  // const Locale('es', 'es'), // 西班牙语
+];
+```
+
+#### 使用自定义代理
+
+```dart
+// 默认widget是英文的，添加 flutter_localizations 让其国际化
+final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates = [
+  // 为Material 组件库提供的本地化的字符串和其他值
+  GlobalMaterialLocalizations.delegate,
+  // 对应的Cupertino风格
+  GlobalCupertinoLocalizations.delegate,
+  // 定义组件默认的文本方向，从左到右或从右到左，这是因为有些语言的阅读习惯并不是从左到右，比如如阿拉伯语就是从右向左的
+  GlobalWidgetsLocalizations.delegate,
+
+  // 使用自定义代理
+  CustomLocalizationsDelegate.delegate,
+];
+
+```
+
+#### 获取当前语言类型
+
+```dart
+// 可以获取应用当前设置的语言类型(区域、环境)
+Locale myLocale = Localizations.localeOf(context)
+```
+
+#### 自定义 locale 让 flutter 使用
+
+```dart
 // https://blog.csdn.net/zhongad007/article/details/106470787/
 import 'dart:convert';
 
@@ -87,3 +162,5 @@ class CustomLocalizationsDelegate
 
 // * 使用本地化格式化后的类，在 widget 中可以使用下面代码进行使用
 // Localizations.of(context, CustomLocalizations).title
+
+```

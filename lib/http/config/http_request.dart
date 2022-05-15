@@ -64,9 +64,9 @@ class Http {
 
   // 设置鉴权请求头
   Options setAuthorizationHeader(Options requestOptions) {
-    String _token = '';
-    if (_token.isNotEmpty) {
-      requestOptions.headers!['token'] = _token;
+    String token = '';
+    if (token.isNotEmpty) {
+      requestOptions.headers!['token'] = token;
     }
     return requestOptions;
   }

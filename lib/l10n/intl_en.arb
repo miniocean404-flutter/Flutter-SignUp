@@ -1,13 +1,12 @@
 {
-  "@@last_modified": "2018-12-10T15:46:20.897228",
-  "@@locale": "zh_CH",
-  "title": "home1 {name}",
+  "@@locale": "en",
+  "title": "title {other}",
   "@title": {
     "description": "@ title 是 title的描述信息",
     "type": "text",
     "placeholders": {}
   },
-  "remainingEmailsMessage": "{howMany,plural, =0{没有未读邮件}=1{有{howMany}封未读邮件}other{有{howMany}封未读邮件}}",
+  "remainingEmailsMessage": "{howMany,plural, =0{There are no emails left}=1{There is {howMany} email left}other{There are {howMany} emails left}}",
   "@remainingEmailsMessage": {
     "description": "存档后还剩下多少封电子邮件",
     "type": "text",
@@ -17,7 +16,5 @@
       }
     }
   },
-  "greet": "hello~ ",
-  "picktime": "Pick a time",
-  "test": "aaa"
+  "singleField": "singleField"
 }

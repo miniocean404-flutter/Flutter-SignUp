@@ -95,8 +95,8 @@ class _UpdateState extends State<Update> {
   }
 
   void _isAutoUpdateButton(v) async {
-    await SpHelper.setLocalStorage('isAutoUpdate', v);
     Provider.of<Version>(context, listen: false).setIsAutoUpdate = v;
+    await SpHelper.setLocalStorage('isAutoUpdate', v);
 
     setState(() {
       if (v) _currentState = PageState.auto;
