@@ -12,7 +12,7 @@
       "type": "dart", // 语言类型，不同语言有不同扩展
       "flutterMode": "debug", // flutter 运行的模式
       "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
-      "stopAtEntry": false, // 是否在开始处断点
+      // "stopAtEntry": false, // 是否在开始处断点
       "preLaunchTask": "start proxy", // 调试开始前的任务
       "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
       "console": "debugConsole", // 只支持调试控制台
@@ -35,7 +35,6 @@
       "type": "dart",
       "flutterMode": "profile",
       "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
-      "stopAtEntry": false, // 是否在开始处断点
       "preLaunchTask": "start proxy", // 调试开始前的任务
       "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
       "console": "debugConsole", // 只支持调试控制台
@@ -57,7 +56,6 @@
       "type": "dart",
       "flutterMode": "release",
       "program": "${workspaceFolder}/lib/main.dart", // 程序主文件
-      "stopAtEntry": false, // 是否在开始处断点
       "preLaunchTask": "start proxy", // 调试开始前的任务
       "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
       "console": "debugConsole", // 只支持调试控制台
