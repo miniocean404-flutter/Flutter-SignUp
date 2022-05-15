@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // *自定义local语言配置
-class HYLocalizations {
+class CustomLocalizations {
   final Locale locale;
 
-  HYLocalizations(this.locale);
+  CustomLocalizations(this.locale);
+
+  //为了使用方便，我们定义一个静态方法
+  static CustomLocalizations? of(BuildContext context) {
+    return Localizations.of<CustomLocalizations>(context, CustomLocalizations);
+  }
 
   static Map<String, Map<String, String>> _localizedValues = {
     "en": {"title": "home", "greet": "hello~", "picktime": "Pick a Time"},
@@ -59,28 +64,26 @@ class HYLocalizations {
 // load方法：当Locale发生改变时（语言环境），加载对应的HYLocalizations资源
 // 这个方法返回的是一个Future，因为有可能是异步加载的；
 // 但是我们这里是直接定义的一个Map，因此可以直接返回一个同步的
-class HYLocalizationsDelegate extends LocalizationsDelegate<HYLocalizations> {
+class CustomLocalizationsDelegate
+    extends LocalizationsDelegate<CustomLocalizations> {
   @override
-  bool isSupported(Locale locale) {
-    return ["en", "zh"].contains(locale.languageCode);
-  }
+  bool isSupported(Locale locale) => ["en", "zh"].contains(locale.languageCode);
 
   @override
-  bool shouldReload(LocalizationsDelegate<HYLocalizations> old) {
-    return false;
-  }
+  bool shouldReload(LocalizationsDelegate<CustomLocalizations> old) => false;
 
   @override
-  Future<HYLocalizations> load(Locale locale) async {
-    final localization = HYLocalizations(locale);
+  Future<CustomLocalizations> load(Locale locale) async {
+    final localization = CustomLocalizations(locale);
     // await localization.loadJson(); // 加载异步数据i18n
-    Future<HYLocalizations> synchronousFuture = SynchronousFuture(localization);
+    Future<CustomLocalizations> synchronousFuture =
+        SynchronousFuture(localization);
 
     return synchronousFuture;
   }
 
-  static HYLocalizationsDelegate delegate = HYLocalizationsDelegate();
+  static CustomLocalizationsDelegate delegate = CustomLocalizationsDelegate();
 }
 
 // * 使用本地化格式化后的类，在 widget 中可以使用下面代码进行使用
-// Localizations.of(context, HYLocalizations).title
+// Localizations.of(context, CustomLocalizations).title

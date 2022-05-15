@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -55,7 +56,7 @@ class S {
     return Intl.message(
       'home1 $name',
       name: 'title',
-      desc: '',
+      desc: '@ title 是 title的描述信息',
       args: [name],
     );
   }

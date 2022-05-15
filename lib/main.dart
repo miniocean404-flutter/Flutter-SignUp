@@ -64,6 +64,11 @@ class MyApp extends StatelessWidget {
       supportedLocales: supportedLocales,
       localeListResolutionCallback: localeListResolutionCallback,
       localeResolutionCallback: localeResolutionCallback,
+      // onGenerateTitle: (context) {
+      // 此时context在Localizations的子树中，
+      // https://book.flutterchina.club/chapter13/faq.html#_13-4-2-%E5%A6%82%E4%BD%95%E5%AF%B9%E5%BA%94%E7%94%A8%E6%A0%87%E9%A2%98%E8%BF%9B%E8%A1%8C%E5%9B%BD%E9%99%85%E5%8C%96
+      //   return S.of(context).title('国际化动态标题');
+      // },
 
       // 主题
       theme: cupertinoThemeColor(),
