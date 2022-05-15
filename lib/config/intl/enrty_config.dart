@@ -65,19 +65,24 @@ final supportedLocales = [
   ),
   const Locale('en', 'US'), // 美国英语
   const Locale('zh', 'CN'), // 中文简体
+  // const Locale('es', 'es'), // 西班牙语
 ];
 
-// 可以获取应用当前设置的语言类型(区域)
+// 可以获取应用当前设置的语言类型(区域、环境)
 // Locale myLocale = Localizations.localeOf(context)
 
 // 监听系统语言切换事件，一些安卓零碎个性，可设置多语言列表，默认以第一个列表为默认语言
 Locale localeListResolutionCallback(
-    List<Locale>? locales, Iterable<Locale> supportedLocales) {
+  List<Locale>? locales,
+  Iterable<Locale> supportedLocales,
+) {
   return const Locale('zh', 'CN');
 }
 
 // 监听系统语言切换事件
 Locale localeResolutionCallback(
-    Locale? locale, Iterable<Locale> supportedLocales) {
+  Locale? locale,
+  Iterable<Locale> supportedLocales,
+) {
   return const Locale('zh', 'CN');
 }
