@@ -11,7 +11,7 @@ runner_path=~/Library/Developer/Xcode/DerivedData/Runner-bsrdqyyshhsictbeoknvquv
 export_plist_path=${project_path}/shell/scriptTest.plist
 
 #-------------------可选：修改为自己的APP名称------------------#
-app_name="APP名称"
+app_name="flutter 签到"
 
 #----------------可选：将Runner替换成自己的工程名---------------#
 project_name=Runner
@@ -19,7 +19,7 @@ project_name=Runner
 #----------------可选：将Runner替换成自己的sheme名--------------#
 scheme_name=Runner
 
-#打包模式 Debug/Release
+#打包模式 Debug/Release/Profile
 development_mode=Release
 
 #导出.ipa文件所在路径
@@ -35,13 +35,14 @@ unsign_path=${ipa_path}/unsign
 payload_path=${unsign_path}/Payload
 
 
-
+# 是否执行 flutter clean
 clean_tips="执行flutter clean(默认:n) [ y/n ]"
 echo $clean_tips
 read  -t 5 is_clean
 if [  ! -n "${is_clean}" ];then
 	is_clean="n"
 fi
+
 while([[ $is_clean != "y" ]] && [[ $is_clean != "n" ]])
 do
   echo "错误!只能输入[ y/n ] ！！！"
@@ -50,12 +51,13 @@ do
 done
 
 
-
+# 选择打包模式
 echo "请输入选择模式(默认:0) [ UnSign: 0 AdHoc: 1 ] "
 read  -t 5 number
 if [  ! -n "${number}" ];then
 	number=0
 fi
+
 while([[ $number != 0 ]] && [[ $number != 1 ]])
 do
   echo "错误!只能输入0或者1！！！"
@@ -73,12 +75,15 @@ fi
 
 
 echo "=============== 构建FLUTTER_IOS工程 ==============="
+# --obfuscate 混淆 --split-debug-info 将因混淆生成的 map 符号表缓存到此位置 --no-codesign 没有签名的包
+# flutter build ios --release --no-codesign --obfuscate --split-debug-info=./symbols
 if [ $number == 0 ];then
   flutter build ios --release --no-codesign
 else
   flutter build ios
 fi
-#flutter build ios --release --no-codesign --obfuscate --split-debug-info=./symbols
+
+
 
 #如果有product/ipa文件夹则删除，然后再创建一个空文件夹
 if [ -d ${ipa_path} ]; then
@@ -92,7 +97,7 @@ mkdir -p ${ipa_path}
 
 
 if [ $number == 0 ];then
-  #无签名打包
+  #无签名打包 workspace构建工作区
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
   xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode}
 
@@ -111,7 +116,7 @@ if [ $number == 0 ];then
   
   appName="$app_name""_v$version""_b$build""_$time.ipa"
 
-  echo "=============== 优化Framework大小 ==============="
+  echo "=============== 优化Framework大小(删除bitcode) ==============="
   xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter -r -o ${payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter
   xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit -r -o ${payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit
   xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/App.framework/App -r -o ${payload_path}/Runner.app/Frameworks/App.framework/App
@@ -129,6 +134,7 @@ if [ $number == 0 ];then
 
 else
   #Ad hoc 打包
+  # -archivePath 指定任何创建的档案将被放置的目录，或者应该导出的档案
   echo "=============== 正在编译工程:${development_mode} ==============="
   xcodebuild \
   archive -workspace ${project_path}/ios/${project_name}.xcworkspace \
@@ -138,6 +144,7 @@ else
 
   echo ''
   echo '=============== 开始IPA打包 ==============='
+  # -exportArchive 指定应导出存档  exportPath 指定从存档导出的产品的目的地 exportOptionsPlist 指定配置存档导出的 plist 文件的路径
   xcodebuild -exportArchive -archivePath ${ipa_path}/${project_name}.xcarchive \
   -configuration ${development_mode} \
   -exportPath ${sign_path} \
