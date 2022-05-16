@@ -39,6 +39,13 @@ PODS:
   - GoogleUtilitiesComponents (1.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.1)
+  - JCore (3.1.0)
+  - JPush (4.4.0):
+    - JCore (>= 2.0.0)
+  - jpush_flutter (0.0.2):
+    - Flutter
+    - JCore (= 3.1.0)
+    - JPush (= 4.4.0)
   - just_audio (0.0.1):
     - Flutter
   - local_auth_ios (0.0.1):
@@ -99,6 +106,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
   - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
@@ -120,6 +128,8 @@ SPEC REPOS:
     - GoogleUtilities
     - GoogleUtilitiesComponents
     - GTMSessionFetcher
+    - JCore
+    - JPush
     - MLImage
     - MLKitBarcodeScanning
     - MLKitCommon
@@ -140,6 +150,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  jpush_flutter:
+    :path: ".symlinks/plugins/jpush_flutter/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
   local_auth_ios:
@@ -177,6 +189,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
+  JCore: 4029befb2497adc36b2496e2cfd6b24d9f671784
+  JPush: b7d00f2cc78766e76c8abb30a5741fe94d21e5bc
+  jpush_flutter: bc88cfa9a4ff4481031564b641c3fe24024bb2cb
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   local_auth_ios: 0d333dde7780f669e66f19d2ff6005f3ea84008d
   MLImage: a454f9f8ecfd537783a12f9488f5be1a68820829
