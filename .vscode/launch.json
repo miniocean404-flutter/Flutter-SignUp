@@ -19,7 +19,7 @@
       "args": [
         // "run -d chrome", // 运行平台
         "--dart-define",
-        "APP_CHANNEL=Flutter",
+        "CHANNEL=Flutter",
         "--dart-define",
         "ENV=dev"
       ],
@@ -41,7 +41,7 @@
       "args": [
         "run -d chrome", // 运行平台
         "--dart-define",
-        "APP_CHANNEL=Flutter",
+        "CHANNEL=Flutter",
         "--dart-define",
         "ENV=staging"
       ],
@@ -62,7 +62,7 @@
       "args": [
         "run -d chrome", // 运行平台
         "--dart-define",
-        "APP_CHANNEL=Flutter",
+        "CHANNEL=Flutter",
         "--dart-define",
         "ENV=prod"
       ],

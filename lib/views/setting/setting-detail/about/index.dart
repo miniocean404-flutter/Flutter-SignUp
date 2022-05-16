@@ -21,7 +21,7 @@ class _AboutConfigState extends State<About> {
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text(
-            '设备配置',
+            '关于',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 18.sp,

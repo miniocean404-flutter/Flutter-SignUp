@@ -39,7 +39,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
   Widget build(BuildContext context) {
     // CupertinoPageScaffold
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+      navigationBar: CupertinoNavigationBar(
         // leading: Icon(Icons.arrow_back), // 左侧组件
         // previousPageTitle: '返回', // 左侧返回按钮的文字
         //  trailing: Icon(Icons.add), // 右侧组件
@@ -53,10 +53,10 @@ class _DeviceConfigState extends State<DeviceConfig> {
         // 是否添加默认 middle，默认为 true，如果 middle 为空，且当前 route 为 CupertinoPageRoute，会默认填充 route.title
         // Navigator.push(context,CupertinoPageRoute(builder:()=>{},title:'名字'))
         automaticallyImplyLeading: true,
-        // middle: Text(
-        //   '设备配置',
-        //   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
-        // ),
+        middle: Text(
+          '设备配置',
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+        ),
       ),
       child: Container(
         color: const Color(0xffefeff3),
