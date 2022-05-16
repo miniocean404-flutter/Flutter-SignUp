@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 // 文件json形式读取保存
 class FileJson {
   // 读取json
-  static Future<List<Map>> getMapList(String keyPath) async {
+  static Future<List<Map>> getTempMapList(String keyPath) async {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
 
@@ -26,7 +26,7 @@ class FileJson {
   }
 
   // 写入json到文件
-  static Future<void> saveMapList(List<Map> list, String keyPath) async {
+  static Future<void> saveTempMapList(List<Map> list, String keyPath) async {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
     File registerFile = File("$tempPath/$keyPath");
