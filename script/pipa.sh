@@ -109,7 +109,7 @@ if [ $number == 0 ];then
   #无签名打包 workspace构建工作区
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
   # workspace:指定工作空间文件 scheme:是编译任务 configuration:指定编译模式 sdk:指定编译的sdk
-  xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode} -sdk iphoneos
+  xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode} 
 
   mkdir -p ${unsign_payload_path}
 
