@@ -37,3 +37,8 @@ getScreenInfo({BuildContext? context}) {
     'devicePixelRatio': window.devicePixelRatio // 设备像素比
   };
 }
+
+// 获取元素尺寸
+getElementSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
