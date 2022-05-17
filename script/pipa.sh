@@ -5,10 +5,15 @@ project_path=$(pwd)
 
 #xCode build 出来的APP文件有所优化，比Flutter build ios 的Runner.app要小
 
-# 目录在 Xcode->Preferences->Locations 自定义的话在上面基础上 选择Custom->Relative to Workspace
-# 可在路径中/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
+
 #------------------必须修改：XCODE工程导出路径----------------#
-Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
+# 目录在 Xcode->Preferences->Locations 自定义的话在上面基础上 选择Custom->Relative to Workspace
+# 可在路径中~/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
+
+# Xcode导出的目录
+# Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
+# 本地项目的Runner.app 
+Xcode_runner_path=${project_path}/build/ios/iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
 # export_plist_path=${project_path}/shell/scriptTest.plist
@@ -103,7 +108,8 @@ mkdir -p ${ipa_path}
 if [ $number == 0 ];then
   #无签名打包 workspace构建工作区
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
-  xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode}
+  # workspace:指定工作空间文件 scheme:是编译任务 configuration:指定编译模式 sdk:指定编译的sdk
+  xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode} -sdk iphoneos
 
   mkdir -p ${unsign_payload_path}
 
