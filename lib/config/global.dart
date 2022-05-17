@@ -9,7 +9,7 @@ import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Global {
-  static void initCommon() {
+  static Future initCommon() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // 当输入和显示频率不同导致的性能下降处理
@@ -27,13 +27,11 @@ class Global {
       barColor('white');
     }
 
-    // 初始化路由
-    Routers.defineRoutes();
-  }
-
-  static void initSp() async {
     // 初始化持久化key,value存储工具
     await SpHelper.init();
+
+    // 初始化路由
+    Routers.defineRoutes();
   }
 
   // 初始化屏幕自适应工具

@@ -3,7 +3,6 @@
 // 与安卓的Scaffold一样 iOS的是CupertinoPageScaffold
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +11,8 @@ import 'config/global.dart';
 import 'provider/version.dart';
 import 'router/routers.dart';
 
-void main() {
+void main() async {
   Global.initCommon();
-
-  // 解决web开发报错问题
-  if (kIsWeb) Global.initSp();
 
   runApp(
     MultiProvider(
@@ -79,7 +75,6 @@ class MyApp extends StatelessWidget {
 
       builder: (context, widget) {
         Global.initScreen(context); // 初始化屏幕自适应工具
-        Global.initSp(); // 安卓开发问题
 
         return MediaQuery(
           // 设置文字大小不随系统设置改变（flutter screen 插件用）
