@@ -4,14 +4,17 @@
 project_path=$(pwd)
 
 #xCode build 出来的APP文件有所优化，比Flutter build ios 的Runner.app要小
+
+# 目录在 Xcode->Preferences->Locations 自定义的话在上面基础上 选择Custom->Relative to Workspace
+# 可在路径中/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
 #------------------必须修改：XCODE工程导出路径----------------#
-runner_path=~/Library/Developer/Xcode/DerivedData/Runner-bsrdqyyshhsictbeoknvquvcxcsm/Build/Products/Release-iphoneos/Runner.app
+runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
 export_plist_path=${project_path}/shell/scriptTest.plist
 
 #-------------------可选：修改为自己的APP名称------------------#
-app_name="flutter 签到"
+app_name="flutter-签到"
 
 #----------------可选：将Runner替换成自己的工程名---------------#
 project_name=Runner
