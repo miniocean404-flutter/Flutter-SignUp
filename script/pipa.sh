@@ -8,7 +8,7 @@ project_path=$(pwd)
 # 目录在 Xcode->Preferences->Locations 自定义的话在上面基础上 选择Custom->Relative to Workspace
 # 可在路径中/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
 #------------------必须修改：XCODE工程导出路径----------------#
-runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
+Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
 export_plist_path=${project_path}/shell/scriptTest.plist
@@ -35,7 +35,7 @@ sign_path=${ipa_path}/sign
 unsign_path=${ipa_path}/unsign
 
 #导出未签名.Payload文件所在路径
-payload_path=${unsign_path}/Payload
+unsign_payload_path=${unsign_path}/Payload
 
 
 # 是否执行 flutter clean
@@ -104,9 +104,9 @@ if [ $number == 0 ];then
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
   xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode}
 
-  mkdir -p ${payload_path}
+  mkdir -p ${unsign_payload_path}
 
-  cp -r ${runner_path} ${payload_path}
+  cp -r ${Xcode_runner_path} ${unsign_payload_path}
 
   cd ${unsign_path}
 
@@ -115,14 +115,14 @@ if [ $number == 0 ];then
   info_plist="Payload/Runner.app/info.plist"
   version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$info_plist")
   build=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$info_plist")
-  time=$(date "+%Y%m%d_%H%M%S")
+  time=$(date "+%Y-%m-%d_%H:%M:%S")
   
   appName="$app_name""_v$version""_b$build""_$time.ipa"
 
   echo "=============== 优化Framework大小(删除bitcode) ==============="
-  xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter -r -o ${payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter
-  xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit -r -o ${payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit
-  xcrun bitcode_strip ${payload_path}/Runner.app/Frameworks/App.framework/App -r -o ${payload_path}/Runner.app/Frameworks/App.framework/App
+  xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter -r -o ${unsign_payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter
+  xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit -r -o ${unsign_payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit
+  xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/App.framework/App -r -o ${unsign_payload_path}/Runner.app/Frameworks/App.framework/App
 
   echo "=============== 生成IPA(压缩Payload文件并修改文件名为IPA) ==============="
   zip -r ${appName} *
