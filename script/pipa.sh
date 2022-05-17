@@ -11,7 +11,8 @@ project_path=$(pwd)
 Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
-export_plist_path=${project_path}/shell/scriptTest.plist
+# export_plist_path=${project_path}/shell/scriptTest.plist
+export_plist_path=${project_path}/ios/Runner/info.plist
 
 #-------------------可选：修改为自己的APP名称------------------#
 app_name="flutter-签到"
