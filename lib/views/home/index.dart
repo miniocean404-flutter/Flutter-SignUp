@@ -90,6 +90,7 @@ class _HomeState extends State<Home> {
         // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
         await _controller.setVolume(0.0);
       }
+      await _controller.setVolume(0.0);
       await _controller.play();
       Wakelock.toggle(enable: true);
 
@@ -142,7 +143,7 @@ class _HomeState extends State<Home> {
     } else if (_clickNum >= 10) {
       _clickNum = 0;
 
-      Routers.navigateTo(context, Routers.settingHome, clearStack: true);
+      Routers.navigateTo(context, Routers.settingHome, clearStack: false);
     }
   }
 

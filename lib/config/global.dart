@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Global {
   static void initCommon() {
@@ -31,9 +31,9 @@ class Global {
     Routers.defineRoutes();
   }
 
-  static void initSp() {
+  static void initSp() async {
     // 初始化持久化key,value存储工具
-    SpHelper.init();
+    await SpHelper.init();
   }
 
   // 初始化屏幕自适应工具
