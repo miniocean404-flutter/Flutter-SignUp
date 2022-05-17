@@ -11,9 +11,8 @@ project_path=$(pwd)
 # 可在路径中~/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
 
 # Xcode导出的目录
-# Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
-# 本地项目的Runner.app 
-Xcode_runner_path=${project_path}/build/ios/iphoneos/Runner.app
+# 可使用命令：xcodebuild -project App/App.xcodeproj -showBuildSettings -destination "generic/platform=iOS" 查看 -json 以json 形式查看
+Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
 # export_plist_path=${project_path}/shell/scriptTest.plist
@@ -106,9 +105,12 @@ mkdir -p ${ipa_path}
 
 
 if [ $number == 0 ];then
-  #无签名打包 workspace构建工作区
   echo "=============== 正在编译XCODE工程:${development_mode} ==============="
-  # workspace:指定工作空间文件 scheme:是编译任务 configuration:指定编译模式 sdk:指定编译的sdk
+  #无签名打包 workspace 构建工作区(.xcworkspace) 
+  #  project构建项目(.xcodeproj文件)
+  # workspace:指定工作空间文件 scheme:是编译任务 
+  # configuration:build setting 的变体,指的是编译设置，默认有两个( release 、debug )
+  # sdk:指定编译的sdk
   xcodebuild build -workspace ios/${project_name}.xcworkspace -scheme ${scheme_name} -configuration ${development_mode} 
 
   mkdir -p ${unsign_payload_path}
