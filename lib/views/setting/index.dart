@@ -45,17 +45,13 @@ class _SettingState extends State<Setting> {
     }
   }
 
-  iosPop() {
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     // 返回键拦截 返回true 代表返回桌面 false代表什么都不做
     return WillPopScope(
       onWillPop: Platform.isIOS
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
-          ? iosPop()
+          ? null
           : () async {
               if (kIsWeb) {
                 Routers.navigateTo(context, Routers.home, clearStack: true);
