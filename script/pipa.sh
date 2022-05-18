@@ -10,7 +10,7 @@ project_path=$(pwd)
 # 目录在 Xcode->Preferences->Locations 自定义的话在上面基础上 选择Custom->Relative to Workspace
 # 可在路径中~/Library/Developer/Xcode/DerivedData/的文件夹里查看对应的 info.plist 文件
 
-# Xcode导出的目录
+# Xcode的缓存目录
 # 可使用命令：xcodebuild -project Runner.xcodeproj -showBuildSettings -destination "generic/platform=iOS" 查看 -json 以json 形式查看
 # 上述命令中的build_dir是打包目录
 Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
@@ -87,9 +87,9 @@ echo "=============== 构建FLUTTER_IOS工程 ==============="
 # --obfuscate 混淆 --split-debug-info 将因混淆生成的 map 符号表缓存到此位置 --no-codesign 没有签名的包
 # flutter build ios --release --no-codesign --obfuscate --split-debug-info=./symbols
 if [ $number == 0 ];then
-  flutter build ios --release --no-codesign
+  flutter build ios --dart-define ENV=dev --release --no-codesign --split-debug-info=./symbols 
 else
-  flutter build ios
+  flutter build ios --dart-define ENV=dev
 fi
 
 
