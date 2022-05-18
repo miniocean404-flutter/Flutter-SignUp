@@ -48,8 +48,8 @@ class _HomeState extends State<Home> {
 
     login();
     initVideo(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-      // 'https://vd2.bdstatic.com/mda-nec58z84qej7rg6z/sc/cae_h264/1652413788970483306/mda-nec58z84qej7rg6z.mp4',
+      // 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4',
     );
   }
 
