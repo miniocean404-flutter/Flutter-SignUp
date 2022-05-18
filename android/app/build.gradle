@@ -68,9 +68,10 @@ android {
                 // 获取版本
                 def versionName = variant.versionName
                 def versionCode = variant.versionCode
+                def applicationId = variant.applicationId
+                println(applicationId)
                 // 设置新名称
-                def newApkName = "App_env_${dartEnvironmentVariables.ENV}_date_${getDateTime()}_name_${defaultConfig.versionName}_v${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.CHANNEL}.apk"
-                println(newApkName)
+                def newApkName = "app_env_${dartEnvironmentVariables.ENV}_date_${getDateTime()}_name_${defaultConfig.versionName}_v${defaultConfig.versionCode}_channel_${dartEnvironmentVariables.CHANNEL}.apk"
                 outputFileName = new File(newApkName)
             }
         }
