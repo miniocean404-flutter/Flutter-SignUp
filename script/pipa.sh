@@ -13,7 +13,8 @@ project_path=$(pwd)
 # Xcode的缓存目录
 # 可使用命令：xcodebuild -project Runner.xcodeproj -showBuildSettings -destination "generic/platform=iOS" 查看 -json 以json 形式查看
 # 上述命令中的build_dir是打包目录
-Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
+# Xcode_runner_path=~/Library/Developer/Xcode/DerivedData/Runner-ecduyvhxvpunmbfrflanxlsnblwf/Build/Products/Release-iphoneos/Runner.app
+Xcode_runner_path=${project_path}/build/ios/iphoneos/Runner.app
 
 #-------------------可选：自己的plist配置路径------------------#
 # export_plist_path=${project_path}/shell/scriptTest.plist
