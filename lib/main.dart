@@ -12,7 +12,7 @@ import 'provider/version.dart';
 import 'router/routers.dart';
 
 void main() async {
-  Global.initCommon();
+  await Global.initCommon();
 
   runApp(
     MultiProvider(
