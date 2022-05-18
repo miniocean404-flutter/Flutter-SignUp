@@ -10,6 +10,33 @@
       "isBackground": true,
       "problemMatcher": []
     },
+    // 打包shell脚本
+    {
+      "label": "打包Android.sh",
+      "type": "shell",
+      "command": "sh",
+      "args": ["./script/papk.sh"],
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "windows": {
+        "command": "D:\\soft-dev\\env\\Git\\bin\\bash.exe"
+      }
+    },
+    {
+      "label": "打包iOS.sh",
+      "type": "shell",
+      "command": "sh",
+      "args": ["./script/papk.sh"],
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "windows": {
+        "command": "D:\\soft-dev\\env\\Git\\bin\\bash.exe"
+      }
+    },
 
     // 多任务命令
     {
@@ -22,10 +49,14 @@
         "git-push-origin"
       ],
       "dependsOrder": "sequence",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "presentation": {
+        // 任务完成时，是否关闭终端
+        "close": true
+      }
     },
 
-    // 单任务命令
+    // Git
     {
       "label": "git-add.",
       "type": "shell",
@@ -38,7 +69,11 @@
       "type": "shell",
       "command": "git",
       "args": ["commit", "-am", "${input:commit-info}"],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "presentation": {
+        // 是否输出前 清除屏幕信息
+        "clear": true
+      }
     },
     {
       "label": "git-push-github",
@@ -52,13 +87,6 @@
       "type": "shell",
       "command": "git",
       "args": ["push", "origin"],
-      "problemMatcher": []
-    },
-    {
-      "label": "git-push",
-      "type": "shell",
-      "command": "git",
-      "args": ["push", "origin", "${input:branchName}"],
       "problemMatcher": []
     }
   ],

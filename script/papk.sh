@@ -27,7 +27,7 @@ echo $env_tip
 # -t 5 等待5秒 read 获取命令行输入, -n 字符串大于0为true
 read -t 5 is_env
 if [ ! -n "${is_env}" ];then
-is_env = 'dev'
+ is_env='dev'
 fi
 
 while([[ $is_env != "dev" ]] && [[ $is_env != "prod" ]])
@@ -45,7 +45,6 @@ echo $clean_tips
 read  -t 5 is_clean
 if [  ! -n "${is_clean}" ];then
 	is_clean="n"
-elif echo ''
 fi
 
 while([[ $is_clean != "y" ]] && [[ $is_clean != "n" ]])
@@ -89,6 +88,7 @@ done
 #如果有product/apk文件夹则删除，然后再创建一个空文件夹
 if [ -d ${prod_path} ]; then
   rm -rf ${prod_path}
+  rm -rf ${release_path}
 fi
 
 #创建目录
@@ -105,12 +105,12 @@ if (($number == 0 )); then
   echo "=============== 开始构建：全部渠道包 ==============="
   for(( i=0;i<${c_length};i++)) do
     echo "正在构建：${channels[$i]} 渠道包"
-    flutter build apk --obfuscate --split-debug-info=debug_info --no-shrink --dart-define=${is_env} --dart-define=CHANNEL=${channels[$i]}
+    flutter build apk --obfuscate --split-debug-info=debug_info --no-shrink --dart-define ENV=${is_env} --dart-define CHANNEL=${channels[$i]}
     cp -R ${release_path}*.apk ${prod_path}
   done;
 else
   echo "=============== 正在构建：${channels[$((number-1))]} 渠道包 ==============="
-  flutter build apk --obfuscate --split-debug-info=debug_info --no-shrink --dart-define=${is_env} --dart-define=CHANNEL=${channels[$((number-1))]}
+  flutter build apk --obfuscate --split-debug-info=debug_info --no-shrink --dart-define ENV=${is_env} --dart-define CHANNEL=${channels[$((number-1))]}
   cp -R ${release_path}*.apk ${prod_path}
 fi
 
@@ -124,7 +124,5 @@ else
   echo '=============== APK包导出失败 ==============='
   exit 1
 fi
-
-
 
 exit 0
