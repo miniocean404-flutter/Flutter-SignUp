@@ -49,27 +49,25 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     // 返回键拦截 返回true 代表返回桌面 false代表什么都不做
     return WillPopScope(
-      onWillPop: !kIsWeb && Platform.isIOS
+      onWillPop:
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
-          ? null
-          : () async {
-              if (kIsWeb) {
-                return true;
-              }
+          !kIsWeb && Platform.isIOS
+              ? null
+              : () async {
+                  if (kIsWeb) return true;
 
-              DateTime now = DateTime.now();
+                  DateTime now = DateTime.now();
 
-              // 对比两个时间是否相差1秒
-              if (_lastTime == null ||
-                  now.difference(_lastTime!).inSeconds > 1) {
-                _lastTime = DateTime.now();
-                toast('再点击一次回到扫码界面');
-                return false;
-              } else {
-                Navigator.pop(context);
-                return true;
-              }
-            },
+                  // 对比两个时间是否相差1秒
+                  if (_lastTime == null || now.difference(_lastTime!).inSeconds > 1) {
+                    _lastTime = DateTime.now();
+                    toast('再点击一次回到扫码界面');
+                    return false;
+                  } else {
+                    Navigator.pop(context);
+                    return true;
+                  }
+                },
       child: CupertinoPageScaffold(
         child: Container(
           width: double.infinity,

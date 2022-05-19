@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sign_in/router/router_observer.dart';
 import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 // 函数导入
@@ -9,6 +10,8 @@ import 'setting_handler.dart';
 //省略 import
 class Routers {
   static final FluroRouter router = FluroRouter();
+  static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>(); // 页面级路由监听
+  static final RouteObserver<PageRoute> allRouteObserver = myRouteObserver; // 整个应用的路由监听
 
   static const String splash = "/";
   static const String home = "/home";

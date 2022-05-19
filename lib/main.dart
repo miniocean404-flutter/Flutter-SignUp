@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
       // 路由
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
+      navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
 
       builder: (context, widget) {
         Global.initScreen(context); // 初始化屏幕自适应工具

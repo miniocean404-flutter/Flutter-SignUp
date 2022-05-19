@@ -13,8 +13,7 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash>
-    with TickerProviderStateMixin, WidgetsBindingObserver {
+class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _controller;
   late Timer _timer;
   int step = 3;
@@ -23,7 +22,7 @@ class _SplashState extends State<Splash>
   void initState() {
     super.initState();
 
-    // SystemChrome.setEnabledSystemUIMode();
+    WidgetsBinding.instance.addObserver(this);
     animationExec();
   }
 
@@ -31,6 +30,7 @@ class _SplashState extends State<Splash>
   void dispose() {
     _controller.dispose(); // 销毁动画
     _timer.cancel();
+    WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
   }
@@ -44,7 +44,7 @@ class _SplashState extends State<Splash>
       duration: Duration(milliseconds: step * 1000),
     );
 
-    final animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
+    final animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     animation.addStatusListener((status) {
       if (status == AnimationStatus.forward) startTiming();
@@ -68,7 +68,7 @@ class _SplashState extends State<Splash>
   }
 
   ///  生命周期变化时回调
-  ///  类需要携带：with WidgetsBindingObserver
+  ///  类需要携带：with WidgetsBindingObserver 及 WidgetsBinding.instance.addObserver(this) 及 WidgetsBinding.instance.removeObserver(this);
   ///  resumed:应用可见并可响应用户操作
   ///  inactive:用户可见，但不可响应用户操作
   ///  paused:已经暂停了，用户不可见、不可操作
@@ -77,12 +77,23 @@ class _SplashState extends State<Splash>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
-    if (state == AppLifecycleState.resumed) {
-      startTiming();
-    } else if (state == AppLifecycleState.inactive) {
-    } else if (state == AppLifecycleState.paused) {
-      _timer.cancel();
-    } else if (state == AppLifecycleState.detached) {}
+    switch (state) {
+      // 应用可见并可响应用户操作
+      case AppLifecycleState.resumed:
+        startTiming();
+        _controller.forward();
+        break;
+      // 用户可见，但不可响应用户操作
+      case AppLifecycleState.inactive:
+        break;
+      // 已经暂停了，用户不可见、不可操作
+      case AppLifecycleState.paused:
+        _timer.cancel();
+        _controller.stop();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   @override

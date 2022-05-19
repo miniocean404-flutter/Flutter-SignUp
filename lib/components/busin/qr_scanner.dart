@@ -9,7 +9,9 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QRScanner extends StatefulWidget {
   final Function(Barcode barcode, MobileScannerArguments? args) onDetect;
-  const QRScanner({Key? key, required this.onDetect}) : super(key: key);
+  final MobileScannerController controller;
+
+  const QRScanner({Key? key, required this.onDetect, required this.controller}) : super(key: key);
 
   @override
   State<QRScanner> createState() => _QRScannerState();
@@ -17,11 +19,6 @@ class QRScanner extends StatefulWidget {
 
 class _QRScannerState extends State<QRScanner> {
   bool? _isOpen = true;
-  MobileScannerController controller = MobileScannerController(
-    // 相机朝向
-    facing: CameraFacing.front,
-    torchEnabled: false,
-  );
 
   @override
   void initState() {
@@ -31,8 +28,6 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   void dispose() {
-    controller.dispose();
-
     super.dispose();
   }
 
@@ -65,7 +60,7 @@ class _QRScannerState extends State<QRScanner> {
         ? MobileScanner(
             allowDuplicates: true, // 扫描一次还是(true)多次
             fit: BoxFit.cover,
-            controller: controller,
+            controller: widget.controller,
             // 发现二维码事件
             onDetect: widget.onDetect,
           )
