@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -40,6 +41,7 @@ class _HomeState extends State<Home> {
   bool isHavaVideoLink = true; // 是否有视频链接
 
   DateTime? lastTime;
+  DateTime? _backLastTime; // 安卓返回桌面的时间间隔
 
   // 初始化声明周期
   @override
@@ -157,112 +159,130 @@ class _HomeState extends State<Home> {
     bool isShowVideo =
         _businState == BusinState.sign && _controller.value.isInitialized;
 
-    return SafeArea(
-      child: CupertinoPageScaffold(
-        child: Center(
-          child: StateModal(
-            state: _modalState,
-            onClose: closeModal,
-            bgChild: Stack(
-              alignment: Alignment.center,
-              children: [
-                // 背景视屏
-                isShowVideo
-                    ? Transform.scale(
-                        scale: scale,
-                        child: VideoPlayer(_controller),
-                      )
-                    : Container(),
+    return WillPopScope(
+      onWillPop: Platform.isIOS
+          // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
+          ? null
+          : () async {
+              DateTime now = DateTime.now();
 
-                Column(
-                  children: [
-                    SizedBox(height: 159.h),
+              // 对比两个时间是否相差1秒
+              if (_backLastTime == null ||
+                  now.difference(_backLastTime!).inSeconds > 1) {
+                _backLastTime = DateTime.now();
+                toast('再点击一次回到扫码界面');
+                return false;
+              } else {
+                return true;
+              }
+            },
+      child: SafeArea(
+        child: CupertinoPageScaffold(
+          child: Center(
+            child: StateModal(
+              state: _modalState,
+              onClose: closeModal,
+              bgChild: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 背景视屏
+                  isShowVideo
+                      ? Transform.scale(
+                          scale: scale,
+                          child: VideoPlayer(_controller),
+                        )
+                      : Container(),
 
-                    // 签到标题
-                    GestureDetector(
-                      onTap: goSetting,
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 29.sp,
-                          fontWeight: FontWeight.w600,
-                          color: isHavaVideoLink
-                              ? const Color(0xffFFFFFF)
-                              : const Color(0xff000000),
+                  Column(
+                    children: [
+                      SizedBox(height: 159.h),
+
+                      // 签到标题
+                      GestureDetector(
+                        onTap: goSetting,
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 29.sp,
+                            fontWeight: FontWeight.w600,
+                            color: isHavaVideoLink
+                                ? const Color(0xffFFFFFF)
+                                : const Color(0xff000000),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 102.h),
+                      SizedBox(height: 102.h),
 
-                    // 扫码
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: SizedBox(
-                        width: 160.r,
-                        height: 160.r,
-                        child: QRScanner(
-                          onDetect: scanQRcode,
+                      // 扫码
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: SizedBox(
+                          width: 160.r,
+                          height: 160.r,
+                          child: QRScanner(
+                            onDetect: scanQRcode,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 158.h),
+                      SizedBox(height: 158.h),
 
-                    // 老师或者学生签到后不显示
-                    teachIsSign || childrenIsSign
-                        ? Container()
-                        : Column(
-                            children: [
-                              Text(
-                                '请向屏幕展示二维码',
-                                style: TextStyle(
-                                  color: isHavaVideoLink
-                                      ? const Color(0xffFFFFFF)
-                                      : const Color(0xff999999),
-                                  fontSize: 14.5.sp,
+                      // 老师或者学生签到后不显示
+                      teachIsSign || childrenIsSign
+                          ? Container()
+                          : Column(
+                              children: [
+                                Text(
+                                  '请向屏幕展示二维码',
+                                  style: TextStyle(
+                                    color: isHavaVideoLink
+                                        ? const Color(0xffFFFFFF)
+                                        : const Color(0xff999999),
+                                    fontSize: 14.5.sp,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '识别后会自动签到',
-                                style: TextStyle(
-                                  color: isHavaVideoLink
-                                      ? const Color(0xffFFFFFF)
-                                      : const Color(0xff999999),
+                                Text(
+                                  '识别后会自动签到',
+                                  style: TextStyle(
+                                    color: isHavaVideoLink
+                                        ? const Color(0xffFFFFFF)
+                                        : const Color(0xff999999),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 292.h),
-                              Text(
-                                'Serendipity Envoy',
-                                style: TextStyle(
-                                  color: isHavaVideoLink
-                                      ? const Color(0xffFFFFFF)
-                                      : const Color(0xffCECECE),
-                                  fontWeight: FontWeight.w400,
+                                SizedBox(height: 292.h),
+                                Text(
+                                  'Serendipity Envoy',
+                                  style: TextStyle(
+                                    color: isHavaVideoLink
+                                        ? const Color(0xffFFFFFF)
+                                        : const Color(0xffCECECE),
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                  ],
-                ),
+                              ],
+                            )
+                    ],
+                  ),
 
-                //  学生上课下课card
-                teachIsSign
-                    ? UpDownClassCard(
-                        name: '张三',
-                        role: '游泳教练',
-                        left: 22.w,
-                        bottom: 22.h,
-                      )
-                    : Container(),
-                childrenIsSign
-                    ? UpDownClassCard(
-                        name: '李四',
-                        role: '学生',
-                        right: 22.w,
-                        bottom: 22.h,
-                      )
-                    : Container()
-                // _businState == BusinState.upDownClass
-              ],
+                  //  学生上课下课card
+                  teachIsSign
+                      ? UpDownClassCard(
+                          name: '张三',
+                          role: '游泳教练',
+                          left: 22.w,
+                          bottom: 22.h,
+                        )
+                      : Container(),
+                  childrenIsSign
+                      ? UpDownClassCard(
+                          name: '李四',
+                          role: '学生',
+                          right: 22.w,
+                          bottom: 22.h,
+                        )
+                      : Container()
+                  // _businState == BusinState.upDownClass
+                ],
+              ),
             ),
           ),
         ),

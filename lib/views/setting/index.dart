@@ -66,7 +66,7 @@ class _SettingState extends State<Setting> {
                 toast('再点击一次回到扫码界面');
                 return false;
               } else {
-                Routers.navigateTo(context, Routers.home, clearStack: true);
+                Routers.navigateTo(context, Routers.home, replace: true);
                 return false;
               }
             },
