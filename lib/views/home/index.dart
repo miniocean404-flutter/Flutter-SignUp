@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
 import 'package:flutter_sign_in/http/login.dart';
@@ -47,7 +46,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
     login();
     initVideo(
       // 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
@@ -76,7 +74,7 @@ class _HomeState extends State<Home> {
   }
 
   // 初始化视频
-  initVideo(url) {
+  initVideo(url) async {
     _controller = VideoPlayerController.network(url);
 
     _controller.addListener(() {
@@ -84,21 +82,21 @@ class _HomeState extends State<Home> {
       if (message != null) logger.e(message);
     });
 
-    _controller.initialize().then((value) async {
-      await _controller.setLooping(true);
-      if (kIsWeb) {
-        // play() failed because the user didn't interact with the document
-        // chrome文档 https://developer.chrome.com/blog/autoplay/
-        // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
-        await _controller.setVolume(0.0);
-      }
+    await _controller.setLooping(true);
+    if (kIsWeb) {
+      // play() failed because the user didn't interact with the document
+      // chrome文档 https://developer.chrome.com/blog/autoplay/
+      // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
       await _controller.setVolume(0.0);
-      await _controller.play();
-      Wakelock.toggle(enable: true);
+    }
 
-      // 设置属性后初始化
-      setState(() {});
-    });
+    await _controller.setVolume(0.0);
+    await _controller.play();
+    await _controller.initialize();
+
+    Wakelock.toggle(enable: true);
+    setState(() {});
+    // 设置属性后初始化
   }
 
   // 扫码结果
@@ -113,9 +111,7 @@ class _HomeState extends State<Home> {
     if (gap && code != null) {
       lastTime = DateTime.now();
 
-      _businState == BusinState.sign
-          ? mode = 'admittance'
-          : mode = 'serviceSigning';
+      _businState == BusinState.sign ? mode = 'admittance' : mode = 'serviceSigning';
 
       dynamic res = await scanQRCodeApi(token, code, mode);
       bool isSuccess = res['isSuccess'];
@@ -140,12 +136,15 @@ class _HomeState extends State<Home> {
   // 进入设置界面
   goSetting() {
     _clickNum++;
+
     if (_clickNum > 5 && _clickNum < 10) {
       toast('再点击5次进入设置界面');
-    } else if (_clickNum >= 10) {
+    }
+
+    if (_clickNum >= 10) {
       _clickNum = 0;
 
-      Routers.navigateTo(context, Routers.settingHome, clearStack: false);
+      Routers.navigateTo(context, Routers.settingHome);
     }
   }
 
@@ -153,136 +152,129 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
 
-    // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
-    double scale =
-        _controller.value.aspectRatio / window.physicalSize.aspectRatio;
-    bool isShowVideo =
-        _businState == BusinState.sign && _controller.value.isInitialized;
+    bool isShowVideo = _businState == BusinState.sign && _controller.value.isInitialized;
+    logger.i(_controller.value.aspectRatio / window.physicalSize.aspectRatio);
 
     return WillPopScope(
-      onWillPop: Platform.isIOS
+      onWillPop: !kIsWeb && Platform.isIOS
+          //
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
           ? null
           : () async {
               DateTime now = DateTime.now();
 
               // 对比两个时间是否相差1秒
-              if (_backLastTime == null ||
-                  now.difference(_backLastTime!).inSeconds > 1) {
+              if (_backLastTime == null || now.difference(_backLastTime!).inSeconds > 1) {
                 _backLastTime = DateTime.now();
-                toast('再点击一次回到扫码界面');
+                toast('再点击一次回桌面');
                 return false;
               } else {
                 return true;
               }
             },
-      child: SafeArea(
-        child: CupertinoPageScaffold(
-          child: Center(
-            child: StateModal(
-              state: _modalState,
-              onClose: closeModal,
-              bgChild: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // 背景视屏
-                  isShowVideo
-                      ? Transform.scale(
-                          scale: scale,
-                          child: VideoPlayer(_controller),
-                        )
-                      : Container(),
-
-                  Column(
-                    children: [
-                      SizedBox(height: 159.h),
-
-                      // 签到标题
-                      GestureDetector(
-                        onTap: goSetting,
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 29.sp,
-                            fontWeight: FontWeight.w600,
-                            color: isHavaVideoLink
-                                ? const Color(0xffFFFFFF)
-                                : const Color(0xff000000),
+      child: CupertinoPageScaffold(
+        child: Center(
+          child: StateModal(
+            state: _modalState,
+            onClose: closeModal,
+            bgChild: Stack(
+              alignment: Alignment.center,
+              children: [
+                // 背景视屏
+                isShowVideo
+                    ? Transform.scale(
+                        // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
+                        scale: _controller.value.aspectRatio / window.physicalSize.aspectRatio,
+                        child: Center(
+                          child: AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 102.h),
+                      )
+                    : Container(),
 
-                      // 扫码
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: SizedBox(
-                          width: 160.r,
-                          height: 160.r,
-                          child: QRScanner(
-                            onDetect: scanQRcode,
-                          ),
+                Column(
+                  children: [
+                    SizedBox(height: 159.h),
+
+                    // 签到标题
+                    GestureDetector(
+                      onTap: goSetting,
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 29.sp,
+                          fontWeight: FontWeight.w600,
+                          color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff000000),
                         ),
                       ),
-                      SizedBox(height: 158.h),
+                    ),
+                    SizedBox(height: 102.h),
 
-                      // 老师或者学生签到后不显示
-                      teachIsSign || childrenIsSign
-                          ? Container()
-                          : Column(
-                              children: [
-                                Text(
-                                  '请向屏幕展示二维码',
-                                  style: TextStyle(
-                                    color: isHavaVideoLink
-                                        ? const Color(0xffFFFFFF)
-                                        : const Color(0xff999999),
-                                    fontSize: 14.5.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '识别后会自动签到',
-                                  style: TextStyle(
-                                    color: isHavaVideoLink
-                                        ? const Color(0xffFFFFFF)
-                                        : const Color(0xff999999),
-                                  ),
-                                ),
-                                SizedBox(height: 292.h),
-                                Text(
-                                  'Serendipity Envoy',
-                                  style: TextStyle(
-                                    color: isHavaVideoLink
-                                        ? const Color(0xffFFFFFF)
-                                        : const Color(0xffCECECE),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            )
-                    ],
-                  ),
+                    // 扫码
+                    // ClipRRect(
+                    //   borderRadius: BorderRadius.circular(20),
+                    //   child: SizedBox(
+                    //     width: 160.r,
+                    //     height: 160.r,
+                    //     child: QRScanner(
+                    //       onDetect: scanQRcode,
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(height: 158.h),
 
-                  //  学生上课下课card
-                  teachIsSign
-                      ? UpDownClassCard(
-                          name: '张三',
-                          role: '游泳教练',
-                          left: 22.w,
-                          bottom: 22.h,
-                        )
-                      : Container(),
-                  childrenIsSign
-                      ? UpDownClassCard(
-                          name: '李四',
-                          role: '学生',
-                          right: 22.w,
-                          bottom: 22.h,
-                        )
-                      : Container()
-                  // _businState == BusinState.upDownClass
-                ],
-              ),
+                    // 老师或者学生签到后不显示
+                    teachIsSign || childrenIsSign
+                        ? Container()
+                        : Column(
+                            children: [
+                              Text(
+                                '请向屏幕展示二维码',
+                                style: TextStyle(
+                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                  fontSize: 14.5.sp,
+                                ),
+                              ),
+                              Text(
+                                '识别后会自动签到',
+                                style: TextStyle(
+                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                ),
+                              ),
+                              SizedBox(height: 292.h),
+                              Text(
+                                'Serendipity Envoy',
+                                style: TextStyle(
+                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          )
+                  ],
+                ),
+
+                //  学生上课下课card
+                teachIsSign
+                    ? UpDownClassCard(
+                        name: '张三',
+                        role: '游泳教练',
+                        left: 22.w,
+                        bottom: 22.h,
+                      )
+                    : Container(),
+                childrenIsSign
+                    ? UpDownClassCard(
+                        name: '李四',
+                        role: '学生',
+                        right: 22.w,
+                        bottom: 22.h,
+                      )
+                    : Container()
+                // _businState == BusinState.upDownClass
+              ],
             ),
           ),
         ),

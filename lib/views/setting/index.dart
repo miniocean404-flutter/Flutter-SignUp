@@ -49,12 +49,12 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     // 返回键拦截 返回true 代表返回桌面 false代表什么都不做
     return WillPopScope(
-      onWillPop: Platform.isIOS
+      onWillPop: !kIsWeb && Platform.isIOS
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
           ? null
           : () async {
               if (kIsWeb) {
-                Routers.navigateTo(context, Routers.home, clearStack: true);
+                return true;
               }
 
               DateTime now = DateTime.now();
@@ -66,8 +66,8 @@ class _SettingState extends State<Setting> {
                 toast('再点击一次回到扫码界面');
                 return false;
               } else {
-                Routers.navigateTo(context, Routers.home, replace: true);
-                return false;
+                Navigator.pop(context);
+                return true;
               }
             },
       child: CupertinoPageScaffold(
