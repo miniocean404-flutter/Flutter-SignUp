@@ -102,6 +102,7 @@ class _HomeState extends State<Home> with RouteAware {
   @override
   // 别的页面进来的时候调用
   void didPush() {
+    // 获取当前页面的名字
     // ignore: unused_local_variable
     final route = ModalRoute.of(context)?.settings.name;
   }
@@ -114,12 +115,16 @@ class _HomeState extends State<Home> with RouteAware {
       facing: CameraFacing.front,
       torchEnabled: false,
     );
+
+    setState(() {});
   }
 
   @override
   // 当前页面去别的页面时候调用
   void didPushNext() {
     _scanController.dispose();
+
+    logger.i(_scanController);
   }
 
   @override

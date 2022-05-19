@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
     // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: step * 1000),
+      duration: Duration(milliseconds: step + 1 * 1000),
     );
 
     final animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
