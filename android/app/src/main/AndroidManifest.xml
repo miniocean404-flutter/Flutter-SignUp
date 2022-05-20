@@ -5,7 +5,7 @@
     <!-- usesCleartextTraffic、networkSecurityConfig 解决不能直接访问http协议 -->
     <!-- @xml是当前res目录下的xml文件夹 -->
    <application
-        android:label="flutter_sign_in"
+        android:label="游泳课签到"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         
