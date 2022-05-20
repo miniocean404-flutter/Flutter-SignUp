@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -40,17 +39,14 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
     //创建动画控制器
     // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
     // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
-
-    final int countdown = int.parse(step.toString());
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: countdown * 1000),
+      duration: Duration(milliseconds: step * 1000),
     );
 
-    final animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+    final Animation<double> animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     animation.addStatusListener((status) {
-      logger.i(status);
       if (status == AnimationStatus.forward) startTiming();
 
       // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页
@@ -64,9 +60,11 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   void startTiming() {
     _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       setState(() => step--);
+      if (step == 0) timer.cancel();
     });
   }
 
+  // ! 如果产生按钮自己被点击,查看是不是开启了 自动跳过 的软件
   void startJump() {
     Routers.navigateTo(context, Routers.home, clearStack: true);
   }
@@ -125,7 +123,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
                   ),
                 ),
               ),
-              onPressed: () => {startJump()},
+              onPressed: startJump,
               child: Text('${step}s跳过'),
             ),
           )
