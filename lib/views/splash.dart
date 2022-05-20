@@ -47,7 +47,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
       duration: Duration(milliseconds: countdown * 1000),
     );
 
-    final animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
+    final animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     animation.addStatusListener((status) {
       logger.i(status);
