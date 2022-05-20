@@ -213,8 +213,8 @@ class _HomeState extends State<Home> with RouteAware {
   @override
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
-
     bool isShowVideo = _businState == BusinState.sign && _videoController.value.isInitialized;
+    dynamic isBack = ModalRoute.of(context)?.isCurrent;
 
     return WillPopScope(
       onWillPop: !kIsWeb && Platform.isIOS
@@ -273,17 +273,19 @@ class _HomeState extends State<Home> with RouteAware {
                     SizedBox(height: 102.h),
 
                     // 扫码
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: SizedBox(
-                        width: 160.r,
-                        height: 160.r,
-                        child: QRScanner(
-                          controller: _scanController,
-                          onDetect: scanQRcode,
-                        ),
-                      ),
-                    ),
+                    isBack == true
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: SizedBox(
+                              width: 160.r,
+                              height: 160.r,
+                              child: QRScanner(
+                                controller: _scanController,
+                                onDetect: scanQRcode,
+                              ),
+                            ),
+                          )
+                        : Container(),
                     SizedBox(height: 158.h),
 
                     // 老师或者学生签到后不显示
