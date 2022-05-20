@@ -39,12 +39,14 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
     //创建动画控制器
     // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
     // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
+
+    final int countdown = int.parse(step.toString());
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: step + 1 * 1000),
+      duration: Duration(milliseconds: countdown * 1000),
     );
 
-    final animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+    final animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
 
     animation.addStatusListener((status) {
       if (status == AnimationStatus.forward) startTiming();
