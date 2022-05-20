@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 
 import 'env.dev.dart';
@@ -39,4 +40,24 @@ String getCompileMode() {
   } else {
     return "unknown mode";
   }
+}
+
+/// 判断编译模式2
+String getCompileMode2() {
+  String url = '';
+
+  if (foundation.kReleaseMode) {
+    url = '发布版本';
+    return url;
+  }
+  if (foundation.kDebugMode) {
+    url = 'debug版本';
+    return url;
+  }
+  if (foundation.kProfileMode) {
+    url = 'Profile版本';
+    return url;
+  }
+
+  return url;
 }
