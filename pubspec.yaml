@@ -65,6 +65,8 @@ dependencies:
   fluttertoast: ^8.0.9
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.0.20
+  # URL Scheme 跳转app
+  uni_links: ^0.5.1
   # 指纹或面部识别 (官方)
   local_auth: ^2.0.1
   # 视频播放 (官方)
