@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
     final animation = Tween(begin: 1.0, end: 1.0).animate(_controller);
 
     animation.addStatusListener((status) {
+      logger.i(status);
       if (status == AnimationStatus.forward) startTiming();
 
       // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页

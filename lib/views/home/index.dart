@@ -29,15 +29,12 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with RouteAware {
+class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   late VideoPlayerController _videoController; // 播放控制器
   String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
 
-  MobileScannerController _scanController = MobileScannerController(
-    // 相机朝向
-    facing: CameraFacing.front,
-    torchEnabled: false,
-  );
+  late MobileScannerController _scanController;
+  bool isShowScan = false;
 
   int _clickNum = 0; // 点击跳转次数
 
@@ -55,8 +52,24 @@ class _HomeState extends State<Home> with RouteAware {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
     login();
+    createOrDisposeScanQR(true);
     initVideo(videoLink);
+  }
+
+  // 页面彻底销毁声明周期
+  @override
+  void dispose() {
+    _videoController.dispose();
+
+    WidgetsBinding.instance.removeObserver(this);
+    Routers.routeObserver.unsubscribe(this);
+
+    Wakelock.toggle(enable: false);
+
+    super.dispose();
   }
 
   @override
@@ -87,18 +100,6 @@ class _HomeState extends State<Home> with RouteAware {
     super.deactivate();
   }
 
-  // 页面彻底销毁声明周期
-  @override
-  void dispose() {
-    _videoController.dispose();
-
-    Routers.routeObserver.unsubscribe(this);
-
-    Wakelock.toggle(enable: false);
-
-    super.dispose();
-  }
-
   @override
   // 别的页面进来的时候调用
   void didPush() {
@@ -110,26 +111,43 @@ class _HomeState extends State<Home> with RouteAware {
   @override
   // 别的页面退出到当前页面的时候调用
   void didPopNext() {
-    _scanController = MobileScannerController(
-      // 相机朝向
-      facing: CameraFacing.front,
-      torchEnabled: false,
-    );
-
-    setState(() {});
+    createOrDisposeScanQR(true);
   }
 
   @override
   // 当前页面去别的页面时候调用
   void didPushNext() {
-    _scanController.dispose();
-
-    logger.i(_scanController);
+    createOrDisposeScanQR(false);
   }
 
   @override
   // 当前页面pop的时候嗲用
   void didPop() {}
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      // 应用可见并可响应用户操作
+      case AppLifecycleState.resumed:
+        // isCurrent:这条路线是否是导航器上最顶层的路线
+        dynamic isBack = ModalRoute.of(context)?.isCurrent;
+
+        if (isBack) createOrDisposeScanQR(true);
+
+        break;
+      // 用户可见，但不可响应用户操作
+      case AppLifecycleState.inactive:
+        break;
+      // 已经暂停了，用户不可见、不可操作
+      case AppLifecycleState.paused:
+        createOrDisposeScanQR(false);
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
 
   void login() async {
     final res = await deviceLogin(187237, 'f1c8ec723723');
@@ -160,6 +178,23 @@ class _HomeState extends State<Home> with RouteAware {
     Wakelock.toggle(enable: true);
     setState(() {});
     // 设置属性后初始化
+  }
+
+  // 创建销毁扫码控制器
+  void createOrDisposeScanQR(bool state) {
+    if (state) {
+      _scanController = MobileScannerController(
+        // 相机朝上 front
+        facing: CameraFacing.front,
+        torchEnabled: false,
+      );
+    } else {
+      _scanController.dispose();
+    }
+
+    setState(() {
+      isShowScan = state;
+    });
   }
 
   // 扫码结果
@@ -198,14 +233,13 @@ class _HomeState extends State<Home> with RouteAware {
   goSetting() {
     _clickNum++;
 
-    if (_clickNum > 5 && _clickNum < 10) {
-      toast('再点击5次进入设置界面');
+    if (_clickNum < 5) {
+      toast('点击5次进入设置界面');
     }
 
-    if (_clickNum >= 10) {
+    if (_clickNum >= 5) {
       _clickNum = 0;
 
-      _scanController.dispose();
       Routers.navigateTo(context, Routers.settingHome);
     }
   }
@@ -214,7 +248,6 @@ class _HomeState extends State<Home> with RouteAware {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
     bool isShowVideo = _businState == BusinState.sign && _videoController.value.isInitialized;
-    dynamic isBack = ModalRoute.of(context)?.isCurrent;
 
     return WillPopScope(
       onWillPop: !kIsWeb && Platform.isIOS
@@ -273,7 +306,7 @@ class _HomeState extends State<Home> with RouteAware {
                     SizedBox(height: 102.h),
 
                     // 扫码
-                    isBack == true
+                    isShowScan == true
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: SizedBox(
@@ -286,6 +319,7 @@ class _HomeState extends State<Home> with RouteAware {
                             ),
                           )
                         : Container(),
+
                     SizedBox(height: 158.h),
 
                     // 老师或者学生签到后不显示
