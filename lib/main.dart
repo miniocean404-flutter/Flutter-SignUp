@@ -69,11 +69,13 @@ class MyApp extends StatelessWidget {
       // 主题
       theme: cupertinoThemeColor(),
       // darkTheme: materialDarkTheme(),
+
       // 路由
       initialRoute: Routers.splash,
       onGenerateRoute: Routers.router.generator,
       navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
 
+      // 自适应
       builder: (context, widget) {
         Global.initScreen(context); // 初始化屏幕自适应工具
 
