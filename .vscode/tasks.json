@@ -32,6 +32,17 @@
         "cwd": "${workspaceFolder}"
       }
     },
+    {
+      "label": "icons_launcher 生成新的图标",
+      "type": "shell",
+      // flutter_launcher_icons 命令 flutter pub run flutter_launcher_icons:main
+      "command": "flutter pub run icons_launcher:create",
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
     // 打包shell脚本
     {
       "label": "打包Android.sh",

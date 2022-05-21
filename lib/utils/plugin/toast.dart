@@ -13,8 +13,8 @@ void toast(String msg) async {
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 1,
-    backgroundColor: Colors.black,
-    textColor: Colors.white,
+    backgroundColor: Colors.white,
+    textColor: Colors.black,
     fontSize: 16.0,
   );
 }
