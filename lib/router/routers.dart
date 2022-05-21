@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/router/router_observer.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
 
 // 函数导入
 import 'route_handler.dart';
@@ -25,12 +25,7 @@ class Routers {
 
   static void defineRoutes() {
     // 处理找不到页面情况
-    router.notFoundHandler = Handler(
-      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-        logger.w('没有匹配的路由!');
-        return null;
-      },
-    );
+    router.notFoundHandler = page404Handler;
 
     router.define(splash, handler: splashHandler);
     router.define(home, handler: homeHandler);

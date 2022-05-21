@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/config/system/immerse.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Global {
   static Future initCommon() async {

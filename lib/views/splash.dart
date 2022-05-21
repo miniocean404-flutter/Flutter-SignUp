@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
+import 'package:flutter_sign_in/config/system/immerse.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

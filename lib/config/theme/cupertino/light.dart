@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sign_in/config/theme/color.dart';
 
-import 'color.dart';
+CupertinoThemeData cupertinoThemeColor = _cupertinoThemeColor();
 
-CupertinoThemeData cupertinoThemeColor() {
+CupertinoThemeData _cupertinoThemeColor() {
   return CupertinoThemeData(
     brightness: Brightness.light,
 
@@ -21,7 +22,7 @@ CupertinoThemeData cupertinoThemeColor() {
      *  用于主题的交互元素的颜色。
      *  Icon
      */
-    primaryColor: AppColor.info,
+    primaryColor: AppColor.secondary,
 
     /**
      * 在primaryColor背景上渲染时必须易于看到的颜色。

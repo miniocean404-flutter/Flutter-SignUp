@@ -1,67 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/utils/system/water_ripple.dart';
+import 'package:flutter_sign_in/config/system/water_ripple.dart';
+import 'package:flutter_sign_in/config/theme/color.dart';
+import 'package:flutter_sign_in/config/theme/font.dart';
 
-import 'color.dart';
+final ThemeData materialDarkTheme = _materialDarkColor();
 
-// 全局主题配置
-class ColorSchemeConfig {
-  static ColorScheme colorScheme({mode = Brightness.light}) {
-    return ColorScheme(
-      brightness: mode,
-      // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
-      primary: AppColor.primary,
-      // 黑暗主题的主色调
-      primaryContainer: AppColor.dark,
-
-      // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
-      secondary: AppColor.info,
-      secondaryContainer: AppColor.info,
-
-      // 小部件的背景色 如:card appbar
-      surface: AppColor.info,
-      //可滚动内容后面的颜色
-      background: Colors.green,
-      //用于输入验证错误的颜色，例如:InputDecoration.errorText
-      error: AppColor.danger,
-
-      //(按钮、AppBar) 在主色调上绘制清晰易读的字体颜色
-      onPrimary: AppColor.dark,
-      //在secondary上绘制清晰易读的颜色
-      onSecondary: AppColor.primary,
-      onSurface: AppColor.primary,
-      onBackground: AppColor.info,
-      onError: AppColor.danger,
+TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
+      bodyText1: base.bodyText1!.copyWith(
+        fontFamily: 'GoogleSans',
+      ),
     );
-  }
-}
 
-ThemeData materialThemeColor() {
-  return ThemeData(
+ThemeData _materialDarkColor() {
+  // 创建此配色方案的副本，并将给定字段替换为非空参数值
+  final colorScheme = const ColorScheme.dark().copyWith(
+    // 日夜间模式
+    brightness: Brightness.dark,
+    // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
+    primary: AppColor.primary,
+    // 黑暗主题的主色调
+    primaryContainer: AppColor.primary,
+
+    // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
+    secondary: AppColor.secondary,
+    secondaryContainer: AppColor.secondary,
+
+    // 小部件的背景色 如:card appbar
+    surface: AppColor.secondary,
+    //可滚动内容后面的颜色
+    background: AppColor.page,
+    //用于输入验证错误的颜色，例如:InputDecoration.errorText
+    error: AppColor.danger,
+
+    // (按钮、AppBar) 在主色调上绘制清晰易读的字体颜色
+    onPrimary: AppColor.unactive,
+    // 在secondary上绘制清晰易读的颜色
+    onSecondary: AppColor.un2active,
+    onSurface: AppColor.un3active,
+    onBackground: AppColor.unactive,
+    onError: AppColor.danger,
+  );
+
+  final base = ThemeData(
     platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {
+      // TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
+    }),
+    brightness: Brightness.dark,
+    // * 全局主题
+    colorScheme: colorScheme,
 
     // 用于去除水波纹
     splashColor: AppColor.transparent,
     highlightColor: AppColor.transparent,
     splashFactory: const NoSplashFactory(),
 
-    primaryColor: AppColor.info,
+    primaryColor: AppColor.primary,
+    primaryColorDark: AppColor.dark,
+    primaryColorLight: AppColor.secondary,
+
+    indicatorColor: AppColor.primary,
+    toggleableActiveColor: AppColor.primary,
+    canvasColor: AppColor.dark,
+
     //用于materia应用程序或app内页面的背景色
     scaffoldBackgroundColor: AppColor.page,
+    backgroundColor: AppColor.page,
+    errorColor: AppColor.danger,
 
-    // * 全局主题
-    colorScheme: ColorSchemeConfig.colorScheme(),
+    buttonTheme: ButtonThemeData(
+      colorScheme: colorScheme,
+      textTheme: ButtonTextTheme.primary,
+    ),
 
     // * 横向TabBar的主题
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.info,
+      labelColor: AppColor.secondary,
       labelStyle: const TextStyle(
-        fontWeight: AppColor.fontWeight,
+        fontWeight: AppFont.fontWeight,
       ),
       unselectedLabelColor: AppColor.unactive,
       labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: const TextStyle(
-        fontWeight: AppColor.fontWeight,
+        fontWeight: AppFont.fontWeight,
       ),
     ),
 
@@ -86,14 +108,15 @@ ThemeData materialThemeColor() {
     //     }),
     //   ),
     // ),
+
     // * 文字按钮主题
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor.danger)),
+        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor.unactive)),
         //未知
         backgroundColor: MaterialStateProperty.all(AppColor.transparent),
         //背景颜色
-        foregroundColor: MaterialStateProperty.all(AppColor.info),
+        foregroundColor: MaterialStateProperty.all(AppColor.secondary),
         //设置按钮上字体与图标的颜色
         overlayColor: MaterialStateProperty.all(AppColor.transparent),
         //长按水波纹颜色
@@ -111,50 +134,29 @@ ThemeData materialThemeColor() {
         shape: MaterialStateProperty.all(const StadiumBorder()),
       ),
     ),
+
     // * 进度指示器主题
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColor.info,
+      color: AppColor.secondary,
     ),
+
     // * AppBar主题配置
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.primary,
       elevation: 1,
     ),
+
     // * 底部按钮主题
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColor.primary,
       elevation: 0, //虚线阴影
-      selectedItemColor: AppColor.info,
+      selectedItemColor: AppColor.secondary,
       unselectedItemColor: AppColor.unactive,
     ),
   );
-}
 
-// * 黑暗主题
-ThemeData materialDarkTheme() {
-  return ThemeData(
-    // * 全局主题
-    colorScheme: ColorSchemeConfig.colorScheme(mode: Brightness.dark),
-
-    // * 横向TabBar的主题
-    tabBarTheme: TabBarTheme(
-      // indicator:,
-      indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.info,
-      labelStyle: const TextStyle(
-        fontWeight: AppColor.fontWeight,
-      ),
-      unselectedLabelColor: AppColor.unactive,
-      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      unselectedLabelStyle: const TextStyle(
-        fontWeight: AppColor.fontWeight,
-      ),
-    ),
-    // * 底部按钮主题
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      elevation: 0, //虚线阴影
-      selectedItemColor: AppColor.unactive,
-      unselectedItemColor: AppColor.unactive,
-    ),
+  return base.copyWith(
+    textTheme: _buildTextTheme(base.textTheme),
+    primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
   );
 }

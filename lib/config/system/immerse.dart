@@ -33,7 +33,7 @@ void barColor(String? color) {
 SystemUiOverlayStyle light = SystemUiOverlayStyle(
   // * 虚拟按键
   systemNavigationBarDividerColor: AppColor.primary, //分割颜色
-  systemNavigationBarColor: AppColor.primary, //背景色
+  systemNavigationBarColor: AppColor.page, //背景色
   systemNavigationBarIconBrightness: Brightness.dark, //图标色(按钮、小白条)
   systemNavigationBarContrastEnforced: false,
 

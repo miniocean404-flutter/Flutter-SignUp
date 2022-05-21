@@ -14,9 +14,20 @@
       "label": "生成闪屏页",
       "type": "shell",
       // 删除闪屏页 flutter pub run flutter_native_splash:remove
-      "command": "flutter pub run flutter_native_splash:create",
+      // powershell 使用;分别执行 cmd,shell是用 && 执行
+      "command": "flutter clean ; flutter pub get ; flutter pub run flutter_native_splash:create",
       "isBackground": true,
       "problemMatcher": [],
+      // option shell 配置使用的shell
+      "windows": {
+        "options": {
+          "shell": {
+            // executable 和  "args": ["/d", "/c"] 指定 cmd执行
+            // "executable": "cmd.exe",
+            // "args": ["/d", "/c"]
+          }
+        }
+      },
       "options": {
         "cwd": "${workspaceFolder}"
       }

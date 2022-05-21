@@ -3,11 +3,16 @@
 // 与安卓的Scaffold一样 iOS的是CupertinoPageScaffold
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
-import 'package:flutter_sign_in/config/theme/cupertino.dart';
+import 'package:flutter_sign_in/config/theme/cupertino/light.dart';
+import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
+import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
+import 'config/theme/material/light.dart';
 import 'provider/version.dart';
 import 'router/routers.dart';
 
@@ -33,11 +38,12 @@ void main() async {
       ],
       // 消费者
       child: Consumer<Version>(
+        // 决定 ChangeNotifierProvider 中数据变化时候重新刷新的颗粒度
         // builder 中的参数分别是 Context context、T value、Widget child，value 即Data，value 的类型和 Data 类型一致，
         // builder 方法返回的是 Widget，也就是被 Consumer 包裹的 widget，
         // 当监听的 model 值发生改变，此 widget 会被 Rebuild。
 
-        builder: (ctx, data, child) {
+        builder: (context, data, child) {
           return const MyApp();
         },
       ),
@@ -48,13 +54,14 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // CupertinoApp
-    return CupertinoApp(
+    return MaterialApp(
       title: '签到',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, // 右上角有一个DEBUG的标识
+      showPerformanceOverlay: false, // 打开性能检测
+
       // 国际化
       localizationsDelegates: localizationsDelegates,
       supportedLocales: supportedLocales,
@@ -67,23 +74,46 @@ class MyApp extends StatelessWidget {
       // },
 
       // 主题
-      theme: cupertinoThemeColor(),
-      // darkTheme: materialDarkTheme(),
+      theme: materialLightTheme,
+      darkTheme: materialDarkTheme,
 
       // 路由
       initialRoute: Routers.splash,
-      onGenerateRoute: Routers.router.generator,
+      onGenerateRoute: Routers.router.generator, // 在routes查找不到时，会调用该方法
       navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
 
-      // 自适应
-      builder: (context, widget) {
-        Global.initScreen(context); // 初始化屏幕自适应工具
+      // ignore: todo
+      //TODO 待查阅
+      shortcuts: <ShortcutActivator, Intent>{
+        ...WidgetsApp.defaultShortcuts,
+        const SingleActivator(LogicalKeyboardKey.select): const ActivateIntent()
+      },
 
-        return MediaQuery(
-          // 设置文字大小不随系统设置改变（flutter screen 插件用）
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: widget ?? Container(),
-        );
+      // MaterialApp 会返回一个 home 或者 router 的页面, 页面中所有的 widget 都会被其包裹
+      builder: (context, widget) {
+        // 初始化屏幕自适应工具，配合 MediaQuery 限制文字缩放
+        Global.initScreen(context);
+
+        // 可判断是否是夜间模式来设置主题
+        isDarkMode(context);
+
+        // 可没有 Builder(构造器) 只是为了看使用方式
+        return Builder(builder: ((context) {
+          // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
+          // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+          return Material(
+            child: CupertinoTheme(
+              data: cupertinoThemeColor,
+
+              // 自适应,文字缩放
+              child: MediaQuery(
+                // 设置文字大小不随系统设置改变（flutter screen 插件用）
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: widget ?? Container(),
+              ),
+            ),
+          );
+        }));
       },
     );
   }
