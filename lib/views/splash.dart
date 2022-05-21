@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -66,6 +67,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
 
   // ! 如果产生按钮自己被点击,查看是不是开启了 自动跳过 的软件
   void startJump() {
+    barWidgetShow(show: 'all');
     Routers.navigateTo(context, Routers.home, clearStack: true);
   }
 

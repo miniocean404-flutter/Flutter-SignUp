@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/router/routers.dart';
@@ -22,10 +21,9 @@ class Global {
     // 图片缓存大小 50m
     PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
 
-    if (!kIsWeb) {
-      // 初始化沉浸式状态栏
-      barColor('white');
-    }
+    // 初始化沉浸式状态栏
+    barColor('white');
+    barWidgetShow();
 
     // 初始化持久化key,value存储工具
     await SpHelper.init();
