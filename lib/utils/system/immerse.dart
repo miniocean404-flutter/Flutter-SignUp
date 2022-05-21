@@ -55,4 +55,5 @@ SystemUiOverlayStyle dark = SystemUiOverlayStyle(
   statusBarColor: Colors.transparent,
   statusBarIconBrightness: Brightness.dark,
   statusBarBrightness: Brightness.light,
+  systemStatusBarContrastEnforced: true,
 );
