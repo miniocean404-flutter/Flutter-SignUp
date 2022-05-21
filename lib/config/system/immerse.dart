@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sign_in/config/theme/color.dart';
+import 'package:flutter_sign_in/utils/plugin/device_info.dart';
 
 // 设置状态栏隐藏哪些，或者全部隐藏
 void barWidgetShow({String? show, SystemUiMode? type, List<SystemUiOverlay>? overlays}) {
@@ -19,7 +22,16 @@ void barWidgetShow({String? show, SystemUiMode? type, List<SystemUiOverlay>? ove
   }
 
   if (show == 'all') {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    final info = DeviceInfo.info;
+
+    if (Platform.isAndroid && (info['version.sdkInt'] < 29 || int.parse(info['version.release']) < 10)) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+        SystemUiOverlay.top,
+        SystemUiOverlay.bottom,
+      ]);
+    } else {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); // 安卓 10 以上支持
+    }
     return;
   }
 

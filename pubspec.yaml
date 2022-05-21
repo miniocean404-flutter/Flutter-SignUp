@@ -19,31 +19,6 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=2.16.1 <3.0.0'
-flutter_native_splash:
-  # 默认背景色
-  color: '#000000'
-  image: 'assets/splash.png'
-  # branding: assets/setting-icon/about.png # 指定logo
-  # 黑暗模式背景色
-  color_dark: #000000
-  image_dark: 'assets/splash.png'
-  # branding_dark: assets/setting-icon/about.png
-  android_12:
-    image: assets/splash.png
-    icon_background_color: '#ffffff'
-    image_dark: assets/splash.png
-    icon_background_color_dark: '#121212'
-  ardroid: true
-  ios: true
-  web: true
-  # 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top
-  android_gravity: fill
-  # 在iOS闪屏页中的位置,值有 scaleToFill, scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight
-  ios_content_mode: scaleToFill
-  # 在web页屏幕中的位置,值有 center, contain, stretch, cover
-  web_image_mode: cover
-  # image/image_dark是否是全屏模式 值为true/false
-  fullscreen: true
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -161,6 +136,34 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.1
+
+flutter_native_splash:
+  # 默认背景色
+  color: '#000000'
+  image: 'assets/splash.png'
+  # branding: assets/setting-icon/about.png # 指定logo
+  # 黑暗模式背景色
+  color_dark: #000000
+  image_dark: 'assets/splash.png'
+  # branding_dark: assets/setting-icon/about.png
+  # 可以使用 bottom, bottomRight, bottomLeft
+  branding_mode: bottom
+  android_12:
+    image: assets/splash.png
+    icon_background_color: '#ffffff'
+    image_dark: assets/splash.png
+    icon_background_color_dark: '#121212'
+  ardroid: true
+  ios: true
+  web: true
+  # 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top
+  android_gravity: fill
+  # 在iOS闪屏页中的位置,值有 scaleToFill, scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight
+  ios_content_mode: scaleToFill
+  # 在web页屏幕中的位置,值有 center, contain, stretch, cover
+  web_image_mode: cover
+  # image/image_dark是否是全屏模式 值为true/false
+  fullscreen: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

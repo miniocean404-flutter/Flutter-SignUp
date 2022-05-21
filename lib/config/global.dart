@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/system/immerse.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/plugin/device_info.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 
 class Global {
@@ -20,6 +21,8 @@ class Global {
     PaintingBinding.instance.imageCache.maximumSize = 100;
     // 图片缓存大小 50m
     PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
+
+    await DeviceInfo().init();
 
     // 初始化沉浸式状态栏
     barColor('white');
