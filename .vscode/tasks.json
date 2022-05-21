@@ -11,11 +11,11 @@
       "problemMatcher": []
     },
     {
-      "label": "生成闪屏页",
+      "label": "生成新的闪屏页",
       "type": "shell",
       // 删除闪屏页 flutter pub run flutter_native_splash:remove
       // powershell 使用;分别执行 cmd,shell是用 && 执行
-      "command": "flutter clean ; flutter pub get ; flutter pub run flutter_native_splash:create",
+      "command": "flutter pub run flutter_native_splash:remove; flutter pub run flutter_native_splash:create",
       "isBackground": true,
       "problemMatcher": [],
       // option shell 配置使用的shell

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/modal.dart';
+import 'package:flutter_sign_in/config/system/immerse.dart';
 import 'package:flutter_sign_in/http/login.dart';
 import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
@@ -111,12 +112,14 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   @override
   // 别的页面退出到当前页面的时候调用
   void didPopNext() {
+    barWidgetShow();
     createOrDisposeScanQR(true);
   }
 
   @override
   // 当前页面去别的页面时候调用
   void didPushNext() {
+    barWidgetShow(show: 'all');
     createOrDisposeScanQR(false);
   }
 
