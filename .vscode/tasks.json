@@ -13,11 +13,13 @@
     {
       "label": "生成闪屏页",
       "type": "shell",
-      "command": "flutter",
       // 删除闪屏页 flutter pub run flutter_native_splash:remove
-      "args": ["pub run flutter_native_splash:create"],
+      "command": "flutter pub run flutter_native_splash:create",
       "isBackground": true,
-      "problemMatcher": []
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
     },
     // 打包shell脚本
     {
