@@ -15,11 +15,11 @@ void toast(String msg) async {
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.white,
     textColor: Colors.black,
-    fontSize: 16.0,
+    fontSize: 12.0,
   );
 }
 
-// SnackBar的调用必须是在main.dart中是MaterialApp 且 页面中是Scaffold才能使用
+// SnackBar的调用必须是在 main.dart 中是 MaterialApp 且 页面中是Scaffold才能使用
 void showSnackBar(BuildContext context, String text) {
   final snackBar = SnackBar(content: Text(text));
   final message = ScaffoldMessenger.of(context);

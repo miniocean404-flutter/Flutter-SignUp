@@ -145,7 +145,7 @@ flutter_icons:
   macos: false
   windows: false
   linux: false
-  image_path: 'assets/desk_icon.png'
+  image_path: 'assets/logo.png'
 
 flutter_native_splash:
   # 默认背景色
@@ -158,10 +158,11 @@ flutter_native_splash:
   # branding_dark: assets/setting-icon/about.png
   # 可以使用 bottom, bottomRight, bottomLeft
   branding_mode: bottom
+  # 安卓12是logo形式，不能全屏进行展示
   android_12:
-    image: assets/splash.png
+    image: assets/logo.png
     icon_background_color: '#ffffff'
-    image_dark: assets/splash.png
+    image_dark: assets/logo.png
     icon_background_color_dark: '#121212'
   ardroid: true
   ios: true
