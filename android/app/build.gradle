@@ -34,7 +34,7 @@ def dartEnvironmentVariables = [
         ENV: 'dev',
 ]
 
-// TODO 获取命令行参数脚本
+//* 获取命令行参数脚本
 if (project.hasProperty('dart-defines')) {
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
             .split(',')
@@ -61,7 +61,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 // android {} 中配置构建Android APP所需的特定编译选项。
 android {
-    // TODO 打包APK时修改文件名带上渠道参数,还有一些SDK也可以通过这种方式设置参数
+    // * 打包APK时修改文件名带上渠道参数,还有一些SDK也可以通过这种方式设置参数
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             if (variant.buildType.name == "release") {
@@ -103,7 +103,7 @@ android {
      * 在这个区块还可以设置产品风味，给不同的风味版本配置不同的属性值。
      * */
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // *: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.flutter_sign_in"
         // 定义APP需要支持的 Android API 最小的版本。
@@ -126,7 +126,7 @@ android {
     buildTypes {
         // Android Studio默认配置release编译类型开启代码缩减和指定代码混淆文件。
         release {
-            // TODO: Add your own signing config for the release build.
+            // *: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
 

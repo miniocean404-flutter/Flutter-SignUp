@@ -16,6 +16,7 @@ CupertinoThemeData _cupertinoThemeColor() {
      * 顶部导航栏和底部标签栏的背景颜色。
      * 默认:在浅色模式下默认为浅灰色，在深色模式下默认为深半透明灰色。
      */
+    // 设置后会导致位置下坠
     // barBackgroundColor: CupertinoColors.systemGrey6,
 
     /**
