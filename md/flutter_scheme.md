@@ -1,26 +1,26 @@
-# Flutter Scheme 使用(浏览器打开App，App内打开另一个App)
+# Flutter Scheme 使用(浏览器打开 App，App 内打开另一个 App)
 
 ## 🍵[项目地址](https://github.com/Tecode/dynamic_theme)
 
-## URL Scheme的作用
+## URL Scheme 的作用
 
-### iOS Scheme介绍
+### iOS Scheme 介绍
 
-我们都知道苹果手机中的APP都有一个沙盒，APP就是一个信息孤岛，相互是不可以进行通信的。但是iOS的APP可以注册自己的URL Scheme，URL Scheme是为方便app之间互相调用而设计的。我们可以通过系统的OpenURL来打开该app，并可以传递一些参数。
+我们都知道苹果手机中的 APP 都有一个沙盒，APP 就是一个信息孤岛，相互是不可以进行通信的。但是 iOS 的 APP 可以注册自己的 URL Scheme，URL Scheme 是为方便 app 之间互相调用而设计的。我们可以通过系统的 OpenURL 来打开该 app，并可以传递一些参数。
 
-例如：你在Safari里输入www.alipay.com，就可以直接打开你的支付宝app，前提是你的手机装了支付宝。如果你没有装支付宝，应该显示的是支付宝下载界面，点击会跳到AppStore的支付宝下载界面。
+例如：你在 Safari 里输入www.alipay.com，就可以直接打开你的支付宝app，前提是你的手机装了支付宝。如果你没有装支付宝，应该显示的是支付宝下载界面，点击会跳到AppStore的支付宝下载界面。
 
-URL Scheme必须能唯一标识一个APP，如果你设置的URL Scheme与别的APP的URL Scheme冲突时，你的APP不一定会被启动起来。因为当你的APP在安装的时候，系统里面已经注册了你的URL Scheme。
+URL Scheme 必须能唯一标识一个 APP，如果你设置的 URL Scheme 与别的 APP 的 URL Scheme 冲突时，你的 APP 不一定会被启动起来。因为当你的 APP 在安装的时候，系统里面已经注册了你的 URL Scheme。
 
-一般情况下，是会调用先安装的app。但是iOS的系统app的URL Scheme肯定是最高的。所以我们定义URL Scheme的时候，尽量避开系统app已经定义过的URL Scheme。
+一般情况下，是会调用先安装的 app。但是 iOS 的系统 app 的 URL Scheme 肯定是最高的。所以我们定义 URL Scheme 的时候，尽量避开系统 app 已经定义过的 URL Scheme。
 
-### Android Scheme介绍
+### Android Scheme 介绍
 
-android中的scheme是一种页面内跳转协议;
+android 中的 scheme 是一种页面内跳转协议;
 
-通过定义自己的scheme协议，可以非常方便跳转app中的各个页面；
+通过定义自己的 scheme 协议，可以非常方便跳转 app 中的各个页面；
 
-通过scheme协议，服务器可以定制化告诉App跳转到APP内部页面。
+通过 scheme 协议，服务器可以定制化告诉 App 跳转到 APP 内部页面。
 
 ## 使用[uni_links](https://pub.dev/packages/uni_links#-installing-tab-)库
 
@@ -30,6 +30,7 @@ android中的scheme是一种页面内跳转协议;
 dependencies:
   uni_links: 0.4.0
 ```
+
 ### 2 、安装
 
 ```dart
@@ -39,7 +40,7 @@ Running "flutter pub get" in dynamic_theme...                       5.8s
 Process finished with exit code 0
 ```
 
-### 3、Dart代码中使用插件
+### 3、Dart 代码中使用插件
 
 ```
 import 'package:uni_links/uni_links.dart';
@@ -47,7 +48,7 @@ import 'package:uni_links/uni_links.dart';
 
 ## Android 配置
 
-**⚠️注意：Scheme 命名不支持`dynamic_theme`在`iOS`中测试了一下无法打开,改成了全小写`dynamictheme`**
+**⚠️ 注意：Scheme 命名不支持`dynamic_theme`在`iOS`中测试了一下无法打开,改成了全小写`dynamictheme`**
 
 ### `android/app/src/main/AndroidManifest.xml`
 
@@ -73,10 +74,15 @@ import 'package:uni_links/uni_links.dart';
  <action android:name="android.intent.action.VIEW"/>
   <category android:name="android.intent.category.DEFAULT"/>
   <category android:name="android.intent.category.BROWSABLE"/>
-  <data android:scheme="dynamictheme"/>
-  <data 
-        android:host="detail"
-        android:scheme="dynamictheme"/>
+
+  <!-- android:host为空则跳转首页 -->
+  <!-- 参数是使用链接带的 customscheme://home?name=flutter -->
+  <data
+        android:host=""
+        android:scheme="customscheme"/>
+  <data
+        android:host="pagePath"
+        android:scheme="customscheme"/>
 </intent-filter>
 ```
 
@@ -87,7 +93,7 @@ import 'package:uni_links/uni_links.dart';
 添加完也直接反应到配置文件`info.plist`中了，当然你要是觉得自己很厉害，也可以直接在`info.plist`添加。
 
 <p align="center">
-    <img width="1400" title="Xcode->Info->URL Types" src="../assets/preview/xcode_scheme.png">
+    <img width="1400" title="Xcode->Info->URL Types" src="../assets/md/xcode_scheme.png">
 </p>
 
 **`ios/Runner/Info.plist`**
@@ -149,7 +155,7 @@ Future<void> initPlatformStateForStringUniLinks() async {
 }
 ```
 
-**解析Scheme跳转页面**
+**解析 Scheme 跳转页面**
 
 我配置的`scheme`是`dynamictheme://`使用的是`Deep Link`，你也可以配置成`http://www.xx.com`和`https://www.xx.com`这种是`App Links`。
 
@@ -172,7 +178,7 @@ final Uri _jumpUri = Uri.parse(schemeUrl.replaceFirst(
 
 ## Scheme [测试地址](https://tecode.github.io/dynamic_theme/document/index.html)
 
-测试前需要先[安装APK](https://www.pgyer.com/QChJ)(目前只有安卓APK可以下载，iOS需要自己拉代码打包)。
+测试前需要先[安装 APK](https://www.pgyer.com/QChJ)(目前只有安卓 APK 可以下载，iOS 需要自己拉代码打包)。
 
 ```html
 <a href="dynamictheme://"> 打开App(dynamictheme://) </a>
@@ -180,33 +186,30 @@ final Uri _jumpUri = Uri.parse(schemeUrl.replaceFirst(
 <a href="dynamictheme://detail?name=flutter"> 打开App跳转到详情页面带上参数 </a>
 ```
 
-
 ## iOS 效果预览
 
-### 未打开App（开启以后跳转）
+### 未打开 App（开启以后跳转）
 
 <p align="center">
-    <img width="200" title="ios_scheme_open" src="../assets/preview/ios_scheme_open.gif">
+    <img width="200" title="ios_scheme_open" src="../assets/md/ios_scheme_open.gif">
 </p>
 
-
-### 已打开App（监听Scheme）
+### 已打开 App（监听 Scheme）
 
 <p align="center">
-    <img width="200" title="ios_scheme_listen" src="../assets/preview/ios_scheme_listen.gif">
+    <img width="200" title="ios_scheme_listen" src="../assets/md/ios_scheme_listen.gif">
 </p>
 
 ## Android 效果预览
 
-### 未打开App（开启以后跳转）
+### 未打开 App（开启以后跳转）
 
 <p align="center">
-    <img width="200" title="android_scheme_open" src="../assets/preview/android_scheme_open.gif">
+    <img width="200" title="android_scheme_open" src="../assets/md/android_scheme_open.gif">
 </p>
 
-
-### 已打开App（监听Scheme）
+### 已打开 App（监听 Scheme）
 
 <p align="center">
-    <img width="200" title="android_scheme_listen" src="../assets/preview/android_scheme_listen.gif">
+    <img width="200" title="android_scheme_listen" src="../assets/md/android_scheme_listen.gif">
 </p>

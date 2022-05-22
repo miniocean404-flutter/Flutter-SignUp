@@ -42,6 +42,25 @@
 	</dict>
 
  
+	<!-- app名字 -->
+ 	<key>CFBundleName</key>
+	<string>游泳课签到</string>
+
+	<!-- 在ios自定义Scheme的配置 -->
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<!-- 任意 URL 名 -->
+			<string>ANY_URL_NAME</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>customscheme</string>
+			</array>
+		</dict>
+	</array>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -52,8 +71,7 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>flutter_sign_in</string>
+
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/config/theme/color/custom.dart';
 import 'package:flutter_sign_in/provider/version.dart';
 import 'package:provider/provider.dart';
 
@@ -18,12 +22,27 @@ class _AboutConfigState extends State<About> {
     String? version = Provider.of<Version>(context).getVersion;
 
     return CupertinoPageScaffold(
+      // todo 查看 CupertinoNavigationBar
       navigationBar: CupertinoNavigationBar(
+        padding: const EdgeInsetsDirectional.only(),
+        transitionBetweenRoutes: !kIsWeb && Platform.isIOS,
         middle: Text(
           '关于',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 18.sp,
+          ),
+        ),
+        leading: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => Navigator.pop(context, '数据传参'),
+          child: Container(
+            width: 42.0,
+            padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+            child: Image.asset(
+              'assets/icons/ic_arrow_left_gray.png',
+              color: CustomAppColor.of(context).color202326,
+            ),
           ),
         ),
       ),

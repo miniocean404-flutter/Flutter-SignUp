@@ -13,4 +13,7 @@ class Assets {
 
   // lottie
   static String lottieLading = 'assets/lottie/loading.json';
+
+  // ios
+  static String arrowLeftGray = 'assets/ios/ic_arrow_left_gray.json';
 }

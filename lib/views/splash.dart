@@ -3,9 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/components/help/immerse.dart';
+import 'package:flutter_sign_in/components/help/immerse.dart' show barWidgetShow;
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/plugin/url_scheme.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -25,6 +26,13 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
 
     WidgetsBinding.instance.addObserver(this);
     animationExec();
+    initUrlScheme();
+  }
+
+  ///  初始化Scheme只使用了String类型的路由跳转
+  ///  所以只有一个有需求可以使用[initPlatformStateForUriUniLinks]
+  initUrlScheme() async {
+    await initPlatformStateForStringUniLinks(context);
   }
 
   @override
