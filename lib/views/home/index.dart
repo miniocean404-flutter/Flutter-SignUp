@@ -11,6 +11,7 @@ import 'package:flutter_sign_in/components/help/immerse.dart';
 import 'package:flutter_sign_in/http/login.dart';
 import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/plugin/android_intent.dart';
 import 'package:flutter_sign_in/utils/plugin/logger.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/plugin/toast.dart';
@@ -263,6 +264,9 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
               if (_backLastTime == null || now.difference(_backLastTime!).inSeconds > 1) {
                 _backLastTime = DateTime.now();
                 toast('再点击一次回桌面');
+                return false;
+              } else if (!kIsWeb && Platform.isAndroid) {
+                backHome();
                 return false;
               } else {
                 return true;
