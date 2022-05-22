@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino/light.dart';
-import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:provider/provider.dart';
 
@@ -60,7 +59,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '签到',
       debugShowCheckedModeBanner: false, // 右上角有一个DEBUG的标识
-      showPerformanceOverlay: false, // 打开性能检测
+      debugShowMaterialGrid: false, // debug 模式是否展示基线像素网格
+      showSemanticsDebugger: false, // 打开显示可拜访性信息的叠加层，展现组件之间的关系、占位大小
+      showPerformanceOverlay: false, // 打开性能检测 web 不可开启,否则无法启动
+      checkerboardRasterCacheImages: false, // 关上栅格缓存图像的棋盘格警告 web 不可开启,否则无法启动
+      checkerboardOffscreenLayers: false, // 关上渲染到屏幕外位图的层的棋盘格警告 web 不可开启,否则无法启动
 
       // 国际化
       localizationsDelegates: localizationsDelegates,
@@ -76,6 +79,7 @@ class MyApp extends StatelessWidget {
       // 主题
       theme: materialLightTheme,
       darkTheme: materialDarkTheme,
+      themeMode: ThemeMode.system, // 设置日间夜间模式、或者跟随系统
 
       // 路由
       initialRoute: Routers.splash,
@@ -83,7 +87,7 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
 
       // ignore: todo
-      //TODO 待查阅
+      //TODO 待查阅、将物理键盘事件绑定到用户界面中的操作
       shortcuts: <ShortcutActivator, Intent>{
         ...WidgetsApp.defaultShortcuts,
         const SingleActivator(LogicalKeyboardKey.select): const ActivateIntent()
@@ -93,9 +97,6 @@ class MyApp extends StatelessWidget {
       builder: (context, widget) {
         // 初始化屏幕自适应工具，配合 MediaQuery 限制文字缩放
         Global.initScreen(context);
-
-        // 可判断是否是夜间模式来设置主题
-        isDarkMode(context);
 
         // 可没有 Builder(构造器) 只是为了看使用方式
         return Builder(builder: ((context) {

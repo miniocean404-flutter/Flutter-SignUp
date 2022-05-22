@@ -1,7 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_sign_in/config/theme/color/base.dart';
 
-class AppColor {
-  static Color primary = const Color(0xffFFFFFF);
+class AppColorLight extends AppColorBase {
+  // 包含 Text
+  static Color primary = const Color(0xff409eff);
+
   static Color secondary = const Color(0xffC1C1C1);
 
   static Color danger = const Color(0xffee0a24);
@@ -17,15 +20,7 @@ class AppColor {
 
   static Color dark = const Color(0xFF000000);
   static Color transparent = const Color.fromRGBO(0, 0, 0, 0);
+
   // static Color transparent = Colors.transparent;
 
-  // 颜色值转换
-  static Color string2Color(String colorString) {
-    int value = 0x00000000;
-    if (colorString[0] == '#') colorString = colorString.substring(1);
-    value = int.tryParse(colorString, radix: 16)!;
-    if (value < 0xFF000000) value += 0xFF000000;
-
-    return Color(value);
-  }
 }
