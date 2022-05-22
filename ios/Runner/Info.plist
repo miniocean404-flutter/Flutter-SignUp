@@ -59,6 +59,8 @@
 		<string>App需要您的同意,才能访问图库</string>
 		<key>NSRemindersUsageDescription</key>
 		<string>App需要您的同意,才能访问提醒事项</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>App需要您的同意,使用面部识别才可使用设置界面</string>
 
 		
 		<array>

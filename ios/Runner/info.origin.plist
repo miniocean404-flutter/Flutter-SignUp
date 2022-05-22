@@ -33,6 +33,8 @@
 	<string>App需要您的同意,才能访问运动与健身</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>App需要您的同意,才能访问提醒事项</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>App需要您的同意,使用面部识别才可使用设置界面</string>
 
 	<!-- 开启http请求 -->
 	<key>AppTransportSecurity</key>

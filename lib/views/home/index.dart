@@ -12,6 +12,7 @@ import 'package:flutter_sign_in/http/login.dart';
 import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/android_intent.dart';
+import 'package:flutter_sign_in/utils/plugin/local_auth.dart';
 import 'package:flutter_sign_in/utils/plugin/logger.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/plugin/toast.dart';
@@ -234,7 +235,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   }
 
   // 进入设置界面
-  goSetting() {
+  goSetting() async {
     _clickNum++;
 
     if (_clickNum < 5) {
@@ -242,9 +243,26 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     }
 
     if (_clickNum >= 5) {
-      _clickNum = 0;
+      final auth = LocalAuth();
+      final isCanBiometrics = await auth.isCanBiometrics;
+      final isCanDeviceBiometrics = await auth.isCanDeviceBiometrics;
 
-      Routers.navigateTo(context, Routers.settingHome);
+      if (!isCanBiometrics && !isCanDeviceBiometrics) {
+        _clickNum = 0;
+
+        // ignore: use_build_context_synchronously
+        Routers.navigateTo(context, Routers.settingHome);
+      }
+
+      if (isCanBiometrics || isCanDeviceBiometrics) {
+        final bool isSucess = await auth.startCertification();
+        if (isSucess == true) {
+          _clickNum = 0;
+
+          // ignore: use_build_context_synchronously
+          Routers.navigateTo(context, Routers.settingHome);
+        }
+      }
     }
   }
 
