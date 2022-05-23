@@ -209,101 +209,129 @@ flutter:
 flutter_intl:
   enabled: true
 
+  # * widget 类
+  # 底部导航栏,可以上拉第二屏
+  # bottom_bar_with_sheet: ^2.4.0
+  # 自定义导航条
+  # custom_navigation_bar: ^0.8.2
+
+  # 图片添加blur
+  # flutter_blurhash: ^0.7.0
+  # 缓存图片
+  # cached_network_image: ^3.1.0
+  # 预览放大缩小编辑照片
+  # photo_view: ^0.13.0
+
+  # 输入时有下拉建议
+  # flutter_typeahead: ^4.0.0
+  # 根据 widget 范围自动调整文字大小
+  # auto_size_text: ^3.0.0
+  # 日期选择器
+  # flutter_datetime_picker: ^1.5.1
+  # 日期选择器
+  # syncfusion_flutter_datepicker:    ^20.1.56
+  # pin码、验证码、自动填充
+  # pinput: ^2.2.9
+
+  # flutter 简单动画
+  # simple_animations: ^4.0.2
+  # 动画切换开关
+  # animated_toggle_switch: ^0.5.2
+  # 现成的登录界面(包括动画)
+  # flutter_login: ^3.2.0
+  # 类似 animation.css 的动画库
+  # animate_do: ^2.1.0
+
+  # 拉刷新或者上拉加载插件
+  # pull_to_refresh: ^2.0.0
+  # 滑动面板,面板可上拉,下拉
+  # sliding_up_panel: ^2.0.0+1
+  # 瀑布流
+  # flutter_staggered_grid_view: ^0.4.1
+  # 类似探探的滑动卡片
+  # swipable_stack: ^1.3.0
+  # 滚动时,让某一部分定位
+  # flutter_sticky_header: ^0.6.2
+  # 左滑删除
+  # flutter_slidable: ^1.3.0
+
+  # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter
+  # fijkplayer: ^0.10.1
+  # 视频插件
+  # chewie: ^1.2.2
+
+  # 评级弹窗
+  # in_app_review: ^2.0.4
+  # 独立于系统的 widget 通知
+  # in_app_notification: ^1.1.1
+  # 请求加载提示
+  # flutter_easyloading: ^3.0.3
+  # 徽标 (消息提示等)
+  # badges: ^2.0.2
+  # 控制屏幕亮度 屏幕常亮
+  # screen: ^0.0.5
+  # 应用程序快捷方式 （官方）
+  # quick_actions: ^0.6.0+7
+  # http请求 (官方)
+  # http: ^0.13.3
+  # 二维码生成器(可带logo)
+  # qr_flutter: ^4.0.0
+  # 签名板
+  # syncfusion_flutter_signaturepad: ^20.1.56
+  # SVG使用（官方）只能是静态的，不能是动态svg
+  # flutter_svg: ^1.0.3
+
+  # windows 版本 UI (官方都是移动版的)
+  # fluent_ui: ^3.12.0
+  # macos 版本 UI (官方都是移动版的)
+  # macos_ui: ^1.4.1+1
+
+  # * 工具类
   # 游戏引擎
   # flame: ^1.1.1
   # 视频剪辑
   # video_trimmer: ^1.1.3
   # 周围网络扫描仪
   # lan_scanner: ^3.4.1
-  # 独立于系统的 widget 通知
-  # in_app_notification: ^1.1.1
-  # 评级弹窗
-  # in_app_review: ^2.0.4
-  # flutter 简单动画
-  # simple_animations: ^4.0.2
-  # 预览放大缩小编辑照片
-  # photo_view: ^0.13.0
-  # 底部导航栏,可以上拉第二屏
-  # bottom_bar_with_sheet: ^2.4.0
-  # 图片添加blur
-  # flutter_blurhash: ^0.7.0
-  # pin码、验证码、自动填充
-  # pinput: ^2.2.9
-  # 徽标 (消息提示等)
-  # badges: ^2.0.2
-  # 滑动面板,面板可上拉,下拉
-  # 输入时有下拉建议
-  # flutter_typeahead: ^4.0.0
   # rtc 视频、语音通话
   # agora_rtc_engine: ^5.2.0
-  # 现成的登录界面(包括动画)
-  # flutter_login: ^3.2.0
-  # webview (官方)
-  # webview_flutter: ^2.1.1
-  # 调用分享平台（官方）
-  # share_plus: ^3.0.4
-  # 网络检测（官方）
-  # connectivity: ^3.0.6
+  # 音频播放器
+  # just_audio: ^0.9.21
+
   # 数据持久化
   # sqflite: ^2.0.0+4
   # 选择图片 (官方)
   # image_picker: ^0.8.4+2
   # 结合 image_picker 保存图片到图库
   # image_gallery_saver: ^1.7.1
-  # 瀑布流
-  # flutter_staggered_grid_view: ^0.4.1
-  # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter
-  # fijkplayer: ^0.10.1
-  # 拉刷新或者上拉加载插件
-  # pull_to_refresh: ^2.0.0
-  # 缓存图片
-  # cached_network_image: ^3.1.0
-  # JSON序列化（官方）
-  # json_serializable: ^6.0.0
-  # http请求 (官方)
-  # http: ^0.13.3
-  # 视频插件
-  # chewie: ^1.2.2
-  # 控制屏幕亮度 屏幕常亮
-  # screen: ^0.0.5
-  # 应用程序快捷方式 （官方）
-  # quick_actions: ^0.6.0+7
+  # 图片压缩
+  # flutter_image_compress: ^1.1.0
+  # flutter_luban: ^0.1.13
+  # 调用分享平台（官方）
+  # share_plus: ^3.0.4
+  # 网络检测（官方）
+  # connectivity: ^3.0.6
   # web_socket
   # web_socket_channel: ^2.1.0
   # 定位插件
   # geolocator: ^8.2.1
+  # Dart 常用工具类库包含日期，正则，如果你倒计时，好轴等工具类
+  # common_utils: ^2.1.0
+  # webview (官方)
+  # webview_flutter: ^2.1.1
+
   # 不同设备预览
   # device_preview: ^0.7.4
   # 版本管理cli
   # fvm: ^2.2.3
-  # windows 版本 UI (官方都是移动版的)
-  # fluent_ui: ^3.12.0
-  # 类似 animation.css 的动画库
-  # animate_do: ^2.1.0
-  # 二维码生成器(可带logo)
-  # qr_flutter: ^4.0.0
-  # 自定义导航条
-  # custom_navigation_bar: ^0.8.2
-  # 动画切换开关
-  # animated_toggle_switch: ^0.5.2
-  # 类似探探的滑动卡片
-  # swipable_stack: ^1.3.0
-  # 滚动时,让某一部分定位
-  # flutter_sticky_header: ^0.6.2
-  # 签名板
-  # syncfusion_flutter_signaturepad: ^20.1.56
-  # 日期选择器
-  # syncfusion_flutter_datepicker: ^20.1.56
   # 减少模板代码
   # freezed: ^2.0.3+1
-  # 音频播放器
-  # just_audio: ^0.9.21
-  # 左滑删除
-  # flutter_slidable: ^1.3.0
-  # 图片压缩
-  # flutter_luban: ^0.1.13
-  # SVG使用（官方）只能是静态的，不能是动态svg
-  # flutter_svg: ^1.0.3
+  # JSON序列化（官方）
+  # json_serializable: ^6.0.0
+  # 汉字转拼音
+  # lpinyin: ^2.0.3
+
+  # * 国内SDK
   # 极光推送
   # jpush_flutter: ^2.2.5
   # 微信SDK调用（第三方）
