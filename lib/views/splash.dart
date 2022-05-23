@@ -24,9 +24,10 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   void initState() {
     super.initState();
 
+    initUrlScheme();
+
     WidgetsBinding.instance.addObserver(this);
     animationExec();
-    initUrlScheme();
   }
 
   ///  初始化Scheme只使用了String类型的路由跳转
