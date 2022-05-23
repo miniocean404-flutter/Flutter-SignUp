@@ -149,7 +149,7 @@ flutter_icons:
 
 flutter_native_splash:
   # 默认背景色
-  color: '#000000'
+  color: '#ffffff'
   image: 'assets/splash.png'
   # branding: assets/setting-icon/about.png # 指定logo
   # 黑暗模式背景色
@@ -161,6 +161,7 @@ flutter_native_splash:
   # 安卓12是logo形式，不能全屏进行展示
   android_12:
     image: assets/logo.png
+    # 这里只是透明 logo 的背景色 是个正方形, 需要搭配 color 设置背景色
     icon_background_color: '#ffffff'
     image_dark: assets/logo.png
     icon_background_color_dark: '#121212'
