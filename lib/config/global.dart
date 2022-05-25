@@ -3,10 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/help/immerse.dart';
+import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/device_info.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/system/immerse.dart';
 
 class Global {
   static Future initCommon() async {
@@ -22,21 +23,20 @@ class Global {
     // 图片缓存大小 50m
     PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
 
-    await DeviceInfo().init();
+    // 初始化路由
+    Routers.defineRoutes();
 
-    // 初始化沉浸式状态栏
-    barColor('white');
     barWidgetShow();
+
+    await DeviceInfo().init();
 
     // 初始化持久化key,value存储工具
     await SpHelper.init();
-
-    // 初始化路由
-    Routers.defineRoutes();
   }
 
-  // 初始化屏幕自适应工具
-  static initScreen(ctx) {
+  // 根据context动态初始化
+  static dynamicInit(ctx) {
+    // 初始化屏幕自适应工具,配合 MediaQuery 限制文字缩放
     // MediaQuery.of(context) 的使用必须在 WidgetsApp or MaterialApp 里来提供数据。
     ScreenUtil.init(
       ctx, // 传入context会更灵敏的根据屏幕变化而改变
@@ -46,5 +46,8 @@ class Global {
       splitScreenMode: true, // 支持分屏尺寸
       deviceSize: Size(window.physicalSize.width, window.physicalSize.height),
     );
+
+    // 初始化沉浸式状态栏
+    barColor(isDarkMode(ctx));
   }
 }

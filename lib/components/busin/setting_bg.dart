@@ -72,9 +72,7 @@ class _SettingBgState extends State<SettingBg> {
         color: const Color(0xffFFFFFf),
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
       ),
-      child: widget.childs != null
-          ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list)
-          : widget.child,
+      child: widget.childs != null ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list) : widget.child,
     );
   }
 }

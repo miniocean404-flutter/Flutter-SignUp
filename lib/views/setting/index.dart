@@ -69,9 +69,8 @@ class _SettingState extends State<Setting> {
                   }
                 },
       child: CupertinoPageScaffold(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
-          color: const Color(0xffefeff3),
           child: Container(
             margin: EdgeInsets.fromLTRB(21.w, 72.h, 21.w, 0),
             child: Column(

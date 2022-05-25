@@ -48,66 +48,38 @@ class _AboutConfigState extends State<About> {
         ),
       ),
       child: Container(
-        color: const Color(0xffefeff3),
-        child: Container(
-          margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
-          child: Column(
-            children: [
-              SettingBg(
-                leftLine: 17.w,
-                childs: [
-                  // 版本
-                  GestureDetector(
-                    child: Container(
-                      height: 44.h,
-                      margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '版本',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
-                          Text(
-                            'Version $version',
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              color: const Color(0xff8A8A8D),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // 更新日志
-                  Container(
+        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        child: Column(
+          children: [
+            SettingBg(
+              leftLine: 17.w,
+              childs: [
+                // 版本
+                GestureDetector(
+                  child: Container(
                     height: 44.h,
                     margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                    child: GestureDetector(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '更新日志',
-                            style: TextStyle(fontSize: 18.sp),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '版本',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
+                        Text(
+                          'Version $version',
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: const Color(0xff8A8A8D),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 20.r,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 30.h),
+                ),
 
-              // 服务器状态
-              SettingBg(
-                leftLine: 16.w,
-                child: Container(
+                // 更新日志
+                Container(
                   height: 44.h,
                   margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
                   child: GestureDetector(
@@ -115,7 +87,7 @@ class _AboutConfigState extends State<About> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '软件生态',
+                          '更新日志',
                           style: TextStyle(fontSize: 18.sp),
                         ),
                         Icon(
@@ -126,9 +98,34 @@ class _AboutConfigState extends State<About> {
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ],
+            ),
+            SizedBox(height: 30.h),
+
+            // 服务器状态
+            SettingBg(
+              leftLine: 16.w,
+              child: Container(
+                height: 44.h,
+                margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '软件生态',
+                        style: TextStyle(fontSize: 18.sp),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20.r,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

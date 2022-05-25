@@ -3,11 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/modal.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
-import 'package:flutter_sign_in/components/help/immerse.dart';
 import 'package:flutter_sign_in/http/login.dart';
 import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
@@ -16,6 +16,7 @@ import 'package:flutter_sign_in/utils/plugin/local_auth.dart';
 import 'package:flutter_sign_in/utils/plugin/logger.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/plugin/toast.dart';
+import 'package:flutter_sign_in/utils/system/immerse.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
@@ -58,11 +59,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
 
     login();
-    createOrDisposeScanQR(true);
     initVideo(videoLink);
+    startScanQrAndVideo(true);
   }
 
-  // 页面彻底销毁声明周期
+  // 页面彻底销毁
   @override
   void dispose() {
     _videoController.dispose();
@@ -115,14 +116,14 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   // 别的页面退出到当前页面的时候调用
   void didPopNext() {
     barWidgetShow();
-    createOrDisposeScanQR(true);
+    startScanQrAndVideo(true);
   }
 
   @override
   // 当前页面去别的页面时候调用
   void didPushNext() {
     barWidgetShow(show: 'all');
-    createOrDisposeScanQR(false);
+    startScanQrAndVideo(false);
   }
 
   @override
@@ -139,7 +140,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         // isCurrent:这条路线是否是导航器上最顶层的路线
         dynamic isBack = ModalRoute.of(context)?.isCurrent;
 
-        if (isBack) createOrDisposeScanQR(true);
+        if (isBack) startScanQrAndVideo(true);
 
         break;
       // 用户可见，但不可响应用户操作
@@ -147,7 +148,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         break;
       // 已经暂停了，用户不可见、不可操作
       case AppLifecycleState.paused:
-        createOrDisposeScanQR(false);
+        startScanQrAndVideo(false);
         break;
       case AppLifecycleState.detached:
         break;
@@ -186,17 +187,19 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   }
 
   // 创建销毁扫码控制器
-  void createOrDisposeScanQR(bool state) {
+  void startScanQrAndVideo(bool state) {
     if (state) {
       _scanController = MobileScannerController(
         // 相机朝上 front
         facing: CameraFacing.front,
         torchEnabled: false,
       );
+
+      _videoController.play();
     } else {
       _scanController.dispose();
+      _videoController.pause();
     }
-
     setState(() {
       isShowScan = state;
     });
@@ -270,7 +273,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
     bool isShowVideo = _businState == BusinState.sign && _videoController.value.isInitialized;
-
     return WillPopScope(
       onWillPop: !kIsWeb && Platform.isIOS
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
@@ -310,7 +312,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                           ),
                         ),
                       )
-                    : Container(),
+                    : Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.black,
+                      ),
 
                 Column(
                   children: [

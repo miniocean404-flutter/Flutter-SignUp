@@ -59,70 +59,14 @@ class _DeviceConfigState extends State<DeviceConfig> {
         ),
       ),
       child: Container(
-        color: const Color(0xffefeff3),
-        child: Container(
-          margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
-          child: Column(
-            children: [
-              SettingBg(
-                leftLine: 17.w,
-                childs: [
-                  // 服务器
-                  GestureDetector(
-                    child: Container(
-                      height: 44.h,
-                      margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '服务名称',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
-                          Text(
-                            serverName,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              color: const Color(0xff8A8A8D),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // 使用https
-                  Container(
-                    height: 44.h,
-                    margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                    child: GestureDetector(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '摆放位置',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
-                          Text(
-                            location,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              color: const Color(0xff8A8A8D),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30.h),
-
-              // 重新登录
-              GestureDetector(
-                onTap: () => reLogin(),
-                child: SettingBg(
-                  leftLine: 16.w,
+        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        child: Column(
+          children: [
+            SettingBg(
+              leftLine: 17.w,
+              childs: [
+                // 服务器
+                GestureDetector(
                   child: Container(
                     height: 44.h,
                     margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
@@ -130,20 +74,73 @@ class _DeviceConfigState extends State<DeviceConfig> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '重新登录',
+                          '服务名称',
                           style: TextStyle(fontSize: 18.sp),
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 20.r,
+                        Text(
+                          serverName,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: const Color(0xff8A8A8D),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+
+                // 使用https
+                Container(
+                  height: 44.h,
+                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                  child: GestureDetector(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '摆放位置',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
+                        Text(
+                          location,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: const Color(0xff8A8A8D),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 30.h),
+
+            // 重新登录
+            GestureDetector(
+              onTap: () => reLogin(),
+              child: SettingBg(
+                leftLine: 16.w,
+                child: Container(
+                  height: 44.h,
+                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '重新登录',
+                        style: TextStyle(fontSize: 18.sp),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20.r,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

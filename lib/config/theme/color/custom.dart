@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 
 // 覆盖主题的全局自定义
 class CustomAppColor {
@@ -27,10 +28,5 @@ class CustomAppColor {
     navBarColor = Colors.white;
     colorF3F3F6 = const Color(0xffF3F3F6);
     color202326 = const Color(0xff202326);
-  }
-
-  // 是否深色模式, 可判断是否是夜间模式来设置自定义颜色
-  bool isDarkMode(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark;
   }
 }

@@ -6,7 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
-import 'package:flutter_sign_in/config/theme/cupertino/light.dart';
+import 'package:flutter_sign_in/config/theme/cupertino/index.dart';
+import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:provider/provider.dart';
 
@@ -95,8 +96,7 @@ class MyApp extends StatelessWidget {
 
       // MaterialApp 会返回一个 home 或者 router 的页面, 页面中所有的 widget 都会被其包裹
       builder: (context, widget) {
-        // 初始化屏幕自适应工具，配合 MediaQuery 限制文字缩放
-        Global.initScreen(context);
+        Global.dynamicInit(context);
 
         // 可没有 Builder(构造器) 只是为了看使用方式
         return Builder(builder: ((context) {
@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
           // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
           return Material(
             child: CupertinoTheme(
-              data: cupertinoThemeColor,
+              data: cupertinoTheme(isDarkMode(context)),
 
               // 自适应,文字缩放
               child: MediaQuery(

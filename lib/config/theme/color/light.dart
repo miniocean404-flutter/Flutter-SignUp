@@ -22,5 +22,4 @@ class AppColorLight extends AppColorBase {
   static Color transparent = const Color.fromRGBO(0, 0, 0, 0);
 
   // static Color transparent = Colors.transparent;
-
 }

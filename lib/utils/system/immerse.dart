@@ -51,10 +51,10 @@ void barWidgetShow({String? show, SystemUiMode? type, List<SystemUiOverlay>? ove
 }
 
 // 状态栏和虚拟按键沉浸式
-void barColor(String? color) {
+void barColor(bool isDarkMode) {
   if (kIsWeb) return;
 
-  if (color?.trim() == 'white') {
+  if (!isDarkMode) {
     SystemChrome.setSystemUIOverlayStyle(light);
   } else {
     SystemChrome.setSystemUIOverlayStyle(dark);
