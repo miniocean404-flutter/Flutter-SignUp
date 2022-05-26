@@ -118,7 +118,7 @@ fi
 
 #判断apk目录下是否有文件
 if [ "$(ls -A $prod_path)" ]; then
-  echo "=============== APK包已导出:$prod_path ==============="
+  echo "=============== APK包已导出: $prod_path ==============="
   open $prod_path
 else
   echo '=============== APK包导出失败 ==============='
