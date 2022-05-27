@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // router_animation 需要搭配 router_animation 的 HERO
 
+// 作用,可滑动图片,可双支缩放,可双击放大
 class ViewImage extends StatefulWidget {
   final String? tag;
   final String? url;
