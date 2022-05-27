@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
@@ -184,7 +185,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   }
 
   // 创建销毁扫码控制器
-  void startScanQrAndVideo(bool state) {
+  void startScanQrAndVideo(bool state) async {
     if (state) {
       _scanController = MobileScannerController(
         // 相机朝上 front
@@ -193,11 +194,17 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       );
 
       _videoController.play();
-      Wakelock.toggle(enable: true);
+
+      // web 插件加载延时问题
+      if (kIsWeb) {
+        Timer(const Duration(milliseconds: 1000), () => Wakelock.toggle(enable: true));
+      } else {
+        Wakelock.toggle(enable: true);
+      }
     } else {
       _scanController.dispose();
       _videoController.pause();
-      Wakelock.toggle(enable: false);
+      await Wakelock?.toggle(enable: false);
     }
     setState(() {
       isShowScan = state;
@@ -244,7 +251,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       toast('点击5次进入设置界面');
     }
 
-    if (_clickNum >= 5) {
+    if (_clickNum >= 5 && !kIsWeb) {
       final auth = LocalAuth();
       final isCanBiometrics = await auth.isCanBiometrics;
       final isCanDeviceBiometrics = await auth.isCanDeviceBiometrics;
@@ -265,6 +272,8 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
           Routers.navigateTo(context, Routers.settingHome);
         }
       }
+    } else if (_clickNum >= 5 && kIsWeb) {
+      Routers.navigateTo(context, Routers.settingHome);
     }
   }
 

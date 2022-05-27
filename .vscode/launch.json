@@ -17,6 +17,7 @@
       "internalConsoleOptions": "openOnFirstSessionStart", // 选择调试时调试输出的面板是否打开
       "console": "debugConsole", // 只支持调试控制台
       "args": [
+        // "--web-renderer html",
         // "run -d chrome", // 运行平台
         "--dart-define",
         "CHANNEL=Flutter",
