@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/device_info.dart';
+import 'package:flutter_sign_in/utils/plugin/local_notifications.dart';
 import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
 import 'package:flutter_sign_in/utils/system/immerse.dart';
 
@@ -27,6 +28,9 @@ class Global {
     Routers.defineRoutes();
 
     barWidgetShow();
+
+    // 本地通知
+    await LocalNotifications.init();
 
     await DeviceInfo().init();
 

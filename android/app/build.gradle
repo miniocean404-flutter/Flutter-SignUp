@@ -141,7 +141,8 @@ android {
         debug {
             ndk {
                 //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错(x86是兼容模拟器的)
-                abiFilters "armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"
+                // abiFilters "armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"
+                abiFilters "arm64-v8a" // 暂时使用真机调试的so
             }
         }
     }

@@ -191,7 +191,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     if (state) {
       _scanController = MobileScannerController(
         // 相机朝上 front
-        facing: CameraFacing.front,
+        facing: CameraFacing.back,
         torchEnabled: false,
       );
 

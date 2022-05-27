@@ -45,6 +45,8 @@ dependencies:
   logger: ^1.1.0
   # toast
   fluttertoast: ^8.0.9
+  # 本地通知
+  flutter_local_notifications: ^9.5.3+1
   # 下滑刷新,下拉到底动画
   flutter_easyrefresh: ^2.2.1
   # 加载AE制作的炫酷动画

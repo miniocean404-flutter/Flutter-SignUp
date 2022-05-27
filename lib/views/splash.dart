@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/router/routers.dart';
+import 'package:flutter_sign_in/utils/plugin/local_notifications.dart';
 import 'package:flutter_sign_in/utils/plugin/url_scheme.dart';
 import 'package:flutter_sign_in/utils/system/immerse.dart' show barWidgetShow;
 
@@ -78,7 +78,8 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   void startJump() async {
     barWidgetShow();
 
-    Routers.navigateTo(context, Routers.home, clearStack: true);
+    LocalNotifications().send('test1', 'body');
+    // Routers.navigateTo(context, Routers.home, clearStack: true);
   }
 
   ///  生命周期变化时回调
