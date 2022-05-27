@@ -9,10 +9,10 @@ import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino/index.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
+import 'package:flutter_sign_in/config/theme/material/light.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
-import 'config/theme/material/light.dart';
 import 'provider/version.dart';
 import 'router/routers.dart';
 

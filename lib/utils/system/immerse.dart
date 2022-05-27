@@ -74,6 +74,9 @@ SystemUiOverlayStyle light = SystemUiOverlayStyle(
   statusBarColor: Colors.transparent,
   statusBarIconBrightness: Brightness.dark,
   statusBarBrightness: Brightness.dark,
+  // true为强制设置白色背景条确保与图标和应用程序的背景形成对比
+  // 并且虚拟按键也有强制添加导致上划有白色细线
+  // 安卓10 sdk 29 可用
   systemStatusBarContrastEnforced: false,
 );
 
@@ -86,6 +89,6 @@ SystemUiOverlayStyle dark = SystemUiOverlayStyle(
   /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
   statusBarColor: Colors.transparent,
   statusBarIconBrightness: Brightness.dark,
-  statusBarBrightness: Brightness.light,
-  systemStatusBarContrastEnforced: true,
+  statusBarBrightness: Brightness.dark,
+  systemStatusBarContrastEnforced: false,
 );

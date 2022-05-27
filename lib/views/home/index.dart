@@ -71,8 +71,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     Routers.routeObserver.unsubscribe(this);
 
-    Wakelock.toggle(enable: false);
-
     super.dispose();
   }
 
@@ -181,7 +179,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     await _videoController.play();
     await _videoController.initialize();
 
-    Wakelock.toggle(enable: true);
     setState(() {});
     // 设置属性后初始化
   }
@@ -196,9 +193,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       );
 
       _videoController.play();
+      Wakelock.toggle(enable: true);
     } else {
       _scanController.dispose();
       _videoController.pause();
+      Wakelock.toggle(enable: false);
     }
     setState(() {
       isShowScan = state;

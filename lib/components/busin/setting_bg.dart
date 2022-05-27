@@ -73,7 +73,7 @@ class _SettingBgState extends State<SettingBg> {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         // color: const Color(0xffFFFFFf),
-        color: AppColor.of(context).currentMode.primary,
+        color: AppColor.of(context).currentMode.secondary,
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
       ),
       child: widget.childs != null ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list) : widget.child,
