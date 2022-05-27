@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/custom.dart';
+import 'package:flutter_sign_in/components/common/custom_corlor.dart';
 
 // 覆盖主题的全局自定义
 @immutable

@@ -16,7 +16,7 @@ class AppColorDark extends CurrentModeColor {
     unactive = const Color(0xffd2d5dd);
     un2active = const Color(0xff8d8d8d);
     un3active = const Color(0xffb1b1b1);
-    border = const Color(0xFF000000);
+    border = const Color(0xFF202124);
 
     black = const Color(0xFF000000);
     transparent = const Color.fromRGBO(0, 0, 0, 0);

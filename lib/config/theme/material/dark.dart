@@ -26,6 +26,7 @@ ThemeData _materialDarkColor() {
     onSurface: AppColor().dark.un3active,
     onBackground: AppColor().dark.unactive,
     onError: AppColor().dark.danger,
+    outline: AppColor().dark.border,
   );
 
   final base = ThemeData(
@@ -47,7 +48,8 @@ ThemeData _materialDarkColor() {
     splashFactory: const NoSplashFactory(),
 
     // visualDensity:,
-    // useMaterial3: true,
+
+    useMaterial3: true,
 
     // * 全局主题
     colorScheme: colorScheme,
@@ -64,6 +66,7 @@ ThemeData _materialDarkColor() {
 
     // focusColor:,
     // hoverColor:,
+
     // shadowColor:,
 
     canvasColor: AppColor().dark.black,
@@ -98,7 +101,7 @@ ThemeData _materialDarkColor() {
 
     toggleableActiveColor: AppColor().dark.primary,
 
-    // fontFamily:,
+    fontFamily: 'GoogleSans',
     // typography:,
 
     // textTheme:,

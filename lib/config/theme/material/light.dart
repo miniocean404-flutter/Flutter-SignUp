@@ -81,8 +81,8 @@ ThemeData _materialLightColor() {
     //  surfaceVariant:,
     //  onSurfaceVariant:,
 
-    // 可创建边界和强调
-    //  outline:,
+    // matrial3开启时 可创建边界和强调,outline 这种按钮的边框颜色
+    outline: AppColor().light.border,
 
     // 绘制高架组件的阴影的颜色
     //  shadow:,
@@ -101,7 +101,6 @@ ThemeData _materialLightColor() {
   final base = ThemeData(
     // applyElevationOverlayColor:,
     // cupertinoOverrideTheme:,
-
     // 对于主题颜色的扩展，继承重写别的主题配置，是个可迭代的Map
     // extensions:,
 
@@ -112,9 +111,9 @@ ThemeData _materialLightColor() {
     // materialTapTargetSize:,
 
     // 每个TargetPlatform的默认MaterialPageRoute过渡。
-    pageTransitionsTheme: const PageTransitionsTheme(builders: {
-      // TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
-    }),
+    // pageTransitionsTheme: const PageTransitionsTheme(builders: {
+    //   TargetPlatform.iOS: ,
+    // }),
 
     //需要适配的目标类型，启动时候的平台模式，打包还是原来的模式
     platform: TargetPlatform.iOS,
@@ -213,7 +212,7 @@ ThemeData _materialLightColor() {
     // 用于突出显示切换Widget(如Switch、Radio和Checkbox)的活动状态的颜色
     toggleableActiveColor: AppColor().light.primary,
 
-    // fontFamily:,
+    fontFamily: 'GoogleSans',
 
     // 活版印刷
     // typography:,
