@@ -7,7 +7,7 @@ CupertinoThemeData cupertinoLight() {
   return CupertinoThemeData(
     brightness: Brightness.light,
 
-    // app内页面的背景色
+    // 顶部导航栏和底部标签栏的背景颜色
     scaffoldBackgroundColor: AppColorLight.page,
 
     // 顶部导航栏和底部标签栏的背景颜色。
@@ -15,10 +15,11 @@ CupertinoThemeData cupertinoLight() {
     // 设置后会导致位置下坠
     // barBackgroundColor: CupertinoColors.systemGrey6,
 
-    //  用于主题的交互元素的颜色 Icon
+    // 这种颜色通常用于按钮和可点击的文本和图标
+    // 默认为[CupertinoColors.activeBlue]。
     primaryColor: AppColorLight.primary,
 
-    // 在primaryColor背景上渲染时必须易于看到的颜色 , Button文字颜色
+    // 在primaryColor背景上渲染时必须易于看到的颜色 ,例如，当按钮的背景为primaryColor时，此颜色用于CupertinoButton的文本和图标。
     primaryContrastingColor: AppColorLight.primary,
 
     // 文字相关样式

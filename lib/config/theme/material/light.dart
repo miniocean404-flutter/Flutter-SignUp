@@ -3,6 +3,11 @@ import 'package:flutter_sign_in/config/theme/color/light.dart';
 import 'package:flutter_sign_in/config/theme/font/font_global.dart';
 import 'package:flutter_sign_in/utils/system/water_ripple.dart';
 
+// 用于去除水波纹
+// highlightColor: AppColorLight.transparent,
+// splashColor: AppColorLight.transparent,
+// splashFactory: const NoSplashFactory(),
+
 final ThemeData materialLightTheme = _materialLightColor();
 
 TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
@@ -42,50 +47,132 @@ ThemeData _materialLightColor() {
   );
 
   final base = ThemeData(
-    platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
+    // applyElevationOverlayColor:,
+    // cupertinoOverrideTheme:,
+    // extensions:,
+
+    // inputDecorationTheme:, // InputDecorator,TextField和TextFormField的默认 InputDecoration值基于此主题
+
+    // materialTapTargetSize:,
+
     pageTransitionsTheme: const PageTransitionsTheme(builders: {
       // TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
     }),
-    brightness: Brightness.light,
+    platform: TargetPlatform.iOS, //需要适配的目标类型，启动时候的平台模式，打包还是原来的模式
+
+    // scrollbarTheme:,
+
+    splashFactory: const NoSplashFactory(), // 定义InkWall和InkResponse生成的动画的外观
+
+    // visualDensity:,
+    // useMaterial3:,
+
     // * 全局主题
     colorScheme: colorScheme,
 
-    // 用于去除水波纹
-    splashColor: AppColorLight.transparent,
-    highlightColor: AppColorLight.transparent,
-    splashFactory: const NoSplashFactory(),
+    // colorSchemeSeed:,
+    brightness: Brightness.light,
 
-    primaryColor: AppColorLight.primary,
-    primaryColorDark: AppColorLight.dark,
-    primaryColorLight: AppColorLight.secondary,
+    // primarySwatch:,
+    primaryColor: AppColorLight.primary, // App主要部分的背景色(ToolBar、Tabbar等)
 
-    indicatorColor: AppColorLight.primary,
-    toggleableActiveColor: AppColorLight.primary,
+    primaryColorLight: AppColorLight.secondary, // primaryColor的较亮版本
+
+    primaryColorDark: AppColorLight.dark, // primaryColor的较暗版本
+
+    // focusColor:,
+    // hoverColor:,
+    // shadowColor:,
+
+    // MaterialType.canvas Material 的默认颜色
     canvasColor: AppColorLight.dark,
 
-    //用于materia应用程序或app内页面的背景色
+    // 作为Scaffold基础的Material默认颜色,典型Material应用或应用内页面的背景颜色
     scaffoldBackgroundColor: AppColorLight.page,
+
+    // 底部导航的颜色
+    bottomAppBarColor: AppColorLight.primary,
+
+    // card颜色
+    // cardColor:,
+
+    // Dividers PopupMenuDividers的顔色, 也用于ListTiles中间和DataTables的每行中间
+    // dividerColor:,
+
+    highlightColor: AppColorLight.transparent, // 用于动画或指示菜单被选中的高亮颜色
+    splashColor: AppColorLight.transparent, // 动画的颜色
+
+    // selectedRowColor:, // 选中行时的高亮颜色
+    // unselectedWidgetColor:, // 用于Widget处于非活动（但已启用）状态的颜色。例如，未选中的复选框。通常与accentColor形成对比
+
+    // 用于Widget无效的颜色,包括任何状态。例如禁用复选框
+    // disabledColor:,
+
+    // 有选定行时PaginatedDataTable标题的颜色
+    // secondaryHeaderColor:,
+
+    // 与primaryColor对比的颜色(例如,用作进度条的剩余部分)
     backgroundColor: AppColorLight.page,
+
+    // Dialog元素的背景色
+    // dialogBackgroundColor:,
+
+    // 选项选中的指示器颜色
+    indicatorColor: AppColorLight.primary,
+
+    // hintColor:,
+
+    // 用于输人验证错误的颜色，例如在TextField中
     errorColor: AppColorLight.danger,
 
+    toggleableActiveColor: AppColorLight.primary, // 用于突出显示切换Widget(如Switch、Radio和Checkbox)的活动状态的颜色
+
+    // fontFamily:,
+    // typography:,
+
+    // textTheme:, // 与卡片和画布对比的文本颜色
+
+    // primaryTextTheme:, // 与主色对比的文本主题
+
+    // iconTheme:, // 图标主题,图标的默认配置
+
+    // primaryIconTheme:, // 与主色对比的图标主题
+
+    // * AppBar主题配置
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColorLight.primary,
+      elevation: 1,
+    ),
+
+    // bannerTheme:,
+    // bottomAppBarTheme:,
+
+    // * 底部按钮主题
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColorLight.primary,
+      elevation: 0, //虚线阴影
+      selectedItemColor: AppColorLight.secondary,
+      unselectedItemColor: AppColorLight.unactive,
+    ),
+
+    // bottomSheetTheme:,
+    // buttonBarTheme:,
+
+    // 按钮等控件的默认配置，如RaisedButton和FlatButton
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,
       textTheme: ButtonTextTheme.primary,
     ),
 
-    // * 横向TabBar的主题
-    tabBarTheme: TabBarTheme(
-      indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColorLight.secondary,
-      labelStyle: const TextStyle(
-        fontWeight: AppFont.fontWeight,
-      ),
-      unselectedLabelColor: AppColorLight.unactive,
-      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      unselectedLabelStyle: const TextStyle(
-        fontWeight: AppFont.fontWeight,
-      ),
-    ),
+    // cardTheme:,
+    // checkboxTheme:,
+
+    // chipTheme:,  // 用于渲染Chip的颜色和样式
+
+    // dataTableTheme:,
+    // dialogTheme:,
+    // dividerTheme:,
+    // drawerTheme:,
 
     // ElevatedButton 主题
     // elevatedButtonTheme: ElevatedButtonThemeData(
@@ -108,6 +195,37 @@ ThemeData _materialLightColor() {
     //     }),
     //   ),
     // ),
+
+    // floatingActionButtonTheme:,
+    // listTileTheme:,
+    // navigationBarTheme:,
+    // navigationRailTheme:,
+    // outlinedButtonTheme:,
+    // popupMenuTheme:,
+
+    // * 进度指示器主题
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColorLight.secondary,
+    ),
+
+    // radioTheme:,
+    // sliderTheme:,
+    // snackBarTheme:,
+    // switchTheme:,
+
+    // * 横向TabBar的主题
+    tabBarTheme: TabBarTheme(
+      indicatorSize: TabBarIndicatorSize.label,
+      labelColor: AppColorLight.secondary,
+      labelStyle: const TextStyle(
+        fontWeight: AppFont.fontWeight,
+      ),
+      unselectedLabelColor: AppColorLight.unactive,
+      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: AppFont.fontWeight,
+      ),
+    ),
 
     // * 文字按钮主题
     textButtonTheme: TextButtonThemeData(
@@ -135,24 +253,12 @@ ThemeData _materialLightColor() {
       ),
     ),
 
-    // * 进度指示器主题
-    progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColorLight.secondary,
-    ),
+    // textSelectionTheme:, // 文本字段中选中文本的颜色，例如TextField
 
-    // * AppBar主题配置
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColorLight.primary,
-      elevation: 1,
-    ),
-
-    // * 底部按钮主题
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColorLight.primary,
-      elevation: 0, //虚线阴影
-      selectedItemColor: AppColorLight.secondary,
-      unselectedItemColor: AppColorLight.unactive,
-    ),
+    // timePickerTheme:,
+    // toggleButtonsTheme:,
+    // tooltipTheme:,
+    // expansionTileTheme:,
   );
 
   return base.copyWith(

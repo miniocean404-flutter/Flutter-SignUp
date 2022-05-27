@@ -15,7 +15,7 @@ ThemeData _materialDarkColor() {
   // 创建此配色方案的副本，并将给定字段替换为非空参数值
   final colorScheme = const ColorScheme.dark().copyWith(
     // 日夜间模式
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
     primary: AppColorDark.primary,
     // 黑暗主题的主色调
@@ -42,50 +42,132 @@ ThemeData _materialDarkColor() {
   );
 
   final base = ThemeData(
-    platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
+    // applyElevationOverlayColor:,
+    // cupertinoOverrideTheme:,
+    // extensions:,
+
+    // inputDecorationTheme:, // InputDecorator,TextField和TextFormField的默认 InputDecoration值基于此主题
+
+    // materialTapTargetSize:,
+
     pageTransitionsTheme: const PageTransitionsTheme(builders: {
       // TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
     }),
-    brightness: Brightness.dark,
+    platform: TargetPlatform.iOS, //需要适配的目标类型，启动时候的平台模式，打包还是原来的模式
+
+    // scrollbarTheme:,
+
+    splashFactory: const NoSplashFactory(), // 定义InkWall和InkResponse生成的动画的外观
+
+    // visualDensity:,
+    // useMaterial3:,
+
     // * 全局主题
     colorScheme: colorScheme,
 
-    // 用于去除水波纹
-    splashColor: AppColorDark.transparent,
-    highlightColor: AppColorDark.transparent,
-    splashFactory: const NoSplashFactory(),
+    // colorSchemeSeed:,
+    brightness: Brightness.light,
 
-    primaryColor: AppColorDark.primary,
-    primaryColorDark: AppColorDark.dark,
-    primaryColorLight: AppColorDark.secondary,
+    // primarySwatch:,
+    primaryColor: AppColorDark.primary, // App主要部分的背景色(ToolBar、Tabbar等)
 
-    indicatorColor: AppColorDark.primary,
-    toggleableActiveColor: AppColorDark.primary,
+    primaryColorLight: AppColorDark.secondary, // primaryColor的较亮版本
+
+    primaryColorDark: AppColorDark.dark, // primaryColor的较暗版本
+
+    // focusColor:,
+    // hoverColor:,
+    // shadowColor:,
+
+    // MaterialType.canvas Material 的默认颜色
     canvasColor: AppColorDark.dark,
 
-    //用于materia应用程序或app内页面的背景色
+    // 作为Scaffold基础的Material默认颜色,典型Material应用或应用内页面的背景颜色
     scaffoldBackgroundColor: AppColorDark.page,
+
+    // 底部导航的颜色
+    bottomAppBarColor: AppColorDark.primary,
+
+    // card颜色
+    // cardColor:,
+
+    // Dividers PopupMenuDividers的顔色, 也用于ListTiles中间和DataTables的每行中间
+    // dividerColor:,
+
+    highlightColor: AppColorDark.transparent, // 用于动画或指示菜单被选中的高亮颜色
+    splashColor: AppColorDark.transparent, // 动画的颜色
+
+    // selectedRowColor:, // 选中行时的高亮颜色
+    // unselectedWidgetColor:, // 用于Widget处于非活动（但已启用）状态的颜色。例如，未选中的复选框。通常与accentColor形成对比
+
+    // 用于Widget无效的颜色,包括任何状态。例如禁用复选框
+    // disabledColor:,
+
+    // 有选定行时PaginatedDataTable标题的颜色
+    // secondaryHeaderColor:,
+
+    // 与primaryColor对比的颜色(例如,用作进度条的剩余部分)
     backgroundColor: AppColorDark.page,
+
+    // Dialog元素的背景色
+    // dialogBackgroundColor:,
+
+    // 选项选中的指示器颜色
+    indicatorColor: AppColorDark.primary,
+
+    // hintColor:,
+
+    // 用于输人验证错误的颜色，例如在TextField中
     errorColor: AppColorDark.danger,
 
+    toggleableActiveColor: AppColorDark.primary, // 用于突出显示切换Widget(如Switch、Radio和Checkbox)的活动状态的颜色
+
+    // fontFamily:,
+    // typography:,
+
+    // textTheme:, // 与卡片和画布对比的文本颜色
+
+    // primaryTextTheme:, // 与主色对比的文本主题
+
+    // iconTheme:, // 图标主题,图标的默认配置
+
+    // primaryIconTheme:, // 与主色对比的图标主题
+
+    // * AppBar主题配置
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColorDark.primary,
+      elevation: 1,
+    ),
+
+    // bannerTheme:,
+    // bottomAppBarTheme:,
+
+    // * 底部按钮主题
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColorDark.primary,
+      elevation: 0, //虚线阴影
+      selectedItemColor: AppColorDark.secondary,
+      unselectedItemColor: AppColorDark.unactive,
+    ),
+
+    // bottomSheetTheme:,
+    // buttonBarTheme:,
+
+    // 按钮等控件的默认配置，如RaisedButton和FlatButton
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,
       textTheme: ButtonTextTheme.primary,
     ),
 
-    // * 横向TabBar的主题
-    tabBarTheme: TabBarTheme(
-      indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColorDark.secondary,
-      labelStyle: const TextStyle(
-        fontWeight: AppFont.fontWeight,
-      ),
-      unselectedLabelColor: AppColorDark.unactive,
-      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      unselectedLabelStyle: const TextStyle(
-        fontWeight: AppFont.fontWeight,
-      ),
-    ),
+    // cardTheme:,
+    // checkboxTheme:,
+
+    // chipTheme:,  // 用于渲染Chip的颜色和样式
+
+    // dataTableTheme:,
+    // dialogTheme:,
+    // dividerTheme:,
+    // drawerTheme:,
 
     // ElevatedButton 主题
     // elevatedButtonTheme: ElevatedButtonThemeData(
@@ -108,6 +190,37 @@ ThemeData _materialDarkColor() {
     //     }),
     //   ),
     // ),
+
+    // floatingActionButtonTheme:,
+    // listTileTheme:,
+    // navigationBarTheme:,
+    // navigationRailTheme:,
+    // outlinedButtonTheme:,
+    // popupMenuTheme:,
+
+    // * 进度指示器主题
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColorDark.secondary,
+    ),
+
+    // radioTheme:,
+    // sliderTheme:,
+    // snackBarTheme:,
+    // switchTheme:,
+
+    // * 横向TabBar的主题
+    tabBarTheme: TabBarTheme(
+      indicatorSize: TabBarIndicatorSize.label,
+      labelColor: AppColorDark.secondary,
+      labelStyle: const TextStyle(
+        fontWeight: AppFont.fontWeight,
+      ),
+      unselectedLabelColor: AppColorDark.unactive,
+      labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: AppFont.fontWeight,
+      ),
+    ),
 
     // * 文字按钮主题
     textButtonTheme: TextButtonThemeData(
@@ -135,24 +248,12 @@ ThemeData _materialDarkColor() {
       ),
     ),
 
-    // * 进度指示器主题
-    progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColorDark.secondary,
-    ),
+    // textSelectionTheme:, // 文本字段中选中文本的颜色，例如TextField
 
-    // * AppBar主题配置
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColorDark.primary,
-      elevation: 1,
-    ),
-
-    // * 底部按钮主题
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColorDark.primary,
-      elevation: 0, //虚线阴影
-      selectedItemColor: AppColorDark.secondary,
-      unselectedItemColor: AppColorDark.unactive,
-    ),
+    // timePickerTheme:,
+    // toggleButtonsTheme:,
+    // tooltipTheme:,
+    // expansionTileTheme:,
   );
 
   return base.copyWith(
