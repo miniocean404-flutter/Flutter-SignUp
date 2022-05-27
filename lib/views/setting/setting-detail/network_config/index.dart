@@ -78,7 +78,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        margin: EdgeInsets.fromLTRB(20.w, 28.h, 20.w, 0),
         child: Column(
           children: [
             SettingBg(
@@ -100,9 +100,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                           children: [
                             Text(
                               showServe,
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: const Color(0xff8A8A8D)),
+                              style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                             ),
                             SizedBox(
                               width: 5.w,
@@ -157,8 +155,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                       ),
                       Text(
                         '正常',
-                        style: TextStyle(
-                            fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),
                     ],
                   ),

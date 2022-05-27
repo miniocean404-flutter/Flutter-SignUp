@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
           // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
           // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
           return Material(
+            // CupertinoTheme 是 iOS 的 Theme 是 Android 的
             child: CupertinoTheme(
               data: cupertinoTheme(isDarkMode(context)),
 

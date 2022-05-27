@@ -73,8 +73,7 @@ class _UpdateState extends State<Update> {
 
       if (versionRes['count'] > 0) {
         for (var versionItem in list) {
-          _isHaveNew =
-              versionCompare(versionItem['versionCode'], _localVersion!);
+          _isHaveNew = versionCompare(versionItem['versionCode'], _localVersion!);
           _isHaveNew
               ? setState(() {
                   _newVersion = versionItem['versionCode'];
@@ -186,8 +185,7 @@ class _UpdateState extends State<Update> {
                       ),
                       Text(
                         'Version $_newVersion',
-                        style: TextStyle(
-                            fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),
                     ],
                   ),
@@ -208,8 +206,7 @@ class _UpdateState extends State<Update> {
                       ),
                       Text(
                         _isForceUpdate ? '强制' : '非强制',
-                        style: TextStyle(
-                            fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
                       ),
                     ],
                   ),
@@ -276,7 +273,7 @@ class _UpdateState extends State<Update> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        margin: EdgeInsets.fromLTRB(20.w, 28.h, 20.w, 0),
         child: _isLoading(),
       ),
     );

@@ -3,8 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/utils/plugin/local_notifications.dart';
+import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/url_scheme.dart';
 import 'package:flutter_sign_in/utils/system/immerse.dart' show barWidgetShow;
 
@@ -78,8 +79,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   void startJump() async {
     barWidgetShow();
 
-    LocalNotifications().send('test1', 'body');
-    // Routers.navigateTo(context, Routers.home, clearStack: true);
+    Routers.navigateTo(context, Routers.home, clearStack: true);
   }
 
   ///  生命周期变化时回调
@@ -130,14 +130,15 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
             right: 20.0,
             child: OutlinedButton(
               style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size(130.w, 40.h)),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
               ),
               onPressed: startJump,
-              child: Text('${step}s跳过'),
+              child: const Text('跳过'),
             ),
           ),
         ],

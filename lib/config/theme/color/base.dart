@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColorBase {
+class AppColorUtil {
   // 颜色值转换
   static Color string2Color(String colorString) {
     int value = 0x00000000;

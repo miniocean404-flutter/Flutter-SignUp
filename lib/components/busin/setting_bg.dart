@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sign_in/config/theme/color/app_color.dart';
 
 class SettingBg extends StatefulWidget {
   final Widget? child;
@@ -41,19 +43,20 @@ class _SettingBgState extends State<SettingBg> {
         list.add(childs[i]);
 
         if (i != childs.length - 1) {
-          list.add(
-            Row(
+          list.add(Builder(builder: ((context) {
+            return Row(
               children: [
                 SizedBox(width: widget.leftLine),
                 Flexible(
                   child: Container(
-                    color: const Color(0xffC6C6C8),
+                    // color: const Color(0xffC6C6C8),
+                    color: AppColor.of(context).currentMode.page,
                     height: 0.5.h,
                   ),
                 ),
               ],
-            ),
-          );
+            );
+          })));
         }
       }
     }
@@ -69,7 +72,8 @@ class _SettingBgState extends State<SettingBg> {
       //  none 不进行隐藏
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: const Color(0xffFFFFFf),
+        // color: const Color(0xffFFFFFf),
+        color: AppColor.of(context).currentMode.primary,
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
       ),
       child: widget.childs != null ? Column(mainAxisAlignment: MainAxisAlignment.center, children: list) : widget.child,

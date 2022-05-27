@@ -48,7 +48,7 @@ class _AboutConfigState extends State<About> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        margin: EdgeInsets.fromLTRB(20.w, 28.h, 20.w, 0),
         child: Column(
           children: [
             SettingBg(

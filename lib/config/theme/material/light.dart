@@ -130,7 +130,7 @@ ThemeData _materialLightColor() {
     // visualDensity:,
 
     // 是否使用Material3主题
-    // useMaterial3:,
+    useMaterial3: true,
 
     // 全局主题,一组十二种颜色，可用于配置大多数组件的颜色属性。
     // 此属性的添加比主题的高度特定颜色集（如cardColor、buttonColor、canvasColor等）晚得多。新组件可以专门根据colorScheme定义。
@@ -150,7 +150,7 @@ ThemeData _materialLightColor() {
     primaryColorLight: AppColor().light.secondary,
 
     // primaryColor的较暗版本
-    primaryColorDark: AppColor().light.dark,
+    primaryColorDark: AppColor().light.black,
 
     // 使用的焦点颜色表示组件具有输入焦点
     // focusColor:,
@@ -163,7 +163,7 @@ ThemeData _materialLightColor() {
     // shadowColor:,
 
     // MaterialType.canvas Material 的默认颜色
-    canvasColor: AppColor().light.dark,
+    canvasColor: AppColor().light.black,
 
     // 作为Scaffold基础的Material默认颜色,典型Material应用或应用内页面的背景颜色
     scaffoldBackgroundColor: AppColor().light.page,

@@ -42,8 +42,8 @@ class _DeviceConfigState extends State<DeviceConfig> {
       navigationBar: CupertinoNavigationBar(
         // leading: Icon(Icons.arrow_back), // 左侧组件
         // previousPageTitle: '返回', // 左侧返回按钮的文字
-        //  trailing: Icon(Icons.add), // 右侧组件
-        //  backgroundColor: Colors.blue.shade100, // 背景色
+        // trailing: const Icon(Icons.add), // 右侧组件
+        // backgroundColor: Colors.blue.shade100, // 背景色
         // brightness: Brightness.light, // 上方电量，事件，Wifi 等状态栏颜色
         // 内边距，用来调节所有子组件上下左右偏移
         // padding: const EdgeInsetsDirectional.only(start: 15, end: 15),
@@ -59,7 +59,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.fromLTRB(20.w, 108.h, 20.w, 0),
+        margin: EdgeInsets.fromLTRB(20.w, 28.h, 20.w, 0),
         child: Column(
           children: [
             SettingBg(

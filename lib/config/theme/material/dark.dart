@@ -13,7 +13,7 @@ TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
 
 ThemeData _materialDarkColor() {
   final colorScheme = const ColorScheme.dark().copyWith(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     primary: AppColor().dark.primary,
     primaryContainer: AppColor().dark.primary,
     secondary: AppColor().dark.secondary,
@@ -53,20 +53,20 @@ ThemeData _materialDarkColor() {
     colorScheme: colorScheme,
 
     // colorSchemeSeed:,
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
 
     // primarySwatch:,
     primaryColor: AppColor().dark.primary,
 
     primaryColorLight: AppColor().dark.secondary,
 
-    primaryColorDark: AppColor().dark.dark,
+    primaryColorDark: AppColor().dark.black,
 
     // focusColor:,
     // hoverColor:,
     // shadowColor:,
 
-    canvasColor: AppColor().dark.dark,
+    canvasColor: AppColor().dark.black,
 
     scaffoldBackgroundColor: AppColor().dark.page,
 
