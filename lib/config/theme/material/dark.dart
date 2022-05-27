@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/dark.dart';
+import 'package:flutter_sign_in/config/theme/color/app_color.dart';
 import 'package:flutter_sign_in/config/theme/font/font_global.dart';
 import 'package:flutter_sign_in/utils/system/water_ripple.dart';
 
@@ -14,18 +14,18 @@ TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
 ThemeData _materialDarkColor() {
   final colorScheme = const ColorScheme.dark().copyWith(
     brightness: Brightness.light,
-    primary: AppColorDark.primary,
-    primaryContainer: AppColorDark.primary,
-    secondary: AppColorDark.secondary,
-    secondaryContainer: AppColorDark.secondary,
-    surface: AppColorDark.secondary,
-    background: AppColorDark.page,
-    error: AppColorDark.danger,
-    onPrimary: AppColorDark.unactive,
-    onSecondary: AppColorDark.un2active,
-    onSurface: AppColorDark.un3active,
-    onBackground: AppColorDark.unactive,
-    onError: AppColorDark.danger,
+    primary: AppColor.of(mode: ColorMode.dark).primary,
+    primaryContainer: AppColor.of(mode: ColorMode.dark).primary,
+    secondary: AppColor.of(mode: ColorMode.dark).secondary,
+    secondaryContainer: AppColor.of(mode: ColorMode.dark).secondary,
+    surface: AppColor.of(mode: ColorMode.dark).secondary,
+    background: AppColor.of(mode: ColorMode.dark).page,
+    error: AppColor.of(mode: ColorMode.dark).danger,
+    onPrimary: AppColor.of(mode: ColorMode.dark).unactive,
+    onSecondary: AppColor.of(mode: ColorMode.dark).un2active,
+    onSurface: AppColor.of(mode: ColorMode.dark).un3active,
+    onBackground: AppColor.of(mode: ColorMode.dark).unactive,
+    onError: AppColor.of(mode: ColorMode.dark).danger,
   );
 
   final base = ThemeData(
@@ -56,28 +56,28 @@ ThemeData _materialDarkColor() {
     brightness: Brightness.light,
 
     // primarySwatch:,
-    primaryColor: AppColorDark.primary,
+    primaryColor: AppColor.of(mode: ColorMode.dark).primary,
 
-    primaryColorLight: AppColorDark.secondary,
+    primaryColorLight: AppColor.of(mode: ColorMode.dark).secondary,
 
-    primaryColorDark: AppColorDark.dark,
+    primaryColorDark: AppColor.of(mode: ColorMode.dark).dark,
 
     // focusColor:,
     // hoverColor:,
     // shadowColor:,
 
-    canvasColor: AppColorDark.dark,
+    canvasColor: AppColor.of(mode: ColorMode.dark).dark,
 
-    scaffoldBackgroundColor: AppColorDark.page,
+    scaffoldBackgroundColor: AppColor.of(mode: ColorMode.dark).page,
 
-    bottomAppBarColor: AppColorDark.primary,
+    bottomAppBarColor: AppColor.of(mode: ColorMode.dark).primary,
 
     // cardColor:,
 
     // dividerColor:,
 
-    highlightColor: AppColorDark.transparent,
-    splashColor: AppColorDark.transparent,
+    highlightColor: AppColor.of(mode: ColorMode.dark).transparent,
+    splashColor: AppColor.of(mode: ColorMode.dark).transparent,
 
     // selectedRowColor:,
     // unselectedWidgetColor:,
@@ -86,17 +86,17 @@ ThemeData _materialDarkColor() {
 
     // secondaryHeaderColor:,
 
-    backgroundColor: AppColorDark.page,
+    backgroundColor: AppColor.of(mode: ColorMode.dark).page,
 
     // dialogBackgroundColor:,
 
-    indicatorColor: AppColorDark.primary,
+    indicatorColor: AppColor.of(mode: ColorMode.dark).primary,
 
     // hintColor:,
 
-    errorColor: AppColorDark.danger,
+    errorColor: AppColor.of(mode: ColorMode.dark).danger,
 
-    toggleableActiveColor: AppColorDark.primary,
+    toggleableActiveColor: AppColor.of(mode: ColorMode.dark).primary,
 
     // fontFamily:,
     // typography:,
@@ -110,7 +110,7 @@ ThemeData _materialDarkColor() {
     // primaryIconTheme:,
 
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColorDark.primary,
+      backgroundColor: AppColor.of(mode: ColorMode.dark).primary,
       elevation: 1,
     ),
 
@@ -118,10 +118,10 @@ ThemeData _materialDarkColor() {
     // bottomAppBarTheme:,
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColorDark.primary,
+      backgroundColor: AppColor.of(mode: ColorMode.dark).primary,
       elevation: 0,
-      selectedItemColor: AppColorDark.secondary,
-      unselectedItemColor: AppColorDark.unactive,
+      selectedItemColor: AppColor.of(mode: ColorMode.dark).secondary,
+      unselectedItemColor: AppColor.of(mode: ColorMode.dark).unactive,
     ),
 
     // bottomSheetTheme:,
@@ -171,7 +171,7 @@ ThemeData _materialDarkColor() {
     // popupMenuTheme:,
 
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColorDark.secondary,
+      color: AppColor.of(mode: ColorMode.dark).secondary,
     ),
 
     // radioTheme:,
@@ -181,11 +181,11 @@ ThemeData _materialDarkColor() {
 
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColorDark.secondary,
+      labelColor: AppColor.of(mode: ColorMode.dark).secondary,
       labelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
       ),
-      unselectedLabelColor: AppColorDark.unactive,
+      unselectedLabelColor: AppColor.of(mode: ColorMode.dark).unactive,
       labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
@@ -194,13 +194,13 @@ ThemeData _materialDarkColor() {
 
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.all(TextStyle(color: AppColorDark.unactive)),
+        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor.of(mode: ColorMode.dark).unactive)),
         //未知
-        backgroundColor: MaterialStateProperty.all(AppColorDark.transparent),
+        backgroundColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).transparent),
         //背景颜色
-        foregroundColor: MaterialStateProperty.all(AppColorDark.secondary),
+        foregroundColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).secondary),
         //设置按钮上字体与图标的颜色
-        overlayColor: MaterialStateProperty.all(AppColorDark.transparent),
+        overlayColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).transparent),
         //长按水波纹颜色
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
@@ -210,7 +210,7 @@ ThemeData _materialDarkColor() {
         // minimumSize: MaterialStateProperty.all(Size(200, 100)),
         //设置边框
         side: MaterialStateProperty.all(
-          BorderSide(color: AppColorDark.transparent, width: 0),
+          BorderSide(color: AppColor.of(mode: ColorMode.dark).transparent, width: 0),
         ),
         //外边框装饰 会覆盖 side 配置的样式
         shape: MaterialStateProperty.all(const StadiumBorder()),

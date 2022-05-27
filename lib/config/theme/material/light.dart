@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/light.dart';
+import 'package:flutter_sign_in/config/theme/color/app_color.dart';
 import 'package:flutter_sign_in/config/theme/font/font_global.dart';
 import 'package:flutter_sign_in/utils/system/water_ripple.dart';
 
 // 用于去除水波纹
-// highlightColor: AppColorLight.transparent,
-// splashColor: AppColorLight.transparent,
+// highlightColor: AppColor.of().transparent,
+// splashColor: AppColor.of().transparent,
 // splashFactory: const NoSplashFactory(),
 
 final ThemeData materialLightTheme = _materialLightColor();
@@ -26,25 +26,25 @@ ThemeData _materialLightColor() {
     brightness: Brightness.light,
 
     // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)，在您的应用程序的屏幕和组件中最常显示的颜色
-    primary: AppColorLight.primary,
+    primary: AppColor.of().primary,
 
     // (按钮、AppBar) 在主色调上绘制其他部件的颜色
-    onPrimary: AppColorLight.unactive,
+    onPrimary: AppColor.of().unactive,
 
     // 一种颜色，用于需要比原色少一些强调的元素
-    primaryContainer: AppColorLight.primary,
+    primaryContainer: AppColor.of().primary,
 
     // 在primaryContainer色调上绘制其他部件的颜色
     //  onPrimaryContainer:,
 
     // 用于 UI 中不太显眼的组件（例如滤镜芯片）的强调色，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
-    secondary: AppColorLight.secondary,
+    secondary: AppColor.of().secondary,
 
     // 在secondary上绘制其他部件的颜色
-    onSecondary: AppColorLight.un2active,
+    onSecondary: AppColor.of().un2active,
 
     // 比secondary弱一些的色调
-    secondaryContainer: AppColorLight.secondary,
+    secondaryContainer: AppColor.of().secondary,
 
     // secondaryContainer上绘制其他部件的颜色
     // onSecondaryContainer:,
@@ -62,20 +62,20 @@ ThemeData _materialLightColor() {
     //  onTertiaryContainer:,
 
     // 用于输入验证错误的颜色，例如:InputDecoration.errorText
-    error: AppColorLight.danger,
-    onError: AppColorLight.danger,
+    error: AppColor.of().danger,
+    onError: AppColor.of().danger,
 
     // 一种用于错误元素的颜色，它需要的重点少于错误
     //  errorContainer:,
     //  onErrorContainer:,
 
     //可滚动内容后面的颜色
-    background: AppColorLight.page,
-    onBackground: AppColorLight.unactive,
+    background: AppColor.of().page,
+    onBackground: AppColor.of().unactive,
 
     // 小部件的背景色 如:card appbar
-    surface: AppColorLight.secondary,
-    onSurface: AppColorLight.un3active,
+    surface: AppColor.of().secondary,
+    onSurface: AppColor.of().un3active,
 
     // 用于对比surface的颜色变量
     //  surfaceVariant:,
@@ -144,13 +144,13 @@ ThemeData _materialLightColor() {
     // primarySwatch:,
 
     // App主要部分的背景色(ToolBar、Tabbar等)
-    primaryColor: AppColorLight.primary,
+    primaryColor: AppColor.of().primary,
 
     // primaryColor的较亮版本
-    primaryColorLight: AppColorLight.secondary,
+    primaryColorLight: AppColor.of().secondary,
 
     // primaryColor的较暗版本
-    primaryColorDark: AppColorLight.dark,
+    primaryColorDark: AppColor.of().dark,
 
     // 使用的焦点颜色表示组件具有输入焦点
     // focusColor:,
@@ -163,13 +163,13 @@ ThemeData _materialLightColor() {
     // shadowColor:,
 
     // MaterialType.canvas Material 的默认颜色
-    canvasColor: AppColorLight.dark,
+    canvasColor: AppColor.of().dark,
 
     // 作为Scaffold基础的Material默认颜色,典型Material应用或应用内页面的背景颜色
-    scaffoldBackgroundColor: AppColorLight.page,
+    scaffoldBackgroundColor: AppColor.of().page,
 
     // 底部导航的颜色
-    bottomAppBarColor: AppColorLight.primary,
+    bottomAppBarColor: AppColor.of().primary,
 
     // card颜色
     // cardColor:,
@@ -178,10 +178,10 @@ ThemeData _materialLightColor() {
     // dividerColor:,
 
     // 用于动画或指示菜单被选中的高亮颜色
-    highlightColor: AppColorLight.transparent,
+    highlightColor: AppColor.of().transparent,
 
     // 动画的颜色
-    splashColor: AppColorLight.transparent,
+    splashColor: AppColor.of().transparent,
 
     // 选中行时的高亮颜色
     // selectedRowColor:,
@@ -196,22 +196,22 @@ ThemeData _materialLightColor() {
     // secondaryHeaderColor:,
 
     // 与primaryColor对比的颜色(例如,用作进度条的剩余部分)
-    backgroundColor: AppColorLight.page,
+    backgroundColor: AppColor.of().page,
 
     // Dialog元素的背景色
     // dialogBackgroundColor:,
 
     // 选项选中的指示器颜色
-    indicatorColor: AppColorLight.primary,
+    indicatorColor: AppColor.of().primary,
 
     // 用于提示文本或占位符文本的颜色，例如在 TextField 字段中。
     // hintColor:,
 
     // 用于输人验证错误的颜色，例如在TextField中
-    errorColor: AppColorLight.danger,
+    errorColor: AppColor.of().danger,
 
     // 用于突出显示切换Widget(如Switch、Radio和Checkbox)的活动状态的颜色
-    toggleableActiveColor: AppColorLight.primary,
+    toggleableActiveColor: AppColor.of().primary,
 
     // fontFamily:,
 
@@ -232,7 +232,7 @@ ThemeData _materialLightColor() {
 
     // AppBar主题配置
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColorLight.primary,
+      backgroundColor: AppColor.of().primary,
       elevation: 1,
     ),
 
@@ -244,10 +244,10 @@ ThemeData _materialLightColor() {
 
     // 底部按钮主题
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColorLight.primary,
+      backgroundColor: AppColor.of().primary,
       elevation: 0, //虚线阴影
-      selectedItemColor: AppColorLight.secondary,
-      unselectedItemColor: AppColorLight.unactive,
+      selectedItemColor: AppColor.of().secondary,
+      unselectedItemColor: AppColor.of().unactive,
     ),
 
     // 用于自定义底页颜色、高度和形状的主题。
@@ -325,7 +325,7 @@ ThemeData _materialLightColor() {
 
     // 进度指示器主题
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColorLight.secondary,
+      color: AppColor.of().secondary,
     ),
 
     // radio主题
@@ -343,11 +343,11 @@ ThemeData _materialLightColor() {
     // 横向TabBar的主题
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColorLight.secondary,
+      labelColor: AppColor.of().secondary,
       labelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
       ),
-      unselectedLabelColor: AppColorLight.unactive,
+      unselectedLabelColor: AppColor.of().unactive,
       labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
@@ -357,13 +357,13 @@ ThemeData _materialLightColor() {
     // 文字按钮主题
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.all(TextStyle(color: AppColorLight.unactive)),
+        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor.of().unactive)),
         //未知
-        backgroundColor: MaterialStateProperty.all(AppColorLight.transparent),
+        backgroundColor: MaterialStateProperty.all(AppColor.of().transparent),
         //背景颜色
-        foregroundColor: MaterialStateProperty.all(AppColorLight.secondary),
+        foregroundColor: MaterialStateProperty.all(AppColor.of().secondary),
         //设置按钮上字体与图标的颜色
-        overlayColor: MaterialStateProperty.all(AppColorLight.transparent),
+        overlayColor: MaterialStateProperty.all(AppColor.of().transparent),
         //长按水波纹颜色
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
@@ -373,7 +373,7 @@ ThemeData _materialLightColor() {
         // minimumSize: MaterialStateProperty.all(Size(200, 100)),
         //设置边框
         side: MaterialStateProperty.all(
-          BorderSide(color: AppColorLight.transparent, width: 0),
+          BorderSide(color: AppColor.of().transparent, width: 0),
         ),
         //外边框装饰 会覆盖 side 配置的样式
         shape: MaterialStateProperty.all(const StadiumBorder()),

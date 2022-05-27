@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/config/theme/color/light.dart';
+import 'package:flutter_sign_in/config/theme/color/app_color.dart';
 import 'package:flutter_sign_in/utils/plugin/device_info.dart';
 
 // 设置状态栏隐藏哪些，或者全部隐藏
@@ -64,8 +64,8 @@ void barColor(bool isDarkMode) {
 // 白色沉浸式状态栏颜色  白色文字
 SystemUiOverlayStyle light = SystemUiOverlayStyle(
   // * 虚拟按键
-  systemNavigationBarDividerColor: AppColorLight.page, //分割颜色
-  systemNavigationBarColor: AppColorLight.page, //背景色
+  systemNavigationBarDividerColor: AppColor.of().page, //分割颜色
+  systemNavigationBarColor: AppColor.of().page, //背景色
   systemNavigationBarIconBrightness: Brightness.dark, //图标色(按钮、小白条)
   systemNavigationBarContrastEnforced: false,
 
@@ -79,8 +79,8 @@ SystemUiOverlayStyle light = SystemUiOverlayStyle(
 
 // 黑色沉浸式状态栏颜色 黑色文字
 SystemUiOverlayStyle dark = SystemUiOverlayStyle(
-  systemNavigationBarColor: AppColorLight.dark,
-  systemNavigationBarDividerColor: AppColorLight.dark,
+  systemNavigationBarColor: AppColor.of(mode: ColorMode.dark).page,
+  systemNavigationBarDividerColor: AppColor.of(mode: ColorMode.dark).page,
   systemNavigationBarIconBrightness: Brightness.light,
 
   /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
