@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
 import 'package:flutter_sign_in/utils/plugin/device_info.dart';
 
 // 设置状态栏隐藏哪些，或者全部隐藏
@@ -62,31 +61,33 @@ void barColor(bool isDarkMode) {
 }
 
 // 白色沉浸式状态栏颜色  白色文字
-SystemUiOverlayStyle light = SystemUiOverlayStyle(
-  // * 虚拟按键
-  systemNavigationBarDividerColor: AppColor().light.page, //分割颜色
-  systemNavigationBarColor: AppColor().light.page, //背景色
-  systemNavigationBarIconBrightness: Brightness.dark, //图标色(按钮、小白条)
+SystemUiOverlayStyle light = const SystemUiOverlayStyle(
+  // 虚拟按键
+  // 分割颜色
+  systemNavigationBarDividerColor: Colors.transparent,
+  // 背景色,设置为透明防止翻页时候导致的变暗而有细缝,设置后systemNavigationBarDividerColor也失效
+  systemNavigationBarColor: Colors.transparent,
+  // 图标色(按钮、小白条)
+  systemNavigationBarIconBrightness: Brightness.dark,
+  // true为强制设置白色背景条确保与图标和应用程序的背景形成对比
+  // 并且虚拟按键也有强制添加导致上划有白色细线
   systemNavigationBarContrastEnforced: false,
 
-  // * 状态栏
+  // 状态栏
   // 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
   statusBarColor: Colors.transparent,
   statusBarIconBrightness: Brightness.dark,
   statusBarBrightness: Brightness.dark,
   // true为强制设置白色背景条确保与图标和应用程序的背景形成对比
-  // 并且虚拟按键也有强制添加导致上划有白色细线
   // 安卓10 sdk 29 可用
   systemStatusBarContrastEnforced: false,
 );
 
-// 黑色沉浸式状态栏颜色 黑色文字
-SystemUiOverlayStyle dark = SystemUiOverlayStyle(
-  systemNavigationBarColor: AppColor().dark.page,
-  systemNavigationBarDividerColor: AppColor().dark.page,
+SystemUiOverlayStyle dark = const SystemUiOverlayStyle(
+  systemNavigationBarColor: Colors.transparent,
+  systemNavigationBarDividerColor: Colors.transparent,
   systemNavigationBarIconBrightness: Brightness.light,
-
-  /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
+  systemNavigationBarContrastEnforced: false,
   statusBarColor: Colors.transparent,
   statusBarIconBrightness: Brightness.dark,
   statusBarBrightness: Brightness.dark,
