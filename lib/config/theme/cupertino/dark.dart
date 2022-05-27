@@ -8,7 +8,7 @@ CupertinoThemeData cupertinoDark() {
     brightness: Brightness.light,
 
     // 顶部导航栏和底部标签栏的背景颜色
-    scaffoldBackgroundColor: AppColor.of(mode: ColorMode.dark).page,
+    scaffoldBackgroundColor: AppColor().dark.page,
 
     // 顶部导航栏和底部标签栏的背景颜色。
     // 默认:在浅色模式下默认为浅灰色，在深色模式下默认为深半透明灰色。
@@ -17,10 +17,10 @@ CupertinoThemeData cupertinoDark() {
 
     // 这种颜色通常用于按钮和可点击的文本和图标
     // 默认为[CupertinoColors.activeBlue]。
-    primaryColor: AppColor.of().primary,
+    primaryColor: AppColor().dark.primary,
 
     // 在primaryColor背景上渲染时必须易于看到的颜色 ,例如，当按钮的背景为primaryColor时，此颜色用于CupertinoButton的文本和图标。
-    primaryContrastingColor: AppColor.of().primary,
+    primaryContrastingColor: AppColor().dark.primary,
 
     // 文字相关样式
     textTheme: CupertinoTextThemeData(
@@ -28,7 +28,7 @@ CupertinoThemeData cupertinoDark() {
       textStyle: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: AppColor.of().danger,
+        color: AppColor().dark.danger,
       ),
       // actionTextStyle:,
       // tabLabelTextStyle:,

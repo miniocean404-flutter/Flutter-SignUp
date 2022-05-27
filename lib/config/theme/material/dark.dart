@@ -14,18 +14,18 @@ TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
 ThemeData _materialDarkColor() {
   final colorScheme = const ColorScheme.dark().copyWith(
     brightness: Brightness.light,
-    primary: AppColor.of(mode: ColorMode.dark).primary,
-    primaryContainer: AppColor.of(mode: ColorMode.dark).primary,
-    secondary: AppColor.of(mode: ColorMode.dark).secondary,
-    secondaryContainer: AppColor.of(mode: ColorMode.dark).secondary,
-    surface: AppColor.of(mode: ColorMode.dark).secondary,
-    background: AppColor.of(mode: ColorMode.dark).page,
-    error: AppColor.of(mode: ColorMode.dark).danger,
-    onPrimary: AppColor.of(mode: ColorMode.dark).unactive,
-    onSecondary: AppColor.of(mode: ColorMode.dark).un2active,
-    onSurface: AppColor.of(mode: ColorMode.dark).un3active,
-    onBackground: AppColor.of(mode: ColorMode.dark).unactive,
-    onError: AppColor.of(mode: ColorMode.dark).danger,
+    primary: AppColor().dark.primary,
+    primaryContainer: AppColor().dark.primary,
+    secondary: AppColor().dark.secondary,
+    secondaryContainer: AppColor().dark.secondary,
+    surface: AppColor().dark.secondary,
+    background: AppColor().dark.page,
+    error: AppColor().dark.danger,
+    onPrimary: AppColor().dark.unactive,
+    onSecondary: AppColor().dark.un2active,
+    onSurface: AppColor().dark.un3active,
+    onBackground: AppColor().dark.unactive,
+    onError: AppColor().dark.danger,
   );
 
   final base = ThemeData(
@@ -56,28 +56,28 @@ ThemeData _materialDarkColor() {
     brightness: Brightness.light,
 
     // primarySwatch:,
-    primaryColor: AppColor.of(mode: ColorMode.dark).primary,
+    primaryColor: AppColor().dark.primary,
 
-    primaryColorLight: AppColor.of(mode: ColorMode.dark).secondary,
+    primaryColorLight: AppColor().dark.secondary,
 
-    primaryColorDark: AppColor.of(mode: ColorMode.dark).dark,
+    primaryColorDark: AppColor().dark.dark,
 
     // focusColor:,
     // hoverColor:,
     // shadowColor:,
 
-    canvasColor: AppColor.of(mode: ColorMode.dark).dark,
+    canvasColor: AppColor().dark.dark,
 
-    scaffoldBackgroundColor: AppColor.of(mode: ColorMode.dark).page,
+    scaffoldBackgroundColor: AppColor().dark.page,
 
-    bottomAppBarColor: AppColor.of(mode: ColorMode.dark).primary,
+    bottomAppBarColor: AppColor().dark.primary,
 
     // cardColor:,
 
     // dividerColor:,
 
-    highlightColor: AppColor.of(mode: ColorMode.dark).transparent,
-    splashColor: AppColor.of(mode: ColorMode.dark).transparent,
+    highlightColor: AppColor().dark.transparent,
+    splashColor: AppColor().dark.transparent,
 
     // selectedRowColor:,
     // unselectedWidgetColor:,
@@ -86,17 +86,17 @@ ThemeData _materialDarkColor() {
 
     // secondaryHeaderColor:,
 
-    backgroundColor: AppColor.of(mode: ColorMode.dark).page,
+    backgroundColor: AppColor().dark.page,
 
     // dialogBackgroundColor:,
 
-    indicatorColor: AppColor.of(mode: ColorMode.dark).primary,
+    indicatorColor: AppColor().dark.primary,
 
     // hintColor:,
 
-    errorColor: AppColor.of(mode: ColorMode.dark).danger,
+    errorColor: AppColor().dark.danger,
 
-    toggleableActiveColor: AppColor.of(mode: ColorMode.dark).primary,
+    toggleableActiveColor: AppColor().dark.primary,
 
     // fontFamily:,
     // typography:,
@@ -110,7 +110,7 @@ ThemeData _materialDarkColor() {
     // primaryIconTheme:,
 
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColor.of(mode: ColorMode.dark).primary,
+      backgroundColor: AppColor().dark.primary,
       elevation: 1,
     ),
 
@@ -118,10 +118,10 @@ ThemeData _materialDarkColor() {
     // bottomAppBarTheme:,
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColor.of(mode: ColorMode.dark).primary,
+      backgroundColor: AppColor().dark.primary,
       elevation: 0,
-      selectedItemColor: AppColor.of(mode: ColorMode.dark).secondary,
-      unselectedItemColor: AppColor.of(mode: ColorMode.dark).unactive,
+      selectedItemColor: AppColor().dark.secondary,
+      unselectedItemColor: AppColor().dark.unactive,
     ),
 
     // bottomSheetTheme:,
@@ -171,7 +171,7 @@ ThemeData _materialDarkColor() {
     // popupMenuTheme:,
 
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColor.of(mode: ColorMode.dark).secondary,
+      color: AppColor().dark.secondary,
     ),
 
     // radioTheme:,
@@ -181,11 +181,11 @@ ThemeData _materialDarkColor() {
 
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.of(mode: ColorMode.dark).secondary,
+      labelColor: AppColor().dark.secondary,
       labelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
       ),
-      unselectedLabelColor: AppColor.of(mode: ColorMode.dark).unactive,
+      unselectedLabelColor: AppColor().dark.unactive,
       labelPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: const TextStyle(
         fontWeight: AppFont.fontWeight,
@@ -194,13 +194,13 @@ ThemeData _materialDarkColor() {
 
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor.of(mode: ColorMode.dark).unactive)),
+        textStyle: MaterialStateProperty.all(TextStyle(color: AppColor().dark.unactive)),
         //未知
-        backgroundColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).transparent),
+        backgroundColor: MaterialStateProperty.all(AppColor().dark.transparent),
         //背景颜色
-        foregroundColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).secondary),
+        foregroundColor: MaterialStateProperty.all(AppColor().dark.secondary),
         //设置按钮上字体与图标的颜色
-        overlayColor: MaterialStateProperty.all(AppColor.of(mode: ColorMode.dark).transparent),
+        overlayColor: MaterialStateProperty.all(AppColor().dark.transparent),
         //长按水波纹颜色
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
@@ -210,7 +210,7 @@ ThemeData _materialDarkColor() {
         // minimumSize: MaterialStateProperty.all(Size(200, 100)),
         //设置边框
         side: MaterialStateProperty.all(
-          BorderSide(color: AppColor.of(mode: ColorMode.dark).transparent, width: 0),
+          BorderSide(color: AppColor().dark.transparent, width: 0),
         ),
         //外边框装饰 会覆盖 side 配置的样式
         shape: MaterialStateProperty.all(const StadiumBorder()),
