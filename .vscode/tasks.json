@@ -156,7 +156,7 @@
     {
       "id": "branchName",
       "type": "pickString",
-      "options": ["master", "dev", "feature/api"],
+      "options": ["master", "dev"],
       "description": "请选择分支"
     },
     {
