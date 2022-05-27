@@ -10,6 +10,7 @@ class AppColorLight extends CurrentModeColor {
 
     // 页面颜色
     page = const Color(0xffefeff3);
+    buttonText = const Color(0xffFFFFFf);
 
     danger = const Color(0xffee0a24);
     warning = const Color(0xffffba00);

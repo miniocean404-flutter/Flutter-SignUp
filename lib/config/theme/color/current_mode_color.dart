@@ -13,6 +13,7 @@ abstract class CurrentModeColor {
   late Color un3active;
 
   late Color page;
+  late Color buttonText;
   late Color border;
 
   late Color black;

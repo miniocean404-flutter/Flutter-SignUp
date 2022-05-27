@@ -8,6 +8,7 @@ class AppColorDark extends CurrentModeColor {
 
     // page = const Color(0xFF202124);
     page = const Color(0xFF000000);
+    buttonText = const Color(0xffFFFFFf);
 
     danger = const Color(0xffee0a24);
     warning = const Color(0xffffba00);

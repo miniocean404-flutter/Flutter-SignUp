@@ -21,7 +21,7 @@ CupertinoThemeData cupertinoLight() {
     primaryColor: AppColor().light.primary,
 
     // 在primaryColor背景上渲染时必须易于看到的颜色 ,例如，当按钮的背景为primaryColor时，此颜色用于CupertinoButton的文本和图标。
-    primaryContrastingColor: AppColor().light.primary,
+    primaryContrastingColor: AppColor().light.buttonText,
 
     // 文字相关样式
     textTheme: CupertinoTextThemeData(
