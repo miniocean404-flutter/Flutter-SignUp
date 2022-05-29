@@ -5,10 +5,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/device_info.dart';
-import 'package:flutter_sign_in/utils/plugin/local_notifications.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
+// deferred as 将包变成异步，需要时 await 包名.loadLibrary() 包名.方法名 进行调用
+// show 只载入库的某些部分
+// hide 筛选掉库的某些部分
+import 'package:flutter_sign_in/utils/plugin/index.dart' deferred as util_plguin show LocalNotifications, DeviceInfo, SpHelper hide FileJson;
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class Global {
   static Future initCommon() async {
@@ -29,13 +30,14 @@ class Global {
 
     barWidgetShow();
 
+    await util_plguin.loadLibrary();
     // 本地通知
-    await LocalNotifications.init();
+    await util_plguin.LocalNotifications.init();
 
-    await DeviceInfo().init();
+    await util_plguin.DeviceInfo().init();
 
     // 初始化持久化key,value存储工具
-    await SpHelper.init();
+    await util_plguin.SpHelper.init();
   }
 
   // 根据context动态初始化

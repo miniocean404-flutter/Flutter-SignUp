@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 // 自定义 http 异常
 class HttpException implements Exception {
@@ -30,8 +30,7 @@ class HttpException implements Exception {
         int statusCode = error.response?.statusCode ?? 0;
         switch (statusCode) {
           case 0:
-            return HttpException(
-                code: statusCode, msg: 'response 或者 状态码为空,如果是web项目可能跨域');
+            return HttpException(code: statusCode, msg: 'response 或者 状态码为空,如果是web项目可能跨域');
           case 400:
             return HttpException(code: statusCode, msg: '请求语法错误');
           case 401:

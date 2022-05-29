@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Version extends ChangeNotifier {

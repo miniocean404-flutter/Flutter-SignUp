@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:android_intent_plus/android_intent.dart';
+part of util.plugin;
 
 Future<void> backHome() async {
   if (Platform.isAndroid) {

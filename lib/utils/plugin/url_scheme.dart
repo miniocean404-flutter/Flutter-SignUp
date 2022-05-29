@@ -1,12 +1,4 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
-import 'package:uni_links/uni_links.dart';
+part of util.plugin;
 
 /// 路由跳转 context schemeUrl
 void schemeJump(BuildContext context, String schemeUrl) {

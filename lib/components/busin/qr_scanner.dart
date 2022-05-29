@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
 

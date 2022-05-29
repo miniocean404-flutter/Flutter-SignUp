@@ -1,8 +1,4 @@
-import 'package:encrypt/encrypt.dart';
-import 'package:encrypt/encrypt_io.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
-// ignore: depend_on_referenced_packages
-import 'package:pointycastle/asymmetric/api.dart';
+part of util.plugin;
 
 // 解密RSA公钥
 Future<String> decryptedRsa(RSAPublicKey publicKey, Encrypted encrypted) async {

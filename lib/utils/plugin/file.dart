@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:path_provider/path_provider.dart';
+part of util.plugin;
 
 // 文件json形式读取保存
 class FileJson {

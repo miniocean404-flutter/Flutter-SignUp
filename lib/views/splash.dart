@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/url_scheme.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

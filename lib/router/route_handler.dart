@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/views/home/index.dart';
 import 'package:flutter_sign_in/views/splash.dart';
 

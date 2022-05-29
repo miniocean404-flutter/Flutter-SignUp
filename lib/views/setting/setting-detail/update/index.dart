@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/version.dart';
 import 'package:flutter_sign_in/provider/version.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/string_handle.dart';
 import 'package:provider/provider.dart';
 

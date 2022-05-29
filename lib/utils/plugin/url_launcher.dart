@@ -1,4 +1,4 @@
-import 'package:url_launcher/url_launcher.dart';
+part of util.plugin;
 
 void launchURL(String url) async {
   final Uri uri = Uri.parse(url);

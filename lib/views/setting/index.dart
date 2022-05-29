@@ -7,7 +7,7 @@ import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/components/busin/setting_icon_button_bar.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/toast.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 enum Page {
   device,
