@@ -11,6 +11,9 @@ import 'package:flutter_sign_in/router/routers.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart' deferred as util_plguin show LocalNotifications, DeviceInfo, SpHelper hide FileJson;
 import 'package:flutter_sign_in/utils/system/index.dart';
 
+// 为函数定义类型别名，可使用 Global.initCommon is  GlobalInit<T> 进行判别是否是这个对象
+typedef GlobalInit<T, K> = Future<void> Function<T>();
+
 class Global {
   static Future initCommon() async {
     WidgetsFlutterBinding.ensureInitialized();

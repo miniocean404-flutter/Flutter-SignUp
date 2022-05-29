@@ -17,7 +17,8 @@ import 'provider/version.dart';
 import 'router/routers.dart';
 
 void main() async {
-  await Global.initCommon();
+  // ignore: unused_local_variable
+  final GlobalInit init = await Global.initCommon();
 
   runApp(
     MultiProvider(
