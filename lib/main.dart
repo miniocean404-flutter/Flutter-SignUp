@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
 
       // ignore: todo
-      //TODO 待查阅、将物理键盘事件绑定到用户界面中的操作
+      //todo 待查阅、将物理键盘事件绑定到用户界面中的操作
       shortcuts: <ShortcutActivator, Intent>{
         ...WidgetsApp.defaultShortcuts,
         const SingleActivator(LogicalKeyboardKey.select): const ActivateIntent()
@@ -100,24 +100,26 @@ class MyApp extends StatelessWidget {
         Global.dynamicInit(context);
 
         // 可没有 Builder(构造器) 只是为了看使用方式
-        return Builder(builder: ((context) {
-          // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
-          // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+        return Builder(
+          builder: ((context) {
+            // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
+            // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
 
-          return Material(
-            // CupertinoTheme 是 iOS 的 Theme 是 Android 的
-            child: CupertinoTheme(
-              data: cupertinoTheme(isDarkMode(context)),
-              child: MediaQuery(
-                // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
-                key: ObjectKey(MediaQuery.of(context).orientation),
-                // 设置文字大小不随系统设置改变（flutter screen 插件用）
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget ?? Container(),
+            return Material(
+              // CupertinoTheme 是 iOS 的 Theme 是 Android 的
+              child: CupertinoTheme(
+                data: cupertinoTheme(isDarkMode(context)),
+                child: MediaQuery(
+                  // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
+                  key: ObjectKey(MediaQuery.of(context).orientation),
+                  // 设置文字大小不随系统设置改变（flutter screen 插件用）
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                  child: widget ?? Container(),
+                ),
               ),
-            ),
-          );
-        }));
+            );
+          }),
+        );
       },
     );
   }
