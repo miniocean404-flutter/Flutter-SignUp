@@ -17,7 +17,6 @@ Future scanQRCodeApi(secret, code, type) async {
     },
   );
 
-  dynamic res = ScanQRCodeResult.fromJson(jsonDecode(json)).toJson();
-
-  return res['data'];
+  ScanQRCodeResult res = ScanQRCodeResult.fromJson(jsonDecode(json));
+  return res.data;
 }

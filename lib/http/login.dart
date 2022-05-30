@@ -13,7 +13,7 @@ Future deviceLogin(accessId, password) async {
     },
   );
 
-  dynamic res = DeviceConnect.fromJson(jsonDecode(json)).toJson();
+  DeviceConnect res = DeviceConnect.fromJson(jsonDecode(json));
 
-  return res['data'];
+  return res.data;
 }

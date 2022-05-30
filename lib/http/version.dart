@@ -13,9 +13,9 @@ Future getHistoryVersion() async {
     },
   );
 
-  Map<String, dynamic> res = HistoryVersion.fromJson(jsonDecode(json)).toJson();
+  HistoryVersion res = HistoryVersion.fromJson(jsonDecode(json));
 
-  return res['data'];
+  return res.data;
 }
 
 Future getNewVersion(version) async {
@@ -28,9 +28,9 @@ Future getNewVersion(version) async {
     },
   );
 
-  dynamic res = GetNewVersion.fromJson(jsonDecode(json)).toJson();
+  GetNewVersion res = GetNewVersion.fromJson(jsonDecode(json));
 
-  if (res['message'] == '不存在的版本') return null;
+  if (res.message == '不存在的版本') return null;
 
-  return res['data'];
+  return res.data;
 }
