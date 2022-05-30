@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,10 +10,11 @@ import 'package:flutter_sign_in/utils/plugin/index.dart' deferred as util_plguin
 import 'package:flutter_sign_in/utils/system/index.dart';
 
 // 为函数定义类型别名，可使用 Global.initCommon is  GlobalInit<T> 进行判别是否是这个对象
+// ignore: avoid_shadowing_type_parameters
 typedef GlobalInit<T, K> = Future<void> Function<T>();
 
 class Global {
-  static Future initCommon() async {
+  static Future<void> initCommon() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // 当输入和显示频率不同导致的性能下降处理
@@ -47,13 +46,16 @@ class Global {
   static dynamicInit(ctx) {
     // 初始化屏幕自适应工具,配合 MediaQuery 限制文字缩放
     // MediaQuery.of(context) 的使用必须在 WidgetsApp or MaterialApp 里来提供数据。
+
     ScreenUtil.init(
       ctx, // 传入context会更灵敏的根据屏幕变化而改变
-      orientation: Orientation.portrait, // 屏幕方向
+      // 5.5.2 版本需要添加
+      // orientation: MediaQuery.of(ctx).orientation, // 屏幕方向
+      // deviceSize: Size(window.physicalSize.width, window.physicalSize.height),
+
       designSize: const Size(768, 1024),
       minTextAdapt: true, // 是否根据宽度/高度中的最小值适配文字
       splitScreenMode: true, // 支持分屏尺寸
-      deviceSize: Size(window.physicalSize.width, window.physicalSize.height),
     );
 
     // 初始化沉浸式状态栏

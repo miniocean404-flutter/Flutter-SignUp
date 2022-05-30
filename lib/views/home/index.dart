@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/modal.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
+import 'package:flutter_sign_in/components/common/video_full.dart';
 import 'package:flutter_sign_in/http/login.dart';
 import 'package:flutter_sign_in/http/qr_code.dart';
 import 'package:flutter_sign_in/router/routers.dart';
@@ -35,6 +34,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
 
   late MobileScannerController _scanController;
+
   bool isShowScan = false;
 
   int _clickNum = 0; // 点击跳转次数
@@ -277,6 +277,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
     bool isShowVideo = _businState == BusinState.sign && _videoController.value.isInitialized;
+
     return WillPopScope(
       onWillPop: !kIsWeb && Platform.isIOS
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
@@ -305,22 +306,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
               alignment: Alignment.center,
               children: [
                 // 背景视频
-                isShowVideo
-                    ? Transform.scale(
-                        // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
-                        scale: _videoController.value.aspectRatio / window.physicalSize.aspectRatio,
-                        child: Center(
-                          child: AspectRatio(
-                            aspectRatio: _videoController.value.aspectRatio,
-                            child: VideoPlayer(_videoController),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        color: Colors.black,
-                      ),
+                VideoFull(
+                  show: isShowVideo,
+                  videoAspectRatio: _videoController.value.aspectRatio,
+                  child: VideoPlayer(_videoController),
+                ),
 
                 Column(
                   children: [

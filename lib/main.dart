@@ -18,7 +18,7 @@ import 'router/routers.dart';
 
 void main() async {
   // ignore: unused_local_variable
-  final GlobalInit init = await Global.initCommon();
+  await Global.initCommon();
 
   runApp(
     MultiProvider(
@@ -103,13 +103,14 @@ class MyApp extends StatelessWidget {
         return Builder(builder: ((context) {
           // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
           // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+
           return Material(
             // CupertinoTheme 是 iOS 的 Theme 是 Android 的
             child: CupertinoTheme(
               data: cupertinoTheme(isDarkMode(context)),
-
-              // 自适应,文字缩放
               child: MediaQuery(
+                // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
+                key: ObjectKey(MediaQuery.of(context).orientation),
                 // 设置文字大小不随系统设置改变（flutter screen 插件用）
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: widget ?? Container(),
