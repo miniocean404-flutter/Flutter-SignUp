@@ -85,6 +85,8 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   void deactivate() {
     // isCurrent:这条路线是否是导航器上最顶层的路线
     dynamic isBack = ModalRoute.of(context)?.isCurrent;
+    // 命令版 willPop
+    // logger.i(ModalRoute.of(context)?.willPop());
 
     if (isBack) {
       // 限于从其他页面返回到当前页面时执行，首次进入当前页面不执行
@@ -109,7 +111,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   @override
   // 别的页面退出到当前页面的时候调用
   void didPopNext() {
-    // logger.i(ModalRoute.of(context).);
     barWidgetShow();
     startScanQrAndVideo(true);
   }
