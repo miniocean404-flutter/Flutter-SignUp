@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:lottie/lottie.dart';
 
-enum StateType { success, error, loading, none }
+enum StateType { success, error, loading }
 
 class SignStateModal extends StatefulWidget {
   final StateType state; // 状态
@@ -48,121 +48,119 @@ class _SignStateModalState extends State<SignStateModal> {
 
   @override
   Widget build(BuildContext context) {
-    final bool loadingState = widget.state != StateType.loading;
-    final bool noneState = widget.state != StateType.none;
+    final bool loadingState = widget.state == StateType.loading;
 
     return Container(
-      color: Colors.transparent,
-      child: noneState
-          ? BackdropFilter(
-              //  widget.state != StateType.none
-              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 265.h,
+        color: Colors.transparent,
+        child: BackdropFilter(
+          //  widget.state != StateType.none
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 265.h,
+                ),
+
+                // 提示卡片
+                if (loadingState)
+                  Lottie.asset(
+                    Assets.lottieLading,
+                    width: 150.r,
+                    height: 150.r,
+                    fit: BoxFit.fill,
+                  ),
+
+                if (!loadingState)
+                  Container(
+                    width: 300.w,
+                    height: 323.h,
+                    decoration: const BoxDecoration(
+                      color: Color(0xffFFFFFF),
+                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 4,
+                          blurRadius: 50,
+                          color: Color.fromRGBO(0, 0, 0, 0.18),
+                        )
+                      ],
                     ),
-                    // 提示卡片
-                    loadingState
-                        ? Container(
-                            width: 300.w,
-                            height: 323.h,
-                            decoration: const BoxDecoration(
-                              color: Color(0xffFFFFFF),
-                              borderRadius: BorderRadius.all(Radius.circular(18)),
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 4,
-                                  blurRadius: 50,
-                                  color: Color.fromRGBO(0, 0, 0, 0.18),
-                                )
-                              ],
-                            ),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 50.h),
-                                  Image.asset(
-                                    _currentState['img'],
-                                    width: 141.67.r,
-                                    height: 141.67.r,
-                                  ),
-                                  SizedBox(height: 36.h),
-                                  Text(
-                                    _currentState['state'],
-                                    style: TextStyle(
-                                      fontSize: 32.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  )
-                                ],
-                              ),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 50.h),
+                          Image.asset(
+                            _currentState['img'],
+                            width: 141.67.r,
+                            height: 141.67.r,
+                          ),
+                          SizedBox(height: 36.h),
+                          Text(
+                            _currentState['state'],
+                            style: TextStyle(
+                              fontSize: 32.sp,
+                              fontWeight: FontWeight.w400,
                             ),
                           )
-                        : Lottie.asset(
-                            Assets.lottieLading,
-                            width: 150.r,
-                            height: 150.r,
-                            fit: BoxFit.fill,
-                          ),
-                    SizedBox(height: 50.h),
+                        ],
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 50.h),
 
-                    // 提示语
-                    SizedBox(
-                      width: 216.w,
-                      child: Text(
-                        _currentState['tip'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w400,
+                // 提示语
+                SizedBox(
+                  width: 216.w,
+                  child: Text(
+                    _currentState['tip'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xff999999),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 72.5.h),
+
+                // 关闭按钮
+                if (!loadingState)
+                  GestureDetector(
+                    // '按下时回调'
+                    onTapDown: (TapDownDetails tapDownDetails) {},
+                    // '抬起时回调'
+                    onTapUp: (TapUpDetails tapUpDetails) {},
+                    // '点击事件回调'
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    // '点击取消事件回调'
+                    onTapCancel: () {},
+                    child: Container(
+                      width: 35.r,
+                      height: 35.r,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        border: Border.all(
+                          width: 2.5.r,
                           color: const Color(0xff999999),
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.close,
+                          color: Color(0xff999999),
                         ),
                       ),
                     ),
-                    SizedBox(height: 72.5.h),
-
-                    // 关闭按钮
-                    loadingState
-                        ? GestureDetector(
-                            // '按下时回调'
-                            onTapDown: (TapDownDetails tapDownDetails) {},
-                            // '抬起时回调'
-                            onTapUp: (TapUpDetails tapUpDetails) {},
-                            // '点击事件回调'
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            // '点击取消事件回调'
-                            onTapCancel: () {},
-                            child: Container(
-                              width: 35.r,
-                              height: 35.r,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                                border: Border.all(
-                                  width: 2.5.r,
-                                  color: const Color(0xff999999),
-                                  style: BorderStyle.solid,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.close,
-                                  color: Color(0xff999999),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                  ],
-                ),
-              ),
-            )
-          : Container(),
-    );
+                  )
+              ],
+            ),
+          ),
+        ));
   }
 }
