@@ -10,11 +10,11 @@ import 'package:flutter_sign_in/config/theme/cupertino/index.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:flutter_sign_in/config/theme/material/light.dart';
+import 'package:flutter_sign_in/router/index.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
 import 'provider/version.dart';
-import 'router/routers.dart';
 
 void main() async {
   // ignore: unused_local_variable
@@ -84,9 +84,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system, // 设置日间夜间模式、或者跟随系统
 
       // 路由
-      initialRoute: Routers.splash,
-      onGenerateRoute: Routers.router.generator, // 在routes查找不到时，会调用该方法
-      navigatorObservers: [Routers.routeObserver, Routers.allRouteObserver],
+      initialRoute: CustomRoute().splash,
+      onGenerateRoute: Routers().router.generator, // 在routes查找不到时，会调用该方法
+      navigatorObservers: [Routers().routeObserver, Routers().allRouteObserver],
 
       // ignore: todo
       //todo 待查阅、将物理键盘事件绑定到用户界面中的操作

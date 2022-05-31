@@ -9,7 +9,7 @@ void schemeJump(BuildContext context, String schemeUrl) {
 
   switch (jumpUri.path) {
     case '/home':
-      Routers.navigateTo(context, Routers.home, params: jumpUri.queryParameters);
+      Routers().navigateTo(context, CustomRoute().home, params: jumpUri.queryParameters);
       break;
     default:
       break;

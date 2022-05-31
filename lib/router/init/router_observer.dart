@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of fluro_routers;
 
 MyRouteObserver<PageRoute> myRouteObserver = MyRouteObserver<PageRoute>();
 
