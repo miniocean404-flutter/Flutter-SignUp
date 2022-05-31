@@ -327,67 +327,70 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                   SizedBox(height: 102.h),
 
                   // 扫码
-                  if (isShowScan)
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: SizedBox(
-                        width: 160.r,
-                        height: 160.r,
-                        child: QRScanner(
-                          controller: _scanController,
-                          onDetect: scanQRcode,
-                        ),
-                      ),
-                    ),
+                  isShowScan == true
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: SizedBox(
+                            width: 160.r,
+                            height: 160.r,
+                            child: QRScanner(
+                              controller: _scanController,
+                              onDetect: scanQRcode,
+                            ),
+                          ),
+                        )
+                      : Container(),
 
                   SizedBox(height: 158.h),
 
                   // 老师或者学生签到后不显示
-                  if (!teachIsSign && childrenIsSign)
-                    Column(
-                      children: [
-                        Text(
-                          '请向屏幕展示二维码',
-                          style: TextStyle(
-                            color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
-                            fontSize: 14.5.sp,
-                          ),
-                        ),
-                        Text(
-                          '识别后会自动签到',
-                          style: TextStyle(
-                            color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
-                          ),
-                        ),
-                        SizedBox(height: 292.h),
-                        Text(
-                          'Serendipity Envoy',
-                          style: TextStyle(
-                            color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    )
+                  teachIsSign || childrenIsSign
+                      ? Container()
+                      : Column(
+                          children: [
+                            Text(
+                              '请向屏幕展示二维码',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                fontSize: 14.5.sp,
+                              ),
+                            ),
+                            Text(
+                              '识别后会自动签到',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                              ),
+                            ),
+                            SizedBox(height: 292.h),
+                            Text(
+                              'Serendipity Envoy',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        )
                 ],
               ),
 
               //  学生上课下课card
-              if (teachIsSign)
-                UpDownClassCard(
-                  name: '张三',
-                  role: '游泳教练',
-                  left: 22.w,
-                  bottom: 22.h,
-                ),
-
-              if (childrenIsSign)
-                UpDownClassCard(
-                  name: '李四',
-                  role: '学生',
-                  right: 22.w,
-                  bottom: 22.h,
-                )
+              teachIsSign
+                  ? UpDownClassCard(
+                      name: '张三',
+                      role: '游泳教练',
+                      left: 22.w,
+                      bottom: 22.h,
+                    )
+                  : Container(),
+              childrenIsSign
+                  ? UpDownClassCard(
+                      name: '李四',
+                      role: '学生',
+                      right: 22.w,
+                      bottom: 22.h,
+                    )
+                  : Container()
               // _businState == BusinState.upDownClass
             ],
           ),
