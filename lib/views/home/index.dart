@@ -42,7 +42,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   DateTime? _scanLastTime; // 距离上次扫码时间
   DateTime? _backLastTime; // 安卓返回桌面的时间间隔
 
-  StateType _modalState = StateType.none; // 弹窗状态
   final BusinState _businState = BusinState.sign; // 当前业务模式
 
   bool teachIsSign = false; // 老师是否签到
@@ -236,11 +235,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         Navigator.of(context).push(Routers().showDialogRouter(const SignStateModal(state: StateType.success)));
       }
     }
-  }
-
-  // 关闭弹窗
-  closeModal() {
-    setState(() => {_modalState = StateType.none});
   }
 
   // 进入设置界面
