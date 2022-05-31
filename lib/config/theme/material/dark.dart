@@ -7,7 +7,7 @@ final ThemeData materialDarkTheme = _materialDarkColor();
 
 TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
       bodyText1: base.bodyText1!.copyWith(
-        fontFamily: 'GoogleSans',
+        fontFamily: 'Ping fang SC',
       ),
     );
 
@@ -101,7 +101,7 @@ ThemeData _materialDarkColor() {
 
     toggleableActiveColor: AppColor().dark.primary,
 
-    fontFamily: 'GoogleSans',
+    fontFamily: 'Ping fang SC',
     // typography:,
 
     // textTheme:,

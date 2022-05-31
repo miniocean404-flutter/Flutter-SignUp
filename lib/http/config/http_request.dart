@@ -22,10 +22,11 @@ class Http {
       receiveTimeout: HttpOptions().receiveTimeout,
       headers: HttpOptions().header,
       responseType: HttpOptions().responseType,
+      contentType: HttpOptions().contentType,
     );
 
     dio = Dio(baseOptions);
-    dio.interceptors.add(HttpInterceptor()); // 添加拦截器
+    dio.interceptors.add(HttpInterceptor()); // 添加拦截器,还可以继续添加其他拦截器
   }
 
   //* 初始化公共属性 如果需要覆盖原配置项 就调用它
@@ -48,36 +49,32 @@ class Http {
     if (interceptors != null) dio.interceptors.addAll(interceptors);
   }
 
-  //* 设置请求头
+  // * 设置请求头
   void setHeaders(Map<String, dynamic> headers) {
     dio.options.headers.addAll(headers);
   }
 
-  //  取消请求:
-  //  同一个cancel token 可以用于多个请求
-  //  当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
-  //  所以参数可选
-  final CancelToken _cancelToken = CancelToken();
+  // * 取消请求:
+  // 同一个cancel token 可以用于多个请求
+  // 当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
+  // 所以参数可选
+  // final CancelToken _cancelToken = CancelToken();
+  // 取消时创建 CancelToken()
   void cancelRequests({required CancelToken token}) {
-    _cancelToken.cancel("cancelled");
+    token.cancel("cancelled");
   }
 
   // 设置鉴权请求头
   Options setAuthorizationHeader(Options requestOptions) {
     String token = '';
     if (token.isNotEmpty) {
-      requestOptions.headers!['token'] = token;
+      requestOptions.headers!['token'] = 'Bearer $token';
     }
     return requestOptions;
   }
 
   // restful get 操作
-  Future get(
-    String path, {
-    Map<String, dynamic>? params,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
+  Future get(String path, {Map<String, dynamic>? params, Options? options, CancelToken? cancelToken}) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
     Response response = await dio.get(
@@ -91,19 +88,68 @@ class Http {
   }
 
   // restful post 操作
-  Future post(
-    String path, {
-    Map<String, dynamic>? params,
-    dynamic data,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
+  Future post(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
     Response response = await dio.post(
       path,
       data: data,
-      queryParameters: params,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+
+    return response.data;
+  }
+
+  // restful put 操作
+  Future put(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
+    Options requestOptions = setAuthorizationHeader(Options());
+
+    Response response = await dio.put(
+      path,
+      data: data,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+
+    return response.data;
+  }
+
+  // restful patch 操作
+  Future patch(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
+    Options requestOptions = setAuthorizationHeader(Options());
+
+    Response response = await dio.patch(
+      path,
+      data: data,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+
+    return response.data;
+  }
+
+  // restful patch 操作
+  Future delete(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
+    Options requestOptions = setAuthorizationHeader(Options());
+
+    Response response = await dio.delete(
+      path,
+      data: data,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+
+    return response.data;
+  }
+
+  // restful patch 操作
+  Future head(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
+    Options requestOptions = setAuthorizationHeader(Options());
+
+    Response response = await dio.head(
+      path,
+      data: data,
       options: requestOptions,
       cancelToken: cancelToken,
     );
@@ -112,12 +158,7 @@ class Http {
   }
 
   // restful post form 表单提交操作
-  Future postForm(
-    String path, {
-    required Map<String, dynamic> params,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
+  Future postForm(String path, {required Map<String, dynamic> params, Options? options, CancelToken? cancelToken}) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
     Response response = await dio.post(

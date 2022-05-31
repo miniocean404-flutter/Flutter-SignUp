@@ -29,6 +29,7 @@ CupertinoThemeData cupertinoDark() {
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: AppColor().dark.danger,
+        fontFamily: 'Ping fang SC',
       ),
       // actionTextStyle:,
       // tabLabelTextStyle:,

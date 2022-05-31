@@ -80,6 +80,9 @@ dependencies:
 
   # AES RSA 加密解密
   encrypt: ^5.0.1
+  # SHA-256 加密解密 (官方)
+  crypto: ^3.0.2
+
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
@@ -196,17 +199,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  # 字体支持格式 .ttf .otf .ttc
+  fonts:
+    - family: Ping fang SC
+      fonts:
+        - asset: assets/font/Ping_fang_SC/pingfangsc-medium.otf
+        - asset: assets/font/Ping_fang_SC/pingfangsc-regular.otf
+          weight: 400
+        - asset: assets/font/Ping_fang_SC/pingfangsc-semibold.otf
+          weight: 500
+        - asset: assets/font/Ping_fang_SC/pingfangsc-light.otf
+        - asset: assets/font/Ping_fang_SC/pingfangsc-thin.otf
+        - asset: assets/font/Ping_fang_SC/pingfangsc-ultralight.otf
+        # style: italic
+    - family: HarmonyOS_Sans
+      fonts:
+        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf
+        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf
+          weight: 400
+        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf
+          weight: 500
+          # style: italic
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

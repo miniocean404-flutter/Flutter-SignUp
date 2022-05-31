@@ -1,5 +1,15 @@
 part of util.plugin;
 
+/// SHA256
+String duSHA256(String input) {
+  String salt = RSA_SALT; // 加盐
+  var bytes = utf8.encode(input + salt);
+
+  var digest = sha256.convert(bytes);
+
+  return digest.toString();
+}
+
 // 解密RSA公钥
 Future<String> decryptedRsa(RSAPublicKey publicKey, Encrypted encrypted) async {
   final privKey = await parseKeyFromFile<RSAPrivateKey>('test/private.pem');
