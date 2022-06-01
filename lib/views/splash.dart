@@ -78,7 +78,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   // ! 如果产生按钮自己被点击,查看是不是开启了 自动跳过 的软件
   void startJump() async {
     barWidgetShow();
-
     Routers().navigateTo(context, CustomRoute().home, clearStack: true);
   }
 

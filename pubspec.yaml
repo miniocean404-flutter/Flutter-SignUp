@@ -45,6 +45,8 @@ dependencies:
   logger: ^1.1.0
   # toast
   fluttertoast: ^8.0.9
+  # loading 动画
+  flutter_easyloading: ^3.0.3
   # 本地通知
   flutter_local_notifications: ^9.5.3+1
   # 下滑刷新,下拉到底动画

@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/plugin/easyloading.dart';
 // deferred as 将包变成异步，需要时 await 包名.loadLibrary() 包名.方法名 进行调用
 // show 只载入库的某些部分
 // hide 筛选掉库的某些部分
@@ -38,9 +39,8 @@ class Global {
     await util_plguin.loadLibrary();
     // 本地通知
     await util_plguin.LocalNotifications.init();
-
+    // 设备信息
     await util_plguin.DeviceInfo().init();
-
     // 初始化持久化key,value存储工具
     await util_plguin.SpHelper.init();
   }
@@ -63,5 +63,7 @@ class Global {
 
     // 初始化沉浸式状态栏
     barColor(isDarkMode(ctx));
+
+    initCustomEasyLoading();
   }
 }

@@ -5,12 +5,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino/index.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:flutter_sign_in/config/theme/material/light.dart';
 import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/plugin/easyloading.dart';
 import 'package:provider/provider.dart';
 
 import 'config/global.dart';
@@ -97,31 +99,34 @@ class MyApp extends StatelessWidget {
       },
 
       // MaterialApp 会返回一个 home 或者 router 的页面, 页面中所有的 widget 都会被其包裹
-      builder: (context, widget) {
-        Global.dynamicInit(context);
 
-        // 可没有 Builder(构造器) 只是为了看使用方式
-        return Builder(
-          builder: ((context) {
-            // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
-            // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+      builder: EasyLoading.init(
+        builder: (context, widget) {
+          Global.dynamicInit(context);
 
-            return Material(
-              // CupertinoTheme 是 iOS 的 Theme 是 Android 的
-              child: CupertinoTheme(
-                data: cupertinoTheme(isDarkMode(context)),
-                child: MediaQuery(
-                  // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
-                  key: ObjectKey(MediaQuery.of(context).orientation),
-                  // 设置文字大小不随系统设置改变（flutter screen 插件用）
-                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                  child: widget ?? Container(),
+          // 可没有 Builder(构造器) 只是为了看使用方式
+          return Builder(
+            builder: ((context) {
+              // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
+              // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+
+              return Material(
+                // CupertinoTheme 是 iOS 的 Theme 是 Android 的
+                child: CupertinoTheme(
+                  data: cupertinoTheme(isDarkMode(context)),
+                  child: MediaQuery(
+                    // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
+                    key: ObjectKey(MediaQuery.of(context).orientation),
+                    // 设置文字大小不随系统设置改变（flutter screen 插件用）
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: widget ?? Container(),
+                  ),
                 ),
-              ),
-            );
-          }),
-        );
-      },
+              );
+            }),
+          );
+        },
+      ),
     );
   }
 }
