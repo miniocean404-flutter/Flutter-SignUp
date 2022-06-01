@@ -208,18 +208,18 @@ flutter:
           weight: 400
         - asset: assets/font/Ping_fang_SC/pingfangsc-semibold.otf
           weight: 500
-        - asset: assets/font/Ping_fang_SC/pingfangsc-light.otf
-        - asset: assets/font/Ping_fang_SC/pingfangsc-thin.otf
-        - asset: assets/font/Ping_fang_SC/pingfangsc-ultralight.otf
+        # - asset: assets/font/Ping_fang_SC/pingfangsc-light.otf
+        # - asset: assets/font/Ping_fang_SC/pingfangsc-thin.otf
+        # - asset: assets/font/Ping_fang_SC/pingfangsc-ultralight.otf
         # style: italic
-    - family: HarmonyOS_Sans
-      fonts:
-        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf
-        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf
-          weight: 400
-        - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf
-          weight: 500
-          # style: italic
+    # - family: HarmonyOS_Sans
+    #   fonts:
+    #     - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf
+    #     - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf
+    #       weight: 400
+    #     - asset: assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf
+    #       weight: 500
+    #       # style: italic
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
