@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_sign_in/http/config/http_request.dart';
-import 'package:flutter_sign_in/model/qr_code/qr_code.dart';
+import 'package:flutter_sign_in/http/model/qr_code/qr_code.dart';
 
 // 设备连接上线
 // type

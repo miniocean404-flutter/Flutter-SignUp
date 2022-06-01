@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_sign_in/http/config/http_request.dart';
-import 'package:flutter_sign_in/model/version/ger_new_version.dart';
-import 'package:flutter_sign_in/model/version/history_version.dart';
+import 'package:flutter_sign_in/http/model/version/ger_new_version.dart';
+import 'package:flutter_sign_in/http/model/version/history_version.dart';
 
 Future getHistoryVersion() async {
   var json = await Http().get(
