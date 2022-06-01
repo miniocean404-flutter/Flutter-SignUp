@@ -28,16 +28,24 @@ mixin RouteAnimationDialog {
   void showDialogNative(BuildContext context, Widget widget, {Color? bgColor}) {
     showGeneralDialog(
       context: context,
-      barrierColor: bgColor ?? Colors.black.withOpacity(0.7),
-      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => widget,
-      transitionBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-        // 渐隐渐显动画
-        return FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            scale: Tween<double>(begin: 0.1, end: 1.0).animate(animation),
-            child: child,
-          ),
+      barrierColor: Colors.black.withOpacity(0.5),
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+        return Builder(
+          builder: (BuildContext context) {
+            // 缩放动画
+            return ScaleTransition(
+              scale: Tween<double>(begin: 0.1, end: 1.0).animate(
+                CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.fastOutSlowIn,
+                ),
+              ),
+              child: widget,
+            );
+          },
         );
       },
     );
