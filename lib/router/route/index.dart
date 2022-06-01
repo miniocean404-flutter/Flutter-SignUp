@@ -16,12 +16,17 @@ class CustomRoute with InitRoute, SettingRoute {
     // 处理找不到页面情况
     router.notFoundHandler = _instance.page404Handler;
 
+    // 初始界面
     router.define(_instance.splash, handler: _instance.splashHandler);
     router.define(_instance.home, handler: _instance.homeHandler);
+
+    // 设置界面
     router.define(_instance.settingHome, handler: _instance.settingHomeHandler);
     router.define(_instance.settingAbout, handler: _instance.settingAboutHandler);
     router.define(_instance.settingNetwork, handler: _instance.settingNetworkHandler);
     router.define(_instance.settingDevice, handler: _instance.settingDeviceHandler);
     router.define(_instance.settingUpdate, handler: _instance.settingUpdateHandler);
+
+    //
   }
 }

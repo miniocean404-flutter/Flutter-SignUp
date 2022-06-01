@@ -15,7 +15,7 @@ class EnvironmentDev extends CurrentEnv {
 
     if (kIsWeb) {
       // baseUrl = IP_COMPANY_DEV_BASE_URL; // 公司
-      baseUrl = ip_HOME_DEV_BASE_URL; // 自己
+      baseUrl = IP_HOME_DEV_BASE_URL; // 自己
     }
 
     RegExp reg = RegExp(r"\/\/([\d\w.]+)", multiLine: true, unicode: true);

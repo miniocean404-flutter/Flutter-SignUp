@@ -67,6 +67,8 @@ dependencies:
   animations: ^2.0.3
   # 仅安卓使用，可以返回桌面（调用安卓原生intent）
   android_intent_plus: ^3.1.1
+  # 咸鱼优化图片加载
+  # power_image: ^0.1.0-pre.2
 
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.1.2

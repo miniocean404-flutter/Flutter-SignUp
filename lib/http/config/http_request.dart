@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sign_in/http/config/https_proxy.dart';
 
 import 'http_interceptor.dart';
 import 'http_options.dart';
@@ -27,6 +28,7 @@ class Http {
 
     dio = Dio(baseOptions);
     dio.interceptors.add(HttpInterceptor()); // 添加拦截器,还可以继续添加其他拦截器
+    HttpsProxy(dio);
   }
 
   //* 初始化公共属性 如果需要覆盖原配置项 就调用它
