@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // CupertinoApp
     return MaterialApp(
+      navigatorKey: Global.navigatorStateKey,
       title: '签到',
       debugShowCheckedModeBanner: false, // 右上角有一个DEBUG的标识
       debugShowMaterialGrid: false, // debug 模式是否展示基线像素网格

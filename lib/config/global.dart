@@ -14,6 +14,9 @@ import 'package:flutter_sign_in/utils/system/index.dart';
 typedef GlobalInit<T, K> = Future<void> Function<T>();
 
 class Global {
+  // 全局上下文
+  static final navigatorStateKey = GlobalKey<NavigatorState>();
+
   static Future<void> initCommon() async {
     WidgetsFlutterBinding.ensureInitialized();
 

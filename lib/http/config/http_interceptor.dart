@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_sign_in/http/config/http_exception.dart';
+import 'package:flutter_sign_in/http/config/status_handle.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 // 自定义拦截器
@@ -22,10 +23,9 @@ class HttpInterceptor extends Interceptor {
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
     // 覆盖异常为自定义的异常类
     HttpException httpException = HttpException.create(err);
+    StatusHandle.code(httpException);
+
     err.error = httpException;
-
-    toast('Http错误: 状态码:${httpException.code} 错误消息: ${httpException.msg}');
-
     super.onError(err, handler);
   }
 }
