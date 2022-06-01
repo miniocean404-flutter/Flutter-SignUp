@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 // 自定义 http 异常
 class HttpException implements Exception {
@@ -11,8 +10,7 @@ class HttpException implements Exception {
   // 重写报错的tostring
   @override
   String toString() {
-    logger.e('Http错误: \r\n\t状态码:$code \r\n\t错误消息: $msg');
-    return "";
+    return "\r\n\tHttp错误: \r\n\t\t状态码:$code \r\n\t\t错误消息: $msg";
   }
 
   factory HttpException.create(DioError error) {
