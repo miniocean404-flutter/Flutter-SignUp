@@ -130,6 +130,9 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
 
+            minifyEnabled true // 资源压缩设置
+            useProguard true // 代码压缩设置
+
             // 配置打包的架构
             ndk {
                 //之前看QQ微信等大佬都只用"armeabi",手机没什么x86框架的,只包含arm32和arm64即可
