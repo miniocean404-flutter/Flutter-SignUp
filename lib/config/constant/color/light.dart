@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/config/theme/color/current_mode_color.dart';
+import 'package:flutter_sign_in/config/constant/color/current_mode_color.dart';
 
 class AppColorLight extends CurrentModeColor {
   AppColorLight() {

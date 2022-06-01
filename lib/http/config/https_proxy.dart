@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/config/env/compile_mode.dart';
-import 'package:flutter_sign_in/constant/index.dart';
 
 // 文档：https://github.com/flutterchina/dio/blob/master/README-ZH.md#%E8%AE%BE%E7%BD%AEHttp%E4%BB%A3%E7%90%86
 // 掘金：https://juejin.cn/post/7029974646137028638

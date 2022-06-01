@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/base.dart';
-import 'package:flutter_sign_in/config/theme/color/current_mode_color.dart';
-import 'package:flutter_sign_in/config/theme/color/dark.dart';
-import 'package:flutter_sign_in/config/theme/color/light.dart';
-import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
+part of constant;
 
 enum ColorMode { light, dark }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 
 class SettingBg extends StatefulWidget {
   final Widget? child;

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
-import 'package:flutter_sign_in/constant/index.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class EnvironmentDev extends CurrentEnv {

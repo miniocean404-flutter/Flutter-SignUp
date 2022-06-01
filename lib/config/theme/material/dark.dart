@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
-import 'package:flutter_sign_in/config/theme/font/font_global.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
 
 final ThemeData materialDarkTheme = _materialDarkColor();

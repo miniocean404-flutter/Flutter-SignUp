@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 
 final CupertinoThemeData cupertinoDarkTheme = cupertinoDark();
 
