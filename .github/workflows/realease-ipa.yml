@@ -112,7 +112,7 @@ jobs:
         uses: actions/create-release@v1.1.4
         # 创建一个 release 版本，这里使用的 secrets.GITHUB_TOKEN 是官方内置的 secrets ，我们直接使用就可以了；
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
@@ -121,7 +121,7 @@ jobs:
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./app.ipa
