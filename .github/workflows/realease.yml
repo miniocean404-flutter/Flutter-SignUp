@@ -1,5 +1,6 @@
 # github action Flutter https://juejin.cn/post/7080764562609274916
 # 插件市场：https://github.com/marketplace?type=actions
+# 文档: https://docs.github.com/cn/actions
 
 # 这表示该工作流文件的名称，将在 Github 的 actions 选项卡作为名称显示
 name: 发布 Release
@@ -39,17 +40,17 @@ on:
 
 jobs:
   install:
-    name: Test
-    runs-on: ubuntu-latest
+    name: 测试
+    runs-on: macos-latest
     steps:
-      - run: ls -r
+      - run: ls -R
 
   # 这是工作 ID，你也可以根据自己的需要命名，会在 action 的执行过程中显示
   build:
     # 每个 job 的名字
-    name: Build
+    name: 打包
     # jobs 需要运行在虚拟机上，在这里中使用了 ubuntu-latest，当然你也可以使用windows-latest 或者 macos-latest；
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
     steps:
       # 每个步骤的名字,没有步骤的话需要加(-), 比如 - uses、- run
@@ -76,6 +77,7 @@ jobs:
         # env:
         #   FILE_NAME: lib/common/config/ignoreConfig.dart
         #   FILE_DATA: class NetConfig { static const CLIENT_ID = "${{ secrets.CLIENT_ID }}"; static const CLIENT_SECRET = "${{ secrets.CLIENT_SECRET }}";}
+
       - name: 安装依赖
         # 用于提供执行命令；
         run: |
@@ -85,30 +87,30 @@ jobs:
       - name: 打包 APK
         run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink
 
-      - name: 打包 IPA
-        run: |
-          cd ios/Runner.xcworkspace
-          xcodebuild build
-          cd ..
-          cd ..
-          flutter build ios --release --no-codesign  --split-debug-info=./symbols 
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
-
-      - name: Release
+      # - name: 打包 IPA
+      #   run: |
+      #     cd ios/Runner.xcworkspace
+      #     xcodebuild build
+      #     cd ..
+      #     cd ..
+      #     flutter build ios --release --no-codesign  --split-debug-info=./symbols
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
+      - name: 分享 Release 包
         uses: actions/upload-artifact@v3
         with:
           name: package
           path: |
             build/app/outputs/apk/release/*.apk
-            build/ios/iphoneos/app.ipa
+        #   build/ios/iphoneos/app.ipa
 
   # 上传到 release 进行版本发布
   publish:
+    name: 上传到 release 进行版本发布
     # 等待某个工作完成后
     needs: build
     # 存在 tag 的时候才会触发该任务执行
@@ -131,6 +133,6 @@ jobs:
         with:
           files: |
             prod/package/*.apk
-            prod/package/app.ipa
+        #   prod/package/app.ipa
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
