@@ -75,9 +75,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
-          upload_url: build/ios/iphoneos
-          asset_path: ./app.ipa
-          asset_name: app.ipa
+          upload_url: build/app/outputs/flutter-apk
+          asset_path: ./*.apk
+          asset_name: '*.apk'
           asset_content_type: application/zip
 
   apk:
