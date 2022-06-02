@@ -127,9 +127,9 @@ jobs:
       - name: 上传到 release 进行版本发布
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
           files: |
             prod/package/*.apk
-        #   prod/package/app.ipa
+          # prod/package/app.ipa
+          token: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
