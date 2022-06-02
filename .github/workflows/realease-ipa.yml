@@ -63,7 +63,8 @@ jobs:
       - run: flutter pub get
       - run: flutter pub deps
       - run: |
-          flutter build ios --release --no-codesign 
+          xcodebuild build 
+          flutter build ios --release --no-codesign  --split-debug-info=./symbols 
           cd build/ios/iphoneos
           mkdir Payload
           cd Payload
