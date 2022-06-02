@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: out echo
-      - run: ls -r
+        run: ls -r
 
   # 这是工作 ID，你也可以根据自己的需要命名，会在 action 的执行过程中显示
   build:
@@ -120,15 +120,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: package
+          path: prod/package
 
       - name: 展示下载的文件列表
         run: ls -R
+        working-directory: prod/package
 
       - name: 上传到 release 进行版本发布
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/app/outputs/apk/release/*.apk
-            build/ios/iphoneos/app.ipa
+            prod/package/*.apk
+            prod/package/app.ipa
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
