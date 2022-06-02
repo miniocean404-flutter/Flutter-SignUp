@@ -29,7 +29,7 @@ jobs:
       # 使用一些官方或者第三方的 actions 来执行，
       # 例如：这里使用官方的 actions/checkout@v2，它会check-out 我们的 repo
       # 之后工作流可以直接访问 repo 里的文件；
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # 设置java jdk
       - uses: actions/setup-java@v2
         with:
