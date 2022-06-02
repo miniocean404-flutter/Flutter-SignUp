@@ -30,11 +30,6 @@ jobs:
       # 例如：这里使用官方的 actions/checkout@v3，它会check-out 我们的 repo
       # 之后工作流可以直接访问 repo 里的文件；
       - uses: actions/checkout@v3
-      # 设置java jdk
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 17
       # 使用flutter环境
       - uses: subosito/flutter-action@v2
         with:
@@ -64,11 +59,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 17
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.0.1'
