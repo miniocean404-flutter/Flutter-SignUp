@@ -76,8 +76,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
           upload_url: build/app/outputs/flutter-apk
-          asset_path: ./*.apk
-          asset_name: '*.apk'
+          asset_path: ./app-release.apk
+          asset_name: 'app-release.apk'
           asset_content_type: application/zip
 
   apk:
