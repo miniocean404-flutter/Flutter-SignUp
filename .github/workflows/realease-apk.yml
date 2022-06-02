@@ -23,7 +23,7 @@ jobs:
   build:
     name: Build
     # jobs 需要运行在虚拟机上，在这里中使用了 ubuntu-latest，当然你也可以使用windows-latest 或者 macos-latest；
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
     steps:
       # 使用一些官方或者第三方的 actions 来执行，
@@ -48,7 +48,7 @@ jobs:
       # 用于提供执行命令；
       - run: flutter pub get
       - run: flutter pub deps
-      - run: flutter build apk --release --split-per-abi --no-shrink
+      - run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink
   apk:
     name: Product Apk
     # 存在 tag 的时候才会触发该任务执行
@@ -66,7 +66,7 @@ jobs:
         with:
           flutter-version: '3.0.1'
       - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi --no-shrink
+      - run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink
       # 用于将构建出来的 build/app/outputs/apk/release/app-release.apk 上传，并等到 release 任务内使用；
       - name: Upload APK
         # 上传到 release 任务
