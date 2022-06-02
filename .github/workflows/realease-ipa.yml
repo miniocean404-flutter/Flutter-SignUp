@@ -27,14 +27,14 @@ jobs:
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
     steps:
       # 使用一些官方或者第三方的 actions 来执行，
-      # 例如：这里使用官方的 actions/checkout@v2，它会check-out 我们的 repo
+      # 例如：这里使用官方的 actions/checkout@v3，它会check-out 我们的 repo
       # 之后工作流可以直接访问 repo 里的文件；
       - uses: actions/checkout@v3
       # 设置java jdk
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 17
       # 使用flutter环境
       - uses: subosito/flutter-action@v2
         with:
@@ -63,12 +63,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 8
+          java-version: 17
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.0.1'
