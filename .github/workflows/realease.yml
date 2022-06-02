@@ -42,8 +42,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: out echo
-        run: ls -r
+      - run: ls -r
 
   # 这是工作 ID，你也可以根据自己的需要命名，会在 action 的执行过程中显示
   build:
@@ -77,7 +76,7 @@ jobs:
         # env:
         #   FILE_NAME: lib/common/config/ignoreConfig.dart
         #   FILE_DATA: class NetConfig { static const CLIENT_ID = "${{ secrets.CLIENT_ID }}"; static const CLIENT_SECRET = "${{ secrets.CLIENT_SECRET }}";}
-
+      - name: 安装依赖
         # 用于提供执行命令；
         run: |
           flutter pub get
