@@ -2,7 +2,7 @@
 # 插件市场：https://github.com/marketplace?type=actions
 
 # 这表示该工作流文件的名称，将在 Github 的 actions 选项卡作为名称显示
-name: flutter_sign_in
+name: flutter_sign_in_ipa
 on:
   # 这将触发该工作流的事件名称，它可以包含事件列表，例如这里监听的事 push
   push:

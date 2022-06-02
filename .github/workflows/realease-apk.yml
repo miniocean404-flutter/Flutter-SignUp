@@ -2,7 +2,7 @@
 # 插件市场：https://github.com/marketplace?type=actions
 
 # 这表示该工作流文件的名称，将在 Github 的 actions 选项卡作为名称显示
-name: flutter_sign_in
+name: flutter_sign_in_apk
 on:
   # 这将触发该工作流的事件名称，它可以包含事件列表，例如这里监听的事 push
   push:
@@ -48,9 +48,9 @@ jobs:
       # 用于提供执行命令；
       - run: flutter pub get
       - run: flutter pub deps
-      - run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --split-per-abi --no-shrink
+      - run: flutter build apk --release --split-per-abi --no-shrink
   apk:
-    name: Generate APK
+    name: 生成Apk
     # 存在 tag 的时候才会触发该任务执行
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: macos-latest
@@ -66,7 +66,7 @@ jobs:
         with:
           flutter-version: '3.0.1'
       - run: flutter pub get
-      - run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --split-per-abi --no-shrink
+      - run: flutter build apk --release --split-per-abi --no-shrink
       # 用于将构建出来的 build/app/outputs/apk/release/app-release.apk 上传，并等到 release 任务内使用；
       - name: Upload APK
         # 上传到 release 任务
