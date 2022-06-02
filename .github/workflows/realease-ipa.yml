@@ -23,7 +23,7 @@ jobs:
   build:
     name: build-release-ipa
     # jobs 需要运行在虚拟机上，在这里中使用了 ubuntu-latest，当然你也可以使用windows-latest 或者 macos-latest；
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
     steps:
       # 使用一些官方或者第三方的 actions 来执行，
