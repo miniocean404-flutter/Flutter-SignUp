@@ -99,7 +99,7 @@ jobs:
           cd ..
           zip -r app.ipa Payload
 
-      - name: 分享到 Release Job
+      - name: Release
         uses: actions/upload-artifact@v3
         with:
           name: package
@@ -109,10 +109,11 @@ jobs:
 
   # 上传到 release 进行版本发布
   publish:
+    # 等待某个工作完成后
+    needs: build
     # 存在 tag 的时候才会触发该任务执行
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: macos-latest
-    needs: package
     steps:
       # 接收上传的东西
       - name: 获取分享的安装包
