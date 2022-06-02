@@ -21,7 +21,7 @@ on:
 jobs:
   # 这是工作 ID，你也可以根据自己的需要命名，会在 action 的执行过程中显示
   build:
-    name: 打包DEV_APK
+    name: dev-apk
     # jobs 需要运行在虚拟机上，在这里中使用了 ubuntu-latest，当然你也可以使用windows-latest 或者 macos-latest；
     runs-on: macos-latest
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
@@ -50,7 +50,7 @@ jobs:
       - run: flutter pub deps
       - run: flutter build apk --release --split-per-abi --no-shrink
   apk:
-    name: 生成Apk
+    name: Product-Apk
     # 存在 tag 的时候才会触发该任务执行
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: macos-latest
@@ -75,7 +75,7 @@ jobs:
           name: apk
           path: build/app/outputs/apk/release/app-release.apk
   release:
-    name: 发布正式APK
+    name: Release-APK
     needs: apk
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: macos-latest
