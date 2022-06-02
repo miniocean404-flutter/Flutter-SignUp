@@ -95,7 +95,7 @@ jobs:
       #     ln -s ../Runner.app
       #     cd ..
       #     zip -r app.ipa Payload
-      - name: 分享 Release 包
+      - name: 分享 Release 包给其他 Job
         uses: actions/upload-artifact@v3
         with:
           name: package
@@ -127,8 +127,9 @@ jobs:
       - name: 上传到 release 进行版本发布
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
           files: |
             prod/package/*.apk
         #   prod/package/app.ipa
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
