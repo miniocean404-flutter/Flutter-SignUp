@@ -130,7 +130,7 @@ jobs:
         # 将 apk 上传到刚刚创建的 release 版本里，自此就完成了 action 的发布流程
       - name: Upload Release APK
         id: upload_release_asset
-        uses: actions/upload-release-asset@v1.1.0
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
