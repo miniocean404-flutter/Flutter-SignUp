@@ -45,6 +45,7 @@ jobs:
     runs-on: macos-latest
     # 每个 jobs 可以将需要执行的内容划分为不同步骤；
     steps:
+      - name: Install Package And Build
       # 使用一些官方或者第三方的 actions 来执行，
       # 例如：这里使用官方的 actions/checkout@v3，它会check-out 我们的 repo
       # 之后工作流可以直接访问 repo 里的文件；
@@ -62,7 +63,6 @@ jobs:
       # 用于提供执行命令；
       - run: flutter pub get
       - run: flutter pub deps
-      - run: flutter build ipa  --release --no-codesign
       - run: |
           flutter build ios --release --no-codesign --split-debug-info=./symbols 
           cd build/ios/iphoneos
@@ -71,6 +71,18 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+      # 上传到 release
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
+        with:
+          upload_url: build/app/outputs/flutter-apk
+          asset_path: ./*.apk
+          asset_name: '*.apk'
+          asset_content_type: application/zip
+
   ipa:
     name: Generate IPA
     # 存在 tag 的时候才会触发该任务执行
@@ -129,7 +141,7 @@ jobs:
         # 将 apk 上传到刚刚创建的 release 版本里，自此就完成了 action 的发布流程
       - name: Upload Release APK
         id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
+        uses: actions/upload-release-asset@v1.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
         with:
