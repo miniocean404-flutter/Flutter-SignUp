@@ -49,13 +49,14 @@
 	<string>游泳课签到</string>
 
 	<!-- 在ios自定义Scheme的配置 -->
+	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<!-- 任意 URL 名 -->
-			<string>ANY_URL_NAME</string>
+			<string>ANYURLNAME</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>customscheme</string>

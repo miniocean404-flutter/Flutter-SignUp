@@ -105,6 +105,7 @@ import 'package:uni_links/uni_links.dart';
 <dict>
 ...
 <!-- 其它配置 -->
+  <key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
