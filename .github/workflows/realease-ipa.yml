@@ -71,16 +71,12 @@ jobs:
           cd ..
           zip -r app.ipa Payload
       # 上传到 release
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
+      - uses: softprops/action-gh-release@v1
         with:
-          upload_url: build/ios/iphoneos
-          asset_path: ./app.ipa
-          asset_name: app.ipa
-          asset_content_type: application/zip
+          files: |
+            build/ios/iphoneos/app.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ipa:
     name: Generate IPA
