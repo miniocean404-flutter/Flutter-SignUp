@@ -120,7 +120,9 @@ jobs:
           path: prod/package
 
       - name: 展示下载的文件列表
-        run: ls -R
+        run: |
+          pwd
+          ls -R
         working-directory: prod/package
 
       - name: 上传到 release 进行版本发布
