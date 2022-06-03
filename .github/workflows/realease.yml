@@ -98,27 +98,18 @@ jobs:
           cd ..
           zip -r app.ipa Payload
 
-      - name: 将 APK IPA 归并到一个目录中去
+      - name: 将 APK IPA 归并到一个目录中再准备上传
         run: |
-          pwd
-          ls -R
-          cd build/
-          pwd
-          ls -R
-          cd ~
-          pwd
-          ls -R
-          mkdir test
-          pwd
-          ls -R
+          mkdir tag
+          cp build/app/outputs/apk/release/*.apk tag
+          cp build/ios/iphoneos/app.ipa tag
 
       - name: 分享 Release 包给其他 Job
         uses: actions/upload-artifact@v3
         with:
           name: package_app_ipa
           path: |
-            build/app/outputs/apk/release/*.apk
-            build/ios/iphoneos/app.ipa
+            tag/*
 
   # 上传到 release 进行版本发布
   publish:
@@ -152,7 +143,7 @@ jobs:
           body: ${{ github.event.head_commit.message }}
           token: ${{ github.token }}
           files: |
-            prod/package/app/outputs/apk/release/*.apk
-            prod/package/ios/iphoneos/app.ipa
+            prod/package/*.apk
+            prod/package/app.ipa
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
