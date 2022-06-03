@@ -67,7 +67,9 @@ class Http {
   }
 
   // 设置鉴权请求头
-  Options setAuthorizationHeader(Options requestOptions) {
+  Options setAuthorizationHeader(Options? requestOptions) {
+    requestOptions ??= Options();
+
     String token = '';
     if (token.isNotEmpty) {
       requestOptions.headers!['token'] = 'Bearer $token';
@@ -77,7 +79,7 @@ class Http {
 
   // restful get 操作
   Future get(String path, {Map<String, dynamic>? params, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.get(
       path,
@@ -91,7 +93,7 @@ class Http {
 
   // restful post 操作
   Future post(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.post(
       path,
@@ -105,7 +107,7 @@ class Http {
 
   // restful put 操作
   Future put(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.put(
       path,
@@ -119,7 +121,7 @@ class Http {
 
   // restful patch 操作
   Future patch(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.patch(
       path,
@@ -133,7 +135,7 @@ class Http {
 
   // restful patch 操作
   Future delete(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.delete(
       path,
@@ -147,7 +149,7 @@ class Http {
 
   // restful patch 操作
   Future head(String path, {dynamic data, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.head(
       path,
@@ -161,7 +163,7 @@ class Http {
 
   // restful post form 表单提交操作
   Future postForm(String path, {required Map<String, dynamic> params, Options? options, CancelToken? cancelToken}) async {
-    Options requestOptions = setAuthorizationHeader(Options());
+    Options requestOptions = setAuthorizationHeader(options);
 
     Response response = await dio.post(
       path,
@@ -182,6 +184,12 @@ class Http {
     data,
     Options? options,
   }) async {
+    Options requestOptions = setAuthorizationHeader(options);
+    requestOptions.responseType = ResponseType.bytes;
+    requestOptions.validateStatus = (status) {
+      return status! < 500;
+    };
+
     Response? response = await dio.download(
       path,
       savePath,

@@ -38,22 +38,24 @@ dependencies:
   provider: ^6.0.3
   # 有原生写法 https://book.flutterchina.club/chapter8/eventbus.html
   event_bus: ^2.0.0
-  # 简单数据持久化，清除数据就消失（官方）
-  shared_preferences: ^2.0.15
-  # 文件读取（官方）
-  path_provider: ^2.0.10
   # 日志打印
   logger: ^1.1.0
-  # toast
-  fluttertoast: ^8.0.9
-  # loading 动画
-  flutter_easyloading: ^3.0.3
-  # 本地通知
-  flutter_local_notifications: ^9.5.3+1
+
+  # 动画(官方)
+  animations: ^2.0.3
   # 下滑刷新,下拉到底动画
   flutter_easyrefresh: ^2.2.1
   # 加载AE制作的炫酷动画
   lottie: ^1.3.0
+  # toast
+  fluttertoast: ^8.0.9
+  # loading 动画
+  flutter_easyloading: ^3.0.3
+
+  # 简单数据持久化，清除数据就消失（官方）
+  shared_preferences: ^2.0.15
+  # 文件读取（官方）
+  path_provider: ^2.0.10
 
   # 应用包信息查询（官方）
   package_info_plus: ^1.4.2
@@ -62,12 +64,23 @@ dependencies:
   # 网络信息（官方）
   network_info_plus: ^2.1.3
 
-  # 权限申请
-  permission_handler: ^9.2.0
   # 日期格式化
   date_format: ^2.0.6
-  # 动画(官方)
-  animations: ^2.0.3
+  # AES RSA 加密解密
+  encrypt: ^5.0.1
+  # SHA-256 加密解密 (官方)
+  crypto: ^3.0.2
+  # 错误收集到本地或服务器
+  sentry: ^6.5.1
+  # 控制屏幕常亮 全平台
+  wakelock: ^0.6.1+2
+  # Google 官方文章
+  # https://developer.android.com/training/permissions/requesting
+  # https://developer.android.com/training/permissions/usage-notes
+  # 可申请权限列表
+  # https://pub.dev/documentation/permission_handler_platform_interface/latest/permission_handler_platform_interface/Permission-class.html#constants
+  # 动态权限申请
+  permission_handler: ^9.2.0
   # 仅安卓使用，可以返回桌面（调用安卓原生intent）
   android_intent_plus: ^3.1.1
 
@@ -75,19 +88,12 @@ dependencies:
   url_launcher: ^6.1.2
   # URL Scheme 跳转app(浏览器跳当前自身app)
   uni_links: ^0.5.1
-
   # 指纹或面部识别 (官方)
   local_auth: ^2.1.0
   # 视频播放 (官方)
   video_player: ^2.4.2
-
-  # AES RSA 加密解密
-  encrypt: ^5.0.1
-  # SHA-256 加密解密 (官方)
-  crypto: ^3.0.2
-
-  # 控制屏幕常亮 全平台
-  wakelock: ^0.6.1+2
+  # 本地通知
+  flutter_local_notifications: ^9.5.3+1
   # 二维码扫描 同一个作者旧版本 qr_code_scanner: ^0.7.0
   mobile_scanner:
     # ^1.1.0
@@ -96,7 +102,6 @@ dependencies:
     git:
       url: https://github.com/juliansteenbakker/mobile_scanner.git
       ref: master
-
   # android ios 的升级插件
   r_upgrade: ^0.3.8+2
 
