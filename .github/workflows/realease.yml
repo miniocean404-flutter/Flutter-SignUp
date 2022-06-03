@@ -51,7 +51,8 @@ jobs:
     name: 打包
     # jobs 需要运行在虚拟机上，在这里中使用了 ubuntu-latest，当然你也可以使用windows-latest 或者 macos-latest；
     runs-on: macos-latest
-    # 每个 jobs 可以将需要执行的内容划分为不同步骤；
+    # 每个 jobs 可以将需要执行的内容划分为不同步骤，每个 name 为一个步骤
+    # 每个步骤中都是以项目目录为基准，除非一个 run 命令过程中, cd 到了某个目录 在 cd ..回来 这时候是命令的目录
     steps:
       # 每个步骤的名字,没有步骤的话需要加(-), 比如 - uses、- run
       - name: 签出文件
@@ -98,6 +99,10 @@ jobs:
           cd ..
           zip -r app.ipa Payload
 
+      # 如果不归为一个文件夹 会因为不同目录导致上传文件为 build 之后的 所有文件层级
+      # 比如 actions/upload-artifact 的 path 目录为
+      #  build/app/outputs/apk/release/*.apk  build/ios/iphoneos/app.ipa
+      # 最后会上传成一个文件夹有这两个目录结构 app/outputs/apk/release/xx.apk ios/iphoneos/xx.ipa
       - name: 将 APK IPA 归并到一个目录中再准备上传
         run: |
           mkdir tag
