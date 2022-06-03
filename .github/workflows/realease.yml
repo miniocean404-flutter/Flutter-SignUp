@@ -79,7 +79,7 @@ jobs:
           flutter pub deps
 
       - name: 打包 APK
-        run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink
+        run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink --dart-define ENV=dev --dart-define CHANNEL=MI
 
       # - name: 打包 IPA
       #   run: |
@@ -97,7 +97,7 @@ jobs:
       - name: 分享 Release 包给其他 Job
         uses: actions/upload-artifact@v3
         with:
-          name: package
+          name: package_app_ipa
           path: |
             build/app/outputs/apk/release/*.apk
         #   build/ios/iphoneos/app.ipa
@@ -116,7 +116,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           # name 为分享 Release 包里的 name
-          name: package
+          name: package_app_ipa
           path: prod/package
 
       - name: 展示下载的文件列表
@@ -131,8 +131,8 @@ jobs:
         with:
           generate_release_notes: true
           tag_name: ${{ github.ref }}
-          token: ${{ github.token }}
           body: ${{ github.event.head_commit.message }}
+          token: ${{ github.token }}
           files: |
             prod/package/*.apk
           # prod/package/app.ipa
