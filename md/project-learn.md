@@ -6,6 +6,14 @@ https://juejin.cn/post/6953144821611495431#heading-5
 
 https://zhuanlan.zhihu.com/p/505288508
 
+#### 全局 context 问题
+
+1. 路由跳转、弹窗、媒体查询，全部依赖于 BuildContext，如果在 Service 层（或其他非 UI 层）做这些操作，必须要逐层传递正确的 BuildContext 实例。
+2. 依赖于 BuildContext 的逻辑，必须写在某一个页面的 Widget 初始化中，否则无法拿到正确的 BuildContext；而一些全局初始化的逻辑必须要写在某一个页面里，而如果首次唤起的不是这个页面，需要手动保证初始化逻辑不出问题。
+3. 获取当前前台页面的路由，可以用 ModalRoute 对象，但必须拿到目标页面的 BuildContext 才可以，Navigator 的 BuildContext 是拿不到的。
+4. MediaQuery、Navigator、Overlays 的 BuildContext 不是一个，不能用错。
+5. Flutter 绝大部分第三方 UI 库是依赖于 BuildContext，意味着你必须要在 APP 初始化后才能使用这些库，即使是 toast 这样的工具 UI。
+
 #### Overlay 图层
 
 添加 Overlay 图层 (常用于自定义 loading，toast 等能力支持)\
