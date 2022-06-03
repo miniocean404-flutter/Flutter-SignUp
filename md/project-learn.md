@@ -6,6 +6,11 @@ https://juejin.cn/post/6953144821611495431#heading-5
 
 https://zhuanlan.zhihu.com/p/505288508
 
+#### Overlay 图层
+
+添加 Overlay 图层 (常用于自定义 loading，toast 等能力支持)\
+Overlay.of(context)?.insert(? extends OverlayEntry);
+
 #### !.和?.的区别
 
 ```

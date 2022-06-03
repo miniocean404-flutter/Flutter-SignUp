@@ -1,5 +1,13 @@
 // https://github.com/nslogx/flutter_easyloading/blob/master/README-zh_CN.md
 
+// 添加 Overlay 图层 (常用于自定义 loading，toast 等能力支持) EasyLoading 也是基于 Overlay实现
+// Overlay.of(context)?.insert(OverlayEntry(builder: (context) {
+//       return Container(
+//         alignment: Alignment.center,
+//         child: Container(height: 200, width: 200, color: Colors.black),
+//       );
+//     }));
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

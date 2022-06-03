@@ -7,7 +7,7 @@ import 'package:flutter_sign_in/utils/plugin/easyloading.dart';
 // deferred as 将包变成异步，需要时 await 包名.loadLibrary() 包名.方法名 进行调用
 // show 只载入库的某些部分
 // hide 筛选掉库的某些部分
-import 'package:flutter_sign_in/utils/plugin/index.dart' deferred as util_plguin show LocalNotifications, DeviceInfo, SpHelper hide FileJson;
+import 'package:flutter_sign_in/utils/plugin/index.dart' deferred as util_plguin hide FileJson;
 import 'package:flutter_sign_in/utils/system/index.dart';
 
 // 为函数定义类型别名，可使用 Global.initCommon is  GlobalInit<T> 进行判别是否是这个对象
@@ -31,9 +31,6 @@ class Global {
     // 图片缓存大小 50m
     PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
 
-    // 初始化路由
-    Routers().route.defineRoutes();
-
     barWidgetShow();
 
     await util_plguin.loadLibrary();
@@ -43,6 +40,8 @@ class Global {
     await util_plguin.DeviceInfo().init();
     // 初始化持久化key,value存储工具
     await util_plguin.SpHelper.init();
+
+    Routers().route.defineRoutes();
   }
 
   // 根据context动态初始化

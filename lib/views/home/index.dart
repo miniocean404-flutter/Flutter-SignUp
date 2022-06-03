@@ -255,7 +255,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         _clickNum = 0;
 
         // ignore: use_build_context_synchronously
-        Routers().navigateTo(context, CustomRoute().settingHome);
+        Routers().navigateTo(CustomRoute().settingHome);
       }
 
       if (isCanBiometrics || isCanDeviceBiometrics) {
@@ -264,11 +264,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
           _clickNum = 0;
 
           // ignore: use_build_context_synchronously
-          Routers().navigateTo(context, CustomRoute().settingHome);
+          Routers().navigateTo(CustomRoute().settingHome);
         }
       }
     } else if (_clickNum >= 5 && kIsWeb) {
-      Routers().navigateTo(context, CustomRoute().settingHome);
+      Routers().navigateTo(CustomRoute().settingHome);
     }
   }
 

@@ -1,7 +1,6 @@
 part of fluro_routers;
 
 typedef FluroRouterNavigateTo = Future<dynamic> Function(
-  BuildContext context,
   String path, {
   Map<String, dynamic>? params,
   bool clearStack, // 是否清理页面栈
@@ -11,6 +10,8 @@ typedef FluroRouterNavigateTo = Future<dynamic> Function(
   RouteSettings? routeSettings, // 路由要进入的页面名及参数
   RouteTransitionsBuilder? transitionBuilder, // 要执行的动画效果
 });
+
+typedef FluroRouterGenerator = Route<dynamic>? Function(RouteSettings settings);
 
 class InitFluroRouter with RouteAnimationDialog {
   late final FluroRouter router;
@@ -22,8 +23,16 @@ class InitFluroRouter with RouteAnimationDialog {
     router = FluroRouter();
   }
 
-  Future<dynamic> navigateTo(
-    BuildContext context,
+  BuildContext? initGlobalKeyContext;
+
+  Route<dynamic>? generator(RouteSettings settings) {
+    // 处理 路由需要全局 context 问题, 及不能及时获取 currentState 而获取不到 context
+    initGlobalKeyContext ??= Global.navigatorStateKey.currentContext;
+
+    return router.generator(settings);
+  }
+
+  Future<void> navigateTo(
     String path, {
     Map<String, dynamic>? params,
     bool clearStack = false, // 是否清理页面栈
@@ -48,7 +57,7 @@ class InitFluroRouter with RouteAnimationDialog {
     path = path + paramsStr;
 
     return router.navigateTo(
-      context,
+      initGlobalKeyContext!,
       path,
       clearStack: clearStack,
       replace: replace,

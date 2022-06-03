@@ -18,7 +18,6 @@ import 'config/global.dart';
 import 'provider/version.dart';
 
 void main() async {
-  // ignore: unused_local_variable
   await Global.initCommon();
 
   runApp(
@@ -87,7 +86,7 @@ class MyApp extends StatelessWidget {
 
       // 路由
       initialRoute: CustomRoute().splash,
-      onGenerateRoute: Routers().router.generator, // 在routes查找不到时，会调用该方法
+      onGenerateRoute: Routers().generator, // 在routes查找不到时，会调用该方法
       navigatorObservers: [Routers().routeObserver, Routers().allRouteObserver],
 
       // ignore: todo
@@ -98,31 +97,25 @@ class MyApp extends StatelessWidget {
       },
 
       // MaterialApp 会返回一个 home 或者 router 的页面, 页面中所有的 widget 都会被其包裹
-
       builder: EasyLoading.init(
         builder: (context, widget) {
           Global.dynamicInit(context);
 
-          // 可没有 Builder(构造器) 只是为了看使用方式
-          return Builder(
-            builder: ((context) {
-              // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
-              // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
-
-              return Material(
-                // CupertinoTheme 是 iOS 的 Theme 是 Android 的
-                child: CupertinoTheme(
-                  data: cupertinoTheme(isDarkMode(context)),
-                  child: MediaQuery(
-                    // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
-                    key: ObjectKey(MediaQuery.of(context).orientation),
-                    // 设置文字大小不随系统设置改变（flutter screen 插件用）
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                    child: widget ?? Container(),
-                  ),
-                ),
-              );
-            }),
+          // Builder(构造器) 只是一个 StatelessWidget widget
+          // 可以让 MaterialApp 后代 使用 CupertinoPageScaffold 但是 使用的是 MaterialApp Scaffold 的样式
+          // 想要使用 CupertinoPageScaffold 的样式 就要加上 CupertinoTheme 包裹
+          return Material(
+            // CupertinoTheme 是 iOS 的 Theme 是 Android 的
+            child: CupertinoTheme(
+              data: cupertinoTheme(isDarkMode(context)),
+              child: MediaQuery(
+                // 处理屏幕旋转之后 ScreenUtil.init 的值及时修正
+                key: ObjectKey(MediaQuery.of(context).orientation),
+                // 设置文字大小不随系统设置改变（flutter screen 插件用）
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: widget ?? Container(),
+              ),
+            ),
           );
         },
       ),

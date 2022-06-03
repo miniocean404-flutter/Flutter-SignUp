@@ -30,16 +30,16 @@ class _SettingState extends State<Setting> {
   goPage(page) {
     switch (page) {
       case Page.device:
-        Routers().navigateTo(context, CustomRoute().settingDevice);
+        Routers().navigateTo(CustomRoute().settingDevice);
         break;
       case Page.network:
-        Routers().navigateTo(context, CustomRoute().settingNetwork);
+        Routers().navigateTo(CustomRoute().settingNetwork);
         break;
       case Page.about:
-        Routers().navigateTo(context, CustomRoute().settingAbout);
+        Routers().navigateTo(CustomRoute().settingAbout);
         break;
       case Page.update:
-        Routers().navigateTo(context, CustomRoute().settingUpdate);
+        Routers().navigateTo(CustomRoute().settingUpdate);
         break;
       default:
     }

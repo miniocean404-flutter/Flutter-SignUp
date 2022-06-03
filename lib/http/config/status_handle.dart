@@ -1,4 +1,3 @@
-import 'package:flutter_sign_in/config/global.dart';
 import 'package:flutter_sign_in/http/config/http_exception.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
@@ -20,8 +19,7 @@ class StatusHandle {
     switch (code) {
       case 401:
         // 应该跳转登录页
-        final context = Global.navigatorStateKey.currentContext;
-        Routers().navigateTo(context!, CustomRoute().splash);
+        Routers().navigateTo(CustomRoute().splash);
     }
 
     return _instance;
