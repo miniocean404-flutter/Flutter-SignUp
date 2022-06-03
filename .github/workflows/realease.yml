@@ -87,26 +87,23 @@ jobs:
       - name: 打包 APK
         run: flutter build apk --release  --obfuscate --split-debug-info=debug_info --no-shrink --dart-define ENV=dev --dart-define CHANNEL=MI
 
-      # - name: 打包 IPA
-      #   run: |
-      #     cd ios/Runner.xcworkspace
-      #     xcodebuild build
-      #     cd ..
-      #     cd ..
-      #     flutter build ios --release --no-codesign  --split-debug-info=./symbols
-      #     cd build/ios/iphoneos
-      #     mkdir Payload
-      #     cd Payload
-      #     ln -s ../Runner.app
-      #     cd ..
-      #     zip -r app.ipa Payload
+      - name: 打包 IPA
+        run: |
+          flutter build ios --release --no-codesign  --split-debug-info=./symbols
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+
       - name: 分享 Release 包给其他 Job
         uses: actions/upload-artifact@v3
         with:
           name: package_app_ipa
           path: |
             build/app/outputs/apk/release/*.apk
-        #   build/ios/iphoneos/app.ipa
+            build/ios/iphoneos/app.ipa
 
   # 上传到 release 进行版本发布
   publish:
@@ -141,6 +138,6 @@ jobs:
           token: ${{ github.token }}
           files: |
             prod/package/*.apk
-          # prod/package/app.ipa
+            prod/package/app.ipa
         env:
           GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
