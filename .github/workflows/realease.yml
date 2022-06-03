@@ -132,4 +132,4 @@ jobs:
             prod/package/*.apk
           # prod/package/app.ipa
         env:
-          GITHUB_TOKEN: ${{ secrets.flutter_sign_up_cicd }}
+          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
