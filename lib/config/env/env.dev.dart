@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class EnvironmentDev extends CurrentEnv {
   EnvironmentDev(channel) {
@@ -9,12 +10,12 @@ class EnvironmentDev extends CurrentEnv {
     final getUrl = SpHelper.getLocalStorage('baseUrl');
 
     if (!kIsWeb) {
-      baseUrl = 'http://api.uat.serendipity.illiaccess.com'; // 服务器
+      baseUrl = DOMAIN_DEV_BASE_URL; // 服务器
     }
 
     if (kIsWeb) {
-      // baseUrl = 'http://10.30.13.134:4040'; // 公司
-      baseUrl = 'http://192.168.1.130:4040'; // 自己
+      // baseUrl = IP_COMPANY_DEV_BASE_URL; // 公司
+      baseUrl = IP_HOME_DEV_BASE_URL; // 自己
     }
 
     RegExp reg = RegExp(r"\/\/([\d\w.]+)", multiLine: true, unicode: true);

@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:network_info_plus/network_info_plus.dart';
+part of util.plugin;
 
 getLocationPcIp() async {
   // 内网ip

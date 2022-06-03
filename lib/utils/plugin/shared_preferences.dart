@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
+part of util.plugin;
 
 class SpHelper {
   // 命名构造函数,及初始化

@@ -1,6 +1,6 @@
-// https://juejin.cn/post/6963128547837739015
+part of util.plugin;
 
-import 'package:logger/logger.dart';
+// https://juejin.cn/post/6963128547837739015
 
 var logger = Logger(
   filter: DevelopmentFilter(), // 默认开发环境，如果是prod则生产开发都会打印日志

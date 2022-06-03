@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
-import 'package:flutter_sign_in/config/theme/font/font_global.dart';
-import 'package:flutter_sign_in/utils/system/water_ripple.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 final ThemeData materialDarkTheme = _materialDarkColor();
 
 TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
       bodyText1: base.bodyText1!.copyWith(
-        fontFamily: 'GoogleSans',
+        fontFamily: 'Ping fang SC',
       ),
     );
 
@@ -101,7 +100,7 @@ ThemeData _materialDarkColor() {
 
     toggleableActiveColor: AppColor().dark.primary,
 
-    fontFamily: 'GoogleSans',
+    fontFamily: 'Ping fang SC',
     // typography:,
 
     // textTheme:,

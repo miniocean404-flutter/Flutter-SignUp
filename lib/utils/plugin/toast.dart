@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+part of util.plugin;
 
 void toast(String msg) async {
   // 修复web没有实现toast取消方法

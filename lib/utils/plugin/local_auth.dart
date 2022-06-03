@@ -1,16 +1,5 @@
+part of util.plugin;
 // 指纹识别 面部识别
-
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
-import 'package:local_auth/local_auth.dart';
-// ignore: depend_on_referenced_packages
-import 'package:local_auth_android/local_auth_android.dart';
-// ignore: depend_on_referenced_packages
-import 'package:local_auth_ios/local_auth_ios.dart';
 
 class LocalAuth {
   // 初始化一个单例实例

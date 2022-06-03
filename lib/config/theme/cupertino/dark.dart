@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 
 final CupertinoThemeData cupertinoDarkTheme = cupertinoDark();
 
@@ -29,6 +29,7 @@ CupertinoThemeData cupertinoDark() {
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: AppColor().dark.danger,
+        fontFamily: 'Ping fang SC',
       ),
       // actionTextStyle:,
       // tabLabelTextStyle:,

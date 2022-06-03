@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/url_scheme.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
+import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -79,7 +79,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin, WidgetsB
   void startJump() async {
     barWidgetShow();
 
-    Routers.navigateTo(context, Routers.home, clearStack: true);
+    Routers().navigateTo(CustomRoute().home, clearStack: true);
   }
 
   ///  生命周期变化时回调

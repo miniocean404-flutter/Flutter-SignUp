@@ -11,7 +11,8 @@ class DialogBox extends StatelessWidget {
   const DialogBox({Key? key, this.title = '提示', this.content = '请输入内容', this.isHaveCancel = false}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Material(
+  // Material 或 Container 都可以
+  Widget build(BuildContext context) => Container(
         color: Colors.transparent,
         child: Center(
           child: Container(

@@ -17,10 +17,9 @@ buildscript {
      * 下面代码示例Gradle使用JCenter、google作为查找依赖库的代码仓库。
      */
     repositories {
-        // Gradle 4.1开始可以通过google()方法来支持Google的Maven仓库。
-        // 我们需要从这个仓库下载Android plugin 3.0.0或者更新的版本。
-        google()
-        mavenCentral()
+        // 设置 gradle 镜像
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/'}
     }
 
     dependencies {
@@ -40,8 +39,9 @@ buildscript {
  */
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        // 设置 gradle 镜像
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/'}
     }
 }
 

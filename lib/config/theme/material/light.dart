@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
-import 'package:flutter_sign_in/config/theme/font/font_global.dart';
-import 'package:flutter_sign_in/utils/system/water_ripple.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 // 用于去除水波纹
 // highlightColor: AppColor().light.transparent,
 // splashColor: AppColor().light.transparent,
 // splashFactory: const NoSplashFactory(),
 
+// GoogleSans 谷歌字体
+
 final ThemeData materialLightTheme = _materialLightColor();
 
 TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
       bodyText1: base.bodyText1!.copyWith(
-        fontFamily: 'GoogleSans',
+        fontFamily: 'Ping fang SC',
       ),
     );
 
@@ -212,7 +213,7 @@ ThemeData _materialLightColor() {
     // 用于突出显示切换Widget(如Switch、Radio和Checkbox)的活动状态的颜色
     toggleableActiveColor: AppColor().light.primary,
 
-    fontFamily: 'GoogleSans',
+    fontFamily: 'Ping fang SC',
 
     // 活版印刷
     // typography:,

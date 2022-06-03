@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+part of util.plugin;
 
 class LocalNotifications {
   static final LocalNotifications _instance = LocalNotifications._internal();

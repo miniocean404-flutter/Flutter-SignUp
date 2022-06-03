@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_sign_in/utils/plugin/device_info.dart';
+part of util.system;
 
 // 设置状态栏隐藏哪些，或者全部隐藏
 void barWidgetShow({String? show, SystemUiMode? type, List<SystemUiOverlay>? overlays}) {

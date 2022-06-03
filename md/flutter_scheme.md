@@ -93,7 +93,7 @@ import 'package:uni_links/uni_links.dart';
 添加完也直接反应到配置文件`info.plist`中了，当然你要是觉得自己很厉害，也可以直接在`info.plist`添加。
 
 <p align="center">
-    <img width="1400" title="Xcode->Info->URL Types" src="../assets/md/xcode_scheme.png">
+    <img width="1400" title="Xcode->Info->URL Types" src="./image/scheme/xcode_scheme.png">
 </p>
 
 **`ios/Runner/Info.plist`**
@@ -105,6 +105,7 @@ import 'package:uni_links/uni_links.dart';
 <dict>
 ...
 <!-- 其它配置 -->
+  <key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -191,13 +192,13 @@ final Uri _jumpUri = Uri.parse(schemeUrl.replaceFirst(
 ### 未打开 App（开启以后跳转）
 
 <p align="center">
-    <img width="200" title="ios_scheme_open" src="../assets/md/ios_scheme_open.gif">
+    <img width="200" title="ios_scheme_open" src="./image/scheme/ios_scheme_open.gif">
 </p>
 
 ### 已打开 App（监听 Scheme）
 
 <p align="center">
-    <img width="200" title="ios_scheme_listen" src="../assets/md/ios_scheme_listen.gif">
+    <img width="200" title="ios_scheme_listen" src="./image/scheme/ios_scheme_listen.gif">
 </p>
 
 ## Android 效果预览
@@ -205,11 +206,11 @@ final Uri _jumpUri = Uri.parse(schemeUrl.replaceFirst(
 ### 未打开 App（开启以后跳转）
 
 <p align="center">
-    <img width="200" title="android_scheme_open" src="../assets/md/android_scheme_open.gif">
+    <img width="200" title="android_scheme_open" src="./image/scheme/android_scheme_open.gif">
 </p>
 
 ### 已打开 App（监听 Scheme）
 
 <p align="center">
-    <img width="200" title="android_scheme_listen" src="../assets/md/android_scheme_listen.gif">
+    <img width="200" title="android_scheme_listen" src="./image/scheme/android_scheme_listen.gif">
 </p>

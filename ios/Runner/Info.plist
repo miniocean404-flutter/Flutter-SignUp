@@ -61,13 +61,14 @@
 		<string>App需要您的同意,才能访问提醒事项</string>
 		<key>NSFaceIDUsageDescription</key>
 		<string>App需要您的同意,使用面部识别才可使用设置界面</string>
+		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleURLName</key>
 				<!-- 任意 URL 名 -->
-				<string>ANY_URL_NAME</string>
+				<string>ANYURLNAME</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>customscheme</string>

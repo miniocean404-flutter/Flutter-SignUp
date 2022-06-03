@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
-import 'package:flutter_sign_in/http/login.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
+import 'package:flutter_sign_in/http/api/login.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class DeviceConfig extends StatefulWidget {
   const DeviceConfig({Key? key}) : super(key: key);

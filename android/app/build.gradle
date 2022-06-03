@@ -130,6 +130,9 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
 
+            minifyEnabled true // 资源压缩设置
+            useProguard true // 代码压缩设置
+
             // 配置打包的架构
             ndk {
                 //之前看QQ微信等大佬都只用"armeabi",手机没什么x86框架的,只包含arm32和arm64即可
@@ -142,10 +145,21 @@ android {
             ndk {
                 //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错(x86是兼容模拟器的)
                 // abiFilters "armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"
-                abiFilters "arm64-v8a" // 暂时使用真机调试的so
+                abiFilters "arm64-v8a","x86" // 暂时使用真机调试和模拟器的so
             }
         }
     }
+
+    // split-per-abi 命令需要 split-per-abi 命令 和 abi配置 与 ndk 配置冲突
+    // splits {
+    //     abi {
+    //         reset()//重置 ABI 列表为只包含一个空字符串（与 include 一起使用可以表示要使用哪一个 ABI，而不是要 exclude 哪些 ABI）
+    //         enable true // 设为true，才能启用ABI拆分机制在打包时根据架构生成不同的apk文件
+    //         universalApk false  // If true, 构建支持所有平台abi类型，构建一个包，包含多个架构的so(只要代码中有的都会打进去)
+    //         include "armeabi","armeabi-v7a","arm64-v8a" // 设置所有要支持的abi类型，构建多个包，每个包只包含一个架构的so
+    //         exclude "x86"   // 设置所有不要支持的abi类型
+    //     }
+    // }
 }
 
 flutter {

@@ -1,22 +1,18 @@
+import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/modal.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
+import 'package:flutter_sign_in/components/busin/sign_state_modal.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
-import 'package:flutter_sign_in/http/login.dart';
-import 'package:flutter_sign_in/http/qr_code.dart';
-import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/android_intent.dart';
-import 'package:flutter_sign_in/utils/plugin/local_auth.dart';
-import 'package:flutter_sign_in/utils/plugin/logger.dart';
-import 'package:flutter_sign_in/utils/plugin/shared_preferences.dart';
-import 'package:flutter_sign_in/utils/plugin/toast.dart';
-import 'package:flutter_sign_in/utils/system/immerse.dart';
+import 'package:flutter_sign_in/components/common/video_full.dart';
+import 'package:flutter_sign_in/http/api/login.dart';
+import 'package:flutter_sign_in/http/api/qr_code.dart';
+import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
@@ -38,6 +34,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
 
   late MobileScannerController _scanController;
+
   bool isShowScan = false;
 
   int _clickNum = 0; // 点击跳转次数
@@ -45,7 +42,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   DateTime? _scanLastTime; // 距离上次扫码时间
   DateTime? _backLastTime; // 安卓返回桌面的时间间隔
 
-  StateType _modalState = StateType.none; // 弹窗状态
   final BusinState _businState = BusinState.sign; // 当前业务模式
 
   bool teachIsSign = false; // 老师是否签到
@@ -69,7 +65,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     _videoController.dispose();
 
     WidgetsBinding.instance.removeObserver(this);
-    Routers.routeObserver.unsubscribe(this);
+    Routers().routeObserver.unsubscribe(this);
 
     super.dispose();
   }
@@ -80,7 +76,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
 
     // 监听路由变化 需要 material 注册 需要 with RouteAware
     if (ModalRoute.of(context) != null) {
-      Routers.routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
+      Routers().routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
     }
   }
 
@@ -89,6 +85,8 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   void deactivate() {
     // isCurrent:这条路线是否是导航器上最顶层的路线
     dynamic isBack = ModalRoute.of(context)?.isCurrent;
+    // 命令版 willPop
+    // logger.i(ModalRoute.of(context)?.willPop());
 
     if (isBack) {
       // 限于从其他页面返回到当前页面时执行，首次进入当前页面不执行
@@ -184,7 +182,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   }
 
   // 创建销毁扫码控制器
-  void startScanQrAndVideo(bool state) {
+  void startScanQrAndVideo(bool state) async {
     if (state) {
       _scanController = MobileScannerController(
         // 相机朝上 front
@@ -193,11 +191,17 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       );
 
       _videoController.play();
-      Wakelock.toggle(enable: true);
+
+      // web 插件加载延时问题
+      if (kIsWeb) {
+        Timer(const Duration(milliseconds: 1000), () => Wakelock.toggle(enable: true));
+      } else {
+        Wakelock.toggle(enable: true);
+      }
     } else {
       _scanController.dispose();
       _videoController.pause();
-      Wakelock.toggle(enable: false);
+      await Wakelock?.toggle(enable: false);
     }
     setState(() {
       isShowScan = state;
@@ -227,13 +231,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
 
       if (backgroundUrl != null) {
         initVideo(backgroundUrl);
+
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(Routers().showDialogRouter(const SignStateModal(state: StateType.success)));
       }
     }
-  }
-
-  // 关闭弹窗
-  closeModal() {
-    setState(() => {_modalState = StateType.none});
   }
 
   // 进入设置界面
@@ -244,7 +246,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       toast('点击5次进入设置界面');
     }
 
-    if (_clickNum >= 5) {
+    if (_clickNum >= 5 && !kIsWeb) {
       final auth = LocalAuth();
       final isCanBiometrics = await auth.isCanBiometrics;
       final isCanDeviceBiometrics = await auth.isCanDeviceBiometrics;
@@ -253,7 +255,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         _clickNum = 0;
 
         // ignore: use_build_context_synchronously
-        Routers.navigateTo(context, Routers.settingHome);
+        Routers().navigateTo(CustomRoute().settingHome);
       }
 
       if (isCanBiometrics || isCanDeviceBiometrics) {
@@ -262,9 +264,11 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
           _clickNum = 0;
 
           // ignore: use_build_context_synchronously
-          Routers.navigateTo(context, Routers.settingHome);
+          Routers().navigateTo(CustomRoute().settingHome);
         }
       }
+    } else if (_clickNum >= 5 && kIsWeb) {
+      Routers().navigateTo(CustomRoute().settingHome);
     }
   }
 
@@ -272,6 +276,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   Widget build(BuildContext context) {
     String title = _businState == BusinState.sign ? '签到' : '上下课';
     bool isShowVideo = _businState == BusinState.sign && _videoController.value.isInitialized;
+
     return WillPopScope(
       onWillPop: !kIsWeb && Platform.isIOS
           // 处理 iOS 手势返回的问题，并且不能清理路由栈信息
@@ -293,116 +298,101 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
             },
       child: CupertinoPageScaffold(
         child: Center(
-          child: StateModal(
-            state: _modalState,
-            onClose: closeModal,
-            bgChild: Stack(
-              alignment: Alignment.center,
-              children: [
-                // 背景视频
-                isShowVideo
-                    ? Transform.scale(
-                        // 将宽度保持与设备宽度一致的最大放大数值 设备宽度可使用：window.physicalSize.aspectRatio || MediaQuery.of(context).size.aspectRatio
-                        scale: _videoController.value.aspectRatio / window.physicalSize.aspectRatio,
-                        child: Center(
-                          child: AspectRatio(
-                            aspectRatio: _videoController.value.aspectRatio,
-                            child: VideoPlayer(_videoController),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        color: Colors.black,
-                      ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // 背景视频
+              VideoFull(
+                show: isShowVideo,
+                videoAspectRatio: _videoController.value.aspectRatio,
+                child: VideoPlayer(_videoController),
+              ),
 
-                Column(
-                  children: [
-                    SizedBox(height: 159.h),
+              Column(
+                children: [
+                  SizedBox(height: 159.h),
 
-                    // 签到标题
-                    GestureDetector(
-                      onTap: goSetting,
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 29.sp,
-                          fontWeight: FontWeight.w600,
-                          color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff000000),
-                        ),
+                  // 签到标题
+                  GestureDetector(
+                    onTap: goSetting,
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 29.sp,
+                        fontWeight: FontWeight.w600,
+                        color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff000000),
                       ),
                     ),
-                    SizedBox(height: 102.h),
+                  ),
+                  SizedBox(height: 102.h),
 
-                    // 扫码
-                    isShowScan == true
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: SizedBox(
-                              width: 160.r,
-                              height: 160.r,
-                              child: QRScanner(
-                                controller: _scanController,
-                                onDetect: scanQRcode,
+                  // 扫码
+                  isShowScan == true
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: SizedBox(
+                            width: 160.r,
+                            height: 160.r,
+                            child: QRScanner(
+                              controller: _scanController,
+                              onDetect: scanQRcode,
+                            ),
+                          ),
+                        )
+                      : Container(),
+
+                  SizedBox(height: 158.h),
+
+                  // 老师或者学生签到后不显示
+                  teachIsSign || childrenIsSign
+                      ? Container()
+                      : Column(
+                          children: [
+                            Text(
+                              '请向屏幕展示二维码',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                fontSize: 14.5.sp,
                               ),
                             ),
-                          )
-                        : Container(),
-
-                    SizedBox(height: 158.h),
-
-                    // 老师或者学生签到后不显示
-                    teachIsSign || childrenIsSign
-                        ? Container()
-                        : Column(
-                            children: [
-                              Text(
-                                '请向屏幕展示二维码',
-                                style: TextStyle(
-                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
-                                  fontSize: 14.5.sp,
-                                ),
+                            Text(
+                              '识别后会自动签到',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
                               ),
-                              Text(
-                                '识别后会自动签到',
-                                style: TextStyle(
-                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
-                                ),
+                            ),
+                            SizedBox(height: 292.h),
+                            Text(
+                              'Serendipity Envoy',
+                              style: TextStyle(
+                                color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
+                                fontWeight: FontWeight.w400,
                               ),
-                              SizedBox(height: 292.h),
-                              Text(
-                                'Serendipity Envoy',
-                                style: TextStyle(
-                                  color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          )
-                  ],
-                ),
+                            ),
+                          ],
+                        )
+                ],
+              ),
 
-                //  学生上课下课card
-                teachIsSign
-                    ? UpDownClassCard(
-                        name: '张三',
-                        role: '游泳教练',
-                        left: 22.w,
-                        bottom: 22.h,
-                      )
-                    : Container(),
-                childrenIsSign
-                    ? UpDownClassCard(
-                        name: '李四',
-                        role: '学生',
-                        right: 22.w,
-                        bottom: 22.h,
-                      )
-                    : Container()
-                // _businState == BusinState.upDownClass
-              ],
-            ),
+              //  学生上课下课card
+              teachIsSign
+                  ? UpDownClassCard(
+                      name: '张三',
+                      role: '游泳教练',
+                      left: 22.w,
+                      bottom: 22.h,
+                    )
+                  : Container(),
+              childrenIsSign
+                  ? UpDownClassCard(
+                      name: '李四',
+                      role: '学生',
+                      right: 22.w,
+                      bottom: 22.h,
+                    )
+                  : Container()
+              // _businState == BusinState.upDownClass
+            ],
           ),
         ),
       ),

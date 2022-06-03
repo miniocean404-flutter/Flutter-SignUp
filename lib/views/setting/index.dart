@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/components/busin/setting_icon_button_bar.dart';
 import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/router/routers.dart';
-import 'package:flutter_sign_in/utils/plugin/toast.dart';
+import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 enum Page {
   device,
@@ -30,16 +30,16 @@ class _SettingState extends State<Setting> {
   goPage(page) {
     switch (page) {
       case Page.device:
-        Routers.navigateTo(context, Routers.settingDevice);
+        Routers().navigateTo(CustomRoute().settingDevice);
         break;
       case Page.network:
-        Routers.navigateTo(context, Routers.settingNetwork);
+        Routers().navigateTo(CustomRoute().settingNetwork);
         break;
       case Page.about:
-        Routers.navigateTo(context, Routers.settingAbout);
+        Routers().navigateTo(CustomRoute().settingAbout);
         break;
       case Page.update:
-        Routers.navigateTo(context, Routers.settingUpdate);
+        Routers().navigateTo(CustomRoute().settingUpdate);
         break;
       default:
     }

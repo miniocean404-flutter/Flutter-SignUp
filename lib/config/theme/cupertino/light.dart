@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/config/theme/color/app_color.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 
 final CupertinoThemeData cupertinoLightTheme = cupertinoLight();
 
@@ -96,7 +96,7 @@ CupertinoThemeData cupertinoLight() {
         // 绘制文本时使用的字体名称（例如，Roboto）。
         // 如果提供了 afontFamilyFallback而fontFamily没有提供，则其中的第一个字体系列fontFamilyFallback将占据首选字体系列的位置。
         // 当无法找到较高优先级的字体或不包含字形时，将使用较低优先级的字体
-        fontFamily: 'GoogleSans',
+        fontFamily: 'Ping fang SC',
 
         //  当在更高优先级字体中找不到字形时要回退的字体名称的有序列表。
         //  当fontFamily为空时，此列表中的第一个字体系列用作首选字体。
