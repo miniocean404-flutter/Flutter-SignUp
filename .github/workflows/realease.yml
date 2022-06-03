@@ -9,9 +9,8 @@ on:
   push:
     branches:
       - master
-      - dev
     tags:
-      - 'release-v*'
+      - 'v*'
     paths-ignore:
       - '.idea/**'
       - '.gitattributes'
@@ -130,6 +129,6 @@ jobs:
           files: |
             prod/package/*.apk
           # prod/package/app.ipa
-          token: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
+          token: ${{ secrets.flutter_sign_up_cicd }}
         env:
-          GITHUB_TOKEN: ${{ secrets.FLUTTER_SIGN_UP_CICD }}
+          GITHUB_TOKEN: ${{ secrets.flutter_sign_up_cicd }}
