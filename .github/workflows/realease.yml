@@ -127,9 +127,12 @@ jobs:
 
       - name: 上传到 release 进行版本发布
         uses: softprops/action-gh-release@v1
+        # 403 错误 设置 Action 权限 github -> setting -> actiong -> general -> Workflow permissions
         with:
+          generate_release_notes: true
           tag_name: ${{ github.ref }}
           token: ${{ github.token }}
+          body: ${{ github.event.head_commit.message }}
           files: |
             prod/package/*.apk
           # prod/package/app.ipa
