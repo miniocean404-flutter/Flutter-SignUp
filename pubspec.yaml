@@ -214,10 +214,7 @@ flutter:
     - family: Ping fang SC
       fonts:
         - asset: assets/font/Ping_fang_SC/pingfangsc-medium.otf
-        - asset: assets/font/Ping_fang_SC/pingfangsc-regular.otf
           weight: 400
-        - asset: assets/font/Ping_fang_SC/pingfangsc-semibold.otf
-          weight: 500
         # - asset: assets/font/Ping_fang_SC/pingfangsc-light.otf
         # - asset: assets/font/Ping_fang_SC/pingfangsc-thin.otf
         # - asset: assets/font/Ping_fang_SC/pingfangsc-ultralight.otf
