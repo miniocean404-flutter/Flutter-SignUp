@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_sign_in/config/constant/index.dart';
-import 'package:flutter_sign_in/config/env/compile_mode.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
