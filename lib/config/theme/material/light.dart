@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/constant/index.dart';
+import 'package:flutter_sign_in/config/theme/extensions/index.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
+
+// 目前在 Flutter 3 中受到 useMaterial3 影响的主要有以下这些 Widget ，可以看到主要影响的还是具有交互效果的 Widget 居多：
+// [AlertDialog]
+// [AppBar]
+// [Card]
+// [Dialog]
+// [ElevatedButton]
+// [FloatingActionButton]
+// [Material]
+// [NavigationBar]
+// [NavigationRail]
+// [OutlinedButton]
+// [StretchingOverscrollIndicator]
+// [GlowingOverscrollIndicator]
+// [TextButton]
 
 // 用于去除水波纹
 // highlightColor: AppColor().light.transparent,
 // splashColor: AppColor().light.transparent,
 // splashFactory: const NoSplashFactory(),
+// TextButtonThemeData() 的 style 的 splashFactory
 
 // GoogleSans 谷歌字体
 
@@ -18,10 +35,12 @@ TextTheme _buildTextTheme(TextTheme base) => base.copyWith(
     );
 
 ThemeData _materialLightColor() {
+  // Flutter 3.0 里 colorScheme 才是主题颜色的核心
   // Primary(原色)色用于整个 UI 中的关键组件，例如 FAB、突出按钮和活动状态。
   // Secondary(二次)色用于UI中不太突出的组件，例如滤镜芯片，同时扩大了颜色表达的机会。
   // Tertiary(三次)色用于对比强调色，可用于平衡原色和二次色或增加对元素的关注，例如输入字段。第三色由制造商自行决定使用，旨在支持产品中更广泛的颜色表达
   // “on”颜色，用于在匹配颜色之上绘制内容。例如，如果某物使用 primary作为背景颜色，onPrimary将用于在其上绘制文本和图标。出于这个原因，“打开”颜色应与其匹配颜色具有至少
+  // colorScheme 可以用 ColorScheme.fromSeed(seedColor: Color(0xFF4285F4)) 生成一系列主题颜色
   final colorScheme = const ColorScheme.light().copyWith(
     // 日夜间模式
     brightness: Brightness.light,
@@ -103,7 +122,9 @@ ThemeData _materialLightColor() {
     // applyElevationOverlayColor:,
     // cupertinoOverrideTheme:,
     // 对于主题颜色的扩展，继承重写别的主题配置，是个可迭代的Map
-    // extensions:,
+    extensions: const <ThemeExtension<dynamic>>[
+      StatusColors.light,
+    ],
 
     // InputDecorator,TextField和TextFormField的默认 InputDecoration值基于此主题
     // inputDecorationTheme:,
@@ -365,6 +386,7 @@ ThemeData _materialLightColor() {
         //设置按钮上字体与图标的颜色
         overlayColor: MaterialStateProperty.all(AppColor().light.transparent),
         //长按水波纹颜色
+        splashFactory: const NoSplashFactory(),
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
         //设置按钮内边距

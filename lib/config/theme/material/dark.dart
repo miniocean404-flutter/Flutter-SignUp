@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/constant/index.dart';
+import 'package:flutter_sign_in/config/theme/extensions/index.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
 
 final ThemeData materialDarkTheme = _materialDarkColor();
@@ -31,7 +32,9 @@ ThemeData _materialDarkColor() {
   final base = ThemeData(
     // applyElevationOverlayColor:,
     // cupertinoOverrideTheme:,
-    // extensions:,
+    extensions: const <ThemeExtension<dynamic>>[
+      StatusColors.dark,
+    ],
     // inputDecorationTheme:,
     // materialTapTargetSize:,
 
@@ -204,6 +207,7 @@ ThemeData _materialDarkColor() {
         //设置按钮上字体与图标的颜色
         overlayColor: MaterialStateProperty.all(AppColor().dark.transparent),
         //长按水波纹颜色
+        splashFactory: const NoSplashFactory(),
         //设置阴影  不适用于这里的TextButton
         elevation: MaterialStateProperty.all(0),
         //设置按钮内边距
