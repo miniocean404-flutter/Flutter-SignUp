@@ -1,3 +1,6 @@
+# pod 设置清华源：https://mirrors.tuna.tsinghua.edu.cn/help/CocoaPods/
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+
 # Uncomment this line to define a global platform for your project
 # 指定编译iOS版本，Pods->Local Podspecs 文件中platforms指定库要求的最低iOS版本
   # spec.name             = 'Reachability' #名字
