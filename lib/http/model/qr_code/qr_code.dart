@@ -10,11 +10,8 @@ class ScanQRCodeResult {
     code = json['code'];
     message = json['message'];
 
-    if (json['data'].runtimeType == List<dynamic>) {
-      nullInfo = <Null>[];
-    } else {
-      data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    }
+    final jsonData = json['data'];
+    data = jsonData != null && (jsonData.runtimeType != List<dynamic>) ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -36,14 +33,16 @@ class Data {
   String? timeStamp;
   String? message;
   int? delayClose;
+  AppUserInfo? appUserInfo;
 
-  Data({this.isSuccess, this.timeStamp, this.message, this.delayClose});
+  Data({this.isSuccess, this.timeStamp, this.message, this.delayClose, this.appUserInfo});
 
   Data.fromJson(Map<String, dynamic> json) {
     isSuccess = json['isSuccess'];
     timeStamp = json['timeStamp'];
     message = json['message'];
     delayClose = json['delayClose'];
+    appUserInfo = json['appUseInfo'] != null ? AppUserInfo.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -53,5 +52,17 @@ class Data {
     data['message'] = message;
     data['delayClose'] = delayClose;
     return data;
+  }
+}
+
+class AppUserInfo {
+  String? backgroundUrl;
+  String? backgroundType;
+  String? textColor;
+
+  AppUserInfo.fromJson(Map<String, dynamic> json) {
+    backgroundUrl = json['backgroundUrl'];
+    backgroundType = json['backgroundType'];
+    textColor = json['textColor'];
   }
 }

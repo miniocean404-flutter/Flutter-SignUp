@@ -10,11 +10,7 @@ class GetNewVersion {
     code = json['code'];
     message = json['message'];
 
-    if (json['data'].runtimeType == List<dynamic>) {
-      nullInfo = <Null>[];
-    } else {
-      data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    }
+    data = json['data'] != null && (json['data'].runtimeType == List<dynamic>) ? Data.fromJson(json['data']) : null;
   }
 
   dynamic toJson() {

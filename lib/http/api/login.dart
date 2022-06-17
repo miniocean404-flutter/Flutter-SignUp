@@ -15,5 +15,5 @@ Future deviceLogin(accessId, password) async {
 
   DeviceConnect res = DeviceConnect.fromJson(jsonDecode(json));
 
-  return res.data;
+  return res;
 }

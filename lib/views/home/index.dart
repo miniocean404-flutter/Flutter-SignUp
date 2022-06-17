@@ -10,6 +10,8 @@ import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
 import 'package:flutter_sign_in/components/common/video_full.dart';
 import 'package:flutter_sign_in/http/api/login.dart';
 import 'package:flutter_sign_in/http/api/qr_code.dart';
+import 'package:flutter_sign_in/http/model/login/device_connect.dart';
+import 'package:flutter_sign_in/http/model/qr_code/qr_code.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
@@ -31,7 +33,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   late VideoPlayerController _videoController; // 播放控制器
-  String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
+  // String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
+  String videoLink = 'https://vd3.bdstatic.com/mda-jbrihvz6iqqgk67a/sc/mda-jbrihvz6iqqgk67a.mp4';
 
   late MobileScannerController _scanController;
 
@@ -152,8 +155,9 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   }
 
   void login() async {
-    final res = await deviceLogin(187237, 'f1c8ec723723');
-    await SpHelper.setLocalStorage('token', res['accessSecret']);
+    final DeviceConnect res = await deviceLogin(187237, 'f1c8ec723723');
+
+    await SpHelper.setLocalStorage('token', res.data?.accessSecret);
   }
 
   // 初始化视频
@@ -161,19 +165,16 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     _videoController = VideoPlayerController.network(url);
 
     _videoController.addListener(() {
+      logger.i(_videoController.value);
       final message = _videoController.value.errorDescription;
       if (message != null) logger.e(message);
     });
 
-    await _videoController.setLooping(true);
-    if (kIsWeb) {
-      // play() failed because the user didn't interact with the document
-      // chrome文档 https://developer.chrome.com/blog/autoplay/
-      // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
-      await _videoController.setVolume(0.0);
-    }
-
+    // play() failed because the user didn't interact with the document
+    // chrome文档 https://developer.chrome.com/blog/autoplay/
+    // web必须和用户有交互(包括点击等)才可以进行播放，防止打扰用户，如果需要自动播放需要将声音设置为0
     await _videoController.setVolume(0.0);
+    await _videoController.setLooping(true);
     await _videoController.play();
     await _videoController.initialize();
 
@@ -222,12 +223,12 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
 
       _businState == BusinState.sign ? mode = 'admittance' : mode = 'serviceSigning';
 
-      dynamic res = await scanQRCodeApi(token, code, mode);
-      bool isSuccess = res['isSuccess'];
-      String message = res['message'];
-      int delayClose = res['delayClose'];
-      String? textColor = res['appUseInfo']['textColor'];
-      String? backgroundUrl = res['appUseInfo']['backgroundUrl'];
+      ScanQRCodeResult res = await scanQRCodeApi(token, code, mode);
+      bool? isSuccess = res.data?.isSuccess;
+      String? message = res.data?.message;
+      int? delayClose = res.data?.delayClose;
+      String? textColor = res.data?.appUserInfo?.textColor;
+      String? backgroundUrl = res.data?.appUserInfo?.backgroundUrl;
 
       if (backgroundUrl != null) {
         initVideo(backgroundUrl);
