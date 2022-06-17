@@ -19,6 +19,7 @@ class CustomRoute with InitRoute, SettingRoute {
     // 初始界面
     router.define(_instance.splash, handler: _instance.splashHandler);
     router.define(_instance.home, handler: _instance.homeHandler);
+    router.define(_instance.webview, handler: _instance.webviewHandler);
 
     // 设置界面
     router.define(_instance.settingHome, handler: _instance.settingHomeHandler);

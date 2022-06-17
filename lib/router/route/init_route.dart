@@ -6,6 +6,7 @@ part of fluro_routers;
 mixin InitRoute {
   final String splash = "/";
   final String home = "/home";
+  final String webview = "/webview";
 
   final splashHandler = Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return const Splash();
@@ -13,6 +14,12 @@ mixin InitRoute {
 
   final homeHandler = Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return const Home();
+  });
+
+  final webviewHandler = Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return BusinWebView(
+      url: params['url'][0] ?? '',
+    );
   });
 
   // 404页面

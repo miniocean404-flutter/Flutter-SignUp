@@ -220,7 +220,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
 
       _busin == '签到' ? mode = 'admittance' : mode = 'serviceSigning';
 
-      ScanQRCodeResult res = await scanQRCodeApi(token, code, mode);
+      ScanQRCodeResult res = await scanQRCodeApi(token, 'N2iTB2', mode);
       bool? isSuccess = res.data?.isSuccess;
       String? message = res.data?.message;
       int? delayClose = res.data?.delayClose;

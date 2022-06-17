@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/provider/version.dart';
+import 'package:flutter_sign_in/router/index.dart';
 import 'package:provider/provider.dart';
 
 class About extends StatefulWidget {
@@ -79,7 +80,42 @@ class _AboutConfigState extends State<About> {
                 ),
 
                 // 更新日志
-                Container(
+                GestureDetector(
+                  onTap: () => {
+                    Routers().navigateTo(CustomRoute().webview, params: {'url': 'http://www.baidu.com'})
+                  },
+                  child: Container(
+                    height: 44.h,
+                    margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '更新日志',
+                            style: TextStyle(fontSize: 18.sp),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 20.r,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 30.h),
+
+            // 服务器状态
+            GestureDetector(
+              onTap: () => {
+                Routers().navigateTo(CustomRoute().webview, params: {'url': 'http://www.baidu.com'})
+              },
+              child: SettingBg(
+                leftLine: 16.w,
+                child: Container(
                   height: 44.h,
                   margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
                   child: GestureDetector(
@@ -87,7 +123,7 @@ class _AboutConfigState extends State<About> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '更新日志',
+                          '软件生态',
                           style: TextStyle(fontSize: 18.sp),
                         ),
                         Icon(
@@ -96,31 +132,6 @@ class _AboutConfigState extends State<About> {
                         ),
                       ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 30.h),
-
-            // 服务器状态
-            SettingBg(
-              leftLine: 16.w,
-              child: Container(
-                height: 44.h,
-                margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '软件生态',
-                        style: TextStyle(fontSize: 18.sp),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20.r,
-                      ),
-                    ],
                   ),
                 ),
               ),

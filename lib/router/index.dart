@@ -12,6 +12,7 @@ import 'package:flutter_sign_in/views/setting/setting-detail/device_config/index
 import 'package:flutter_sign_in/views/setting/setting-detail/network_config/index.dart';
 import 'package:flutter_sign_in/views/setting/setting-detail/update/index.dart';
 import 'package:flutter_sign_in/views/splash.dart';
+import 'package:flutter_sign_in/views/webview/index.dart';
 
 part 'init/index.dart';
 part 'init/init_fluro_router.dart';
