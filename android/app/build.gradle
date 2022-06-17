@@ -82,7 +82,7 @@ android {
 
     // compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本，这意味着我们的APP只能使用该版本及其以下版本中的API。
     // compileSdkVersion flutter.compileSdkVersion
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

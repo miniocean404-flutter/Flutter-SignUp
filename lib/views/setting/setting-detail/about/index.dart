@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/config/assets.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/provider/version.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:provider/provider.dart';
@@ -81,11 +82,16 @@ class _AboutConfigState extends State<About> {
 
                 // 更新日志
                 GestureDetector(
-                  onTap: () => {
-                    Routers().navigateTo(CustomRoute().webview, params: {'url': 'http://www.baidu.com'})
+                  onTap: () {
+                    if (kIsWeb) return;
+
+                    Routers().navigateTo(CustomRoute().webview, params: {'url': 'https://www.bilibili.com/'});
                   },
                   child: Container(
                     height: 44.h,
+                    decoration: BoxDecoration(
+                      color: AppColor.of(context).currentMode.secondary,
+                    ),
                     margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
                     child: GestureDetector(
                       child: Row(
@@ -110,8 +116,9 @@ class _AboutConfigState extends State<About> {
 
             // 服务器状态
             GestureDetector(
-              onTap: () => {
-                Routers().navigateTo(CustomRoute().webview, params: {'url': 'http://www.baidu.com'})
+              onTap: () {
+                if (kIsWeb) return;
+                Routers().navigateTo(CustomRoute().webview, params: {'url': 'http://www.baidu.com'});
               },
               child: SettingBg(
                 leftLine: 16.w,

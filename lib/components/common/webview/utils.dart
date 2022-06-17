@@ -1,11 +1,30 @@
+// runJavascript runJavascriptReturningResult 都可以执行 javascript ,runJavascriptReturningResult 在执行 runJavascriptReturningResult 错误时会显示错误信息
+// flutter 也可以直接调用 js 中的任何方法
+
 // 获取web浏览器像素密度
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+// onWebViewCreated 钩子时候创建 html 文件
+createAssetsHTML(String htmlPage, WebViewController controller) async {
+  String contentBase64 = base64Encode(const Utf8Encoder().convert(htmlPage));
+  await controller.loadUrl('data:text/html;base64,$contentBase64');
+}
+
+//  从本地加载html文件，需要使用异步操作
+loadHtmlFromAssets(WebViewController controller, {String path = 'assets/html/JavaScriptTest.html'}) async {
+  String fileText = await rootBundle.loadString(path);
+
+  controller.loadUrl(Uri.dataFromString(fileText, mimeType: 'text/html', encoding: Encoding.getByName('utf-8')).toString());
+}
 
 // 注册 执行 js 后分发事件的参数的 回调 (获取 web 页面高度)
 JavascriptChannel invokeJavascriptChannel(BuildContext context, Function cb) {
   return JavascriptChannel(
-    name: 'Invoke',
+    name: 'Invoke', // js 方调用协议名 Invoke.postMessage()
     onMessageReceived: (JavascriptMessage message) {
       debugPrint(message.message);
       var webHeight = double.parse(message.message);
