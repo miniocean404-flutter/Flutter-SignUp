@@ -165,7 +165,6 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     _videoController = VideoPlayerController.network(url);
 
     _videoController.addListener(() {
-      logger.i(_videoController.value);
       final message = _videoController.value.errorDescription;
       if (message != null) logger.e(message);
     });

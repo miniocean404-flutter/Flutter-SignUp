@@ -4,7 +4,7 @@ import 'package:flutter_sign_in/http/config/http_request.dart';
 import 'package:flutter_sign_in/http/model/version/ger_new_version.dart';
 import 'package:flutter_sign_in/http/model/version/history_version.dart';
 
-Future getHistoryVersion() async {
+Future<HistoryVersion> getHistoryVersion() async {
   var json = await Http().get(
     '/version',
     params: {
@@ -15,7 +15,7 @@ Future getHistoryVersion() async {
 
   HistoryVersion res = HistoryVersion.fromJson(jsonDecode(json));
 
-  return res.data;
+  return res;
 }
 
 Future getNewVersion(version) async {

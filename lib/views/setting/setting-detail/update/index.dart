@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/api/version.dart';
+import 'package:flutter_sign_in/http/model/version/history_version.dart';
 import 'package:flutter_sign_in/provider/version.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/string_handle.dart';
@@ -66,25 +69,28 @@ class _UpdateState extends State<Update> {
     if (_isAutoUpdate == true) {
       // 如果是自动更新状态就加载loading
       setState(() => _currentState = PageState.loading);
-      dynamic versionRes = await getHistoryVersion();
+      HistoryVersion versionRes = await getHistoryVersion();
 
+      debugPrint(jsonEncode(versionRes.toJson()));
       // 获取最新版本的信息
-      final List list = versionRes['list'];
+      final List<ListArray>? list = versionRes.data?.listArray;
 
-      if (versionRes['count'] > 0) {
-        for (var versionItem in list) {
-          _isHaveNew = versionCompare(versionItem['versionCode'], _localVersion!);
-          _isHaveNew
-              ? setState(() {
-                  _newVersion = versionItem['versionCode'];
-                  _isForceUpdate = versionItem['isForceUpdate'];
-                })
-              : setState(() {
-                  _newVersion = _localVersion!;
-                });
+      if ((versionRes.data?.count ?? -1) > 0) {
+        if (list != null) {
+          for (var versionItem in list) {
+            _isHaveNew = versionCompare(versionItem.versionCode ?? '', _localVersion!);
+            _isHaveNew
+                ? setState(() {
+                    _newVersion = versionItem.versionCode ?? '';
+                    _isForceUpdate = versionItem.isForceUpdate ?? false;
+                  })
+                : setState(() {
+                    _newVersion = _localVersion!;
+                  });
 
-          if (_isHaveNew) {
-            break;
+            if (_isHaveNew) {
+              break;
+            }
           }
         }
       }
