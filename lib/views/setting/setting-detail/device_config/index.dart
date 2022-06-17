@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/api/login.dart';
+import 'package:flutter_sign_in/http/model/login/device_connect.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class DeviceConfig extends StatefulWidget {
@@ -23,11 +24,11 @@ class _DeviceConfigState extends State<DeviceConfig> {
   }
 
   void login() async {
-    final res = await deviceLogin(187237, 'f1c8ec723723');
-    await SpHelper.setLocalStorage('token', res['accessSecret']);
+    final DeviceConnect res = await deviceLogin(187237, 'f1c8ec723723');
+    await SpHelper.setLocalStorage('token', res.data?.accessSecret);
     setState(() {
-      location = res['cool']['placement'];
-      serverName = res['cool']['serviceName'];
+      location = res.data?.cool?.placement ?? '';
+      serverName = res.data?.cool?.serviceName ?? '';
     });
   }
 
