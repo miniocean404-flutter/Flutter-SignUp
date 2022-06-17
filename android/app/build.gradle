@@ -111,7 +111,7 @@ android {
         minSdkVersion 21
         // 指定用来测试APP的 Android API 版本
         // targetSdkVersion flutter.targetSdkVersion
-        targetSdkVersion 31
+        targetSdkVersion 32
         // 定义APP的版本
         versionCode flutterVersionCode.toInteger()
         // 定义APP的版本名
