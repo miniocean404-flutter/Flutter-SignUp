@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/api/login.dart';
 import 'package:flutter_sign_in/http/model/login/device_connect.dart';
+import 'package:flutter_sign_in/provider/busin_status.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:provider/provider.dart';
 
 class DeviceConfig extends StatefulWidget {
   const DeviceConfig({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class DeviceConfig extends StatefulWidget {
 class _DeviceConfigState extends State<DeviceConfig> {
   late String serverName = '';
   late String location = '';
+  late String currentBusin = Provider.of<BusinStatus>(context).getBusin ?? '';
 
   @override
   void initState() {
@@ -30,6 +33,13 @@ class _DeviceConfigState extends State<DeviceConfig> {
       location = res.data?.cool?.placement ?? '';
       serverName = res.data?.cool?.serviceName ?? '';
     });
+  }
+
+  toogleBusinStatus() async {
+    final BusinStatus businProvider = Provider.of<BusinStatus>(context, listen: false);
+    final String toggle = businProvider.getBusin != null && businProvider.getBusin == '签到' ? '上下课' : '签到';
+    Provider.of<BusinStatus>(context, listen: false).setBusin = toggle;
+    await SpHelper.setLocalStorage('busin', toggle);
   }
 
   void reLogin() {
@@ -115,6 +125,51 @@ class _DeviceConfigState extends State<DeviceConfig> {
                 ),
               ],
             ),
+
+            SizedBox(height: 30.h),
+
+            // 切换自动签到功能
+            GestureDetector(
+              onTap: () => toogleBusinStatus(),
+              child: SettingBg(
+                leftLine: 16.w,
+                child: Container(
+                  height: 44.h,
+                  margin: EdgeInsets.fromLTRB(16.w, 0, 22.w, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '切换自动签到功能',
+                        style: TextStyle(fontSize: 18.sp),
+                      ),
+                      Row(
+                        children: [
+                          Consumer<BusinStatus>(
+                            builder: ((context, value, child) {
+                              final String text = value.getBusin ?? '';
+
+                              return Text(
+                                text,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  color: const Color(0xff8A8A8D),
+                                ),
+                              );
+                            }),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 20.r,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             SizedBox(height: 30.h),
 
             // 重新登录
@@ -140,7 +195,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
