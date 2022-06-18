@@ -1,29 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sign_in/config/constant/color/current_mode_color.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class AppColorLight extends CurrentModeColor {
   AppColorLight() {
-    primary = const Color(0xff409eff);
+    primary = '#409eff'.toColor();
 
     // 主要用于背景色上的一块一块卡片
-    secondary = const Color(0xffFFFFFf);
+    secondary = '#FFFFFf'.toColor();
 
     // 页面颜色
-    page = const Color(0xffefeff3);
-    buttonText = const Color(0xffFFFFFf);
+    page = '#efeff3'.toColor();
+    buttonText = '#FFFFFf'.toColor();
 
-    danger = const Color(0xffee0a24);
-    warning = const Color(0xffffba00);
+    danger = '#ee0a24'.toColor();
+    warning = '#ffba00'.toColor();
 
-    active = const Color(0xff18191b);
-    unactive = const Color(0xff7b7b7b);
-    un2active = const Color(0xff8d8d8d);
-    un3active = const Color(0xffb1b1b1);
+    active = '#18191b'.toColor();
+    unactive = '#7b7b7b'.toColor();
+    un2active = '#8d8d8d'.toColor();
+    un3active = '#b1b1b1'.toColor();
 
     // 边框颜色
-    border = const Color(0xffdedede);
+    border = '#dedede'.toColor();
 
-    black = const Color(0xFF000000);
+    black = '#000000'.toColor();
     transparent = const Color.fromRGBO(0, 0, 0, 0);
   }
 }

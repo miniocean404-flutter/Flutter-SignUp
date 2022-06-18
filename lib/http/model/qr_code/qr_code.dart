@@ -42,7 +42,7 @@ class Data {
     timeStamp = json['timeStamp'];
     message = json['message'];
     delayClose = json['delayClose'];
-    appUserInfo = json['appUseInfo'] != null ? AppUserInfo.fromJson(json['data']) : null;
+    appUserInfo = json['appUseInfo'] != null ? AppUserInfo.fromJson(json['appUseInfo']) : null;
   }
 
   Map<String, dynamic> toJson() {

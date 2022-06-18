@@ -16,10 +16,16 @@ import 'package:flutter_sign_in/provider/busin_status.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
+import 'package:mime/mime.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
+
+enum BgType {
+  video,
+  image,
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,14 +35,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
+  BgType bgType = BgType.video;
   late VideoPlayerController _videoController; // 播放控制器
   // String videoLink = 'https://davinciwebresources.blob.core.windows.net/davinci-web-resources/last dance.mp4';
   String videoLink = 'https://vd3.bdstatic.com/mda-jbrihvz6iqqgk67a/sc/mda-jbrihvz6iqqgk67a.mp4';
+  String imageLink = '';
+
+  String allTextColor = '#FFFFFF';
 
   late MobileScannerController _scanController; // 二维码控制器
-
   bool isShowScan = false; // 是否展示扫码
-
   int _clickNum = 0; // 点击跳转次数
 
   DateTime? _scanLastTime; // 距离上次扫码时间
@@ -56,7 +64,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
 
     login();
     initVideo(videoLink);
-    startScanQrAndVideo(true);
+    toggleAbilityStatus(true);
   }
 
   // 页面彻底销毁
@@ -112,18 +120,18 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
   // 别的页面退出到当前页面的时候调用
   void didPopNext() {
     barWidgetShow();
-    startScanQrAndVideo(true);
+    toggleAbilityStatus(true);
   }
 
   @override
   // 当前页面去别的页面时候调用
   void didPushNext() {
     barWidgetShow(show: 'all');
-    startScanQrAndVideo(false);
+    toggleAbilityStatus(false);
   }
 
   @override
-  // 当前页面pop的时候嗲用
+  // 当前页面pop的时候调用
   void didPop() {}
 
   @override
@@ -136,7 +144,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         // isCurrent:这条路线是否是导航器上最顶层的路线
         dynamic isBack = ModalRoute.of(context)?.isCurrent;
 
-        if (isBack) startScanQrAndVideo(true);
+        if (isBack) toggleAbilityStatus(true);
 
         break;
       // 用户可见，但不可响应用户操作
@@ -144,13 +152,14 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
         break;
       // 已经暂停了，用户不可见、不可操作
       case AppLifecycleState.paused:
-        startScanQrAndVideo(false);
+        toggleAbilityStatus(false);
         break;
       case AppLifecycleState.detached:
         break;
     }
   }
 
+  // 登录获取 token
   void login() async {
     final DeviceConnect res = await deviceLogin(187237, 'f1c8ec723723');
 
@@ -178,20 +187,24 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     // 设置属性后初始化
   }
 
-  // 创建销毁扫码控制器
-  void startScanQrAndVideo(bool state) async {
-    if (state) {
-      _scanController = MobileScannerController(
-        // 相机朝上 front
-        facing: CameraFacing.back,
-        torchEnabled: false,
-      );
+  // 初始化扫码器
+  initMobileScanner() {
+    _scanController = MobileScannerController(
+      // 相机朝上 front
+      facing: CameraFacing.back,
+      torchEnabled: false,
+    );
+  }
 
+  // 创建销毁扫码控制器
+  void toggleAbilityStatus(bool state) async {
+    if (state) {
+      initMobileScanner();
       _videoController.play();
 
       // web 插件加载延时问题
       if (kIsWeb) {
-        Timer(const Duration(milliseconds: 1000), () => Wakelock.toggle(enable: true));
+        Timer(const Duration(seconds: 1), () => Wakelock.toggle(enable: true));
       } else {
         Wakelock.toggle(enable: true);
       }
@@ -201,16 +214,12 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
       await Wakelock?.toggle(enable: false);
     }
 
-    setState(() {
-      isShowScan = state;
-    });
+    setState(() => isShowScan = state);
   }
 
   // 扫码结果
   scanQRcode(Barcode barcode, MobileScannerArguments? args) async {
     final String? code = barcode.rawValue;
-    final String token = SpHelper.getLocalStorage('token');
-    String? mode;
 
     DateTime now = DateTime.now();
     bool gap = _scanLastTime == null || now.difference(_scanLastTime!).inSeconds > 1;
@@ -218,22 +227,51 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     if (gap && code != null) {
       _scanLastTime = DateTime.now();
 
-      _busin == '签到' ? mode = 'admittance' : mode = 'serviceSigning';
-
-      ScanQRCodeResult res = await scanQRCodeApi(token, 'N2iTB2', mode);
-      bool? isSuccess = res.data?.isSuccess;
-      String? message = res.data?.message;
-      int? delayClose = res.data?.delayClose;
-      String? textColor = res.data?.appUserInfo?.textColor;
-      String? backgroundUrl = res.data?.appUserInfo?.backgroundUrl;
-
-      if (backgroundUrl != null) {
-        initVideo(backgroundUrl);
-
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).push(Routers().showDialogRouter(const SignStateModal(state: StateType.success)));
-      }
+      scanTip(code);
     }
+  }
+
+  // 扫码结果后 根据条件弹窗
+  scanTip(String code) async {
+    final String token = SpHelper.getLocalStorage('token');
+    String? mode = _busin == '签到' ? 'admittance' : 'serviceSigning';
+
+    ScanQRCodeResult res = await scanQRCodeApi(token, code, mode);
+    bool? isSuccess = res.data?.isSuccess ?? false;
+    String? message = res.data?.message;
+    // 关闭弹窗延迟时间
+    int? delayClose = res.data?.delayClose;
+    String? textColor = res.data?.appUserInfo?.textColor ?? allTextColor;
+    String? backgroundUrl = res.data?.appUserInfo?.backgroundUrl ?? '';
+
+    late StateType dialogState;
+
+    if (isSuccess) {
+      final bgMime = lookupMimeType(backgroundUrl) ?? '';
+
+      if (bgMime.startsWith('video')) {
+        initVideo(backgroundUrl);
+        bgType = BgType.video;
+      } else if (bgMime.startsWith('image')) {
+        imageLink = backgroundUrl;
+        bgType = BgType.image;
+      }
+
+      dialogState = StateType.success;
+
+      setState(() => {bgType});
+    } else {
+      dialogState = StateType.error;
+    }
+
+    allTextColor = textColor;
+
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).push(Routers().showDialogRouter(SignStateModal(
+      state: dialogState,
+      delay: delayClose,
+      tip: message,
+    )));
   }
 
   // 进入设置界面
@@ -303,12 +341,19 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
               return Stack(
                 alignment: Alignment.center,
                 children: [
-                  // 背景视频
-                  VideoFull(
-                    show: isShowVideo,
-                    videoAspectRatio: _videoController.value.aspectRatio,
-                    child: VideoPlayer(_videoController),
-                  ),
+                  // 背景视频 或 图片
+                  bgType == BgType.video
+                      ? VideoFull(
+                          show: isShowVideo,
+                          videoAspectRatio: _videoController.value.aspectRatio,
+                          child: VideoPlayer(_videoController),
+                        )
+                      : Image.network(
+                          imageLink,
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
 
                   Column(
                     children: [
@@ -322,7 +367,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                           style: TextStyle(
                             fontSize: 29.sp,
                             fontWeight: FontWeight.w600,
-                            color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff000000),
+                            color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff000000),
                           ),
                         ),
                       ),
@@ -353,21 +398,21 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                                 Text(
                                   '请向屏幕展示二维码',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff999999),
                                     fontSize: 14.5.sp,
                                   ),
                                 ),
                                 Text(
                                   '识别后会自动签到',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xff999999),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff999999),
                                   ),
                                 ),
                                 SizedBox(height: 292.h),
                                 Text(
                                   'Serendipity Envoy',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? const Color(0xffFFFFFF) : const Color(0xffCECECE),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xffCECECE),
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

@@ -67,6 +67,8 @@ dependencies:
 
   # 日期格式化
   date_format: ^2.0.6
+  # 获取文件 mime类型
+  mime: ^1.0.2
   # AES RSA 加密解密
   encrypt: ^5.0.1
   # SHA-256 加密解密 (官方)

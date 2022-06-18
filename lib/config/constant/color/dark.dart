@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sign_in/config/constant/color/current_mode_color.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class AppColorDark extends CurrentModeColor {
   AppColorDark() {
-    primary = const Color(0xff409eff);
-    secondary = const Color(0xFF222222);
+    primary = '#409eff'.toColor();
+    secondary = '#222222'.toColor();
 
-    // page = const Color(0xFF202124);
-    page = const Color(0xFF000000);
-    buttonText = const Color(0xffFFFFFf);
+    // page = '#202124'.toColor();
+    page = '#000000'.toColor();
+    buttonText = '#FFFFFf'.toColor();
 
-    danger = const Color(0xffee0a24);
-    warning = const Color(0xffffba00);
+    danger = '#ee0a24'.toColor();
+    warning = '#ffba00'.toColor();
 
-    active = const Color(0xff18191b);
-    unactive = const Color(0xffd2d5dd);
-    un2active = const Color(0xff8d8d8d);
-    un3active = const Color(0xffb1b1b1);
-    border = const Color(0xFF202124);
+    active = '#18191b'.toColor();
+    unactive = '#d2d5dd'.toColor();
+    un2active = '#8d8d8d'.toColor();
+    un3active = '#b1b1b1'.toColor();
+    border = '#202124'.toColor();
 
-    black = const Color(0xFF000000);
+    black = '#000000'.toColor();
     transparent = const Color.fromRGBO(0, 0, 0, 0);
   }
 }

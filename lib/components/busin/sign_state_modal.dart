@@ -1,19 +1,20 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/assets.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 import 'package:lottie/lottie.dart';
 
 enum StateType { success, error, loading }
 
 class SignStateModal extends StatefulWidget {
   final StateType state; // 状态
+  final int? delay;
+  final String? tip;
 
-  const SignStateModal({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const SignStateModal({Key? key, required this.state, this.delay, this.tip}) : super(key: key);
 
   @override
   State<SignStateModal> createState() => _SignStateModalState();
@@ -21,28 +22,50 @@ class SignStateModal extends StatefulWidget {
 
 class _SignStateModalState extends State<SignStateModal> {
   final Map<String, dynamic> _currentState = {'state': '', 'img': '', 'tip': ''};
+  late Timer? _timer;
 
   @override
   void initState() {
     super.initState();
 
+    if (mounted) {
+      toggleShowText(widget.tip);
+      autoClose(widget.delay);
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void toggleShowText(tip) {
     switch (widget.state) {
       case StateType.success:
         _currentState['state'] = '签到成功';
         _currentState['img'] = Assets.stateIconSuccess;
-        _currentState['tip'] = '请前往游泳池区域参与课程';
         break;
       case StateType.error:
         _currentState['state'] = '签到失败';
         _currentState['img'] = Assets.stateIconError;
-        _currentState['tip'] = '此处显示签到失败原因，太长的就折行，文字是居中的。';
         break;
       case StateType.loading:
         _currentState['state'] = '';
         _currentState['img'] = Assets.stateIconSuccess;
-        _currentState['tip'] = '';
         break;
       default:
+    }
+
+    _currentState['tip'] = tip ?? '';
+  }
+
+  void autoClose(delay) {
+    if (delay > 0) {
+      _timer = Timer.periodic(Duration(milliseconds: delay), (timer) {
+        Navigator.pop(context);
+        timer.cancel();
+      });
     }
   }
 
@@ -72,10 +95,10 @@ class _SignStateModalState extends State<SignStateModal> {
                     : Container(
                         width: 300.w,
                         height: 323.h,
-                        decoration: const BoxDecoration(
-                          color: Color(0xffFFFFFF),
-                          borderRadius: BorderRadius.all(Radius.circular(18)),
-                          boxShadow: [
+                        decoration: BoxDecoration(
+                          color: '#FFFFFF'.toColor(),
+                          borderRadius: const BorderRadius.all(Radius.circular(18)),
+                          boxShadow: const [
                             BoxShadow(
                               spreadRadius: 4,
                               blurRadius: 50,
@@ -98,6 +121,7 @@ class _SignStateModalState extends State<SignStateModal> {
                                 style: TextStyle(
                                   fontSize: 32.sp,
                                   fontWeight: FontWeight.w400,
+                                  color: '#000000'.toColor(),
                                 ),
                               )
                             ],
@@ -139,8 +163,8 @@ class _SignStateModalState extends State<SignStateModal> {
                           width: 35.r,
                           height: 35.r,
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(20),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20.r),
                             ),
                             border: Border.all(
                               width: 2.5.r,
@@ -148,10 +172,11 @@ class _SignStateModalState extends State<SignStateModal> {
                               style: BorderStyle.solid,
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.close,
-                              color: Color(0xff999999),
+                              size: 30.r,
+                              color: const Color(0xff999999),
                             ),
                           ),
                         ),

@@ -2,7 +2,7 @@ part of constant;
 
 enum ColorMode { light, dark }
 
-class AppColor extends AppColorUtil {
+class AppColor {
   // 初始化一个单例实例
   static final AppColor _instance = AppColor._internal();
 
