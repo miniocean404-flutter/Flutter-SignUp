@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components/busin/qr_scanner.dart';
 import 'package:flutter_sign_in/components/busin/sign_state_modal.dart';
 import 'package:flutter_sign_in/components/busin/up_down_class_card.dart';
-import 'package:flutter_sign_in/components/common/video_full.dart';
+import 'package:flutter_sign_in/components/common/video_full/index.dart';
 import 'package:flutter_sign_in/http/api/login.dart';
 import 'package:flutter_sign_in/http/api/qr_code.dart';
 import 'package:flutter_sign_in/http/model/login/device_connect.dart';
