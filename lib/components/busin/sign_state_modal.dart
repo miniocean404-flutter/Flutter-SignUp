@@ -139,7 +139,7 @@ class _SignStateModalState extends State<SignStateModal> {
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xff999999),
+                      color: '#999999'.toColor(),
                     ),
                   ),
                 ),
@@ -168,7 +168,7 @@ class _SignStateModalState extends State<SignStateModal> {
                             ),
                             border: Border.all(
                               width: 2.5.r,
-                              color: const Color(0xff999999),
+                              color: '#999999'.toColor(),
                               style: BorderStyle.solid,
                             ),
                           ),
@@ -176,7 +176,7 @@ class _SignStateModalState extends State<SignStateModal> {
                             child: Icon(
                               Icons.close,
                               size: 30.r,
-                              color: const Color(0xff999999),
+                              color: '#999999'.toColor(),
                             ),
                           ),
                         ),

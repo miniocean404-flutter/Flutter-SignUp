@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_sign_in/components/common/up-down-refresh/custom_corlor.dart';
 import 'package:flutter_sign_in/components/common/up-down-refresh/custom_font.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 // The duration of the ScaleTransition that starts when the refresh action
 // has completed.
@@ -392,12 +393,12 @@ class ClassicalHeaderWidgetState extends State<ClassicalHeaderWidget> with Ticke
             height: 22.0,
             width: 22.0,
             child: _refreshState == RefreshMode.refresh || _refreshState == RefreshMode.armed
-                ? const CircularProgressIndicator(
-                    backgroundColor: Color(0xffff4b6e),
-                    valueColor: AlwaysStoppedAnimation(Color(0xff0096fa)),
+                ? CircularProgressIndicator(
+                    backgroundColor: '#ff4b6e'.toColor(),
+                    valueColor: AlwaysStoppedAnimation('#0096fa'.toColor()),
                   )
                 : CircularProgressIndicator(
-                    backgroundColor: const Color(0xffff4b6e),
+                    backgroundColor: '#ff4b6e'.toColor(),
                     value: min(_pulledExtent, widget.extent) / 60.0,
                   ),
           ),

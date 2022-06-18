@@ -9,6 +9,7 @@ import 'package:flutter_sign_in/config/assets.dart';
 import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/provider/version.dart';
 import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 import 'package:provider/provider.dart';
 
 class About extends StatefulWidget {
@@ -72,7 +73,7 @@ class _AboutConfigState extends State<About> {
                           'Version $version',
                           style: TextStyle(
                             fontSize: 18.sp,
-                            color: const Color(0xff8A8A8D),
+                            color: '#8A8A8D'.toColor(),
                           ),
                         ),
                       ],

@@ -49,7 +49,6 @@ class _SettingBgState extends State<SettingBg> {
                 SizedBox(width: widget.leftLine),
                 Flexible(
                   child: Container(
-                    // color: const Color(0xffC6C6C8),
                     color: AppColor.of(context).currentMode.page,
                     height: 0.5.h,
                   ),
@@ -72,7 +71,6 @@ class _SettingBgState extends State<SettingBg> {
       //  none 不进行隐藏
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        // color: const Color(0xffFFFFFf),
         color: AppColor.of(context).currentMode.secondary,
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
       ),

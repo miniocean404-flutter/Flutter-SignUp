@@ -6,6 +6,7 @@ import 'package:flutter_sign_in/http/api/login.dart';
 import 'package:flutter_sign_in/http/model/login/device_connect.dart';
 import 'package:flutter_sign_in/provider/busin_status.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 import 'package:provider/provider.dart';
 
 class DeviceConfig extends StatefulWidget {
@@ -92,7 +93,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                           serverName,
                           style: TextStyle(
                             fontSize: 18.sp,
-                            color: const Color(0xff8A8A8D),
+                            color: '#8A8A8D'.toColor(),
                           ),
                         ),
                       ],
@@ -116,7 +117,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                           location,
                           style: TextStyle(
                             fontSize: 18.sp,
-                            color: const Color(0xff8A8A8D),
+                            color: '#8A8A8D'.toColor(),
                           ),
                         ),
                       ],
@@ -153,7 +154,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
                                 text,
                                 style: TextStyle(
                                   fontSize: 18.sp,
-                                  color: const Color(0xff8A8A8D),
+                                  color: '#8A8A8D'.toColor(),
                                 ),
                               );
                             }),

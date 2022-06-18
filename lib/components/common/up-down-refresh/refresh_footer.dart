@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_sign_in/components/common/up-down-refresh/custom_corlor.dart';
 import 'package:flutter_sign_in/components/common/up-down-refresh/custom_font.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class RefreshFooter extends Footer {
   /// Key
@@ -319,12 +320,12 @@ class ClassicalFooterWidgetState extends State<ClassicalFooterWidget> with Ticke
               right: 10.0,
             ),
             child: (widget.loadState == LoadMode.load || widget.loadState == LoadMode.armed) && !widget.noMore
-                ? const SizedBox(
+                ? SizedBox(
                     width: 16.0,
                     height: 16.0,
                     child: CircularProgressIndicator(
-                      backgroundColor: Color(0xffff4b6e),
-                      valueColor: AlwaysStoppedAnimation(Color(0xff0096fa)),
+                      backgroundColor: '#ff4b6e'.toColor(),
+                      valueColor: AlwaysStoppedAnimation('#0096fa'.toColor()),
                     ),
                   )
                 : widget.loadState == LoadMode.loaded ||

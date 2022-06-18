@@ -8,6 +8,7 @@ import 'package:flutter_sign_in/http/model/version/history_version.dart';
 import 'package:flutter_sign_in/provider/version.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/string_handle.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 import 'package:provider/provider.dart';
 
 enum PageState {
@@ -127,7 +128,7 @@ class _UpdateState extends State<Update> {
                   'Serendipity Envoy 正在检查更新',
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: const Color(0xff8A8A8D),
+                    color: '#8A8A8D'.toColor(),
                   ),
                 )
               ],
@@ -191,7 +192,7 @@ class _UpdateState extends State<Update> {
                       ),
                       Text(
                         'Version $_newVersion',
-                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
                       ),
                     ],
                   ),
@@ -212,7 +213,7 @@ class _UpdateState extends State<Update> {
                       ),
                       Text(
                         _isForceUpdate ? '强制' : '非强制',
-                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
                       ),
                     ],
                   ),
@@ -227,7 +228,7 @@ class _UpdateState extends State<Update> {
             width: double.infinity,
             child: CupertinoButton(
               borderRadius: BorderRadius.circular(40),
-              color: const Color(0xff0C508F),
+              color: '#0C508F'.toColor(),
               onPressed: () {},
               child: Text(
                 '更新',
@@ -243,7 +244,7 @@ class _UpdateState extends State<Update> {
           SizedBox(height: 330.h),
           Text(
             'Version $_localVersion',
-            style: TextStyle(fontSize: 16.sp, color: const Color(0xff8A8A8D)),
+            style: TextStyle(fontSize: 16.sp, color: '#8A8A8D'.toColor()),
           ),
           SizedBox(height: 5.h),
           Row(
@@ -254,7 +255,7 @@ class _UpdateState extends State<Update> {
                 'Serendipity Envoy 已是最新版本',
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: const Color(0xff8A8A8D),
+                  color: '#8A8A8D'.toColor(),
                 ),
               ),
             ],

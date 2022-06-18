@@ -367,7 +367,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                           style: TextStyle(
                             fontSize: 29.sp,
                             fontWeight: FontWeight.w600,
-                            color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff000000),
+                            color: isHavaVideoLink ? allTextColor.toColor() : '#000000'.toColor(),
                           ),
                         ),
                       ),
@@ -398,21 +398,21 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
                                 Text(
                                   '请向屏幕展示二维码',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff999999),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : '#999999'.toColor(),
                                     fontSize: 14.5.sp,
                                   ),
                                 ),
                                 Text(
                                   '识别后会自动签到',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xff999999),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : '#999999'.toColor(),
                                   ),
                                 ),
                                 SizedBox(height: 292.h),
                                 Text(
                                   'Serendipity Envoy',
                                   style: TextStyle(
-                                    color: isHavaVideoLink ? allTextColor.toColor() : const Color(0xffCECECE),
+                                    color: isHavaVideoLink ? allTextColor.toColor() : '#CECECE'.toColor(),
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

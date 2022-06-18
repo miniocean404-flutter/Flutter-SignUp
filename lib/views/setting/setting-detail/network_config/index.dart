@@ -6,6 +6,7 @@ import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 import 'package:flutter_sign_in/config/env/get_env.dart';
 import 'package:flutter_sign_in/http/config/http_request.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
+import 'package:flutter_sign_in/utils/system/index.dart';
 
 class NetworkConfig extends StatefulWidget {
   const NetworkConfig({Key? key}) : super(key: key);
@@ -100,7 +101,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                           children: [
                             Text(
                               showServe,
-                              style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                              style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
                             ),
                             SizedBox(
                               width: 5.w,
@@ -155,7 +156,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                       ),
                       Text(
                         '正常',
-                        style: TextStyle(fontSize: 18.sp, color: const Color(0xff8A8A8D)),
+                        style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
                       ),
                     ],
                   ),
