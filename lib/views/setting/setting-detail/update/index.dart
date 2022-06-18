@@ -152,6 +152,7 @@ class _UpdateState extends State<Update> {
                   Transform.scale(
                     // 1.r 屏幕放大的倍率也是1个像素放大的倍率
                     scale: 1.r,
+                    alignment: Alignment.centerRight,
                     child: CupertinoSwitch(
                       value: _currentState == PageState.auto,
                       onChanged: _isAutoUpdateButton,

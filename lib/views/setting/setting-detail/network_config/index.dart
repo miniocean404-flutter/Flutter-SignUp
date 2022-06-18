@@ -128,6 +128,7 @@ class _NetworkConfigState extends State<NetworkConfig> {
                       Text('使用https', style: TextStyle(fontSize: 18.sp)),
                       Transform.scale(
                         scale: 1.r,
+                        alignment: Alignment.centerRight,
                         child: CupertinoSwitch(
                           value: _isUseHttps,
                           onChanged: isUseHttpsButton,
