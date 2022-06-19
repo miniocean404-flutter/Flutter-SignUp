@@ -1,7 +1,7 @@
 // 启动页
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/components/splash/text_jump_splash.dart';
+import 'package:flutter_sign_in/components/splash/bloom_screen_splash.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class Splash extends StatefulWidget {
@@ -37,6 +37,6 @@ class _SplashState extends State<Splash> {
     //   localImageUrl: Assets.splash,
     // );
 
-    return const TextJumpSplash();
+    return const BloomScreenSplash();
   }
 }
