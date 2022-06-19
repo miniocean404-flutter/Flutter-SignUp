@@ -46,6 +46,12 @@ dependencies:
   animations: ^2.0.3
   # 文字动画
   animated_text_kit: ^4.2.2
+  # listview gridview 动画
+  flutter_staggered_animations: ^1.0.0
+  # 类似探探的滑动卡片
+  flutter_tindercard: ^0.2.0
+  # 粘液卡片动画
+  slimy_card: ^1.0.4
   # 下滑刷新,下拉到底动画
   flutter_easyrefresh: ^2.2.1
   # 加载AE制作的炫酷动画
