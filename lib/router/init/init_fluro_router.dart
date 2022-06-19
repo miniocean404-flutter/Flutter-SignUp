@@ -64,6 +64,7 @@ class InitFluroRouter with RouteAnimationDialog {
       transition: transition,
       transitionDuration: transitionDuration,
       routeSettings: routeSettings,
+      transitionBuilder: transitionBuilder,
     );
   }
 }

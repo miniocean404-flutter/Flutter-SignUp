@@ -1,5 +1,6 @@
 class Assets {
   static String splash = 'assets/splash.png';
+  static String logo = 'assets/logo.png';
 
   // 设置图标
   static String iconSettingConfig = 'assets/setting-icon/setting_config.png';
