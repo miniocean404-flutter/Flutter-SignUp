@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/common/webview/utils.dart';
+import 'package:flutter_sign_in/components/webview/utils.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

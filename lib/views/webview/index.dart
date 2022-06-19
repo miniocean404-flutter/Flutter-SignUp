@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sign_in/components/common/webview/index.dart';
+import 'package:flutter_sign_in/components/webview/index.dart';
 
 // runJavascript runJavascriptReturningResult 都可以执行 javascript ,runJavascriptReturningResult 在执行 runJavascriptReturningResult 错误时会显示错误信息
 

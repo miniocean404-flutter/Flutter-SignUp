@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/components_busin/setting_bg.dart';
 import 'package:flutter_sign_in/http/api/login.dart';
 import 'package:flutter_sign_in/http/model/login/device_connect.dart';
 import 'package:flutter_sign_in/provider/busin_status.dart';

@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_sign_in/components/common/up-down-refresh/custom_corlor.dart';
-import 'package:flutter_sign_in/components/common/up-down-refresh/custom_font.dart';
+import 'package:flutter_sign_in/components/up-down-refresh/custom_corlor.dart';
+import 'package:flutter_sign_in/components/up-down-refresh/custom_font.dart';
 import 'package:flutter_sign_in/utils/system/index.dart';
 
 // The duration of the ScaleTransition that starts when the refresh action

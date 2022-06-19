@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/components/common/up-down-refresh/custom_corlor.dart';
-import 'package:flutter_sign_in/components/common/up-down-refresh/custom_font.dart';
+import 'package:flutter_sign_in/components/up-down-refresh/custom_corlor.dart';
+import 'package:flutter_sign_in/components/up-down-refresh/custom_font.dart';
 
 class DialogBox extends StatelessWidget {
   final String title;

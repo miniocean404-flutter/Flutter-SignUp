@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sign_in/components/busin/setting_bg.dart';
+import 'package:flutter_sign_in/components_busin/setting_bg.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 import 'package:flutter_sign_in/config/env/get_env.dart';
 import 'package:flutter_sign_in/http/config/http_request.dart';
