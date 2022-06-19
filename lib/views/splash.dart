@@ -1,9 +1,7 @@
 // 启动页
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sign_in/components/splash/click_jump_splash.dart';
-import 'package:flutter_sign_in/config/assets.dart';
-import 'package:flutter_sign_in/router/index.dart';
+import 'package:flutter_sign_in/components/splash/text_jump_splash.dart';
 import 'package:flutter_sign_in/utils/plugin/index.dart';
 
 class Splash extends StatefulWidget {
@@ -34,9 +32,11 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return ClickJumpSplash(
-      goPagePath: CustomRoute().home,
-      localImageUrl: Assets.splash,
-    );
+    // return ClickJumpSplash(
+    //   goPagePath: CustomRoute().home,
+    //   localImageUrl: Assets.splash,
+    // );
+
+    return const TextJumpSplash();
   }
 }

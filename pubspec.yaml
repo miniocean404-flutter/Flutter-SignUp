@@ -44,6 +44,8 @@ dependencies:
 
   # 动画(官方)
   animations: ^2.0.3
+  # 文字动画
+  animated_text_kit: ^4.2.2
   # 下滑刷新,下拉到底动画
   flutter_easyrefresh: ^2.2.1
   # 加载AE制作的炫酷动画

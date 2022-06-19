@@ -8,6 +8,13 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
     version: "3.1.1"
+  animated_text_kit:
+    dependency: "direct main"
+    description:
+      name: animated_text_kit
+      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
+    source: hosted
+    version: "4.2.2"
   animations:
     dependency: "direct main"
     description:
