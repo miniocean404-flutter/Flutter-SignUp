@@ -87,10 +87,11 @@ fi
 echo "=============== 构建FLUTTER_IOS工程 ==============="
 # --obfuscate 混淆 --split-debug-info 将因混淆生成的 map 符号表缓存到此位置 --no-codesign 没有签名的包
 # flutter build ios --release --no-codesign --obfuscate --split-debug-info=./symbols
+# --no-codesign 会导致不能进行安装
 if [ $number == 0 ];then
-  flutter build ios --dart-define ENV=dev --release --no-codesign --split-debug-info=./symbols 
+  flutter build ios --dart-define ENV=dev --release  --split-debug-info=./symbols
 else
-  flutter build ios --dart-define ENV=dev --release --no-codesign --split-debug-info=./symbols
+  flutter build ios --dart-define ENV=dev --release  --split-debug-info=./symbols --no-codesign
 fi
 
 
