@@ -82,7 +82,7 @@
       "label": "打包iOS.sh",
       "type": "shell",
       "command": "sh",
-      "args": ["./script/papk.sh"],
+      "args": ["./script/pipa.sh"],
       "problemMatcher": [],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -96,12 +96,7 @@
     {
       "label": "添加文件并推送多个仓库",
       "type": "shell",
-      "dependsOn": [
-        "git-add.",
-        "git-commit-am",
-        "git-push-github",
-        "git-push-origin"
-      ],
+      "dependsOn": ["git-add.", "git-commit-am", "git-push-github", "git-push-origin"],
       "dependsOrder": "sequence",
       "problemMatcher": [],
       "presentation": {
