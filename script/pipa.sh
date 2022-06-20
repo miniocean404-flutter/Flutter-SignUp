@@ -134,7 +134,7 @@ if [ $number == 0 ];then
 
   echo "=============== 优化Framework大小(删除符号) ==============="
   # 移除调试符号表，就是Xcode debug 时候看不到堆栈名字
-  xcrun strip -x -S App.framework/App
+  # xcrun strip -x -S App.framework/App
 
 
   echo "=============== 生成IPA(压缩Payload文件并修改文件名为IPA) ==============="
