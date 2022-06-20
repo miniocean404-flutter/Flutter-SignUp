@@ -22,7 +22,7 @@ class CustomWebView extends StatefulWidget {
 class _CustomWebViewState extends State<CustomWebView> {
   // Completer 可以将回调延迟执行，等待 _controller.feature 完成
   final Completer<WebViewController> _controller = Completer<WebViewController>();
-  late String title = 'webview';
+  late String title = '';
   final String userAgentPC = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36';
   final String userAgentIOS =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1';
