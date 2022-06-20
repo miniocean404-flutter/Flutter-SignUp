@@ -90,7 +90,7 @@ echo "=============== 构建FLUTTER_IOS工程 ==============="
 if [ $number == 0 ];then
   flutter build ios --dart-define ENV=dev --release --no-codesign --split-debug-info=./symbols 
 else
-  flutter build ios --dart-define ENV=dev
+  flutter build ios --dart-define ENV=dev --release --no-codesign --split-debug-info=./symbols
 fi
 
 
@@ -167,7 +167,7 @@ else
   -quiet || exit
 
   if [ -e $sign_path/$app_name.ipa ]; then
-    echo "=============== IPA包已导出:$sign_path/$app_name.ipa ==============="
+    echo "=============== IPA包已导出: $sign_path/$app_name.ipa ==============="
     open $sign_path
   else
     echo '=============== IPA包导出失败 ==============='
