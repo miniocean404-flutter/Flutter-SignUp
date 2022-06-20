@@ -91,7 +91,7 @@ echo "=============== 构建FLUTTER_IOS工程 ==============="
 if [ $number == 0 ];then
   flutter build ios --dart-define ENV=dev --release  --split-debug-info=./symbols
 else
-  flutter build ios --dart-define ENV=dev --release  --split-debug-info=./symbols --no-codesign
+  flutter build ios --dart-define ENV=dev --release  --split-debug-info=./symbols 
 fi
 
 
