@@ -132,11 +132,10 @@ if [ $number == 0 ];then
   
   appName="$app_name""_v$version""_b$build""_$time.ipa"
 
-  echo "=============== 优化Framework大小(删除bitcode) ==============="
-  # 会导致无法安装
-  # xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter -r -o ${unsign_payload_path}/Runner.app/Frameworks/Flutter.framework/Flutter
-  # xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit -r -o ${unsign_payload_path}/Runner.app/Frameworks/AgoraRtcKit.framework/AgoraRtcKit
-  # xcrun bitcode_strip ${unsign_payload_path}/Runner.app/Frameworks/App.framework/App -r -o ${unsign_payload_path}/Runner.app/Frameworks/App.framework/App
+  echo "=============== 优化Framework大小(删除符号) ==============="
+  # 移除调试符号表，就是Xcode debug 时候看不到堆栈名字
+  xcrun strip -x -S App.framework/App
+
 
   echo "=============== 生成IPA(压缩Payload文件并修改文件名为IPA) ==============="
   zip -r ${appName} *
