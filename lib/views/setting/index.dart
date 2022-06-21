@@ -25,6 +25,18 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   DateTime? _lastTime;
+  final List<dynamic> list = [
+    [
+      {'title': '设备配置', 'imgUrl': Assets.iconSettingConfig, 'page': Page.device}
+    ],
+    [
+      {'title': '网络配置', 'imgUrl': Assets.iconNetworkConfig, 'page': Page.network}
+    ],
+    [
+      {'title': '关于', 'imgUrl': Assets.iconAbout, 'page': Page.about},
+      {'title': '软件更新', 'imgUrl': Assets.iconUpdate, 'page': Page.update}
+    ]
+  ];
 
   // 跳转页面
   goPage(page) {
@@ -69,71 +81,55 @@ class _SettingState extends State<Setting> {
                   }
                 },
       child: CupertinoPageScaffold(
-        child: Container(
-          margin: EdgeInsets.fromLTRB(21.w, 72.h, 21.w, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            // 设置标题
-            children: [
-              Text(
-                '设置',
-                style: TextStyle(
-                  fontSize: 34.sp,
-                  fontWeight: FontWeight.w600,
+        child: CustomScrollView(
+          slivers: [
+            const CupertinoSliverNavigationBar(
+              largeTitle: Text('设置'),
+              automaticallyImplyLeading: false,
+            ),
+            const CupertinoSliverRefreshControl(
+                // onRefresh: () {
+                //   return 1;
+                // },
+                ),
+            SliverPadding(
+              padding: MediaQuery.of(context).removePadding(removeTop: true).padding,
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    if (list[index] is List) {
+                      List<dynamic> listItem = list[index];
+
+                      listItem = listItem.map((e) {
+                        final String title = e['title'] ?? '';
+                        final String imgUrl = e['imgUrl'] ?? '';
+                        final Page page = e['page'];
+
+                        return GestureDetector(
+                          onTap: () => goPage(page),
+                          child: SettingBar(
+                            imgUrl: imgUrl,
+                            title: title,
+                          ),
+                        );
+                      }).toList();
+
+                      return Container(
+                        margin: EdgeInsets.fromLTRB(21.w, 21.h, 21.w, 0),
+                        child: SettingBg(
+                          leftLine: 53.w,
+                          childs: listItem as List<Widget>,
+                        ),
+                      );
+                    }
+
+                    return null;
+                  },
+                  childCount: list.length,
                 ),
               ),
-              SizedBox(height: 8.h),
-
-              // 设备配置
-              GestureDetector(
-                onTap: () => goPage(Page.device),
-                child: SettingBg(
-                  leftLine: 53.w,
-                  child: SettingBar(
-                    imgUrl: Assets.iconSettingConfig,
-                    title: '设备配置',
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 30.h),
-
-              // 网络配置
-              GestureDetector(
-                onTap: () => goPage(Page.network),
-                child: SettingBg(
-                  leftLine: 53.w,
-                  child: SettingBar(
-                    imgUrl: Assets.iconNetworkConfig,
-                    title: '网络配置',
-                  ),
-                ),
-              ),
-              SizedBox(height: 30.h),
-
-              // 关于、软件更新
-              SettingBg(
-                leftLine: 53.r,
-                childs: [
-                  GestureDetector(
-                    onTap: () => goPage(Page.about),
-                    child: SettingBar(
-                      imgUrl: Assets.iconAbout,
-                      title: '关于',
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => goPage(Page.update),
-                    child: SettingBar(
-                      imgUrl: Assets.iconUpdate,
-                      title: '软件更新',
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 30.h),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

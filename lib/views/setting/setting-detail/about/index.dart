@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +26,7 @@ class _AboutConfigState extends State<About> {
       // todo 查看 CupertinoNavigationBar
       navigationBar: CupertinoNavigationBar(
         padding: const EdgeInsetsDirectional.only(),
-        transitionBetweenRoutes: !kIsWeb && Platform.isIOS,
+        transitionBetweenRoutes: true, // Cupertino 的 SliverPadding 中元素跳转 CupertinoSliverNavigationBar 到 元素 CupertinoNavigationBar 的动画是否开启
         middle: Text(
           '关于',
           style: TextStyle(
