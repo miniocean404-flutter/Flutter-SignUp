@@ -24,7 +24,7 @@ mixin RouteAnimationDialog {
     );
   }
 
-  // 原生路由弹窗Api
+// 原生路由弹窗Api
   void showDialogNative(BuildContext context, Widget widget, {Color? bgColor}) {
     showGeneralDialog(
       context: context,
@@ -51,7 +51,31 @@ mixin RouteAnimationDialog {
     );
   }
 
-  // Hero 动画使用，在当前页面写下 hero 并标记标签，路由跳转的第二个页面也要有相同的 tag
+// 打开底部表单
+  showBottomSheet(BuildContext context, Widget widget) async {
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      elevation: 10000, // 阴影值
+      clipBehavior: Clip.none,
+      isDismissible: true, // 是否可以点击背景关闭
+      isScrollControlled: false, // 参数指定是否使用可拖动的可滚动的组件，如果子组件是ListView或者GridView，此参数应该设置为true，设置为true后，最大高度可以占满全屏。
+      enableDrag: false, // 底部表单是否可以拖拽
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+      ),
+      // transitionAnimationController: AnimationController(vsync: this, duration: const Duration(milliseconds: 300)),
+      // transitionAnimationController:,
+      builder: (BuildContext context) {
+        return widget;
+      },
+    );
+  }
+
+// Hero 动画使用，在当前页面写下 hero 并标记标签，路由跳转的第二个页面也要有相同的 tag
   Route showHero(Widget widget) {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 500),
@@ -79,7 +103,7 @@ mixin RouteAnimationDialog {
     );
   }
 
-  // 底部弹出窗
+// 底部弹出窗
   Route bottomPopUpRouter(Widget widget, {opaque = false}) {
     return PageRouteBuilder(
       opaque: opaque,

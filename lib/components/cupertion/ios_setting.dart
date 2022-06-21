@@ -24,7 +24,7 @@ class CupertinoNavigationBarDemo extends StatelessWidget {
               settings: settings,
               builder: (context) => _FirstPage(),
             );
-            break;
+
           case CupertinoNavigationBarDemo.secondPageRoute:
             final arguments = settings.arguments as Map<dynamic, dynamic>;
             final title = arguments['pageTitle'] as String;
@@ -33,7 +33,6 @@ class CupertinoNavigationBarDemo extends StatelessWidget {
               settings: settings,
               builder: (context) => _SecondPage(),
             );
-            break;
         }
         return null;
       },

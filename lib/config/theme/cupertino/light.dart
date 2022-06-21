@@ -34,7 +34,7 @@ CupertinoThemeData cupertinoLight() {
         inherit: true,
 
         // 绘制文本时使用的颜色。如果指定了此项，则foreground必须为空。
-        color: AppColor().light.danger,
+        color: AppColor().light.black,
 
         // 用作文本背景的颜色。
         // backgroundColor: AppColor().light.danger,

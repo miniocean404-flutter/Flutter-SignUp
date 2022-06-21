@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/components_busin/setting_bg.dart';
+import 'package:flutter_sign_in/config/constant/index.dart';
 import 'package:flutter_sign_in/config/env/abstract_current_env.dart';
 import 'package:flutter_sign_in/config/env/get_env.dart';
 import 'package:flutter_sign_in/http/config/http_request.dart';
@@ -15,7 +16,7 @@ class NetworkConfig extends StatefulWidget {
   State<NetworkConfig> createState() => _NetworkConfigState();
 }
 
-class _NetworkConfigState extends State<NetworkConfig> {
+class _NetworkConfigState extends State<NetworkConfig> with TickerProviderStateMixin {
   bool _isUseHttps = false; // 是否https
   late String showServe = ''; // 当前服务器地址
 
@@ -28,14 +29,20 @@ class _NetworkConfigState extends State<NetworkConfig> {
   }
 
   // 设置展示的服务器地址
-  void setServeAddress() async {
+  void setServeAddress({String? input}) async {
     CurrentEnv config = getEnvironmentConfig();
-    dynamic baseUrl = SpHelper.getLocalStorage('baseUrl');
+    String? baseUrl = SpHelper.getLocalStorage<String?>('baseUrl');
+
     if (baseUrl == null) {
       baseUrl = config.getBaseUrl;
 
       await SpHelper.setLocalStorage('baseUrl', baseUrl);
     }
+
+    if (input != null) {
+      await SpHelper.setLocalStorage('baseUrl', input);
+    }
+
     baseUrl = SpHelper.getLocalStorage('baseUrl');
 
     // 将地址特换为展示效果
@@ -65,6 +72,74 @@ class _NetworkConfigState extends State<NetworkConfig> {
     await SpHelper.setLocalStorage('baseUrl', replaceUrl);
 
     setState(() => _isUseHttps = v);
+  }
+
+  inputServeAddress() async {
+    final TextEditingController serveAddress = TextEditingController();
+
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColor.of(context).currentMode.page,
+      elevation: 10000, // 阴影值
+      clipBehavior: Clip.none,
+      // isDismissible: true, // 是否可以点击背景关闭
+      // isScrollControlled: false, // 参数指定是否使用可拖动的可滚动的组件，如果子组件是ListView或者GridView，此参数应该设置为true，设置为true后，最大高度可以占满全屏。
+      enableDrag: false, // 底部表单是否可以拖拽
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.r),
+          topRight: Radius.circular(30.r),
+        ),
+      ),
+      transitionAnimationController: AnimationController(vsync: this, duration: const Duration(milliseconds: 300)),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            height: 120.h,
+            width: 100.w,
+            margin: EdgeInsets.all(20.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoTextField(
+                  controller: serveAddress,
+                  keyboardType: TextInputType.text,
+                  autofocus: true,
+                  maxLength: 30,
+                  minLines: 3,
+                  maxLines: 3,
+                  placeholder: '请输入服务器地址',
+                  autocorrect: true, // 是否自动纠正
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                SizedBox(
+                  height: 30.h,
+                  width: 80.w,
+                  child: CupertinoButton.filled(
+                    padding: EdgeInsets.zero,
+                    borderRadius: BorderRadius.all(Radius.circular(20.r)),
+                    onPressed: () {
+                      final String address = serveAddress.text.toString();
+                      RegExp reg = RegExp(r"https?:\/{2}.*", multiLine: true, unicode: true);
+                      if (reg.hasMatch(address)) {
+                        setServeAddress(input: address);
+                      } else {
+                        toast('地址格式错误');
+                      }
+                    },
+                    child: const Text('确认'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -97,20 +172,23 @@ class _NetworkConfigState extends State<NetworkConfig> {
                           '服务器',
                           style: TextStyle(fontSize: 18.sp),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              showServe,
-                              style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 20.r,
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: inputServeAddress,
+                          child: Row(
+                            children: [
+                              Text(
+                                showServe,
+                                style: TextStyle(fontSize: 18.sp, color: '#8A8A8D'.toColor()),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 20.r,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),

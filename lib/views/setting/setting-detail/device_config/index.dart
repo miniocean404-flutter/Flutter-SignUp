@@ -27,7 +27,7 @@ class _DeviceConfigState extends State<DeviceConfig> {
     login();
   }
 
-  void login() async {
+  Future<void> login() async {
     final DeviceConnect res = await deviceLogin(187237, 'f1c8ec723723');
     await SpHelper.setLocalStorage('token', res.data?.accessSecret);
     setState(() {
@@ -36,15 +36,66 @@ class _DeviceConfigState extends State<DeviceConfig> {
     });
   }
 
+  // 切换业务状态
   toogleBusinStatus() async {
     final BusinStatus businProvider = Provider.of<BusinStatus>(context, listen: false);
     final String toggle = businProvider.getBusin != null && businProvider.getBusin == '签到' ? '上下课' : '签到';
-    Provider.of<BusinStatus>(context, listen: false).setBusin = toggle;
-    await SpHelper.setLocalStorage('busin', toggle);
+
+    await showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          title: const Text('提示'),
+          message: const Text('是否要切换签到功能'),
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              onPressed: () async {
+                Provider.of<BusinStatus>(context, listen: false).setBusin = toggle;
+                Navigator.of(context).pop();
+                await SpHelper.setLocalStorage('busin', toggle);
+              },
+              // 颜色是否变为红色提示
+              // isDestructiveAction: true,
+              isDefaultAction: true,
+              child: Text(toggle),
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            child: const Text('取消'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        );
+      },
+    );
   }
 
-  void reLogin() {
-    login();
+  void reLogin() async {
+    await showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('提示'),
+          content: const Text('确认重新登录吗？'),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: const Text('取消'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            CupertinoDialogAction(
+              child: const Text('确认'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await login();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -146,18 +197,21 @@ class _DeviceConfigState extends State<DeviceConfig> {
                       ),
                       Row(
                         children: [
-                          Consumer<BusinStatus>(
-                            builder: ((context, value, child) {
-                              final String text = value.getBusin ?? '';
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 12.w, 0),
+                            child: Consumer<BusinStatus>(
+                              builder: ((context, value, child) {
+                                final String text = value.getBusin ?? '';
 
-                              return Text(
-                                text,
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: '#8A8A8D'.toColor(),
-                                ),
-                              );
-                            }),
+                                return Text(
+                                  text,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: '#8A8A8D'.toColor(),
+                                  ),
+                                );
+                              }),
+                            ),
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
