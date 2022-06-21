@@ -51,8 +51,6 @@ class _FirstPage extends StatelessWidget {
             largeTitle: Text('标题1'),
             automaticallyImplyLeading: false,
           ),
-          // CupertinoSliverRefreshControl(
-          // ),
           const CupertinoSliverRefreshControl(
               // onRefresh: () {
               //   return 1;
