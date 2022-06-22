@@ -100,7 +100,7 @@ class _SettingState extends State<Setting> {
                     if (list[index] is List) {
                       List<dynamic> listItem = list[index];
 
-                      listItem = listItem.map((e) {
+                      final List<Widget> listWidget = listItem.map((e) {
                         final String title = e['title'] ?? '';
                         final String imgUrl = e['imgUrl'] ?? '';
                         final Page page = e['page'];
@@ -118,7 +118,7 @@ class _SettingState extends State<Setting> {
                         margin: EdgeInsets.fromLTRB(21.w, 21.h, 21.w, 0),
                         child: SettingBg(
                           leftLine: 53.w,
-                          childs: listItem as List<Widget>,
+                          childs: listWidget,
                         ),
                       );
                     }
