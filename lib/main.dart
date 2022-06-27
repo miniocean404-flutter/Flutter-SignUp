@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_sign_in/config/env/compile_mode.dart';
 import 'package:flutter_sign_in/config/intl/enrty_config.dart';
 import 'package:flutter_sign_in/config/theme/cupertino/index.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
@@ -24,7 +23,7 @@ void main() {
   sentryInit(() async {
     await Global.initCommon();
 
-    final Widget app = initUme(const MyApp(), disabled: isRelease);
+    final Widget app = initUme(const MyApp(), disabled: false);
     runApp(initProvider(app));
   });
 }
