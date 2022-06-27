@@ -41,6 +41,14 @@ dependencies:
   event_bus: ^2.0.0
   # 日志打印
   logger: ^1.1.0
+  # 字节跳动 应用内调试工具
+  flutter_ume: ^1.0.1
+  flutter_ume_kit_ui: ^1.0.0
+  flutter_ume_kit_device: ^1.0.0
+  flutter_ume_kit_perf: ^1.0.0
+  flutter_ume_kit_show_code: ^1.0.0
+  flutter_ume_kit_console: ^1.0.0
+  flutter_ume_kit_dio: ^1.0.0
 
   # 动画(官方)
   animations: ^2.0.3

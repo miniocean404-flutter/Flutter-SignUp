@@ -15,7 +15,7 @@ class HttpsProxy {
   final pem = '';
 
   HttpsProxy(Dio dio) {
-    if (!kIsWeb && getCompileMode2() != CurrentCompileMode.release && START_PACKET_CAPTURE) {
+    if (!kIsWeb && isRelease && START_PACKET_CAPTURE) {
       (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
         // 这一段是解决安卓https抓包的问题
         client.badCertificateCallback = (X509Certificate cert, String host, int port) {
