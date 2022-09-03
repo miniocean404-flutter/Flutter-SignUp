@@ -211,7 +211,7 @@ class _HomeState extends State<Home> with RouteAware, WidgetsBindingObserver {
     } else {
       _scanController.dispose();
       _videoController.pause();
-      await Wakelock?.toggle(enable: false);
+      await Wakelock.toggle(enable: false);
     }
 
     setState(() => isShowScan = state);

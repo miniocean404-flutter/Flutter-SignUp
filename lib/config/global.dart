@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
-import 'package:flutter_sign_in/http/config/http_request.dart';
 import 'package:flutter_sign_in/router/index.dart';
 import 'package:flutter_sign_in/utils/plugin/easyloading.dart';
 // deferred as 将包变成异步，需要时 await 包名.loadLibrary() 包名.方法名 进行调用
