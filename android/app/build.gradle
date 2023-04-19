@@ -1,7 +1,10 @@
-// 模块级构建文件
-// 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。
-// 通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
+// Gradle 配置：https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration
 
+/**
+ * 模块级构建文件
+ * 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。
+ * 通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
+ */
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -27,20 +30,19 @@ if (flutterVersionName == null) {
 }
 
 
-
-/// 获取渠道参数使用,这里设置一下默认值
+// 获取渠道参数使用,这里设置一下默认值
 def dartEnvironmentVariables = [
         CHANNEL: 'YYB',
-        ENV: 'dev',
+        ENV    : 'dev',
 ]
 
-//* 获取命令行参数脚本
+// 获取命令行参数脚本
 if (project.hasProperty('dart-defines')) {
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
             .split(',')
             .collectEntries { entry ->
                 // 1.22.6 版本
-                //def pair = URLDecoder.decode(entry).split('=')
+                // def pair = URLDecoder.decode(entry).split('=')
                 // 2.2 版本
                 // def pair = URLDecoder.decode(entry).split('=')
                 def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
@@ -82,7 +84,7 @@ android {
 
     // compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本，这意味着我们的APP只能使用该版本及其以下版本中的API。
     // compileSdkVersion flutter.compileSdkVersion
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -106,15 +108,15 @@ android {
         // *: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.flutter_sign_in"
-        // 定义APP需要支持的 Android API 最小的版本。
+        // 指定应用程序设计运行的最低 API 级别，打包闪退就修改最小 SDK 版本
         // minSdkVersion flutter.minSdkVersion
         minSdkVersion 21
-        // 指定用来测试APP的 Android API 版本
+        // 指定应用程序设计运行的目标 API 级别
         // targetSdkVersion flutter.targetSdkVersion
-        targetSdkVersion 32
-        // 定义APP的版本
+        targetSdkVersion 33
+        // 定义APP的版本号, 用作内部版本号的正整数。此数字仅用于确定一个版本是否比另一个版本更新，数字越大表示版本越新。此版本不向用户显示。
         versionCode flutterVersionCode.toInteger()
-        // 定义APP的版本名
+        // 定义APP的版本名, 用作向用户显示的版本号的字符串。此设置可以指定为原始字符串或对字符串资源的引用。
         versionName flutterVersionName
     }
 
@@ -130,22 +132,23 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
 
-            minifyEnabled true // 资源压缩设置
-            useProguard true // 代码压缩设置
+
+            // minifyEnabled false // 资源压缩设置
+            // useProguard true // 代码压缩设置
 
             // 配置打包的架构
             ndk {
                 //之前看QQ微信等大佬都只用"armeabi",手机没什么x86框架的,只包含arm32和arm64即可
-                abiFilters "armeabi","armeabi-v7a","arm64-v8a"
+                abiFilters "armeabi", "armeabi-v7a", "arm64-v8a","x86"
             }
         }
 
         // 配置调试版本时候的包的架构
         debug {
             ndk {
-                //这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错(x86_64,x86是兼容模拟器的)
+                // 这里配置开发调试时的，根据个人需要增减少，x86建议加上不然部分模拟器会报错(x86_64,x86是兼容模拟器的)
                 // abiFilters "armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"
-                abiFilters "arm64-v8a","x86_64" // 暂时使用真机调试和模拟器的so
+                abiFilters "x86_64","arm64-v8a","x86"   // 暂时使用真机调试和模拟器的so
             }
         }
     }

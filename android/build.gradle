@@ -1,15 +1,17 @@
-// 顶级构建文件
-// 顶级 build.gradle 文件位于项目根目录，用于定义适用于项目中所有模块的构建配置。
-// 默认情况下，这个顶级构建文件使用 buildscript {} 代码块来定义项目中所有模块共用的 Gradle 存储区和依赖项。以下代码示例描述的默认设置和 DSL 元素。
+/*
+ * 顶级构建文件
+ * 顶级 build.gradle 文件位于项目根目录，用于定义适用于项目中所有模块的构建配置。
+ * 默认情况下，这个顶级构建文件使用 buildscript {} 代码块来定义项目中所有模块共用的 Gradle 存储区和依赖项。以下代码示例描述的默认设置和 DSL 元素。
+ */
 
 /**
- * buildscript是配置构建工具Gradle本身所需要的依赖和仓库的代码区块，
+ * buildscript 是配置构建工具 Gradle 本身所需要的依赖和仓库的代码区块，
  * 也就是说不能把APP模块所需要的依赖放到这里。
- * 如：这个区块里包含gradle-plugin的依赖，因为这个插件包含了Gradle构建APP模块所需要的附加命令。 
+ * 如：这个区块里包含 gradle-plugin 的依赖，因为这个插件包含了 Gradle 构建APP模块所需要的附加命令。
  */
 buildscript {
     // 使用kotlin编译的版本
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.10'
     /**
      * repositories {} 区域配置Gradle用来下载依赖的仓库地址。
      * Gradle内置支持的远程仓库有JCenter、Maven Central 和 Ivy，4.1版本开始内置支持google()。 
@@ -18,30 +20,68 @@ buildscript {
      */
     repositories {
         // 设置 gradle 镜像
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter/'}
+        maven {
+            // 使用"阿里云"仓库为下载源，可能会报错(gradle的仓库地址不安全警告的错误)，因为配置了除 maven 中央仓库之外的其他不安全的仓库(一些国内的镜像仓库，如"阿里云"镜像仓库也是不安全的)
+            // 解决方法:只需要在App项目工程的 build.gradle 中，使用 allowInsecureProtocol 属性(允许gradle使用"不安全"的仓库并且不报警告信息)即可
+            // 阿里云仓库地址：https://developer.aliyun.com/mvn/guide
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/google'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
     }
 
     dependencies {
-       /**
-        * dependencies {} 区域配置了Gradle编译APP工程所需要的依赖。
-        * 下面代码展示路径依赖4.1.0版本gradle-plugin
-        */
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        /**
+         * dependencies {} 区域配置了 Gradle 编译APP工程所需要的依赖。
+         * 下面代码展示路径依赖4.1.0版本 gradle-plugin
+         * gradle 插件版本
+         * gradle 插件版本与 gradle-wrapper.properties 中 distributionUrl gradle 版本关系： https://developer.android.google.cn/studio/releases/gradle-plugin?hl=zh-cn#updating-gradle
+         */
+        classpath 'com.android.tools.build:gradle:7.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 /**
- * allprojects区域可以配置工程中全局插件、代码仓库、依赖（多处使用），如，三方插件或者库。
+ * allprojects 区域可以配置工程中全局插件、代码仓库、依赖（多处使用），如，三方插件或者库。
  * 如果依赖不是被所有模块都需要，那应该将依赖配到需要它的模块级的build.gradle文件中。
- * 在Android Studio新建的工程里，顶级的build.gradle中只配置JCenter为所有模块的默认仓库，但不配置任何依赖。
+ * 在 Android Studio 新建的工程里，顶级的build.gradle中只配置 JCenter 为所有模块的默认仓库，但不配置任何依赖。
  */
 allprojects {
     repositories {
-        // 设置 gradle 镜像
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter/'}
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/google'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
     }
 }
 

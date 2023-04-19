@@ -90,7 +90,7 @@ dependencies:
   # SHA-256 加密解密 (官方)
   crypto: ^3.0.2
   # 错误收集到本地或服务器
-  sentry_flutter: ^6.5.1
+  # sentry_flutter: ^7.4.2
   # 控制屏幕常亮 全平台
   wakelock: ^0.6.1+2
   # Google 官方文章
@@ -101,7 +101,7 @@ dependencies:
   # 动态权限申请
   permission_handler: ^9.2.0
   # 仅安卓使用，可以返回桌面（调用安卓原生intent）
-  android_intent_plus: ^3.1.1
+  android_intent_plus: ^3.1.7
 
   # 跳转链接 和 实现原生电话的拨打 (官方)
   url_launcher: ^6.1.2
@@ -124,7 +124,7 @@ dependencies:
     #   url: https://github.com/juliansteenbakker/mobile_scanner.git
     #   ref: master
   # android ios 的升级插件
-  r_upgrade: ^0.3.8+2
+  # r_upgrade: ^0.3.8+2
 
   flutter:
     sdk: flutter

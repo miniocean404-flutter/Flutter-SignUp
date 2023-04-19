@@ -27,7 +27,7 @@ import 'package:network_info_plus/network_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:pointycastle/asymmetric/api.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,7 +41,7 @@ part 'local_auth.dart';
 part 'local_notifications.dart';
 part 'logger.dart';
 part 'rsa.dart';
-part 'sentry_flutter.dart';
+// part 'sentry_flutter.dart';
 part 'shared_preferences.dart';
 part 'toast.dart';
 part 'url_launcher.dart';
