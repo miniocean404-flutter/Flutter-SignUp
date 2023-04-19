@@ -23,7 +23,6 @@ void main() async {
 
   final Widget app = initUme(const MyApp(), disabled: false);
   runApp(initProvider(app));
-  // sentryInit(() async {});
 }
 
 class MyApp extends StatelessWidget {
