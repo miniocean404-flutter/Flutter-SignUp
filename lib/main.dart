@@ -12,7 +12,6 @@ import 'package:flutter_sign_in/config/theme/is_dark_mode.dart';
 import 'package:flutter_sign_in/config/theme/material/dark.dart';
 import 'package:flutter_sign_in/config/theme/material/light.dart';
 import 'package:flutter_sign_in/router/index.dart';
-import 'package:flutter_sign_in/utils/plugin/index.dart';
 import 'package:flutter_sign_in/utils/plugin/provider.dart';
 import 'package:flutter_sign_in/utils/plugin/ume.dart';
 
@@ -34,18 +33,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: Global.navigatorStateKey,
       title: '签到',
-      debugShowCheckedModeBanner: false,
       // 右上角有一个DEBUG的标识
-      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       // debug 模式是否展示基线像素网格
-      showSemanticsDebugger: false,
+      debugShowMaterialGrid: false,
       // 打开显示可拜访性信息的叠加层，展现组件之间的关系、占位大小
-      showPerformanceOverlay: false,
+      showSemanticsDebugger: false,
       // 打开性能检测 web 不可开启,否则无法启动
-      checkerboardRasterCacheImages: false,
+      showPerformanceOverlay: false,
+
       // 关上栅格缓存图像的棋盘格警告 web 不可开启,否则无法启动
-      checkerboardOffscreenLayers: false,
+      checkerboardRasterCacheImages: false,
       // 关上渲染到屏幕外位图的层的棋盘格警告 web 不可开启,否则无法启动
+      checkerboardOffscreenLayers: false,
 
       // 国际化
       localizationsDelegates: localizationsDelegates,
@@ -61,8 +61,8 @@ class MyApp extends StatelessWidget {
       // 主题
       theme: materialLightTheme,
       darkTheme: materialDarkTheme,
-      themeMode: ThemeMode.system,
       // 设置日间夜间模式、或者跟随系统
+      themeMode: ThemeMode.system,
 
       // 路由
       initialRoute: CustomRoute().splash,
