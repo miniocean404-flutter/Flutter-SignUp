@@ -24,6 +24,8 @@ void main() async {
   runApp(initProvider(app));
 }
 
+// MaterialApp 属性详解：http://www.liujunmin.com/flutter/material_app.html#1navigatorkey
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
