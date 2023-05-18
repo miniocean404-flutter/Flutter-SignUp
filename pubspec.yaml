@@ -69,7 +69,7 @@ dependencies:
   # loading 动画
   flutter_easyloading: ^3.0.3
 
-  # 简单数据持久化，清除数据就消失（官方）
+  # 简单数据持久化，清除 卸载 数据就消失（官方）
   shared_preferences: ^2.0.15
   # 文件读取（官方）
   path_provider: ^2.0.10
