@@ -2,21 +2,41 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>compileBitcode</key>
-	<true/>
+	<!-- 将 App 上传到 App Store Connect 还是导出到本地，默认是导出到本地。值是 String 类型，所有可用值：export，upload。上传操作需要和 App Store Connect 交互，参见上文的账号授权部分 -->
 	<key>destination</key>
 	<string>export</string>
+
+    <!-- 指定分发方式，例如分发到 AppStore 或沙盒测试。值是 String 类型，所有可用值：app-store，validation，package，ad-hoc，enterprise，development，developer-id，mac-application。归档文件类型不同，可用值也会相应变化 -->
 	<key>method</key>
 	<string>ad-hoc</string>
-	<key>signingCertificate</key>
-    <string>xxxxxxxxx</string>
+
+	<!-- 是否生成AppStoreInfo.plist文件。值是 Bool 类型，YES 或 NO，默认为 NO。在 Linux 和 Windows 中利用iTMSTransporter上传 App 时必须要指定该文件，而在 macOS 中上传时不需要。 -->
+	<!-- <key>generateAppStoreInformation</key>
+	<true/> -->
+
+	<!-- 是否需要 Xcode 以和 AppStore 相同的方式从 bitcode 重新编译 App，只对非 AppStore 导出操作有效。需要在 Xcode 中启用Enable Bitcode，并且归档文件内确实携带 bitcode。值是 Bool 类型，YES 或 NO，默认是 YES。 -->
+	<key>compileBitcode</key>
+	<true/>
+
+	<!-- 导出 App 时使用的签名方式，手动签名或自动签名。值是 String 类型，所有可用值：manual，automatic。如果使用自动签名并导出了归档文件，那么导出 App 可以是手动签名也可以是自动签名。如果使用手动签名导出归档文件，就只能使用手动签名方式导出 App，此时该值会被忽略 -->
 	<key>signingStyle</key>
 	<string>automatic</string>
-	<key>stripSwiftSymbols</key>
-	<true/>
+
+	<!-- 开发者账号的 TeamID。 https://developer.apple.com/ 中 account 中 Membership 一栏获取-->
 	<key>teamID</key>
-	<string>xxxxxxxx</string>
+	<string>XXXXXX</string>
+
+	<!-- 指定签名使用的证书，仅用于手动签名导出操作。值是 String 类型，可以是证书名称、SHA-1 值或自动选择器。证书名称、SHA-1 值都可以从系统的钥匙串访问中获取。自动选择器允许 Xcode 选择类型匹配且最新的证书，可用值有： Mac App Distribution，iOS Distribution，iOS Developer，Developer ID Application，Apple Distribution，Mac Developer，Apple Development。 -->
+	<key>signingCertificate</key>
+    <string>XXXXXXXX</string>
+
+	<!-- 指定瘦身类型，只对非 AppStore 导出操作有效。值是 String 类型。可用值有：<none>（不瘦身，仅导出一个通用 App），<thin-for-all-variants>（针对支持的所有设备进行瘦身，导出一个通用 App 和所有瘦身 App），或者是特定设备的型号标识符（例如 iPhone7,1，仅导出适用于 iPhone7,1 的瘦身 App）。 -->
+	<!-- App Store Connect 只接受 Universal App，因为它要利用 Universal App 导出支持所有设备的瘦身 App 并存储，当用户从 AppStore 下载时，AppStore 会根据用户的设备型号下载对应的瘦身 App。瘦身 App 只能在指定型号的设备上安装。 如果你想从 AppStore 下载某家公司的游戏并尝试修改，提供给特殊玩家使用前，最好留意一下是否适合这些玩家的设备 -->
 	<key>thinning</key>
 	<string>&lt;none&gt;</string>
+
+	<!-- 移除 Swift 标准库中的符号，以减小包体积。值是 Bool 类型，YES 或 NO。目前我们打出的 Swift 包，会将 Swift 标准库直接嵌入到 App 的 Frameworks 目录内，其携带的各种符号如果不再需要，可以移除。 -->
+	<key>stripSwiftSymbols</key>
+	<true/>
 </dict>
 </plist>
